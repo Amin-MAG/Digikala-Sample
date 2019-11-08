@@ -1,0 +1,57 @@
+<com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/digikala_red">
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="103dp"
+            android:layout_height="39dp"
+            android:src="@drawable/logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/materialButton2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/materialButton3"
+            android:layout_width="52dp"
+            android:layout_height="60dp"
+            app:backgroundTint="@color/nothing"
+            app:cornerRadius="30dp"
+            app:icon="@drawable/ic_search"
+            app:iconSize="22dp"
+            app:layout_constraintStart_toEndOf="@+id/materialButton"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/materialButton"
+            android:layout_width="52dp"
+            android:layout_height="60dp"
+            app:backgroundTint="@color/nothing"
+            app:cornerRadius="30dp"
+            app:icon="@drawable/ic_shopping_cart"
+            app:iconSize="22dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/materialButton2"
+            android:layout_width="52dp"
+            android:layout_height="60dp"
+            app:backgroundTint="@color/nothing"
+            app:cornerRadius="30dp"
+            app:icon="@drawable/ic_navigation"
+            app:iconSize="22dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</com.google.android.material.appbar.AppBarLayout>

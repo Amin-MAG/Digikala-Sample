@@ -1,3 +1,29 @@
 <resources>
-    <string name="app_name">Digikala</string>
+
+    <string name="app_name_en">Digikala</string>
+    <string name="app_name_fa">دیجیکالا</string>
+
+
+    // Persian
+    <string name="main_menu">منوی اصلی</string>
+    <string name="home_page">خانه</string>
+    <string name="category">دسته بندی</string>
+
+    <string name="cart_menu">منوی خرید</string>
+    <string name="cart">سبد خرید</string>
+
+    <string name="products_menu">منوی محصولات</string>
+    <string name="offers">محصولات پیشنهادی</string>
+    <string name="best_sellers">پرفروشترین ها</string>
+    <string name="most_views">پربازدیدترین ها</string>
+    <string name="newests">جدیدترین ها</string>
+
+    <string name="app_menu">منوی برنامه</string>
+    <string name="setting">تنظیمات</string>
+    <string name="faq">سوالات متداول</string>
+    <string name="about_us">درباره ما</string>
+
+
+    <string name="add_to_cart">اضافه کردن به سبد</string>
+
 </resources>
