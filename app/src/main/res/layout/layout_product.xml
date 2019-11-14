@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="140dp"
+    android:layout_width="160dp"
     android:layout_height="230dp"
     android:layout_marginRight="8dp">
 
@@ -12,8 +12,8 @@
         android:paddingBottom="8dp">
 
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="141dp"
+            android:id="@+id/product_layout__cover"
+            android:layout_width="0dp"
             android:layout_height="165dp"
             android:src="@drawable/place_holder"
             app:layout_constraintEnd_toEndOf="parent"
@@ -23,23 +23,23 @@
 
         <TextView
             android:id="@+id/product_layout__title"
-            android:layout_width="129dp"
-            android:layout_height="31dp"
+            android:layout_width="133dp"
+            android:layout_height="32dp"
             android:layout_weight="1"
             android:gravity="right"
             android:text="Product Title"
             android:textSize="10dp"
             app:layout_constraintBottom_toTopOf="@+id/divider"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintRight_toRightOf="@+id/imageView"
+            app:layout_constraintRight_toRightOf="@+id/product_layout__cover"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintTop_toBottomOf="@+id/product_layout__cover" />
 
         <View
             android:id="@+id/divider"
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginBottom="4dp"
+            android:layout_marginBottom="8dp"
             android:background="?android:attr/listDivider"
             app:layout_constraintBottom_toTopOf="@+id/product_layout_price"
             app:layout_constraintEnd_toEndOf="parent"
@@ -51,6 +51,7 @@
             android:layout_width="128dp"
             android:layout_height="12dp"
             android:layout_marginLeft="4dp"
+            android:gravity="left"
             android:text="Price"
             android:textSize="10dp"
             app:layout_constraintBottom_toBottomOf="parent"

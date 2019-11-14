@@ -2,15 +2,25 @@ package com.mag.digikala.Model;
 
 public class Merchandise {
 
-    private int id;
+    private String id;
     private String name;
+    private DigikalaImage[] images;
 
-    public Merchandise(String title) {
-        this.name = title;
+    public Merchandise(String name, DigikalaImage[] images) {
+        this.name = name;
+        this.images = images;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getTitle() {
         return name;
+    }
+
+    public DigikalaImage[] getImages() {
+        return images;
     }
 
 }

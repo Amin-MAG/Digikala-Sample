@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mag.digikala.Model.Merchandise;
 import com.mag.digikala.R;
+import com.squareup.picasso.Picasso;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecyclerAdapter.ProductRecyclerViewHolder> {
@@ -44,17 +47,25 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
 
     public class ProductRecyclerViewHolder extends RecyclerView.ViewHolder {
 
+        private int id;
         private TextView title;
+        private TextView price;
+        private ImageView cover;
 
         public ProductRecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            cover = itemView.findViewById(R.id.product_layout__cover);
+            price = itemView.findViewById(R.id.product_layout_price);
             title = itemView.findViewById(R.id.product_layout__title);
 
         }
 
         public void bind(Merchandise merchandise) {
 
+            String imageUrl = merchandise.getImages()[0].getSrc();
+            Picasso.get().load(imageUrl).placeholder(R.drawable.place_holder).into(cover);
+            price.setText(merchandise.getId());
             title.setText(merchandise.getTitle());
 
         }
@@ -65,5 +76,5 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
     public void setProductItems(List<Merchandise> productItems) {
         this.productItems = productItems;
     }
-    
+
 }
