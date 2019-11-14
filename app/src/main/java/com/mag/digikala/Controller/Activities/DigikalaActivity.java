@@ -119,6 +119,10 @@ public class DigikalaActivity extends AppCompatActivity {
                     progressBar.setVisibility(View.GONE);
                     bestProductAdapter.setProductItems(DigikalaRepository.getInstance().getAllProducts());
                     bestProductAdapter.notifyDataSetChanged();
+                    mostViewedProductAdapter.setProductItems(DigikalaRepository.getInstance().getAllProducts());
+                    mostViewedProductAdapter.notifyDataSetChanged();
+                    newestProductAdapter.setProductItems(DigikalaRepository.getInstance().getAllProducts());
+                    newestProductAdapter.notifyDataSetChanged();
 
                 }
 
