@@ -7,6 +7,7 @@
     <color name="digikala_red_dark">#B11315</color>
     <color name="digikala_red">#e72f31</color>
     <color name="digikala_red_light">#FF6F70</color>
+    <color name="digikala_green">#66bb68</color>
     <color name="nothing">#00FFFFFF</color>
 
 </resources>

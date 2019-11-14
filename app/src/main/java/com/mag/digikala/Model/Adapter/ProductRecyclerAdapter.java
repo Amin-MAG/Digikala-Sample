@@ -1,6 +1,8 @@
 package com.mag.digikala.Model.Adapter;
 
 import android.app.Activity;
+import android.graphics.Paint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +16,6 @@ import com.mag.digikala.Model.Merchandise;
 import com.mag.digikala.R;
 import com.squareup.picasso.Picasso;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecyclerAdapter.ProductRecyclerViewHolder> {
@@ -50,6 +51,7 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
         private int id;
         private TextView title;
         private TextView price;
+        private TextView priceInvalid;
         private ImageView cover;
 
         public ProductRecyclerViewHolder(@NonNull View itemView) {
@@ -57,6 +59,7 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
 
             cover = itemView.findViewById(R.id.product_layout__cover);
             price = itemView.findViewById(R.id.product_layout_price);
+            priceInvalid = itemView.findViewById(R.id.product_layout_price_without_sales);
             title = itemView.findViewById(R.id.product_layout__title);
 
         }
@@ -65,8 +68,29 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
 
             String imageUrl = merchandise.getImages()[0].getSrc();
             Picasso.get().load(imageUrl).placeholder(R.drawable.place_holder).into(cover);
-            price.setText(merchandise.getId());
-            title.setText(merchandise.getTitle());
+            Log.d("price_string", "setPrices: " + merchandise.getRegular_price() + " Sales " +   merchandise.getSale_price());
+            setPrices(merchandise.getRegular_price(), merchandise.getSale_price());
+            title.setText(merchandise.getName());
+
+        }
+
+        private void setPrices(String regular_price, String sale_price) {
+
+            String MONEY_STRING = " " + activity.getResources().getString(R.string.tomans);
+            String priceString;
+            String priceInvalidString = "";
+
+            if (sale_price.equals("")) {
+                priceString = regular_price + MONEY_STRING;
+            } else {
+                priceString = sale_price + MONEY_STRING;
+                priceInvalidString = regular_price + MONEY_STRING;
+                Log.d("price_string", "setPrices: " + priceInvalidString + " | ");
+            }
+
+            priceInvalid.setText(priceInvalidString);
+            priceInvalid.setPaintFlags(priceInvalid.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            price.setText(priceString);
 
         }
 
