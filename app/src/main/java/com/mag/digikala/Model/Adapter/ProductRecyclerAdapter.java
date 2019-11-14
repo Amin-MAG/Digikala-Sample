@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mag.digikala.Model.Merchandise;
 import com.mag.digikala.R;
+import com.mag.digikala.Var.Constants;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -68,24 +69,24 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
 
             String imageUrl = merchandise.getImages()[0].getSrc();
             Picasso.get().load(imageUrl).placeholder(R.drawable.place_holder).into(cover);
-            Log.d("price_string", "setPrices: " + merchandise.getRegular_price() + " Sales " +   merchandise.getSale_price());
+
             setPrices(merchandise.getRegular_price(), merchandise.getSale_price());
+
             title.setText(merchandise.getName());
 
         }
 
         private void setPrices(String regular_price, String sale_price) {
 
-            String MONEY_STRING = " " + activity.getResources().getString(R.string.tomans);
+            String MONEY_STRING = Constants.SPACE_CHAR + activity.getResources().getString(R.string.tomans);
             String priceString;
-            String priceInvalidString = "";
+            String priceInvalidString = Constants.EMPTY_CHAR;
 
-            if (sale_price.equals("")) {
+            if (sale_price.equals(Constants.EMPTY_CHAR))
                 priceString = regular_price + MONEY_STRING;
-            } else {
+            else {
                 priceString = sale_price + MONEY_STRING;
                 priceInvalidString = regular_price + MONEY_STRING;
-                Log.d("price_string", "setPrices: " + priceInvalidString + " | ");
             }
 
             priceInvalid.setText(priceInvalidString);

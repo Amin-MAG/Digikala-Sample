@@ -19,12 +19,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.mag.digikala.Controller.Fragments.ToolbarFragment;
 import com.mag.digikala.Model.Adapter.NavigationRecyclerAdapter;
 import com.mag.digikala.Model.Adapter.ProductRecyclerAdapter;
+import com.mag.digikala.Model.DigikalaMenuItem;
 import com.mag.digikala.Model.DigikalaRepository;
 import com.mag.digikala.Model.Merchandise;
 import com.mag.digikala.Network.DigikalaApi;
 import com.mag.digikala.Network.RetrofitInstance;
 import com.mag.digikala.R;
 import com.mag.digikala.Util.UiUtil;
+import com.mag.digikala.Var.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,14 +84,20 @@ public class DigikalaActivity extends AppCompatActivity {
 
         // Adapters
 
-        navigationRecyclerAdapter = new NavigationRecyclerAdapter(new ArrayList<String>() {{
-            add(getString(R.string.home_page));
-            add(getString(R.string.home_page));
-            add(getString(R.string.home_page));
-            add(getString(R.string.home_page));
-            add(getString(R.string.home_page));
-            add(getString(R.string.home_page));
-            add(getString(R.string.home_page));
+        navigationRecyclerAdapter = new NavigationRecyclerAdapter(new ArrayList<DigikalaMenuItem>() {{
+            add(new DigikalaMenuItem(getString(R.string.home_page), R.drawable.ic_home));
+            add(new DigikalaMenuItem(getString(R.string.category), R.drawable.ic_categoty));
+            add(new DigikalaMenuItem(NavigationRecyclerAdapter.SEPRATOR, Constants.NOT_FOUNDED));
+            add(new DigikalaMenuItem(getString(R.string.cart), R.drawable.ic_shopping_cart_dark));
+            add(new DigikalaMenuItem(NavigationRecyclerAdapter.SEPRATOR, Constants.NOT_FOUNDED));
+            add(new DigikalaMenuItem(getString(R.string.offers), R.drawable.ic_star));
+            add(new DigikalaMenuItem(getString(R.string.best_sellers), R.drawable.ic_star));
+            add(new DigikalaMenuItem(getString(R.string.most_views), R.drawable.ic_star));
+            add(new DigikalaMenuItem(getString(R.string.newests), R.drawable.ic_star));
+            add(new DigikalaMenuItem(NavigationRecyclerAdapter.SEPRATOR, Constants.NOT_FOUNDED));
+            add(new DigikalaMenuItem(getString(R.string.setting), R.drawable.ic_setting));
+            add(new DigikalaMenuItem(getString(R.string.faq), R.drawable.ic_help));
+            add(new DigikalaMenuItem(getString(R.string.about_us), R.drawable.ic_phone));
         }});
         bestProductAdapter = new ProductRecyclerAdapter(new ArrayList<Merchandise>());
         mostViewedProductAdapter = new ProductRecyclerAdapter(new ArrayList<Merchandise>());

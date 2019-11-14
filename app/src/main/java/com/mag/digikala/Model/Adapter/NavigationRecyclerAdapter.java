@@ -4,21 +4,25 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mag.digikala.Model.DigikalaMenuItem;
 import com.mag.digikala.R;
 
 import java.util.List;
 
 public class NavigationRecyclerAdapter extends RecyclerView.Adapter<NavigationRecyclerAdapter.NavigationRecyclerViewHolder> {
 
-    private List<String> items;
+    public static final String SEPRATOR = "<!>SEPRATOR<!>";
+
+    private List<DigikalaMenuItem> items;
     private Activity activity;
 
-    public NavigationRecyclerAdapter(List<String> items) {
+    public NavigationRecyclerAdapter(List<DigikalaMenuItem> items) {
         this.items = items;
     }
 
@@ -44,17 +48,28 @@ public class NavigationRecyclerAdapter extends RecyclerView.Adapter<NavigationRe
     public class NavigationRecyclerViewHolder extends RecyclerView.ViewHolder {
 
         private TextView itemString;
+        private ImageView menuImage;
+        private View devider;
 
         public NavigationRecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
 
             itemString = itemView.findViewById(R.id.navigation_layout__item_title);
+            menuImage = itemView.findViewById(R.id.navigation_layout__menu_image);
+            devider = itemView.findViewById(R.id.navigation_layout__devider);
 
         }
 
-        public void bind(String item) {
+        public void bind(DigikalaMenuItem item) {
 
-            itemString.setText("\u200F" + item + "");
+            if (item.getName() != SEPRATOR) {
+                itemString.setText(item.getName());
+                menuImage.setImageDrawable(activity.getResources().getDrawable(item.getDrawbleId()));
+            } else {
+                itemString.setVisibility(View.GONE);
+                menuImage.setVisibility(View.GONE);
+                devider.setVisibility(View.VISIBLE);
+            }
 
         }
 
