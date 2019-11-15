@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/product_layout__cardview"
     android:layout_width="160dp"
     android:layout_height="240dp"
     android:layout_marginRight="8dp">
@@ -69,7 +70,7 @@
             android:textColor="@color/digikala_red"
             android:textSize="8dp"
             app:layout_constraintBottom_toTopOf="@+id/product_layout_price"
-            app:layout_constraintLeft_toLeftOf="parent"/>
+            app:layout_constraintLeft_toLeftOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,8 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mag.digikala.Controller.Activities.ProductDetailActivity;
 import com.mag.digikala.Model.Merchandise;
 import com.mag.digikala.R;
 import com.mag.digikala.Var.Constants;
@@ -54,6 +56,7 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
         private TextView price;
         private TextView priceInvalid;
         private ImageView cover;
+        private CardView cardView;
 
         public ProductRecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -62,10 +65,11 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
             price = itemView.findViewById(R.id.product_layout_price);
             priceInvalid = itemView.findViewById(R.id.product_layout_price_without_sales);
             title = itemView.findViewById(R.id.product_layout__title);
+            cardView = itemView.findViewById(R.id.product_layout__cardview);
 
         }
 
-        public void bind(Merchandise merchandise) {
+        public void bind(final Merchandise merchandise) {
 
             String imageUrl = merchandise.getImages()[0].getSrc();
             Picasso.get().load(imageUrl).placeholder(R.drawable.place_holder).into(cover);
@@ -73,6 +77,14 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
             setPrices(merchandise.getRegular_price(), merchandise.getSale_price());
 
             title.setText(merchandise.getName());
+
+
+            cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    activity.startActivity(ProductDetailActivity.newIntent(activity, merchandise.getId()));
+                }
+            });
 
         }
 

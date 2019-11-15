@@ -29,4 +29,12 @@ public class DigikalaRepository {
     public List<Merchandise> getAllProducts() {
         return allProducts;
     }
+
+    public Merchandise getProductById(String id) {
+        for (Merchandise merchandise : allProducts) {
+            if (merchandise.getId().equals(id)) return merchandise;
+        }
+        return null;
+    }
+
 }

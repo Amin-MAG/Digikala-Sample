@@ -1,6 +1,8 @@
 package com.mag.digikala.Model;
 
-public class Merchandise {
+import java.io.Serializable;
+
+public class Merchandise implements Serializable {
 
     private String id;
     private String name;
