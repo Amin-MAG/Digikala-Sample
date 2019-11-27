@@ -1,7 +1,7 @@
 <resources>
 
     <string name="app_name_en">Digikala</string>
-    <string name="app_name_fa">دیجیکالا</string>
+    <string name="app_name_fa">دیجی کالا</string>
 
 
     // Persian
@@ -28,7 +28,9 @@
     <string name="product_detail">مشخصات</string>
     <string name="product_comments">نظرات کاربران</string>
     <string name="more_detail">ادامه مطلب</string>
-
+    <string name="sell_by">فروش توسط</string>
+    <string name="ready_for_send_storage">آماده ارسال از انبار دیجی کالا</string>
+    <string name="product_garanty">گارانتی ۱۸ ماهه دیجی کالا</string>
 
     <string name="test">
 
@@ -41,5 +43,8 @@
  اگر امکاناتی که در بالا به آن‌ها پرداختیم، هنوز نتوانسته شما را تحت‌تأثیر قرار دهد، می‌توانید پشتیبانی از دو سیم‌کارت، پشتیبانی از اینترنت پرسرعت 4G و برخورداری از حسگر اثرانگشت را به لیست فوق اضافه کنید. درصورتی‌که شما نیز در دسته‌ی افرادی قرار دارید که داشتن گوشی موبایل با صفحه‌نمایش بزرگ برایشان حائز اهمیت است، وای ۷ پرایم ۲۰۱۸ را برای خرید انتخاب کنید.
 
     </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

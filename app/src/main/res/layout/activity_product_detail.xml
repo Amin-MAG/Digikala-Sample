@@ -120,6 +120,7 @@
                 app:backgroundTint="@color/digikala_raw_white"
                 app:cornerRadius="0dp"
                 app:icon="@drawable/ic_comment"
+                app:iconGravity="textStart"
                 app:iconSize="20dp"
                 app:iconTint="@color/digikala_blue_gray"
                 app:rippleColor="@android:color/darker_gray" />
@@ -136,6 +137,7 @@
                 app:backgroundTint="@color/digikala_raw_white"
                 app:cornerRadius="0dp"
                 app:icon="@drawable/ic_detail"
+                app:iconGravity="textStart"
                 app:iconSize="20dp"
                 app:iconTint="@color/digikala_blue_gray"
                 app:rippleColor="@android:color/darker_gray" />
@@ -154,45 +156,113 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="8dp">
 
-                <TextView
-                    android:id="@+id/product_detail_activity__product_name4"
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="TextView" />
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="12dp"
+                    android:gravity="right"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/product_detail_activity__product_name8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|right"
+                        android:layout_marginRight="8dp"
+                        android:text="@string/product_garanty"
+                        android:textSize="12dp" />
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/checked_sheild" />
+
+                </LinearLayout>
+
 
                 <View
                     android:id="@+id/navigation_layout__devider01"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="4dp"
-                    android:background="?android:attr/listDivider"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/navigation_layout__item_title" />
+                    android:background="?android:attr/listDivider"/>
 
 
-                <TextView
-                    android:id="@+id/product_detail_activity__product_name5"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="TextView" />
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="right"
+                    android:orientation="horizontal">
 
+                    <TextView
+                        android:id="@+id/product_detail_activity__product_name5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|right"
+                        android:layout_marginRight="4dp"
+                        android:text="@string/app_name_fa"
+                        android:textColor="@color/digikala_red"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:id="@+id/product_detail_activity__product_name7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|right"
+                        android:layout_marginRight="8dp"
+                        android:text="@string/sell_by"
+                        android:textSize="12dp" />
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/short_logo" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="12dp"
+                    android:gravity="right"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/product_detail_activity__product_name4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|right"
+                        android:layout_marginRight="8dp"
+                        android:text="@string/ready_for_send_storage"
+                        android:textSize="12dp" />
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/truck" />
+
+                </LinearLayout>
 
                 <View
                     android:id="@+id/navigation_layout__devider02"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="4dp"
-                    android:background="?android:attr/listDivider"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/navigation_layout__item_title" />
+                    android:background="?android:attr/listDivider"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -284,21 +354,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="4dp"
-                    android:background="?android:attr/listDivider"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/navigation_layout__item_title" />
+                    android:background="?android:attr/listDivider"/>
 
                 <TextView
                     android:id="@+id/product_detail_activity__product_name6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:gravity="center"
-                    android:textColor="@color/digikala_gray"
                     android:layout_marginBottom="8dp"
-                    android:text="@string/more_detail" />
+                    android:gravity="center"
+                    android:text="@string/more_detail"
+                    android:textColor="@color/digikala_gray" />
 
             </LinearLayout>
 
