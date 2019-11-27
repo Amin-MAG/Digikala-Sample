@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.mag.digikala.Model.Adapter.SliderViewPagerAdapter;
 import com.mag.digikala.Model.DigikalaRepository;
@@ -20,6 +21,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     public static final String EXTRA_MERCHANDISE = "extra_merchandise";
     private Merchandise merchandise;
 
+    private TextView product_name;
     private ViewPager slider;
     private SliderViewPagerAdapter sliderAdapter;
 
@@ -41,6 +43,8 @@ public class ProductDetailActivity extends AppCompatActivity {
 
         merchandise = DigikalaRepository.getInstance().getProductById(getIntent().getExtras().getString(EXTRA_MERCHANDISE));
 
+        product_name = findViewById(R.id.product_detail_activity__product_name);
+        product_name.setText(getString(R.string.product_name) + merchandise.getName());
         slider = findViewById(R.id.product_detail_activity__view_pager);
         sliderAdapter = new SliderViewPagerAdapter(getSupportFragmentManager(), urls);
         slider.setAdapter(sliderAdapter);

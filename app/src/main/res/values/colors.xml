@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#e72f31</color>
+    <color name="colorPrimaryDark">#e72f31</color>
     <color name="colorAccent">#D81B60</color>
 
     <color name="digikala_red_dark">#B11315</color>
     <color name="digikala_red">#e72f31</color>
     <color name="digikala_red_light">#FF6F70</color>
     <color name="digikala_green">#66bb68</color>
+    <color name="digikala_blue_gray">#a2aac1</color>
+    <color name="digikala_dark_blue_gray">#303341</color>
     <color name="digikala_gray">#757575</color>
+    <color name="digikala_light_gray">#aaaaaa</color>
+    <color name="digikala_dark_white">#eeeeee</color>
+    <color name="digikala_white">#fafafa</color>
+    <color name="digikala_raw_white">#ffffff</color>
     <color name="nothing">#00FFFFFF</color>
 
 </resources>

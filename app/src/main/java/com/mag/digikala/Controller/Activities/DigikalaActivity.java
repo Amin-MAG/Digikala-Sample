@@ -79,7 +79,7 @@ public class DigikalaActivity extends AppCompatActivity {
         // Toolbar
 
         toolbarFragment = ToolbarFragment.newInstance();
-        UiUtil.changeFragment(getSupportFragmentManager(), toolbarFragment, R.id.digikala_activity__toolbar_frame, true, "fragment_toolbar");
+        UiUtil.changeFragment(getSupportFragmentManager(), toolbarFragment, R.id.digikala_activity__toolbar_frame, true, "fragment_main_toolbar");
 
 
         // Adapters
