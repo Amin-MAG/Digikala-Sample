@@ -1,13 +1,7 @@
 package com.mag.digikala.Controller.Activities;
 
 import android.os.Bundle;
-import android.text.Layout;
-import android.text.SpannableString;
-import android.text.style.AlignmentSpan;
-import android.util.Log;
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -16,9 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mag.digikala.Controller.Fragments.MainDigikalaFragment;
 import com.mag.digikala.Controller.Fragments.ToolbarFragment;
 import com.mag.digikala.Model.Adapter.NavigationRecyclerAdapter;
-import com.mag.digikala.Model.Adapter.ProductRecyclerAdapter;
 import com.mag.digikala.Model.DigikalaMenuItem;
 import com.mag.digikala.Model.DigikalaRepository;
 import com.mag.digikala.Model.Merchandise;
@@ -35,45 +29,31 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DigikalaActivity extends AppCompatActivity {
+public class MainDigikalaActivity extends AppCompatActivity {
+
+    private ToolbarFragment toolbarFragment;
+    private MainDigikalaFragment mainDigikalaFragment;
 
     private DrawerLayout drawerLayout;
-    private ToolbarFragment toolbarFragment;
     private ProgressBar progressBar;
 
     private RecyclerView navigationRecycler;
     private NavigationRecyclerAdapter navigationRecyclerAdapter;
-
-    private RecyclerView newestProductRecycler;
-    private ProductRecyclerAdapter newestProductAdapter;
-
-    private RecyclerView bestProductRecycler;
-    private ProductRecyclerAdapter bestProductAdapter;
-
-    private RecyclerView mostViewedProductRecycler;
-    private ProductRecyclerAdapter mostViewedProductAdapter;
 
     private DigikalaApi digikalaApi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_digikala);
-
+        setContentView(R.layout.activity_main_digikala);
 
         retrofitConncetion();
-
 
         // Find Items
 
         drawerLayout = findViewById(R.id.digikala_activity__drawer_layout);
         navigationRecycler = findViewById(R.id.digikala_activity__navigation_recycler);
-        bestProductRecycler = findViewById(R.id.digikala_activity__best);
-        newestProductRecycler = findViewById(R.id.digikala_activity__newest);
-        mostViewedProductRecycler = findViewById(R.id.digikala_activity__most_view);
         progressBar = findViewById(R.id.digikala_activity__progress_bar);
-
-        // Progress Bar
 
 
         // Toolbar
@@ -82,7 +62,7 @@ public class DigikalaActivity extends AppCompatActivity {
         UiUtil.changeFragment(getSupportFragmentManager(), toolbarFragment, R.id.digikala_activity__toolbar_frame, true, "fragment_main_toolbar");
 
 
-        // Adapters
+        // Navigation
 
         navigationRecyclerAdapter = new NavigationRecyclerAdapter(new ArrayList<DigikalaMenuItem>() {{
             add(new DigikalaMenuItem(getString(R.string.home_page), R.drawable.ic_home));
@@ -99,18 +79,13 @@ public class DigikalaActivity extends AppCompatActivity {
             add(new DigikalaMenuItem(getString(R.string.faq), R.drawable.ic_help));
             add(new DigikalaMenuItem(getString(R.string.about_us), R.drawable.ic_phone));
         }});
-        bestProductAdapter = new ProductRecyclerAdapter(new ArrayList<Merchandise>());
-        mostViewedProductAdapter = new ProductRecyclerAdapter(new ArrayList<Merchandise>());
-        newestProductAdapter = new ProductRecyclerAdapter(new ArrayList<Merchandise>());
-
-
-        // Set Adapters
-
         navigationRecycler.setAdapter(navigationRecyclerAdapter);
-        bestProductRecycler.setAdapter(bestProductAdapter);
-        newestProductRecycler.setAdapter(newestProductAdapter);
-        mostViewedProductRecycler.setAdapter(mostViewedProductAdapter);
 
+
+        // Main Page
+
+        mainDigikalaFragment = MainDigikalaFragment.newInstance();
+        UiUtil.changeFragment(getSupportFragmentManager(), mainDigikalaFragment, R.id.digikala_activity__scroll_view, false, "fragment_main_digikala");
 
     }
 
@@ -125,12 +100,7 @@ public class DigikalaActivity extends AppCompatActivity {
 
                     DigikalaRepository.getInstance().setAllProducts(response.body());
                     progressBar.setVisibility(View.GONE);
-                    bestProductAdapter.setProductItems(DigikalaRepository.getInstance().getAllProducts());
-                    bestProductAdapter.notifyDataSetChanged();
-                    mostViewedProductAdapter.setProductItems(DigikalaRepository.getInstance().getAllProducts());
-                    mostViewedProductAdapter.notifyDataSetChanged();
-                    newestProductAdapter.setProductItems(DigikalaRepository.getInstance().getAllProducts());
-                    newestProductAdapter.notifyDataSetChanged();
+                    mainDigikalaFragment.updateView();
 
                 }
 
