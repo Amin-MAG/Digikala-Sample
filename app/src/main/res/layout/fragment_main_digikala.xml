@@ -7,7 +7,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/digikala_activity__newest"
+        android:id="@+id/digikala_main_activity__categoty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -16,7 +16,16 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/digikala_activity__most_view"
+        android:id="@+id/digikala_main_activity__newest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layoutDirection="rtl"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/digikala_main_activity__most_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -27,7 +36,7 @@
     </androidx.recyclerview.widget.RecyclerView>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/digikala_activity__best"
+        android:id="@+id/digikala_main_activity__best"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"

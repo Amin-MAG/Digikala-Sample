@@ -4,33 +4,27 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
+import com.mag.digikala.Model.Adapter.CategoryRecyclerAdapter;
 import com.mag.digikala.Model.Adapter.ProductRecyclerAdapter;
+import com.mag.digikala.Model.DigikalaCategory;
 import com.mag.digikala.Model.DigikalaRepository;
 import com.mag.digikala.Model.Merchandise;
-import com.mag.digikala.Network.DigikalaApi;
-import com.mag.digikala.Network.RetrofitInstance;
 import com.mag.digikala.R;
-import com.mag.digikala.Util.UiUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class MainDigikalaFragment extends Fragment {
+
+    private RecyclerView categories;
+    private CategoryRecyclerAdapter categoryAdapter;
 
     private RecyclerView newestProductRecycler;
     private ProductRecyclerAdapter newestProductAdapter;
@@ -45,9 +39,9 @@ public class MainDigikalaFragment extends Fragment {
     }
 
     public static MainDigikalaFragment newInstance() {
-        
+
         Bundle args = new Bundle();
-        
+
         MainDigikalaFragment fragment = new MainDigikalaFragment();
         fragment.setArguments(args);
         return fragment;
@@ -65,9 +59,10 @@ public class MainDigikalaFragment extends Fragment {
 
         // Find Items
 
-        bestProductRecycler = view.findViewById(R.id.digikala_activity__best);
-        newestProductRecycler = view.findViewById(R.id.digikala_activity__newest);
-        mostViewedProductRecycler = view.findViewById(R.id.digikala_activity__most_view);
+        bestProductRecycler = view.findViewById(R.id.digikala_main_activity__best);
+        newestProductRecycler = view.findViewById(R.id.digikala_main_activity__newest);
+        mostViewedProductRecycler = view.findViewById(R.id.digikala_main_activity__most_view);
+        categories = view.findViewById(R.id.digikala_main_activity__categoty);
 
 
         // Adapters
@@ -75,13 +70,27 @@ public class MainDigikalaFragment extends Fragment {
         bestProductAdapter = new ProductRecyclerAdapter(new ArrayList<Merchandise>());
         mostViewedProductAdapter = new ProductRecyclerAdapter(new ArrayList<Merchandise>());
         newestProductAdapter = new ProductRecyclerAdapter(new ArrayList<Merchandise>());
-
+        categoryAdapter = new CategoryRecyclerAdapter(new ArrayList<DigikalaCategory>() {{
+            add(new DigikalaCategory("غذا"));
+            add(new DigikalaCategory("پوشاک"));
+            add(new DigikalaCategory("دیجیتال"));
+            add(new DigikalaCategory("موبایل"));
+            add(new DigikalaCategory("غذا"));
+            add(new DigikalaCategory("پوشاک"));
+            add(new DigikalaCategory("دیجیتال"));
+            add(new DigikalaCategory("موبایل"));
+            add(new DigikalaCategory("غذا"));
+            add(new DigikalaCategory("پوشاک"));
+            add(new DigikalaCategory("دیجیتال"));
+            add(new DigikalaCategory("موبایل"));
+        }});
 
         // Set Adapters
 
         bestProductRecycler.setAdapter(bestProductAdapter);
         newestProductRecycler.setAdapter(newestProductAdapter);
         mostViewedProductRecycler.setAdapter(mostViewedProductAdapter);
+        categories.setAdapter(categoryAdapter);
 
     }
 
