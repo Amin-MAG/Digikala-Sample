@@ -1,5 +1,6 @@
 package com.mag.digikala.Controller.Fragments;
 
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,16 +13,23 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mag.digikala.Model.Adapter.CategoryRecyclerAdapter;
+import com.mag.digikala.Model.Adapter.MainSliderAdapter;
 import com.mag.digikala.Model.Adapter.ProductRecyclerAdapter;
 import com.mag.digikala.Model.DigikalaCategory;
 import com.mag.digikala.Model.DigikalaRepository;
 import com.mag.digikala.Model.Merchandise;
 import com.mag.digikala.R;
+import com.smarteist.autoimageslider.IndicatorAnimations;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainDigikalaFragment extends Fragment {
+
+    private SliderView sliderView;
+    private MainSliderAdapter mainSliderAdapter;
 
     private RecyclerView categories;
     private CategoryRecyclerAdapter categoryAdapter;
@@ -63,6 +71,7 @@ public class MainDigikalaFragment extends Fragment {
         newestProductRecycler = view.findViewById(R.id.digikala_main_activity__newest);
         mostViewedProductRecycler = view.findViewById(R.id.digikala_main_activity__most_view);
         categories = view.findViewById(R.id.digikala_main_activity__categoty);
+        sliderView = view.findViewById(R.id.digikala_main_activity__main_image_slider);
 
 
         // Adapters
@@ -84,6 +93,12 @@ public class MainDigikalaFragment extends Fragment {
             add(new DigikalaCategory("دیجیتال"));
             add(new DigikalaCategory("موبایل"));
         }});
+        mainSliderAdapter = new MainSliderAdapter(new ArrayList<String>() {{
+            add(getURLForResource(R.drawable.main_slider_image01));
+            add(getURLForResource(R.drawable.main_slider_image02));
+            add(getURLForResource(R.drawable.main_slider_image03));
+            add(getURLForResource(R.drawable.main_slider_image04));
+        }});
 
         // Set Adapters
 
@@ -91,6 +106,11 @@ public class MainDigikalaFragment extends Fragment {
         newestProductRecycler.setAdapter(newestProductAdapter);
         mostViewedProductRecycler.setAdapter(mostViewedProductAdapter);
         categories.setAdapter(categoryAdapter);
+
+        sliderView.setSliderAdapter(mainSliderAdapter);
+        sliderView.startAutoCycle();
+        sliderView.setIndicatorAnimation(IndicatorAnimations.WORM);
+        sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
 
     }
 
@@ -103,6 +123,10 @@ public class MainDigikalaFragment extends Fragment {
         newestProductAdapter.setProductItems(DigikalaRepository.getInstance().getAllProducts());
         newestProductAdapter.notifyDataSetChanged();
 
+    }
+
+    public String getURLForResource(int resourceId) {
+        return Uri.parse("android.resource://" + R.class.getPackage().getName() + "/" + resourceId).toString();
     }
 
 }

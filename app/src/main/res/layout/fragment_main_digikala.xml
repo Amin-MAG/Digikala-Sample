@@ -6,11 +6,28 @@
     android:orientation="vertical">
 
 
+    <com.smarteist.autoimageslider.SliderView
+        android:id="@+id/digikala_main_activity__main_image_slider"
+        android:layout_width="match_parent"
+        android:layout_height="141dp"
+        app:sliderAnimationDuration="600"
+        app:sliderAutoCycleDirection="right"
+        app:sliderAutoCycleEnabled="true"
+        app:sliderCircularHandlerEnabled="true"
+        app:sliderIndicatorAnimationDuration="600"
+        app:sliderIndicatorGravity="center_horizontal|bottom"
+        app:sliderIndicatorMargin="10dp"
+        app:sliderIndicatorOrientation="horizontal"
+        app:sliderIndicatorSelectedColor="@color/digikala_red"
+        app:sliderIndicatorUnselectedColor="@color/digikala_raw_white"
+        app:sliderScrollTimeInSec="3"
+        app:sliderStartAutoCycle="true" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/digikala_main_activity__categoty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layoutDirection="rtl"
         android:orientation="horizontal"
         android:paddingTop="8dp"
@@ -18,7 +35,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
@@ -27,30 +44,14 @@
         android:orientation="horizontal">
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="left"
-            android:padding="4dp"
-            android:text="@string/whole_list"
-            android:textColor="@color/digikala_blue"
-            android:textSize="12dp"
-            app:fontFamily="@font/far_roya_bd" />
+        <ImageView
+            android:layout_width="136dp"
+            android:layout_height="29dp"
+            android:layout_gravity="right"
+            android:src="@drawable/digikala_offer" />
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:gravity="right"
-            android:text="@string/best_sellers"
-            app:fontFamily="@font/far_trafc_bd" />
-
-
-    </LinearLayout>
+    </FrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/digikala_main_activity__newest"
