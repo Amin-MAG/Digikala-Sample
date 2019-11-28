@@ -35,7 +35,8 @@
             android:padding="4dp"
             android:text="@string/whole_list"
             android:textColor="@color/digikala_blue"
-            android:textSize="12dp" />
+            android:textSize="12dp"
+            app:fontFamily="@font/far_roya_bd" />
 
 
         <TextView
@@ -43,7 +44,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:gravity="right"
-            android:text="@string/best_sellers" />
+            android:text="@string/best_sellers"
+            app:fontFamily="@font/far_trafc_bd" />
 
 
     </LinearLayout>
@@ -76,7 +78,8 @@
             android:padding="4dp"
             android:text="@string/whole_list"
             android:textColor="@color/digikala_blue"
-            android:textSize="12dp" />
+            android:textSize="12dp"
+            app:fontFamily="@font/far_roya_bd" />
 
 
         <TextView
@@ -84,7 +87,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:gravity="right"
-            android:text="@string/best_sellers" />
+            android:text="@string/best_sellers"
+            app:fontFamily="@font/far_trafc_bd" />
 
 
     </LinearLayout>
@@ -120,7 +124,8 @@
             android:padding="4dp"
             android:text="@string/whole_list"
             android:textColor="@color/digikala_blue"
-            android:textSize="12dp" />
+            android:textSize="12dp"
+            app:fontFamily="@font/far_roya_bd" />
 
 
         <TextView
@@ -128,7 +133,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:gravity="right"
-            android:text="@string/best_sellers" />
+            android:text="@string/best_sellers"
+            app:fontFamily="@font/far_trafc_bd" />
 
 
     </LinearLayout>

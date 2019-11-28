@@ -11,5 +11,6 @@
     android:paddingBottom="8dp"
     android:text="Something"
     android:textColor="@color/digikala_raw_white"
+    android:fontFamily="@font/far_roya_bd"
     app:cornerRadius="16dp"
     app:rippleColor="@color/digikala_gray" />

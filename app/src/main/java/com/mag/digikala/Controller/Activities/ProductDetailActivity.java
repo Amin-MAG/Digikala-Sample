@@ -44,7 +44,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         merchandise = DigikalaRepository.getInstance().getProductById(getIntent().getExtras().getString(EXTRA_MERCHANDISE));
 
         product_name = findViewById(R.id.product_detail_activity__product_name);
-        product_name.setText(getString(R.string.product_name) + merchandise.getName());
+        product_name.setText(getString(R.string.product_name) + " " + merchandise.getName());
         slider = findViewById(R.id.product_detail_activity__view_pager);
         sliderAdapter = new SliderViewPagerAdapter(getSupportFragmentManager(), urls);
         slider.setAdapter(sliderAdapter);

@@ -23,7 +23,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingBottom="16dp">
 
                 <androidx.viewpager.widget.ViewPager
                     android:id="@+id/product_detail_activity__view_pager"
@@ -81,7 +82,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="8dp"
                     android:gravity="right"
-                    android:textSize="18dp" />
+                    android:textSize="16dp"
+                    android:fontFamily="@font/far_roya_bd"/>
 
 
                 <TextView
@@ -91,8 +93,10 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginRight="8dp"
                     android:gravity="right"
-                    android:text="TextView"
-                    android:textColor="@color/digikala_gray" />
+                    android:text="توضیخات بیشتر محصول"
+                    android:textColor="@color/digikala_gray"
+                    android:textSize="12dp"
+                    android:fontFamily="@font/iran_yekan"/>
 
 
             </LinearLayout>
@@ -123,7 +127,8 @@
                 app:iconGravity="textStart"
                 app:iconSize="20dp"
                 app:iconTint="@color/digikala_blue_gray"
-                app:rippleColor="@android:color/darker_gray" />
+                app:rippleColor="@android:color/darker_gray"
+                android:fontFamily="@font/far_trafc_bd"/>
 
             <com.google.android.material.button.MaterialButton
                 android:layout_width="wrap_content"
@@ -140,7 +145,8 @@
                 app:iconGravity="textStart"
                 app:iconSize="20dp"
                 app:iconTint="@color/digikala_blue_gray"
-                app:rippleColor="@android:color/darker_gray" />
+                app:rippleColor="@android:color/darker_gray"
+                android:fontFamily="@font/far_trafc_bd"/>
 
 
         </LinearLayout>
@@ -177,7 +183,8 @@
                         android:layout_gravity="center|right"
                         android:layout_marginRight="8dp"
                         android:text="@string/product_garanty"
-                        android:textSize="12dp" />
+                        android:textSize="10dp"
+                        android:fontFamily="@font/iran_yekan"/>
 
                     <ImageView
                         android:layout_width="18dp"
@@ -213,7 +220,8 @@
                         android:layout_marginRight="4dp"
                         android:text="@string/app_name_fa"
                         android:textColor="@color/digikala_red"
-                        android:textSize="12dp" />
+                        android:textSize="10dp"
+                        android:fontFamily="@font/iran_yekan"/>
 
                     <TextView
                         android:id="@+id/product_detail_activity__product_name7"
@@ -222,12 +230,15 @@
                         android:layout_gravity="center|right"
                         android:layout_marginRight="8dp"
                         android:text="@string/sell_by"
-                        android:textSize="12dp" />
+                        android:textSize="10dp"
+                        android:fontFamily="@font/iran_yekan"/>
 
                     <ImageView
                         android:layout_width="18dp"
                         android:layout_height="18dp"
-                        android:src="@drawable/short_logo" />
+                        android:src="@drawable/short_logo"
+                        android:fontFamily="@font/iran_yekan"/>
+
 
                 </LinearLayout>
 
@@ -248,7 +259,8 @@
                         android:layout_gravity="center|right"
                         android:layout_marginRight="8dp"
                         android:text="@string/ready_for_send_storage"
-                        android:textSize="12dp" />
+                        android:textSize="10dp"
+                        android:fontFamily="@font/iran_yekan"/>
 
                     <ImageView
                         android:layout_width="18dp"
@@ -281,21 +293,18 @@
                         android:text="30000 تومان"
                         android:textColor="@color/digikala_green"
                         android:textSize="17dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent" />
+                        android:fontFamily="@font/far_trafc_bd"/>
 
                     <TextView
                         android:id="@+id/product_layout_price_without_sales"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginLeft="4dp"
+                        android:layout_marginLeft="8dp"
+                        android:fontFamily="@font/far_trafc_bd"
                         android:gravity="left"
                         android:text="20000 تومان"
                         android:textColor="@color/digikala_red"
-                        android:textSize="14dp"
-                        app:layout_constraintBottom_toTopOf="@+id/product_layout_price"
-                        app:layout_constraintLeft_toLeftOf="parent" />
+                        android:textSize="14dp" />
 
                 </LinearLayout>
 
@@ -311,7 +320,8 @@
                     app:backgroundTint="@color/digikala_green"
                     app:cornerRadius="0dp"
                     app:icon="@drawable/ic_add_cart"
-                    app:iconSize="22dp" />
+                    app:iconSize="22dp"
+                    android:fontFamily="@font/iran_yekan"/>
 
 
             </LinearLayout>
@@ -346,8 +356,10 @@
                     android:paddingRight="12dp"
                     android:paddingBottom="4dp"
                     android:text="@string/test"
+                    android:lineSpacingExtra="4dp"
+                    android:fontFamily="@font/iran_yekan"
                     android:textColor="#C9464646"
-                    android:textSize="12dp" />
+                    android:textSize="10dp" />
 
                 <View
                     android:id="@+id/navigation_layout__devider03"
@@ -360,11 +372,16 @@
                     android:id="@+id/product_detail_activity__product_name6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
+                    android:paddingBottom="8dp"
+                    android:paddingTop="8dp"
+                    android:textSize="10dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:gravity="center"
                     android:text="@string/more_detail"
-                    android:textColor="@color/digikala_gray" />
+                    android:textColor="@color/digikala_gray"
+                    android:fontFamily="@font/iran_yekan"/>
 
             </LinearLayout>
 
