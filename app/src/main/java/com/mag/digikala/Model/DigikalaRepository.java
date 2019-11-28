@@ -37,4 +37,17 @@ public class DigikalaRepository {
         return null;
     }
 
+
+    // Navigation items
+
+    private  List<DigikalaMenuItem> navigationItems;
+
+    public List<DigikalaMenuItem> getNavigationItems() {
+        return navigationItems;
+    }
+
+    public void setNavigationItems(List<DigikalaMenuItem> navigationItems) {
+        this.navigationItems = navigationItems;
+    }
+
 }

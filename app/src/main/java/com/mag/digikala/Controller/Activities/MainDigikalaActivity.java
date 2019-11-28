@@ -43,28 +43,17 @@ public class MainDigikalaActivity extends AppCompatActivity {
     private DigikalaApi digikalaApi;
 
     @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_digikala);
 
-        retrofitConncetion();
 
-        // Find Items
-
-        drawerLayout = findViewById(R.id.digikala_activity__drawer_layout);
-        navigationRecycler = findViewById(R.id.digikala_activity__navigation_recycler);
-        progressBar = findViewById(R.id.digikala_activity__progress_bar);
-
-
-        // Toolbar
-
-        toolbarFragment = ToolbarFragment.newInstance();
-        UiUtil.changeFragment(getSupportFragmentManager(), toolbarFragment, R.id.digikala_activity__toolbar_frame, true, "fragment_main_toolbar");
-
-
-        // Navigation
-
-        navigationRecyclerAdapter = new NavigationRecyclerAdapter(new ArrayList<DigikalaMenuItem>() {{
+        DigikalaRepository.getInstance().setNavigationItems(new ArrayList<DigikalaMenuItem>() {{
             add(new DigikalaMenuItem(getString(R.string.home_page), R.drawable.ic_home));
             add(new DigikalaMenuItem(getString(R.string.category), R.drawable.ic_categoty));
             add(new DigikalaMenuItem(NavigationRecyclerAdapter.SEPRATOR, Constants.NOT_FOUNDED));
@@ -79,6 +68,25 @@ public class MainDigikalaActivity extends AppCompatActivity {
             add(new DigikalaMenuItem(getString(R.string.faq), R.drawable.ic_help));
             add(new DigikalaMenuItem(getString(R.string.about_us), R.drawable.ic_phone));
         }});
+
+        retrofitConncetion();
+
+        // Find Items
+
+        drawerLayout = findViewById(R.id.digikala_activity__drawer_layout);
+        navigationRecycler = findViewById(R.id.digikala__navigation_recycler);
+        progressBar = findViewById(R.id.digikala_activity__progress_bar);
+
+
+        // Toolbar
+
+        toolbarFragment = ToolbarFragment.newInstance();
+        UiUtil.changeFragment(getSupportFragmentManager(), toolbarFragment, R.id.digikala_activity__toolbar_frame, true, "fragment_main_toolbar");
+
+
+        // Navigation
+
+        navigationRecyclerAdapter = new NavigationRecyclerAdapter(DigikalaRepository.getInstance().getNavigationItems());
         navigationRecycler.setAdapter(navigationRecyclerAdapter);
 
 

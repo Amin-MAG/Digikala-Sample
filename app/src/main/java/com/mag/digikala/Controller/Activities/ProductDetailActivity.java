@@ -1,29 +1,33 @@
 package com.mag.digikala.Controller.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
+import com.mag.digikala.Controller.Fragments.ProductDetailFragment;
+import com.mag.digikala.Model.Adapter.NavigationRecyclerAdapter;
 import com.mag.digikala.Model.Adapter.SliderViewPagerAdapter;
 import com.mag.digikala.Model.DigikalaRepository;
 import com.mag.digikala.Model.Merchandise;
+import com.mag.digikala.Controller.Fragments.ProductDetailToolbarFragment;
 import com.mag.digikala.R;
+import com.mag.digikala.Util.UiUtil;
 
 import java.util.ArrayList;
 
 public class ProductDetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_MERCHANDISE = "extra_merchandise";
-    private Merchandise merchandise;
+    public static final String FRAGMENT_PRODUCT_DETAIL_TOOLBAR = "fragment_product_detail_toolbar";
+    public static final String FRAGMENT_PRODUCT_DETAIL = "fragment_product_detail";
 
-    private TextView product_name;
-    private ViewPager slider;
-    private SliderViewPagerAdapter sliderAdapter;
+    private RecyclerView navigationRecycler;
+    private NavigationRecyclerAdapter navigationRecyclerAdapter;
 
     public static Intent newIntent(Context context, String merchandiseId) {
         Intent intent = new Intent(context, ProductDetailActivity.class);
@@ -36,18 +40,16 @@ public class ProductDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
 
-        ArrayList<String> urls = new ArrayList<>();
-        for (Merchandise merchandise : DigikalaRepository.getInstance().getAllProducts()) {
-            urls.add(merchandise.getImages()[0].getSrc());
-        }
+        navigationRecycler = findViewById(R.id.digikala__navigation_recycler);
 
-        merchandise = DigikalaRepository.getInstance().getProductById(getIntent().getExtras().getString(EXTRA_MERCHANDISE));
+        UiUtil.changeFragment(getSupportFragmentManager(), ProductDetailToolbarFragment.newInstance(),R.id.digikala_product_detail_activity__toolbar_frame, false, FRAGMENT_PRODUCT_DETAIL_TOOLBAR);
+        UiUtil.changeFragment(getSupportFragmentManager(), ProductDetailFragment.newInstance(getIntent().getExtras().getString(EXTRA_MERCHANDISE)),R.id.digikala_product_detail_activity__main_frame,false, FRAGMENT_PRODUCT_DETAIL);
 
-        product_name = findViewById(R.id.product_detail_activity__product_name);
-        product_name.setText(getString(R.string.product_name) + " " + merchandise.getName());
-        slider = findViewById(R.id.product_detail_activity__view_pager);
-        sliderAdapter = new SliderViewPagerAdapter(getSupportFragmentManager(), urls);
-        slider.setAdapter(sliderAdapter);
+        // Navigation
+
+        navigationRecyclerAdapter = new NavigationRecyclerAdapter(DigikalaRepository.getInstance().getNavigationItems());
+        navigationRecycler.setAdapter(navigationRecyclerAdapter);
+
 
     }
 

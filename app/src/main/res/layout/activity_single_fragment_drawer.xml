@@ -8,7 +8,7 @@
     <!-- Navigation Bar-->
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/digikala_activity__navigation_view"
+        android:id="@+id/digikala__navigation_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="right">
@@ -21,7 +21,7 @@
             <include layout="@layout/layout_navigation_header" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/digikala_activity__navigation_recycler"
+                android:id="@+id/digikala__navigation_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
