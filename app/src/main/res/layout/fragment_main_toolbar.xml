@@ -30,23 +30,45 @@
             app:icon="@drawable/ic_search"
             app:iconPadding="0dp"
             app:iconSize="20dp"
-            app:layout_constraintLeft_toRightOf="@+id/toolbar_fragment__cart_btn"
+            app:layout_constraintLeft_toRightOf="@+id/toolbar_fragment__cart_frame_btn"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/toolbar_fragment__cart_btn"
-            style="?android:attr/borderlessButtonStyle"
+        <FrameLayout
+            android:id="@+id/toolbar_fragment__cart_frame_btn"
             android:layout_width="52dp"
             android:layout_height="60dp"
-            android:insetTop="0dp"
-            android:insetBottom="6dp"
-            app:backgroundTint="#007B2CD6"
-            app:cornerRadius="30dp"
-            app:icon="@drawable/ic_shopping_cart"
-            app:iconPadding="0dp"
-            app:iconSize="20dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/toolbar_fragment__cart_btn"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="52dp"
+                android:layout_height="60dp"
+                android:insetTop="0dp"
+                android:insetBottom="6dp"
+                app:backgroundTint="#007B2CD6"
+                app:cornerRadius="30dp"
+                app:icon="@drawable/ic_shopping_cart"
+                app:iconPadding="0dp"
+                app:iconSize="20dp" />
+
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="top|right"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="12dp"
+                android:background="@drawable/cart_counter"
+                android:gravity="center"
+                android:text="3"
+                android:textColor="@color/digikala_red"
+                android:textSize="12dp"
+                app:fontFamily="@font/far_trafc_bd" />
+
+
+        </FrameLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/toolbar_fragment__menu_btn"
