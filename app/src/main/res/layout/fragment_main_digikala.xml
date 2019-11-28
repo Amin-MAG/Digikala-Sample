@@ -54,7 +54,7 @@
     </FrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/digikala_main_activity__newest"
+        android:id="@+id/digikala_main_activity__offered"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -92,7 +92,50 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:gravity="right"
-            android:text="@string/best_sellers"
+            android:text="@string/newests"
+            app:fontFamily="@font/far_trafc_bd" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/digikala_main_activity__newest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layoutDirection="rtl"
+        android:orientation="horizontal"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="left"
+            android:padding="4dp"
+            android:text="@string/whole_list"
+            android:textColor="@color/digikala_blue"
+            android:textSize="12dp"
+            app:fontFamily="@font/far_roya_bd" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:gravity="right"
+            android:text="@string/most_views"
             app:fontFamily="@font/far_trafc_bd" />
 
 

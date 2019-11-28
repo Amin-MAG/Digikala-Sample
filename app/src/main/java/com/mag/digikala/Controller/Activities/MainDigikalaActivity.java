@@ -3,7 +3,9 @@ package com.mag.digikala.Controller.Activities;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +32,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainDigikalaActivity extends AppCompatActivity {
+
+    private ScrollView mainFrame;
+    private FrameLayout toolbarFrame;
 
     private ToolbarFragment toolbarFragment;
     private MainDigikalaFragment mainDigikalaFragment;
@@ -76,7 +81,8 @@ public class MainDigikalaActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.digikala_activity__drawer_layout);
         navigationRecycler = findViewById(R.id.digikala__navigation_recycler);
         progressBar = findViewById(R.id.digikala_activity__progress_bar);
-
+        mainFrame = findViewById(R.id.digikala_activity__scroll_view);
+        toolbarFrame = findViewById(R.id.digikala_activity__toolbar_frame);
 
         // Toolbar
 
@@ -108,6 +114,9 @@ public class MainDigikalaActivity extends AppCompatActivity {
 
                     DigikalaRepository.getInstance().setAllProducts(response.body());
                     progressBar.setVisibility(View.GONE);
+                    toolbarFrame.setVisibility(View.VISIBLE);
+                    mainFrame.setVisibility(View.VISIBLE);
+
                     mainDigikalaFragment.updateView();
 
                 }

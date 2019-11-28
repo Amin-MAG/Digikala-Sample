@@ -1,5 +1,6 @@
 package com.mag.digikala.Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DigikalaRepository {
@@ -40,7 +41,7 @@ public class DigikalaRepository {
 
     // Navigation items
 
-    private  List<DigikalaMenuItem> navigationItems;
+    private List<DigikalaMenuItem> navigationItems;
 
     public List<DigikalaMenuItem> getNavigationItems() {
         return navigationItems;
@@ -49,5 +50,18 @@ public class DigikalaRepository {
     public void setNavigationItems(List<DigikalaMenuItem> navigationItems) {
         this.navigationItems = navigationItems;
     }
+
+    public List<Merchandise> getOfferedProduct() {
+
+        ArrayList<Merchandise> offered = new ArrayList<>();
+
+        for (Merchandise merchandise : allProducts)
+            if (merchandise.getSale_price().length() > 0)
+                offered.add(merchandise);
+
+        return offered;
+
+    }
+
 
 }

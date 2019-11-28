@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ReportFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -43,6 +44,9 @@ public class MainDigikalaFragment extends Fragment {
     private RecyclerView mostViewedProductRecycler;
     private ProductRecyclerAdapter mostViewedProductAdapter;
 
+    private RecyclerView offeredProductRecycler;
+    private ProductRecyclerAdapter offeredProductAdapter;
+
     public MainDigikalaFragment() {
     }
 
@@ -72,6 +76,7 @@ public class MainDigikalaFragment extends Fragment {
         mostViewedProductRecycler = view.findViewById(R.id.digikala_main_activity__most_view);
         categories = view.findViewById(R.id.digikala_main_activity__categoty);
         sliderView = view.findViewById(R.id.digikala_main_activity__main_image_slider);
+        offeredProductRecycler = view.findViewById(R.id.digikala_main_activity__offered);
 
 
         // Adapters
@@ -99,6 +104,7 @@ public class MainDigikalaFragment extends Fragment {
             add(getURLForResource(R.drawable.main_slider_image03));
             add(getURLForResource(R.drawable.main_slider_image04));
         }});
+        offeredProductAdapter = new ProductRecyclerAdapter(new ArrayList<Merchandise>());
 
         // Set Adapters
 
@@ -106,6 +112,7 @@ public class MainDigikalaFragment extends Fragment {
         newestProductRecycler.setAdapter(newestProductAdapter);
         mostViewedProductRecycler.setAdapter(mostViewedProductAdapter);
         categories.setAdapter(categoryAdapter);
+        offeredProductRecycler.setAdapter(offeredProductAdapter);
 
         sliderView.setSliderAdapter(mainSliderAdapter);
         sliderView.startAutoCycle();
@@ -122,6 +129,8 @@ public class MainDigikalaFragment extends Fragment {
         mostViewedProductAdapter.notifyDataSetChanged();
         newestProductAdapter.setProductItems(DigikalaRepository.getInstance().getAllProducts());
         newestProductAdapter.notifyDataSetChanged();
+        offeredProductAdapter.setProductItems(DigikalaRepository.getInstance().getOfferedProduct());
+        offeredProductAdapter.notifyDataSetChanged();
 
     }
 
