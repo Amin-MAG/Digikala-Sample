@@ -23,6 +23,7 @@ import com.mag.digikala.Network.RetrofitInstance;
 import com.mag.digikala.R;
 import com.mag.digikala.Util.UiUtil;
 import com.mag.digikala.Var.Constants;
+import com.pollux.widget.DualProgressView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,22 +36,18 @@ public class MainDigikalaActivity extends AppCompatActivity {
 
     private ScrollView mainFrame;
     private FrameLayout toolbarFrame;
+    private FrameLayout loadingFrame;
 
     private ToolbarFragment toolbarFragment;
     private MainDigikalaFragment mainDigikalaFragment;
 
     private DrawerLayout drawerLayout;
-    private ProgressBar progressBar;
+    private DualProgressView progressBar;
 
     private RecyclerView navigationRecycler;
     private NavigationRecyclerAdapter navigationRecyclerAdapter;
 
     private DigikalaApi digikalaApi;
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,12 +80,14 @@ public class MainDigikalaActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.digikala_activity__progress_bar);
         mainFrame = findViewById(R.id.digikala_activity__scroll_view);
         toolbarFrame = findViewById(R.id.digikala_activity__toolbar_frame);
+        loadingFrame = findViewById(R.id.digikala_activity__loading_frame);
 
         // Toolbar
 
-        toolbarFragment = ToolbarFragment.newInstance();
-        UiUtil.changeFragment(getSupportFragmentManager(), toolbarFragment, R.id.digikala_activity__toolbar_frame, true, "fragment_main_toolbar");
-
+        if (toolbarFragment == null) {
+            toolbarFragment = ToolbarFragment.newInstance();
+            UiUtil.changeFragment(getSupportFragmentManager(), toolbarFragment, R.id.digikala_activity__toolbar_frame, true, "fragment_main_toolbar");
+        }
 
         // Navigation
 
@@ -98,8 +97,10 @@ public class MainDigikalaActivity extends AppCompatActivity {
 
         // Main Page
 
-        mainDigikalaFragment = MainDigikalaFragment.newInstance();
-        UiUtil.changeFragment(getSupportFragmentManager(), mainDigikalaFragment, R.id.digikala_activity__scroll_view, false, "fragment_main_digikala");
+        if (mainDigikalaFragment == null) {
+            mainDigikalaFragment = MainDigikalaFragment.newInstance();
+            UiUtil.changeFragment(getSupportFragmentManager(), mainDigikalaFragment, R.id.digikala_activity__scroll_view, true, "fragment_main_digikala");
+        }
 
     }
 
@@ -113,7 +114,7 @@ public class MainDigikalaActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
 
                     DigikalaRepository.getInstance().setAllProducts(response.body());
-                    progressBar.setVisibility(View.GONE);
+                    loadingFrame.setVisibility(View.GONE);
                     toolbarFrame.setVisibility(View.VISIBLE);
                     mainFrame.setVisibility(View.VISIBLE);
 

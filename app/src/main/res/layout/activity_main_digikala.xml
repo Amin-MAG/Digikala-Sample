@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/digikala_activity__drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,14 +14,47 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ProgressBar
-            android:id="@+id/digikala_activity__progress_bar"
-            style="?android:attr/progressBarStyle"
+
+        <FrameLayout
+            android:id="@+id/digikala_activity__loading_frame"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:indeterminateDrawable="@drawable/progress_bar"
-            android:indeterminateDuration="800" />
+            android:layout_height="match_parent"
+            android:background="@color/digikala_red_origin">
+
+<!--            <ProgressBar-->
+<!--                android:id="@+id/digikala_activity__progress_bar"-->
+<!--                style="?android:attr/progressBarStyle"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="56dp"-->
+<!--                android:layout_gravity="bottom|center"-->
+<!--                android:layout_marginBottom="12dp"-->
+<!--                android:indeterminateDrawable="@drawable/progress_bar"-->
+<!--                android:indeterminateDuration="800" />  -->
+
+            <com.pollux.widget.DualProgressView
+                android:id="@+id/digikala_activity__progress_bar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="12dp"
+                android:indeterminateDrawable="@drawable/progress_bar"
+                android:indeterminateDuration="800"
+                app:dpv_inner_color="@color/nothing"
+                app:dpv_inner_padding="12dp"
+                app:dpv_outer_color="@color/digikala_raw_white"
+                app:dpv_thickness="3dp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="190dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="80dp"
+                android:layout_marginRight="80dp"
+                android:src="@drawable/loading_logo" />
+
+        </FrameLayout>
+
 
         <ScrollView
             android:id="@+id/digikala_activity__scroll_view"

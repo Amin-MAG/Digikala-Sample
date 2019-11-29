@@ -11,8 +11,8 @@
 
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="79dp"
-            android:layout_height="31dp"
+            android:layout_width="103dp"
+            android:layout_height="61dp"
             android:src="@drawable/logo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/toolbar_fragment__menu_btn"
