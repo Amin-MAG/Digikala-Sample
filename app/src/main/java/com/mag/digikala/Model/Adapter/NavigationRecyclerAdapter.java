@@ -1,6 +1,7 @@
 package com.mag.digikala.Model.Adapter;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,8 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mag.digikala.Model.DigikalaCategory;
 import com.mag.digikala.Model.DigikalaMenuItem;
 import com.mag.digikala.R;
 
@@ -47,6 +50,7 @@ public class NavigationRecyclerAdapter extends RecyclerView.Adapter<NavigationRe
 
     public class NavigationRecyclerViewHolder extends RecyclerView.ViewHolder {
 
+        private ImageView mainLayout;
         private TextView itemString;
         private ImageView menuImage;
         private View devider;
@@ -57,14 +61,29 @@ public class NavigationRecyclerAdapter extends RecyclerView.Adapter<NavigationRe
             itemString = itemView.findViewById(R.id.navigation_layout__item_title);
             menuImage = itemView.findViewById(R.id.navigation_layout__menu_image);
             devider = itemView.findViewById(R.id.navigation_layout__devider);
+            mainLayout = itemView.findViewById(R.id.navigation_layout__menu_image);
 
         }
 
-        public void bind(DigikalaMenuItem item) {
+        public void bind(final DigikalaMenuItem item) {
 
-            if (item.getName() != SEPRATOR) {
+
+            if (!item.getName().equals(SEPRATOR)) {
                 itemString.setText(item.getName());
                 menuImage.setImageDrawable(activity.getResources().getDrawable(item.getDrawbleId()));
+//                mainLayout.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        Log.i("tagtaapsldplasd", "onClick: in bind");
+//                    }
+//                Log.i("tagtaapsldplasd", "got here ");
+//                itemString.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        Log.i("tagtaapsldplasd", "onClick: in text bind");
+//                    }
+//                });
+//                });
             } else {
                 itemString.setVisibility(View.GONE);
                 menuImage.setVisibility(View.GONE);

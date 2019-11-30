@@ -7,7 +7,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
-public interface DigikalaApi {
+public interface Api {
 
     @GET("products")
     Call<List<Merchandise>> getProducts();
