@@ -11,8 +11,8 @@
 
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="103dp"
-            android:layout_height="61dp"
+            android:layout_width="81dp"
+            android:layout_height="37dp"
             android:src="@drawable/logo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/toolbar_fragment__menu_btn"
@@ -55,16 +55,16 @@
                 app:iconSize="20dp" />
 
             <TextView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:layout_gravity="top|right"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginRight="12dp"
                 android:background="@drawable/cart_counter"
                 android:gravity="center"
                 android:text="3"
                 android:textColor="@color/digikala_red"
-                android:textSize="12dp"
+                android:textSize="11dp"
                 app:fontFamily="@font/far_trafc_bd" />
 
 

@@ -3,33 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/digikala_activity__drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#dcdcdc">
+    android:layout_height="match_parent">
 
     <!-- Navigation Bar-->
     <include layout="@layout/layout_navigation" />
 
-    <!-- Toolbar-->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
+        <!--Loading Frame-->
         <FrameLayout
             android:id="@+id/digikala_activity__loading_frame"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/digikala_red_origin">
-
-<!--            <ProgressBar-->
-<!--                android:id="@+id/digikala_activity__progress_bar"-->
-<!--                style="?android:attr/progressBarStyle"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="56dp"-->
-<!--                android:layout_gravity="bottom|center"-->
-<!--                android:layout_marginBottom="12dp"-->
-<!--                android:indeterminateDrawable="@drawable/progress_bar"-->
-<!--                android:indeterminateDuration="800" />  -->
 
             <com.pollux.widget.DualProgressView
                 android:id="@+id/digikala_activity__progress_bar"
@@ -37,13 +25,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_gravity="bottom|center"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="4dp"
                 android:indeterminateDrawable="@drawable/progress_bar"
-                android:indeterminateDuration="800"
+                android:indeterminateDuration="1500"
                 app:dpv_inner_color="@color/nothing"
                 app:dpv_inner_padding="12dp"
                 app:dpv_outer_color="@color/digikala_raw_white"
-                app:dpv_thickness="3dp"/>
+                app:dpv_thickness="2dp" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -55,23 +43,63 @@
 
         </FrameLayout>
 
+        <!--No Internet Frame-->
+        <LinearLayout
+            android:id="@+id/digikala_activity__no_internet_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="80dp"
+            android:background="@color/digikala_white"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
 
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="46dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_no_internet" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/iran_yekan"
+                android:gravity="center"
+                android:text="@string/no_internet"
+                android:textSize="10dp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/digikala_activity__retry_connection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/digikala_red"
+                android:fontFamily="@font/far_roya_bd"
+                android:text="@string/retry"
+                android:textColor="@color/digikala_raw_white"
+                android:textSize="12dp"
+                app:cornerRadius="0dp" />
+
+        </LinearLayout>
+
+        <!--Main Content-->
         <ScrollView
             android:id="@+id/digikala_activity__scroll_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="48dp"
-            android:visibility="gone">
+            android:background="#dcdcdc"
+            android:visibility="gone"/>
 
-        </ScrollView>
-
+        <!-- Toolbar-->
         <FrameLayout
             android:id="@+id/digikala_activity__toolbar_frame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone">
-
-        </FrameLayout>
+            android:visibility="gone"/>
 
     </FrameLayout>
 

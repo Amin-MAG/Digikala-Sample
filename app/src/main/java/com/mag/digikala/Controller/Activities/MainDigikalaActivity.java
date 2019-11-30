@@ -4,14 +4,14 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ProgressBar;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
 import com.mag.digikala.Controller.Fragments.MainDigikalaFragment;
 import com.mag.digikala.Controller.Fragments.ToolbarFragment;
 import com.mag.digikala.Model.Adapter.NavigationRecyclerAdapter;
@@ -37,15 +37,17 @@ public class MainDigikalaActivity extends AppCompatActivity {
     private ScrollView mainFrame;
     private FrameLayout toolbarFrame;
     private FrameLayout loadingFrame;
+    private LinearLayout noInternetConnectionFrame;
 
     private ToolbarFragment toolbarFragment;
     private MainDigikalaFragment mainDigikalaFragment;
 
     private DrawerLayout drawerLayout;
-    private DualProgressView progressBar;
 
     private RecyclerView navigationRecycler;
     private NavigationRecyclerAdapter navigationRecyclerAdapter;
+
+    private MaterialButton retryConnectionBtn;
 
     private DigikalaApi digikalaApi;
 
@@ -77,10 +79,11 @@ public class MainDigikalaActivity extends AppCompatActivity {
 
         drawerLayout = findViewById(R.id.digikala_activity__drawer_layout);
         navigationRecycler = findViewById(R.id.digikala__navigation_recycler);
-        progressBar = findViewById(R.id.digikala_activity__progress_bar);
         mainFrame = findViewById(R.id.digikala_activity__scroll_view);
         toolbarFrame = findViewById(R.id.digikala_activity__toolbar_frame);
         loadingFrame = findViewById(R.id.digikala_activity__loading_frame);
+        noInternetConnectionFrame = findViewById(R.id.digikala_activity__no_internet_frame);
+        retryConnectionBtn = findViewById(R.id.digikala_activity__retry_connection);
 
         // Toolbar
 
@@ -126,7 +129,20 @@ public class MainDigikalaActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Merchandise>> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "No Internet Connection !", Toast.LENGTH_LONG).show();
+
+                loadingFrame.setVisibility(View.GONE);
+                noInternetConnectionFrame.setVisibility(View.VISIBLE);
+                retryConnectionBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        retrofitConncetion();
+                        loadingFrame.setVisibility(View.VISIBLE);
+                        noInternetConnectionFrame.setVisibility(View.GONE   );
+
+                    }
+                });
+
             }
 
         });
