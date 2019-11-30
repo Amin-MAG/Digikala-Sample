@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Controller.Activities.ProductDetailActivity">
+
+    <!-- Navigation Bar-->
+    <include layout="@layout/layout_navigation" />
+
+    <ScrollView
+        android:id="@+id/digikala_product_detail_activity__main_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="48dp">
+
+    </ScrollView>
+
+    <FrameLayout
+        android:id="@+id/digikala_product_detail_activity__toolbar_frame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </FrameLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>

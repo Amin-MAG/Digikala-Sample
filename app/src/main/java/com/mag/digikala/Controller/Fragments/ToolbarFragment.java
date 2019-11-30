@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.material.button.MaterialButton;
-import com.mag.digikala.Controller.Activities.DigikalaActivity;
+import com.mag.digikala.Controller.Activities.MainDigikalaActivity;
 import com.mag.digikala.R;
 
 public class ToolbarFragment extends Fragment {
@@ -49,8 +49,8 @@ public class ToolbarFragment extends Fragment {
         menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (getActivity() instanceof DigikalaActivity)
-                    ((DigikalaActivity) getActivity()).openNavigationView();
+                if (getActivity() instanceof MainDigikalaActivity)
+                    ((MainDigikalaActivity) getActivity()).openNavigationView();
             }
         });
 

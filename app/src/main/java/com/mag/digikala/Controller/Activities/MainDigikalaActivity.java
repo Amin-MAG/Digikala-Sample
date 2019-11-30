@@ -1,24 +1,20 @@
 package com.mag.digikala.Controller.Activities;
 
 import android.os.Bundle;
-import android.text.Layout;
-import android.text.SpannableString;
-import android.text.style.AlignmentSpan;
-import android.util.Log;
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.Toast;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
+import com.mag.digikala.Controller.Fragments.MainDigikalaFragment;
 import com.mag.digikala.Controller.Fragments.ToolbarFragment;
 import com.mag.digikala.Model.Adapter.NavigationRecyclerAdapter;
-import com.mag.digikala.Model.Adapter.ProductRecyclerAdapter;
 import com.mag.digikala.Model.DigikalaMenuItem;
 import com.mag.digikala.Model.DigikalaRepository;
 import com.mag.digikala.Model.Merchandise;
@@ -27,6 +23,7 @@ import com.mag.digikala.Network.RetrofitInstance;
 import com.mag.digikala.R;
 import com.mag.digikala.Util.UiUtil;
 import com.mag.digikala.Var.Constants;
+import com.pollux.widget.DualProgressView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,56 +32,32 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DigikalaActivity extends AppCompatActivity {
+public class MainDigikalaActivity extends AppCompatActivity {
+
+    private ScrollView mainFrame;
+    private FrameLayout toolbarFrame;
+    private FrameLayout loadingFrame;
+    private LinearLayout noInternetConnectionFrame;
+
+    private ToolbarFragment toolbarFragment;
+    private MainDigikalaFragment mainDigikalaFragment;
 
     private DrawerLayout drawerLayout;
-    private ToolbarFragment toolbarFragment;
-    private ProgressBar progressBar;
 
     private RecyclerView navigationRecycler;
     private NavigationRecyclerAdapter navigationRecyclerAdapter;
 
-    private RecyclerView newestProductRecycler;
-    private ProductRecyclerAdapter newestProductAdapter;
-
-    private RecyclerView bestProductRecycler;
-    private ProductRecyclerAdapter bestProductAdapter;
-
-    private RecyclerView mostViewedProductRecycler;
-    private ProductRecyclerAdapter mostViewedProductAdapter;
+    private MaterialButton retryConnectionBtn;
 
     private DigikalaApi digikalaApi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_digikala);
+        setContentView(R.layout.activity_main_digikala);
 
 
-        retrofitConncetion();
-
-
-        // Find Items
-
-        drawerLayout = findViewById(R.id.digikala_activity__drawer_layout);
-        navigationRecycler = findViewById(R.id.digikala_activity__navigation_recycler);
-        bestProductRecycler = findViewById(R.id.digikala_activity__best);
-        newestProductRecycler = findViewById(R.id.digikala_activity__newest);
-        mostViewedProductRecycler = findViewById(R.id.digikala_activity__most_view);
-        progressBar = findViewById(R.id.digikala_activity__progress_bar);
-
-        // Progress Bar
-
-
-        // Toolbar
-
-        toolbarFragment = ToolbarFragment.newInstance();
-        UiUtil.changeFragment(getSupportFragmentManager(), toolbarFragment, R.id.digikala_activity__toolbar_frame, true, "fragment_main_toolbar");
-
-
-        // Adapters
-
-        navigationRecyclerAdapter = new NavigationRecyclerAdapter(new ArrayList<DigikalaMenuItem>() {{
+        DigikalaRepository.getInstance().setNavigationItems(new ArrayList<DigikalaMenuItem>() {{
             add(new DigikalaMenuItem(getString(R.string.home_page), R.drawable.ic_home));
             add(new DigikalaMenuItem(getString(R.string.category), R.drawable.ic_categoty));
             add(new DigikalaMenuItem(NavigationRecyclerAdapter.SEPRATOR, Constants.NOT_FOUNDED));
@@ -99,18 +72,38 @@ public class DigikalaActivity extends AppCompatActivity {
             add(new DigikalaMenuItem(getString(R.string.faq), R.drawable.ic_help));
             add(new DigikalaMenuItem(getString(R.string.about_us), R.drawable.ic_phone));
         }});
-        bestProductAdapter = new ProductRecyclerAdapter(new ArrayList<Merchandise>());
-        mostViewedProductAdapter = new ProductRecyclerAdapter(new ArrayList<Merchandise>());
-        newestProductAdapter = new ProductRecyclerAdapter(new ArrayList<Merchandise>());
 
+        retrofitConncetion();
 
-        // Set Adapters
+        // Find Items
 
+        drawerLayout = findViewById(R.id.digikala_activity__drawer_layout);
+        navigationRecycler = findViewById(R.id.digikala__navigation_recycler);
+        mainFrame = findViewById(R.id.digikala_activity__scroll_view);
+        toolbarFrame = findViewById(R.id.digikala_activity__toolbar_frame);
+        loadingFrame = findViewById(R.id.digikala_activity__loading_frame);
+        noInternetConnectionFrame = findViewById(R.id.digikala_activity__no_internet_frame);
+        retryConnectionBtn = findViewById(R.id.digikala_activity__retry_connection);
+
+        // Toolbar
+
+        if (toolbarFragment == null) {
+            toolbarFragment = ToolbarFragment.newInstance();
+            UiUtil.changeFragment(getSupportFragmentManager(), toolbarFragment, R.id.digikala_activity__toolbar_frame, true, "fragment_main_toolbar");
+        }
+
+        // Navigation
+
+        navigationRecyclerAdapter = new NavigationRecyclerAdapter(DigikalaRepository.getInstance().getNavigationItems());
         navigationRecycler.setAdapter(navigationRecyclerAdapter);
-        bestProductRecycler.setAdapter(bestProductAdapter);
-        newestProductRecycler.setAdapter(newestProductAdapter);
-        mostViewedProductRecycler.setAdapter(mostViewedProductAdapter);
 
+
+        // Main Page
+
+        if (mainDigikalaFragment == null) {
+            mainDigikalaFragment = MainDigikalaFragment.newInstance();
+            UiUtil.changeFragment(getSupportFragmentManager(), mainDigikalaFragment, R.id.digikala_activity__scroll_view, true, "fragment_main_digikala");
+        }
 
     }
 
@@ -124,13 +117,11 @@ public class DigikalaActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
 
                     DigikalaRepository.getInstance().setAllProducts(response.body());
-                    progressBar.setVisibility(View.GONE);
-                    bestProductAdapter.setProductItems(DigikalaRepository.getInstance().getAllProducts());
-                    bestProductAdapter.notifyDataSetChanged();
-                    mostViewedProductAdapter.setProductItems(DigikalaRepository.getInstance().getAllProducts());
-                    mostViewedProductAdapter.notifyDataSetChanged();
-                    newestProductAdapter.setProductItems(DigikalaRepository.getInstance().getAllProducts());
-                    newestProductAdapter.notifyDataSetChanged();
+                    loadingFrame.setVisibility(View.GONE);
+                    toolbarFrame.setVisibility(View.VISIBLE);
+                    mainFrame.setVisibility(View.VISIBLE);
+
+                    mainDigikalaFragment.updateView();
 
                 }
 
@@ -138,7 +129,20 @@ public class DigikalaActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Merchandise>> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "No Internet Connection !", Toast.LENGTH_LONG).show();
+
+                loadingFrame.setVisibility(View.GONE);
+                noInternetConnectionFrame.setVisibility(View.VISIBLE);
+                retryConnectionBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        retrofitConncetion();
+                        loadingFrame.setVisibility(View.VISIBLE);
+                        noInternetConnectionFrame.setVisibility(View.GONE   );
+
+                    }
+                });
+
             }
 
         });

@@ -1,6 +1,5 @@
 <com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -10,39 +9,16 @@
         android:background="@color/digikala_red">
 
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="81dp"
-            android:layout_height="37dp"
-            android:src="@drawable/logo"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/toolbar_fragment__menu_btn"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/toolbar_fragment__search_btn"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="52dp"
-            android:layout_height="60dp"
-            android:insetTop="0dp"
-            android:insetBottom="6dp"
-            app:backgroundTint="#007B2CD6"
-            app:cornerRadius="30dp"
-            app:icon="@drawable/ic_search"
-            app:iconPadding="0dp"
-            app:iconSize="20dp"
-            app:layout_constraintLeft_toRightOf="@+id/toolbar_fragment__cart_frame_btn"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <FrameLayout
-            android:id="@+id/toolbar_fragment__cart_frame_btn"
+            android:id="@+id/product_detail_toolbar_fragment__frame_btn"
             android:layout_width="52dp"
             android:layout_height="60dp"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/product_detail_toolbar_fragment__menu_btn"
             app:layout_constraintTop_toTopOf="parent">
 
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/toolbar_fragment__cart_btn"
+                android:id="@+id/product_detail_toolbar_fragment__cart_btn"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="52dp"
                 android:layout_height="60dp"
@@ -55,23 +31,39 @@
                 app:iconSize="20dp" />
 
             <TextView
-                android:layout_width="18dp"
-                android:layout_height="18dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_gravity="top|right"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:layout_marginRight="12dp"
                 android:background="@drawable/cart_counter"
                 android:gravity="center"
                 android:text="3"
                 android:textColor="@color/digikala_red"
-                android:textSize="11dp"
+                android:textSize="12dp"
                 app:fontFamily="@font/far_trafc_bd" />
 
 
         </FrameLayout>
 
+
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/toolbar_fragment__menu_btn"
+            android:id="@+id/product_detail_toolbar_fragment__menu_btn"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="52dp"
+            android:layout_height="60dp"
+            android:insetTop="0dp"
+            android:insetBottom="6dp"
+            app:backgroundTint="#007B2CD6"
+            app:cornerRadius="30dp"
+            app:icon="@drawable/ic_menu"
+            app:iconPadding="0dp"
+            app:iconSize="20dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/toolbar_fragment__back_btn"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="52dp"
             android:layout_height="60dp"
@@ -79,7 +71,7 @@
             android:insetBottom="8dp"
             app:backgroundTint="#007B2CD6"
             app:cornerRadius="30dp"
-            app:icon="@drawable/ic_navigation"
+            app:icon="@drawable/ic_back"
             app:iconPadding="0dp"
             app:iconSize="22dp"
             app:layout_constraintRight_toRightOf="parent"

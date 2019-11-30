@@ -9,7 +9,7 @@ import retrofit2.http.GET;
 
 public interface DigikalaApi {
 
-    @GET("products?")
+    @GET("products")
     Call<List<Merchandise>> getProducts();
 
 }
