@@ -15,8 +15,8 @@ import com.google.android.material.button.MaterialButton;
 import com.mag.digikala.Controller.Fragments.MainDigikalaFragment;
 import com.mag.digikala.Controller.Fragments.ToolbarFragment;
 import com.mag.digikala.Model.Adapter.NavigationRecyclerAdapter;
-import com.mag.digikala.Model.DigikalaRepository;
-import com.mag.digikala.Model.Merchandise;
+import com.mag.digikala.Model.ProductsRepository;
+import com.mag.digikala.Model.Product;
 import com.mag.digikala.Network.Api;
 import com.mag.digikala.Network.RetrofitInstance;
 import com.mag.digikala.R;
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        DigikalaRepository.getInstance().setNavigationItems(this);
+        ProductsRepository.getInstance().setNavigationItems(this);
 
         retrofitConncetion();
 
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Navigation
 
-        navigationRecyclerAdapter = new NavigationRecyclerAdapter(DigikalaRepository.getInstance().getNavigationItems());
+        navigationRecyclerAdapter = new NavigationRecyclerAdapter(ProductsRepository.getInstance().getNavigationItems());
         navigationRecycler.setAdapter(navigationRecyclerAdapter);
 
 
@@ -91,13 +91,13 @@ public class MainActivity extends AppCompatActivity {
     private void retrofitConncetion() {
 
         api = RetrofitInstance.getInstance().create(Api.class);
-        api.getProducts().enqueue(new Callback<List<Merchandise>>() {
+        api.getProducts().enqueue(new Callback<List<Product>>() {
             @Override
-            public void onResponse(Call<List<Merchandise>> call, Response<List<Merchandise>> response) {
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
 
                 if (response.isSuccessful()) {
 
-                    DigikalaRepository.getInstance().setAllProducts(response.body());
+                    ProductsRepository.getInstance().setAllProducts(response.body());
                     loadingFrame.setVisibility(View.GONE);
                     toolbarFrame.setVisibility(View.VISIBLE);
                     mainFrame.setVisibility(View.VISIBLE);
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<Merchandise>> call, Throwable t) {
+            public void onFailure(Call<List<Product>> call, Throwable t) {
 
                 loadingFrame.setVisibility(View.GONE);
                 noInternetConnectionFrame.setVisibility(View.VISIBLE);

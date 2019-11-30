@@ -2,25 +2,18 @@ package com.mag.digikala.Controller.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import com.mag.digikala.Controller.Fragments.ProductDetailFragment;
 import com.mag.digikala.Model.Adapter.NavigationRecyclerAdapter;
-import com.mag.digikala.Model.Adapter.SliderViewPagerAdapter;
-import com.mag.digikala.Model.DigikalaRepository;
-import com.mag.digikala.Model.Merchandise;
+import com.mag.digikala.Model.ProductsRepository;
 import com.mag.digikala.Controller.Fragments.ProductDetailToolbarFragment;
 import com.mag.digikala.R;
 import com.mag.digikala.Util.UiUtil;
-import com.mag.digikala.Var.Constants;
-
-import java.util.ArrayList;
 
 public class ProductDetailActivity extends AppCompatActivity {
 
@@ -50,7 +43,7 @@ public class ProductDetailActivity extends AppCompatActivity {
 
         // Navigation
 
-        navigationRecyclerAdapter = new NavigationRecyclerAdapter(DigikalaRepository.getInstance().getNavigationItems());
+        navigationRecyclerAdapter = new NavigationRecyclerAdapter(ProductsRepository.getInstance().getNavigationItems());
         navigationRecycler.setAdapter(navigationRecyclerAdapter);
 
 

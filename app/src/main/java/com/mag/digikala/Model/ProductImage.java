@@ -2,13 +2,13 @@ package com.mag.digikala.Model;
 
 import androidx.annotation.NonNull;
 
-public class DigikalaImage {
+public class ProductImage {
 
     private String id;
     private String src;
     private String name;
 
-    public DigikalaImage(String src, String name) {
+    public ProductImage(String src, String name) {
         this.src = src;
         this.name = name;
     }

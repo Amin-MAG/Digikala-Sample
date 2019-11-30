@@ -2,7 +2,6 @@ package com.mag.digikala.Model.Adapter;
 
 import android.app.Activity;
 import android.graphics.Paint;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mag.digikala.Controller.Activities.ProductDetailActivity;
-import com.mag.digikala.Model.Merchandise;
+import com.mag.digikala.Model.Product;
 import com.mag.digikala.R;
 import com.mag.digikala.Var.Constants;
 import com.squareup.picasso.Picasso;
@@ -23,11 +22,11 @@ import java.util.List;
 
 public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecyclerAdapter.ProductRecyclerViewHolder> {
 
-    private List<Merchandise> productItems;
+    private List<Product> productItems;
     private Activity activity;
 
-    public ProductRecyclerAdapter(List<Merchandise> merchandises) {
-        this.productItems = merchandises;
+    public ProductRecyclerAdapter(List<Product> products) {
+        this.productItems = products;
     }
 
 
@@ -69,20 +68,20 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
 
         }
 
-        public void bind(final Merchandise merchandise) {
+        public void bind(final Product product) {
 
-            String imageUrl = merchandise.getImages()[0].getSrc();
+            String imageUrl = product.getImages()[0].getSrc();
             Picasso.get().load(imageUrl).placeholder(R.drawable.place_holder).into(cover);
 
-            setPrices(merchandise.getRegular_price(), merchandise.getSale_price());
+            setPrices(product.getRegular_price(), product.getSale_price());
 
-            title.setText(merchandise.getName());
+            title.setText(product.getName());
 
 
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    activity.startActivity(ProductDetailActivity.newIntent(activity, merchandise.getId()));
+                    activity.startActivity(ProductDetailActivity.newIntent(activity, product.getId()));
                 }
             });
 
@@ -110,7 +109,7 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
     }
 
 
-    public void setProductItems(List<Merchandise> productItems) {
+    public void setProductItems(List<Product> productItems) {
         this.productItems = productItems;
     }
 

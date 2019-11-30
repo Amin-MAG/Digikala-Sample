@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
-import com.mag.digikala.Model.DigikalaCategory;
+import com.mag.digikala.Model.Category;
 import com.mag.digikala.R;
 
 import java.util.List;
@@ -17,10 +17,10 @@ import java.util.List;
 public class CategoryRecyclerAdapter extends RecyclerView.Adapter<CategoryRecyclerAdapter.CategoryRecyclerViewHolder> {
 
 
-    private List<DigikalaCategory> items;
+    private List<Category> items;
     private Activity activity;
 
-    public CategoryRecyclerAdapter(List<DigikalaCategory> items) {
+    public CategoryRecyclerAdapter(List<Category> items) {
         this.items = items;
     }
 
@@ -53,7 +53,7 @@ public class CategoryRecyclerAdapter extends RecyclerView.Adapter<CategoryRecycl
 
         }
 
-        public void bind(DigikalaCategory category) {
+        public void bind(Category category) {
 
             button.setText(category.getName());
 

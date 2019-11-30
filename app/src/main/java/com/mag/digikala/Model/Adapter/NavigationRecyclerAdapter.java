@@ -1,7 +1,6 @@
 package com.mag.digikala.Model.Adapter;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,11 +8,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mag.digikala.Model.DigikalaCategory;
-import com.mag.digikala.Model.DigikalaMenuItem;
+import com.mag.digikala.Model.MenuItem;
 import com.mag.digikala.R;
 
 import java.util.List;
@@ -22,10 +19,10 @@ public class NavigationRecyclerAdapter extends RecyclerView.Adapter<NavigationRe
 
     public static final String SEPRATOR = "<!>SEPRATOR<!>";
 
-    private List<DigikalaMenuItem> items;
+    private List<MenuItem> items;
     private Activity activity;
 
-    public NavigationRecyclerAdapter(List<DigikalaMenuItem> items) {
+    public NavigationRecyclerAdapter(List<MenuItem> items) {
         this.items = items;
     }
 
@@ -65,7 +62,7 @@ public class NavigationRecyclerAdapter extends RecyclerView.Adapter<NavigationRe
 
         }
 
-        public void bind(final DigikalaMenuItem item) {
+        public void bind(final MenuItem item) {
 
 
             if (!item.getName().equals(SEPRATOR)) {

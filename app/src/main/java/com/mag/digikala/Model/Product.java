@@ -2,16 +2,16 @@ package com.mag.digikala.Model;
 
 import java.io.Serializable;
 
-public class Merchandise implements Serializable {
+public class Product implements Serializable {
 
     private String id;
     private String name;
-    private DigikalaImage[] images;
+    private ProductImage[] images;
     // prices
     private String regular_price;
     private String sale_price;
 
-    public Merchandise(String name, DigikalaImage[] images, String regular_price, String sale_price) {
+    public Product(String name, ProductImage[] images, String regular_price, String sale_price) {
         this.name = name;
         this.images = images;
         this.regular_price = regular_price;
@@ -27,7 +27,7 @@ public class Merchandise implements Serializable {
         return name;
     }
 
-    public DigikalaImage[] getImages() {
+    public ProductImage[] getImages() {
         return images;
     }
 

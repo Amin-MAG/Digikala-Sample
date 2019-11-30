@@ -12,9 +12,9 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.mag.digikala.Model.Adapter.SliderViewPagerAdapter;
-import com.mag.digikala.Model.DigikalaImage;
-import com.mag.digikala.Model.DigikalaRepository;
-import com.mag.digikala.Model.Merchandise;
+import com.mag.digikala.Model.ProductImage;
+import com.mag.digikala.Model.ProductsRepository;
+import com.mag.digikala.Model.Product;
 import com.mag.digikala.R;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class ProductDetailFragment extends Fragment {
 
     public static final String ARG_MECHANDICE = "arg_mechandice";
-    private Merchandise merchandise;
+    private Product product;
 
     private TextView product_name;
     private ViewPager slider;
@@ -53,16 +53,16 @@ public class ProductDetailFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        merchandise = DigikalaRepository.getInstance().getProductById(getArguments().getString(ARG_MECHANDICE));
+        product = ProductsRepository.getInstance().getProductById(getArguments().getString(ARG_MECHANDICE));
 
         ArrayList<String> urls = new ArrayList<>();
-        for (Merchandise m : DigikalaRepository.getInstance().getAllProducts())
-            if (merchandise.getId().equals(m.getId()))
-                for (DigikalaImage image : m.getImages())
+        for (Product m : ProductsRepository.getInstance().getAllProducts())
+            if (product.getId().equals(m.getId()))
+                for (ProductImage image : m.getImages())
                     urls.add(image.getSrc());
 
         product_name = view.findViewById(R.id.product_detail_activity__product_name);
-        product_name.setText(getString(R.string.product_name) + " " + merchandise.getName());
+        product_name.setText(getString(R.string.product_name) + " " + product.getName());
         slider = view.findViewById(R.id.product_detail_activity__view_pager);
         sliderAdapter = new SliderViewPagerAdapter(getFragmentManager(), urls);
         slider.setAdapter(sliderAdapter);

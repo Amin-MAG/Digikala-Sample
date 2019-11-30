@@ -6,7 +6,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ReportFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -16,16 +15,15 @@ import android.view.ViewGroup;
 import com.mag.digikala.Model.Adapter.CategoryRecyclerAdapter;
 import com.mag.digikala.Model.Adapter.MainSliderAdapter;
 import com.mag.digikala.Model.Adapter.ProductRecyclerAdapter;
-import com.mag.digikala.Model.DigikalaCategory;
-import com.mag.digikala.Model.DigikalaRepository;
-import com.mag.digikala.Model.Merchandise;
+import com.mag.digikala.Model.Category;
+import com.mag.digikala.Model.ProductsRepository;
+import com.mag.digikala.Model.Product;
 import com.mag.digikala.R;
 import com.smarteist.autoimageslider.IndicatorAnimations;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainDigikalaFragment extends Fragment {
 
@@ -81,22 +79,22 @@ public class MainDigikalaFragment extends Fragment {
 
         // Adapters
 
-        bestProductAdapter = new ProductRecyclerAdapter(new ArrayList<Merchandise>());
-        mostViewedProductAdapter = new ProductRecyclerAdapter(new ArrayList<Merchandise>());
-        newestProductAdapter = new ProductRecyclerAdapter(new ArrayList<Merchandise>());
-        categoryAdapter = new CategoryRecyclerAdapter(new ArrayList<DigikalaCategory>() {{
-            add(new DigikalaCategory("غذا"));
-            add(new DigikalaCategory("پوشاک"));
-            add(new DigikalaCategory("دیجیتال"));
-            add(new DigikalaCategory("موبایل"));
-            add(new DigikalaCategory("غذا"));
-            add(new DigikalaCategory("پوشاک"));
-            add(new DigikalaCategory("دیجیتال"));
-            add(new DigikalaCategory("موبایل"));
-            add(new DigikalaCategory("غذا"));
-            add(new DigikalaCategory("پوشاک"));
-            add(new DigikalaCategory("دیجیتال"));
-            add(new DigikalaCategory("موبایل"));
+        bestProductAdapter = new ProductRecyclerAdapter(new ArrayList<Product>());
+        mostViewedProductAdapter = new ProductRecyclerAdapter(new ArrayList<Product>());
+        newestProductAdapter = new ProductRecyclerAdapter(new ArrayList<Product>());
+        categoryAdapter = new CategoryRecyclerAdapter(new ArrayList<Category>() {{
+            add(new Category("غذا"));
+            add(new Category("پوشاک"));
+            add(new Category("دیجیتال"));
+            add(new Category("موبایل"));
+            add(new Category("غذا"));
+            add(new Category("پوشاک"));
+            add(new Category("دیجیتال"));
+            add(new Category("موبایل"));
+            add(new Category("غذا"));
+            add(new Category("پوشاک"));
+            add(new Category("دیجیتال"));
+            add(new Category("موبایل"));
         }});
         mainSliderAdapter = new MainSliderAdapter(new ArrayList<String>() {{
             add(getURLForResource(R.drawable.main_slider_image01));
@@ -104,7 +102,7 @@ public class MainDigikalaFragment extends Fragment {
             add(getURLForResource(R.drawable.main_slider_image03));
             add(getURLForResource(R.drawable.main_slider_image04));
         }});
-        offeredProductAdapter = new ProductRecyclerAdapter(new ArrayList<Merchandise>());
+        offeredProductAdapter = new ProductRecyclerAdapter(new ArrayList<Product>());
 
         // Set Adapters
 
@@ -123,13 +121,13 @@ public class MainDigikalaFragment extends Fragment {
 
     public void updateView() {
 
-        bestProductAdapter.setProductItems(DigikalaRepository.getInstance().getAllProducts());
+        bestProductAdapter.setProductItems(ProductsRepository.getInstance().getAllProducts());
         bestProductAdapter.notifyDataSetChanged();
-        mostViewedProductAdapter.setProductItems(DigikalaRepository.getInstance().getAllProducts());
+        mostViewedProductAdapter.setProductItems(ProductsRepository.getInstance().getAllProducts());
         mostViewedProductAdapter.notifyDataSetChanged();
-        newestProductAdapter.setProductItems(DigikalaRepository.getInstance().getAllProducts());
+        newestProductAdapter.setProductItems(ProductsRepository.getInstance().getAllProducts());
         newestProductAdapter.notifyDataSetChanged();
-        offeredProductAdapter.setProductItems(DigikalaRepository.getInstance().getOfferedProduct());
+        offeredProductAdapter.setProductItems(ProductsRepository.getInstance().getOfferedProduct());
         offeredProductAdapter.notifyDataSetChanged();
 
     }

@@ -1,10 +1,10 @@
 package com.mag.digikala.Model;
 
-public class DigikalaCategory {
+public class Category {
 
     private  String name;
 
-    public DigikalaCategory(String name) {
+    public Category(String name) {
         this.name = name;
     }
 

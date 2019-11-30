@@ -2,13 +2,13 @@ package com.mag.digikala.Model;
 
 import android.view.View;
 
-public class DigikalaMenuItem {
+public class MenuItem {
 
     private String name;
     private int drawbleId;
     private View.OnClickListener listener;
 
-    public DigikalaMenuItem(String name, int drawbleId, View.OnClickListener listener) {
+    public MenuItem(String name, int drawbleId, View.OnClickListener listener) {
         this.name = name;
         this.drawbleId = drawbleId;
         this.listener = listener;
