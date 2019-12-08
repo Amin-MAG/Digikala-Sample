@@ -43,8 +43,8 @@ public class ProductDetailActivity extends AppCompatActivity {
 
         // Navigation
 
-        navigationRecyclerAdapter = new NavigationRecyclerAdapter(ProductsRepository.getInstance().getNavigationItems());
-        navigationRecycler.setAdapter(navigationRecyclerAdapter);
+//        navigationRecyclerAdapter = new NavigationRecyclerAdapter(ProductsRepository.getInstance().getNavigationItems());
+//        navigationRecycler.setAdapter(navigationRecyclerAdapter);
 
 
     }

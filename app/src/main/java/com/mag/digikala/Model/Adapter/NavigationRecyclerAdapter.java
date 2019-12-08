@@ -1,6 +1,7 @@
 package com.mag.digikala.Model.Adapter;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,6 +65,13 @@ public class NavigationRecyclerAdapter extends RecyclerView.Adapter<NavigationRe
 
         public void bind(final MenuItem item) {
 
+
+            menuImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.i("navigationMenu", "onClick: in text bind");
+                }
+            });
 
             if (!item.getName().equals(SEPRATOR)) {
                 itemString.setText(item.getName());

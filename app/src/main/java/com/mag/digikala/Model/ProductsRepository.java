@@ -48,6 +48,18 @@ public class ProductsRepository {
     }
 
 
+    // Categories
+
+    private List<Category> categories;
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
     // Navigation items
 
     private List<MenuItem> navigationItems;

@@ -68,10 +68,13 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
 
         }
 
+
         public void bind(final Product product) {
 
-            String imageUrl = product.getImages()[0].getSrc();
-            Picasso.get().load(imageUrl).placeholder(R.drawable.place_holder).into(cover);
+            if (product.getImages().length != 0) {
+                String imageUrl = product.getImages()[0].getSrc();
+                Picasso.get().load(imageUrl).placeholder(R.drawable.place_holder).into(cover);
+            }
 
             setPrices(product.getRegular_price(), product.getSale_price());
 

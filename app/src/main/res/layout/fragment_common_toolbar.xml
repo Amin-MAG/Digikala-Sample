@@ -1,0 +1,29 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/digikala_red"
+    android:weightSum="1.0">
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/toolbar_fragment__menu_btn"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_gravity="right"
+        android:layout_width="52dp"
+        android:layout_height="60dp"
+        app:backgroundTint="#007B2CD6"
+        app:cornerRadius="30dp"
+        app:icon="@drawable/ic_back"
+        app:iconPadding="0dp"
+        app:iconSize="22dp" />
+
+</LinearLayout>
+
+
+</FrameLayout>

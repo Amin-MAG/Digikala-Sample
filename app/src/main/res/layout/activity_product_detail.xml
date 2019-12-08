@@ -6,7 +6,7 @@
     tools:context=".Controller.Activities.ProductDetailActivity">
 
     <!-- Navigation Bar-->
-    <include layout="@layout/layout_navigation" />
+<!--    <include layout="@layout/layout_navigation" />-->
 
     <ScrollView
         android:id="@+id/digikala_product_detail_activity__main_frame"

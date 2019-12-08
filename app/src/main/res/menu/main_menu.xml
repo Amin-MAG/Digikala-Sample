@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group android:id="@+id/group_1"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home"
+            android:title="@string/home_page" />
+        <item
+            android:id="@+id/nav_listProduct"
+            android:icon="@drawable/ic_category"
+            android:title="@string/category" />
+    </group>
+
+    <group android:id="@+id/group_12"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/nav_home2"
+            android:icon="@drawable/ic_shopping_cart_dark"
+            android:title="@string/cart" />
+    </group>
+
+
+    <group android:id="@+id/group_2">
+        <item
+            android:id="@+id/nav_mostRate"
+            android:icon="@drawable/ic_star"
+            android:title="بیشترین امتیاز ها" />
+        <item
+            android:id="@+id/nav_latest"
+            android:icon="@drawable/ic_star"
+            android:title="جدید ترین ها" />
+
+        <item
+            android:id="@+id/nav3_popular"
+            android:icon="@drawable/ic_star"
+            android:title="محبوب ترین ها" />
+
+        <item
+            android:id="@+id/nav_1popular"
+            android:icon="@drawable/ic_star"
+            android:title="محبوب ترین ها" />
+    </group>
+
+
+    <group android:id="@+id/grou2p_2">
+        <item
+            android:id="@+id/op"
+            android:icon="@drawable/ic_setting"
+            android:title="بیشترین امتیاز ها" />
+        <item
+            android:id="@+id/nav_lates22t"
+            android:icon="@drawable/ic_help"
+            android:title="جدید ترین ها" />
+
+        <item
+            android:id="@+id/nsav_popular"
+            android:icon="@drawable/ic_phone"
+            android:title="محبوب ترین ها" />
+
+    </group>
+
+</menu>

@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
+import com.mag.digikala.CategoryActivity;
 import com.mag.digikala.Model.Category;
 import com.mag.digikala.R;
 
@@ -56,9 +57,19 @@ public class CategoryRecyclerAdapter extends RecyclerView.Adapter<CategoryRecycl
         public void bind(Category category) {
 
             button.setText(category.getName());
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    activity.startActivity(CategoryActivity.newIntent(activity, ""));
+                }
+            });
 
         }
 
+    }
+
+    public void setCategoriesItems(List<Category> items) {
+        this.items = items;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.mag.digikala.Controller.Fragments;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -8,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +27,22 @@ import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
 
-public class MainDigikalaFragment extends Fragment {
+public class MainFragment extends Fragment {
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Log.i("LifeCycle", "onAttach: ");
+
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Log.i("LifeCycle", "onActivityCreated: ");
+
+
+    }
 
     private SliderView sliderView;
     private MainSliderAdapter mainSliderAdapter;
@@ -45,26 +62,30 @@ public class MainDigikalaFragment extends Fragment {
     private RecyclerView offeredProductRecycler;
     private ProductRecyclerAdapter offeredProductAdapter;
 
-    public MainDigikalaFragment() {
+    public MainFragment() {
     }
 
-    public static MainDigikalaFragment newInstance() {
+    public static MainFragment newInstance() {
 
         Bundle args = new Bundle();
 
-        MainDigikalaFragment fragment = new MainDigikalaFragment();
+        MainFragment fragment = new MainFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.i("LifeCycle", "onCreateView: ");
+
         return inflater.inflate(R.layout.fragment_main_digikala, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Log.i("LifeCycle", "onViewCreated: ");
+
 
 
         // Find Items
@@ -82,20 +103,7 @@ public class MainDigikalaFragment extends Fragment {
         bestProductAdapter = new ProductRecyclerAdapter(new ArrayList<Product>());
         mostViewedProductAdapter = new ProductRecyclerAdapter(new ArrayList<Product>());
         newestProductAdapter = new ProductRecyclerAdapter(new ArrayList<Product>());
-        categoryAdapter = new CategoryRecyclerAdapter(new ArrayList<Category>() {{
-            add(new Category("غذا"));
-            add(new Category("پوشاک"));
-            add(new Category("دیجیتال"));
-            add(new Category("موبایل"));
-            add(new Category("غذا"));
-            add(new Category("پوشاک"));
-            add(new Category("دیجیتال"));
-            add(new Category("موبایل"));
-            add(new Category("غذا"));
-            add(new Category("پوشاک"));
-            add(new Category("دیجیتال"));
-            add(new Category("موبایل"));
-        }});
+        categoryAdapter = new CategoryRecyclerAdapter(new ArrayList<Category>());
         mainSliderAdapter = new MainSliderAdapter(new ArrayList<String>() {{
             add(getURLForResource(R.drawable.main_slider_image01));
             add(getURLForResource(R.drawable.main_slider_image02));
@@ -129,6 +137,8 @@ public class MainDigikalaFragment extends Fragment {
         newestProductAdapter.notifyDataSetChanged();
         offeredProductAdapter.setProductItems(ProductsRepository.getInstance().getOfferedProduct());
         offeredProductAdapter.notifyDataSetChanged();
+        categoryAdapter.setCategoriesItems(ProductsRepository.getInstance().getCategories());
+        categoryAdapter.notifyDataSetChanged();
 
     }
 
