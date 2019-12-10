@@ -9,19 +9,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
-import com.mag.digikala.CategoryActivity;
+import com.mag.digikala.Controller.Activities.CategoryActivity;
 import com.mag.digikala.Model.Category;
 import com.mag.digikala.R;
 
 import java.util.List;
 
-public class CategoryRecyclerAdapter extends RecyclerView.Adapter<CategoryRecyclerAdapter.CategoryRecyclerViewHolder> {
+public class GreenCategoryButtonsRecyclerAdapter extends RecyclerView.Adapter<GreenCategoryButtonsRecyclerAdapter.CategoryRecyclerViewHolder> {
 
 
     private List<Category> items;
     private Activity activity;
 
-    public CategoryRecyclerAdapter(List<Category> items) {
+    public GreenCategoryButtonsRecyclerAdapter(List<Category> items) {
         this.items = items;
     }
 

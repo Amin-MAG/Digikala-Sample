@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.Log;
 import android.view.View;
 
-import com.mag.digikala.CategoryActivity;
+import com.mag.digikala.Controller.Activities.CategoryActivity;
 import com.mag.digikala.Model.Adapter.NavigationRecyclerAdapter;
 import com.mag.digikala.R;
 import com.mag.digikala.Var.Constants;

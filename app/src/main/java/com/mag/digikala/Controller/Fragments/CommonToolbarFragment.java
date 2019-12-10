@@ -1,7 +1,6 @@
-package com.mag.digikala;
+package com.mag.digikala.Controller.Fragments;
 
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.mag.digikala.Controller.Fragments.ToolbarFragment;
+import com.mag.digikala.R;
 
 
 public class CommonToolbarFragment extends Fragment {

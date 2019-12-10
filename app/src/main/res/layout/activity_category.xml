@@ -5,16 +5,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CategoryActivity">
+    tools:context=".Controller.Activities.CategoryActivity">
 
     <!--Main Content-->
-<!--    <ScrollView-->
-<!--        android:id="@+id/digikala_activity__scroll_view"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_marginTop="48dp"-->
-<!--        android:background="#dcdcdc"-->
-<!--        android:visibility="gone" />-->
+    <FrameLayout
+        android:id="@+id/digikala_category__viewpager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/digikala_category__toolbar_frame"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent" />
 
     <!-- Toolbar-->
     <FrameLayout
