@@ -6,24 +6,35 @@
     android:background="@color/digikala_red"
     android:weightSum="1.0">
 
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="right"
+        android:orientation="horizontal">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/toolbar_fragment__menu_btn"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_gravity="right"
-        android:layout_width="52dp"
-        android:layout_height="60dp"
-        app:backgroundTint="#007B2CD6"
-        app:cornerRadius="30dp"
-        app:icon="@drawable/ic_back"
-        app:iconPadding="0dp"
-        app:iconSize="22dp" />
+        <TextView
+            android:id="@+id/common_toolbar_fragment__title"
+            android:layout_width="wrap_content"
+            android:fontFamily="@font/far_roya_bd"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center|right"
+            android:text="TextView"
+            android:textColor="@color/digikala_raw_white" />
 
-</LinearLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/common_toolbar_fragment__back_btn"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="52dp"
+            android:layout_height="60dp"
+            android:layout_gravity="right"
+            app:backgroundTint="#007B2CD6"
+            app:cornerRadius="30dp"
+            app:icon="@drawable/ic_back"
+            app:iconPadding="0dp"
+            app:iconSize="22dp" />
+
+    </LinearLayout>
 
 
 </FrameLayout>

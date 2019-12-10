@@ -1,48 +1,9 @@
 package com.mag.digikala.Network;
 
 
-import android.util.Log;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import java.io.IOException;
-import java.lang.reflect.Type;
-
-import okhttp3.Credentials;
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import retrofit2.Converter;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-//public class RetrofitInstance {
-//
-//    private static final String BASE_URL = "https://woocommerce.maktabsharif.ir/wp-json/wc/v3/";
-//
-//    private static Retrofit instance;
-//
-//    private RetrofitInstance() {
-//
-//    }
-//
-//    public static Retrofit getInstance() {
-//
-//        if (instance == null) {
-//
-//            instance = new Retrofit.Builder()
-//                    .baseUrl(BASE_URL)
-//                    .addConverterFactory(GsonConverterFactory.create())
-//                    .build();
-//
-//        }
-//
-//        return instance;
-//    }
-//
-//}
 
 public class RetrofitInstance {
 
@@ -64,41 +25,16 @@ public class RetrofitInstance {
     public static Retrofit getInstance() {
 
         if (retrofitInstance == null) {
-//            OkHttpClient client = new OkHttpClient.Builder()
-//                    .addInterceptor(new BasicAuthInterceptor(USER_NAME, PASSWORD))
-//                    .build();
-
-            Log.d("retrooofit", "getInstance: " + BASE_URL+"products"+WOOCOMMERCE_REST_AUTHENTICATION_KEY);
 
             retrofitInstance = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
-//                    .client(client)
                     .build();
 
         }
 
 
         return retrofitInstance;
-    }
-
-
-    private static class BasicAuthInterceptor implements Interceptor {
-
-        private String credentials;
-
-        public BasicAuthInterceptor(String user, String password) {
-            this.credentials = Credentials.basic(user, password);
-        }
-
-        @Override
-        public Response intercept(Chain chain) throws IOException {
-            Request request = chain.request();
-            Request authenticatedRequest = request.newBuilder()
-                    .header("Authorization", credentials).build();
-            return chain.proceed(authenticatedRequest);
-        }
-
     }
 
 }

@@ -5,17 +5,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.Toast;
-import android.widget.Toolbar;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
@@ -134,25 +129,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void requestToGetCategories() {
-//        retrofitApi.getCategories().enqueue(new Callback<List<Category>>() {
-//            @Override
-//            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
-//
-//                if (response.isSuccessful()) {
-//
-//                    ProductsRepository.getInstance().setCategories(response.body());
-//                    dropLoadingSlide();
-//
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Category>> call, Throwable t) {
-//                loadConncetionErrorSlide();
-//            }
-//
-//        });
+        retrofitApi.getCategories().enqueue(new Callback<List<Category>>() {
+            @Override
+            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+
+                if (response.isSuccessful()) {
+
+                    ProductsRepository.getInstance().setCategories(response.body());
+                    dropLoadingSlide();
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Category>> call, Throwable t) {
+                loadConncetionErrorSlide();
+            }
+
+        });
     }
 
     private void requestToGetProducts() {
@@ -164,17 +159,9 @@ public class MainActivity extends AppCompatActivity {
 
                     ProductsRepository.getInstance().setAllProducts(response.body());
                     ProductsRepository.getInstance().setCategories(new ArrayList<Category>());
-                    dropLoadingSlide();
-//                    requestToGetCategories();
-                    Log.i("retrooofit", "onResponse: " + "wtf");
-
-
-                } else {
-
-
+//                    dropLoadingSlide();
+                    requestToGetCategories();
                 }
-
-
 
             }
 
