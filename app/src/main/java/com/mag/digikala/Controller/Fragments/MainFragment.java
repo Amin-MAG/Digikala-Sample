@@ -14,7 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.mag.digikala.Model.Adapter.GreenCategoryButtonsRecyclerAdapter;
+import com.mag.digikala.Model.Adapter.CategoryGreenButtonsRecyclerAdapter;
 import com.mag.digikala.Model.Adapter.MainSliderAdapter;
 import com.mag.digikala.Model.Adapter.ProductRecyclerAdapter;
 import com.mag.digikala.Model.Category;
@@ -48,7 +48,7 @@ public class MainFragment extends Fragment {
     private MainSliderAdapter mainSliderAdapter;
 
     private RecyclerView categories;
-    private GreenCategoryButtonsRecyclerAdapter categoryAdapter;
+    private CategoryGreenButtonsRecyclerAdapter categoryAdapter;
 
     private RecyclerView newestProductRecycler;
     private ProductRecyclerAdapter newestProductAdapter;
@@ -103,7 +103,7 @@ public class MainFragment extends Fragment {
         bestProductAdapter = new ProductRecyclerAdapter(new ArrayList<Product>());
         mostViewedProductAdapter = new ProductRecyclerAdapter(new ArrayList<Product>());
         newestProductAdapter = new ProductRecyclerAdapter(new ArrayList<Product>());
-        categoryAdapter = new GreenCategoryButtonsRecyclerAdapter(new ArrayList<Category>());
+        categoryAdapter = new CategoryGreenButtonsRecyclerAdapter(new ArrayList<Category>());
         mainSliderAdapter = new MainSliderAdapter(new ArrayList<String>() {{
             add(getURLForResource(R.drawable.main_slider_image01));
             add(getURLForResource(R.drawable.main_slider_image02));

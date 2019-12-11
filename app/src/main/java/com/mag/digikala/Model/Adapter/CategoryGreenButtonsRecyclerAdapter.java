@@ -15,13 +15,13 @@ import com.mag.digikala.R;
 
 import java.util.List;
 
-public class GreenCategoryButtonsRecyclerAdapter extends RecyclerView.Adapter<GreenCategoryButtonsRecyclerAdapter.CategoryRecyclerViewHolder> {
+public class CategoryGreenButtonsRecyclerAdapter extends RecyclerView.Adapter<CategoryGreenButtonsRecyclerAdapter.CategoryRecyclerViewHolder> {
 
 
     private List<Category> items;
     private Activity activity;
 
-    public GreenCategoryButtonsRecyclerAdapter(List<Category> items) {
+    public CategoryGreenButtonsRecyclerAdapter(List<Category> items) {
         this.items = items;
     }
 
@@ -29,7 +29,7 @@ public class GreenCategoryButtonsRecyclerAdapter extends RecyclerView.Adapter<Gr
     @Override
     public CategoryRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         activity = (Activity) parent.getContext();
-        View view = LayoutInflater.from(activity).inflate(R.layout.layout_green_category_item, parent, false);
+        View view = LayoutInflater.from(activity).inflate(R.layout.layout_category_green_btn_item, parent, false);
         return new CategoryRecyclerViewHolder(view);
     }
 
