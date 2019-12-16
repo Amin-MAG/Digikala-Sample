@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.mag.digikala.FilterFragment;
 import com.mag.digikala.R;
 
 public class FilterToolbarFragment extends Fragment {
