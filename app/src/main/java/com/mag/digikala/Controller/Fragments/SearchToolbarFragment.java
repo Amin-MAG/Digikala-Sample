@@ -14,8 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
+import com.mag.digikala.Controller.Activities.FilterActivity;
 import com.mag.digikala.R;
 
 public class SearchToolbarFragment extends Fragment {
@@ -58,12 +61,28 @@ public class SearchToolbarFragment extends Fragment {
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
 
-//        searchEditTxt.setOnKeyListener(new View.OnKeyListener() {
-//            @Override
-//            public boolean onKey(View view, int i, KeyEvent keyEvent) {
-//                return false;
-//            }
-//        });
+        searchEditTxt.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if (searchEditTxt.getText().length() > 2) {
+
+
+                }
+                return false;
+            }
+        });
+
+
+        searchEditTxt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                startActivity(FilterActivity.newIntent(getContext(), searchEditTxt.getText().toString()));
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 1);
+                return false;
+            }
+        });
+
 
     }
 

@@ -58,6 +58,7 @@
                 android:gravity="right|center"
                 android:hint="@string/search_hint"
                 android:inputType="text"
+                android:imeOptions="actionDone"
                 android:textColor="@color/digikala_dark_blue_gray"
                 android:textColorHint="@color/digikala_light_gray"
                 android:textDirection="rtl"
