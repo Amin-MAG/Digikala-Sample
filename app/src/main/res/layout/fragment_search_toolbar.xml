@@ -17,7 +17,7 @@
             android:layout_gravity="center">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/materialButton2"
+                android:id="@+id/fragement_search_toolbar__voice_button"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="52dp"
                 android:layout_height="60dp"
@@ -28,12 +28,12 @@
                 app:cornerRadius="30dp"
                 app:icon="@drawable/ic_voice"
                 app:iconSize="20dp"
-                app:layout_constraintStart_toEndOf="@+id/materialButton3"
+                app:layout_constraintStart_toEndOf="@+id/fragement_search_toolbar__close_button"
                 app:layout_constraintTop_toTopOf="parent"
                 app:rippleColor="@color/digikala_gray" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/materialButton3"
+                android:id="@+id/fragement_search_toolbar__close_button"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="52dp"
                 android:layout_height="60dp"
@@ -50,6 +50,7 @@
                 app:rippleColor="@color/digikala_gray" />
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fragement_search_toolbar__search_bar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@null"
@@ -62,12 +63,12 @@
                 android:textDirection="rtl"
                 android:textSize="12dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/materialButton"
-                app:layout_constraintStart_toEndOf="@+id/materialButton2"
+                app:layout_constraintEnd_toStartOf="@+id/fragement_search_toolbar__back_button"
+                app:layout_constraintStart_toEndOf="@+id/fragement_search_toolbar__voice_button"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/materialButton"
+                android:id="@+id/fragement_search_toolbar__back_button"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="52dp"
                 android:layout_height="60dp"
