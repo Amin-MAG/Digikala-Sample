@@ -4,4 +4,5 @@
     android:id="@+id/fragment_category_viewpage__viewpager"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="60dp"
     tools:context=".Controller.Fragments.CategoryViewPagerFragment" />

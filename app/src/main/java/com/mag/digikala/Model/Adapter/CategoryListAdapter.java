@@ -1,6 +1,7 @@
 package com.mag.digikala.Model.Adapter;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,13 +22,13 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
 
     public CategoryListAdapter(List<Category> categories) {
         this.categories = categories;
+        Log.i("AdapterList", "CategoryListAdapter: " + categories);
     }
 
     @NonNull
     @Override
     public CategoryListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         activity = (Activity) parent.getContext();
-        ;
         View view = LayoutInflater.from(activity).inflate(R.layout.layout_category_list_item, parent, false);
         return new CategoryListViewHolder(view);
     }
@@ -50,7 +51,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         public CategoryListViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            title = itemView.findViewById(R.id.layout_category_list_item__title);
+            title = itemView.findViewById(R.id.category_list_item_layout__title);
 
         }
 

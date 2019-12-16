@@ -1,20 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/layout_category_list_item__main_card_view"
+    android:id="@+id/category_list_item_layout__main_card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingLeft="16dp"
-    android:paddingTop="24dp"
-    android:paddingRight="16dp"
-    android:paddingBottom="24dp">
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/layout_category_list_item__title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:text="something" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="44dp"
+            android:layout_height="56dp"
+            android:layout_marginLeft="32dp"
+            android:src="@drawable/short_logo" />
+
+        <TextView
+            android:id="@+id/category_list_item_layout__title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="16dp"
+            android:gravity="center|right"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="something"
+            android:textSize="16dp" />
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        android:backgroundTint="@color/digikala_gray" />
 
 </androidx.cardview.widget.CardView>
