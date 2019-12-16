@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:label">
-        <activity android:name=".Controller.Activities.CategoryActivity"></activity>
+        <activity android:name=".Controller.Activities.FilterActivity"></activity>
+        <activity android:name=".Controller.Activities.SearchActivity" />
+        <activity android:name=".Controller.Activities.CategoryActivity" />
         <activity android:name=".Controller.Activities.SingleActivityFragment" />
         <activity android:name=".Controller.Activities.ProductDetailActivity" />
         <activity android:name=".Controller.Activities.MainActivity">

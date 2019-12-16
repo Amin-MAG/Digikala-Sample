@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationView;
 import com.mag.digikala.Controller.Fragments.MainFragment;
-import com.mag.digikala.Controller.Fragments.ToolbarFragment;
+import com.mag.digikala.Controller.Fragments.MainToolbarFragment;
 import com.mag.digikala.Model.Adapter.NavigationRecyclerAdapter;
 import com.mag.digikala.Model.Category;
 import com.mag.digikala.Model.Product;
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private FrameLayout loadingFrame;
     private LinearLayout noInternetConnectionFrame;
 
-    private ToolbarFragment toolbarFragment;
+    private MainToolbarFragment mainToolbarFragment;
     private MainFragment mainFragment;
 
     private DrawerLayout drawerLayout;
@@ -83,9 +83,9 @@ public class MainActivity extends AppCompatActivity {
 
         // Toolbar
 
-        if (toolbarFragment == null) {
-            toolbarFragment = ToolbarFragment.newInstance();
-            UiUtil.changeFragment(getSupportFragmentManager(), toolbarFragment, R.id.digikala_activity__toolbar_frame, true, "fragment_main_toolbar");
+        if (mainToolbarFragment == null) {
+            mainToolbarFragment = MainToolbarFragment.newInstance();
+            UiUtil.changeFragment(getSupportFragmentManager(), mainToolbarFragment, R.id.digikala_activity__toolbar_frame, true, "fragment_main_toolbar");
         }
 
 

@@ -13,22 +13,23 @@ import android.view.ViewGroup;
 
 import com.google.android.material.button.MaterialButton;
 import com.mag.digikala.Controller.Activities.MainActivity;
+import com.mag.digikala.Controller.Activities.SearchActivity;
 import com.mag.digikala.R;
 
-public class ToolbarFragment extends Fragment {
+public class MainToolbarFragment extends Fragment {
 
     private MaterialButton searchBtn, cartBtn, menuBtn;
 
-    public static ToolbarFragment newInstance() {
+    public static MainToolbarFragment newInstance() {
 
         Bundle args = new Bundle();
 
-        ToolbarFragment fragment = new ToolbarFragment();
+        MainToolbarFragment fragment = new MainToolbarFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
-    public ToolbarFragment() {
+    public MainToolbarFragment() {
     }
 
     @Nullable
@@ -51,6 +52,14 @@ public class ToolbarFragment extends Fragment {
             public void onClick(View view) {
                 if (getActivity() instanceof MainActivity)
                     ((MainActivity) getActivity()).openNavigationView();
+            }
+        });
+
+
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(SearchActivity.newIntent(getContext()));
             }
         });
 
