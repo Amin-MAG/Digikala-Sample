@@ -54,6 +54,7 @@ public class FilterListAdapter extends RecyclerView.Adapter<FilterListAdapter.Fi
 
     public class FilterListViewHolder extends RecyclerView.ViewHolder {
 
+        private Product product;
         private TextView productTitle, productDescription, regularPrice, salesPrice;
         private ImageView productImage;
 
@@ -68,6 +69,18 @@ public class FilterListAdapter extends RecyclerView.Adapter<FilterListAdapter.Fi
 
         public void bind(Product product) {
 
+            this.product = product;
+
+            priceView();
+
+            productTitle.setText(product.getName() + " " + product.getId());
+            productDescription.setText(Jsoup.parse(product.getShortDescription()).text());
+
+            Picasso.get().load(product.getImages()[0].getSrc()).placeholder(activity.getResources().getDrawable(R.drawable.place_holder)).into(productImage);
+
+        }
+
+        private void priceView() {
             String MONEY_STRING = Constants.SPACE_CHAR + activity.getResources().getString(R.string.tomans);
             String priceString;
             String priceInvalidString = "";
@@ -82,12 +95,6 @@ public class FilterListAdapter extends RecyclerView.Adapter<FilterListAdapter.Fi
             regularPrice.setText(priceInvalidString);
             regularPrice.setPaintFlags(salesPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             salesPrice.setText(priceString);
-
-            productTitle.setText(product.getName() + " " + product.getId());
-            productDescription.setText(Jsoup.parse(product.getShortDescription()).text());
-
-            Picasso.get().load(product.getImages()[0].getSrc()).placeholder(activity.getResources().getDrawable(R.drawable.place_holder)).into(productImage);
-
         }
 
     }
