@@ -76,7 +76,7 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
                 Picasso.get().load(imageUrl).placeholder(R.drawable.place_holder).into(cover);
             }
 
-            setPrices(product.getRegular_price(), product.getSale_price());
+            setPrices(product.getPrice(), product.getSalePrice());
 
             title.setText(product.getName());
 

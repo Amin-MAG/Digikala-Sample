@@ -8,27 +8,15 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="0.7"
+            android:layout_weight="0.5"
             android:gravity="center"
             android:orientation="vertical">
-
-            <View
-                android:id="@+id/navigation_layout__devider"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="2dp"
-                android:background="?android:attr/listDivider"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/navigation_layout__item_title" />
 
 
             <TextView
@@ -37,29 +25,59 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="8dp"
                 android:gravity="right"
-                android:text="Something" />
+                android:text="Something"
+                android:textColor="@android:color/black"
+                android:textSize="16dp" />
 
             <TextView
+                android:id="@+id/filter_list_item_layout__product_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:text="Something" />
+                android:layout_marginTop="8dp"
+                android:gravity="left"
+                android:text="Something"
+                android:textColor="@color/digikala_gray"
+                android:textSize="10dp" />
+
+            <View
+                android:id="@+id/filter_list_item_layout__devider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="?android:attr/listDivider" />
 
             <TextView
+                android:id="@+id/filter_list_item_layout__product_regular_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:text="Something" />
+                android:layout_marginTop="8dp"
+                android:gravity="left"
+                android:text="Something"
+                android:textColor="@color/digikala_red"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/filter_list_item_layout__product_sales_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:gravity="left"
+                android:text="Something"
+                android:textColor="@color/digikala_green"
+                android:textSize="12dp" />
 
         </LinearLayout>
 
 
         <ImageView
-            android:layout_width="94dp"
-            android:layout_marginLeft="16dp"
+            android:id="@+id/filter_list_item_layout__product_image"
+            android:layout_width="wrap_content"
+            android:layout_height="136dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.3"
+            android:layout_weight="0.5"
             android:src="@drawable/logo" />
 
     </LinearLayout>

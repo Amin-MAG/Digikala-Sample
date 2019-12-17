@@ -1,5 +1,7 @@
 package com.mag.digikala.Model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class Product implements Serializable {
@@ -7,15 +9,19 @@ public class Product implements Serializable {
     private String id;
     private String name;
     private ProductImage[] images;
+    private String description;
+    @SerializedName("short_description")
+    private String shortDescription;
     // prices
-    private String regular_price;
-    private String sale_price;
+    private String price;
+    @SerializedName("sale_price")
+    private String salePrice;
 
-    public Product(String name, ProductImage[] images, String regular_price, String sale_price) {
+    public Product(String name, ProductImage[] images, String price, String sale_price) {
         this.name = name;
         this.images = images;
-        this.regular_price = regular_price;
-        this.sale_price = sale_price;
+        this.price = price;
+        this.salePrice = sale_price;
     }
 
 
@@ -31,12 +37,19 @@ public class Product implements Serializable {
         return images;
     }
 
-    public String getRegular_price() {
-        return regular_price;
+    public String getPrice() {
+        return price;
     }
 
-    public String getSale_price() {
-        return sale_price;
+    public String getSalePrice() {
+        return salePrice;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
 }

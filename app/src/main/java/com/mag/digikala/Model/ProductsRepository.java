@@ -88,7 +88,7 @@ public class ProductsRepository {
         ArrayList<Product> offered = new ArrayList<>();
 
         for (Product product : allProducts)
-            if (product.getSale_price().length() > 0)
+            if (product.getSalePrice().length() > 0)
                 offered.add(product);
 
         return offered;
