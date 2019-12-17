@@ -55,13 +55,13 @@ public class CategoryGreenButtonsRecyclerAdapter extends RecyclerView.Adapter<Ca
 
         }
 
-        public void bind(CategoryGroup category) {
+        public void bind(final CategoryGroup categoryGroup) {
 
-            button.setText(category.getGroupName());
+            button.setText(categoryGroup.getGroupName());
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    activity.startActivity(CategoryActivity.newIntent(activity, ""));
+                    activity.startActivity(CategoryActivity.newIntent(activity, categoryGroup.getId()));
                 }
             });
 

@@ -52,9 +52,15 @@ public class ProductsRepository {
     // Categories
 
     private Map<String ,CategoryGroup> categoryMap;
+    private List<CategoryGroup> parentCategory;
 
     public void setCategoryMap(Map<String ,CategoryGroup> categoryMap) {
         this.categoryMap = categoryMap;
+        this.parentCategory = new ArrayList<>(ProductsRepository.getInstance().getCategoryMap().values());
+    }
+
+    public List<CategoryGroup> getParentCategory() {
+        return parentCategory;
     }
 
     public Map<String ,CategoryGroup> getCategoryMap() {

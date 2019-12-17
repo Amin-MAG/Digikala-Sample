@@ -146,12 +146,18 @@ public class MainActivity extends AppCompatActivity {
 
                      */
 
+                    for (int k = 0 ; k < responseList.size();k++){
+                        Log.d("CATEGORIES", "onResponse: " + responseList.get(k).getName());
+                    }
 
                     Category thisLoopCategory;
                     // Get Root Categories //
-                    for (int i = 0; i < responseList.size(); i++)
-                        if ((thisLoopCategory = responseList.get(i)).getParentId().equals("0"))
+                    for (int i = 0; i < responseList.size(); i++) {
+//                        Log.d("CATEGORIES", "onResponse: " + responseList.get(i).getName());
+                        if ((thisLoopCategory = responseList.get(i)).getParentId().equals("0")) {
                             categoryGroups.put(thisLoopCategory.getId(), new CategoryGroup(thisLoopCategory.getId(), thisLoopCategory.getName()));
+                        }
+                    }
 
 
                     CategoryGroup thisLoopCategoryGroup;

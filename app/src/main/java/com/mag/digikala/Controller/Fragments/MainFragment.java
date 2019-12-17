@@ -139,7 +139,7 @@ public class MainFragment extends Fragment {
         newestProductAdapter.notifyDataSetChanged();
         offeredProductAdapter.setProductItems(ProductsRepository.getInstance().getOfferedProduct());
         offeredProductAdapter.notifyDataSetChanged();
-        categoryAdapter.setCategoriesItems(new ArrayList<>(ProductsRepository.getInstance().getCategoryMap().values()));
+        categoryAdapter.setCategoriesItems(ProductsRepository.getInstance().getParentCategory());
         categoryAdapter.notifyDataSetChanged();
 
     }
