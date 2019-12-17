@@ -26,6 +26,9 @@ public interface RetrofitApi {
     @GET(BASE_URL + "products/{id}" + WOOCOMMERCE_REST_AUTHENTICATION_KEY)
     Call<List<Product>> getProductById(@Path("id") String productId, @QueryMap Map<String, String> queryMap);
 
+    @GET(BASE_URL + "products" + WOOCOMMERCE_REST_AUTHENTICATION_KEY)
+    Call<List<Product>> searchProducts(@Query("search") String searchText);
+
     @GET("products" + "/categories" + WOOCOMMERCE_REST_AUTHENTICATION_KEY + "&per_page=100")
     Call<List<Category>> getAllCategories();
 
