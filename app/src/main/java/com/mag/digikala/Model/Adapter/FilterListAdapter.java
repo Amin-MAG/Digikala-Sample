@@ -9,8 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mag.digikala.Controller.Activities.ProductDetailActivity;
+import com.mag.digikala.Controller.Fragments.ProductDetailFragment;
 import com.mag.digikala.Model.Product;
 import com.mag.digikala.R;
 import com.mag.digikala.Var.Constants;
@@ -57,9 +60,23 @@ public class FilterListAdapter extends RecyclerView.Adapter<FilterListAdapter.Fi
         private Product product;
         private TextView productTitle, productDescription, regularPrice, salesPrice;
         private ImageView productImage;
+        private CardView cardView;
 
         public FilterListViewHolder(@NonNull View itemView) {
             super(itemView);
+            findComponents(itemView);
+
+            cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    activity.startActivity(ProductDetailActivity.newIntent(activity, product.getId()));
+                }
+            });
+
+        }
+
+        private void findComponents(@NonNull View itemView) {
+            cardView = itemView.findViewById(R.id.filter_list_item_layout__card_view);
             regularPrice = itemView.findViewById(R.id.filter_list_item_layout__product_regular_price);
             salesPrice = itemView.findViewById(R.id.filter_list_item_layout__product_sales_price);
             productTitle = itemView.findViewById(R.id.filter_list_item_layout__product_title);

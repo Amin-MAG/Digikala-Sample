@@ -2,6 +2,7 @@ package com.mag.digikala.Controller.Fragments;
 
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import com.mag.digikala.Model.Adapter.SliderViewPagerAdapter;
 import com.mag.digikala.Model.Product;
 import com.mag.digikala.Model.ProductImage;
 import com.mag.digikala.Model.ProductsRepository;
+import com.mag.digikala.Network.RetrofitApi;
+import com.mag.digikala.Network.RetrofitInstance;
 import com.mag.digikala.R;
 import com.mag.digikala.Var.Constants;
 
@@ -23,11 +26,17 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ProductDetailFragment extends Fragment {
 
     public static final String ARG_MECHANDICE = "arg_mechandice";
     private Product product;
+    private RetrofitApi retrofitApi;
 
     private TextView productName, productShortDescription, productDescription;
     private TextView productRegularPrice, productSalePrice;
@@ -48,7 +57,29 @@ public class ProductDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        retrofitApi = RetrofitInstance.getInstance().create(RetrofitApi.class);
+        retrofitApi.getProductById(getArguments().getString(ARG_MECHANDICE)).enqueue(new Callback<Product>() {
+            @Override
+            public void onResponse(Call<Product> call, Response<Product> response) {
+
+                if (response.isSuccessful()) {
+
+                    product = response.body();
+                    updateDetailFragment();
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Product> call, Throwable t) {
+
+            }
+        });
+
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,34 +90,24 @@ public class ProductDetailFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        product = ProductsRepository.getInstance().getProductById(getArguments().getString(ARG_MECHANDICE));
+        findComponents(view);
 
+    }
+
+
+    private void findComponents(@NonNull View view) {
         slider = view.findViewById(R.id.product_detail_activity__view_pager);
         productName = view.findViewById(R.id.product_detail_fragment__product_name);
         productShortDescription = view.findViewById(R.id.product_detail_fragment__product_short_description);
         productRegularPrice = view.findViewById(R.id.product_detail_fragment__product_regular_price);
         productSalePrice = view.findViewById(R.id.product_detail_fragment__product_sale_price);
         productDescription = view.findViewById(R.id.product_detail_fragment__product_long_description);
-
-
-        productName.setText(getString(R.string.product_name) + " " + product.getName());
-        productShortDescription.setText(Jsoup.parse(product.getShortDescription()).body().text());
-        Element pTag;
-        if ((pTag = Jsoup.parse(product.getDescription()).body().select("p").first()) != null)
-            productDescription.setText(pTag.text());
-
-        sliderInitializer();
-        priceView();
-
-
     }
 
     private void sliderInitializer() {
         ArrayList<String> urls = new ArrayList<>();
-        for (Product m : ProductsRepository.getInstance().getAllProducts())
-            if (product.getId().equals(m.getId()))
-                for (ProductImage image : m.getImages())
-                    urls.add(image.getSrc());
+        for (ProductImage image : product.getImages())
+            urls.add(image.getSrc());
         sliderAdapter = new SliderViewPagerAdapter(getFragmentManager(), urls);
         slider.setAdapter(sliderAdapter);
     }
@@ -108,5 +129,18 @@ public class ProductDetailFragment extends Fragment {
         productSalePrice.setText(priceString);
     }
 
+
+    private void updateDetailFragment() {
+
+        productName.setText(getString(R.string.product_name) + " " + product.getName());
+        productShortDescription.setText(Jsoup.parse(product.getShortDescription()).body().text());
+        Element pTag;
+        if ((pTag = Jsoup.parse(product.getDescription()).body().select("p").first()) != null)
+            productDescription.setText(pTag.text());
+
+        sliderInitializer();
+        priceView();
+
+    }
 
 }
