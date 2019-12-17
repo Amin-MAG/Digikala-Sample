@@ -7,6 +7,19 @@
     android:layout_height="match_parent"
     tools:context=".Controller.Activities.CategoryActivity">
 
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/category_activity__tabLayout"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/digikala_category__toolbar_frame"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="@color/colorAccent"
+        app:tabTextColor="@color/digikala_raw_white" />
     <!--Main Content-->
     <FrameLayout
         android:id="@+id/digikala_category__viewpager"

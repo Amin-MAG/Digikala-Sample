@@ -13,20 +13,20 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mag.digikala.Model.Adapter.CategoryListAdapter;
-import com.mag.digikala.Model.Category;
+import com.mag.digikala.Model.CategoryGroup;
 import com.mag.digikala.Model.ProductsRepository;
 import com.mag.digikala.R;
 
-import java.util.ArrayList;
-
 public class CategoryListFragment extends Fragment {
 
+    public static final String ARG_CATEGORY_ID = "arg_category_id";
     private RecyclerView categoryRecycler;
     private CategoryListAdapter categoryListAdapter;
 
-    public static CategoryListFragment newInstance(Category category) {
+    public static CategoryListFragment newInstance(String id) {
 
         Bundle args = new Bundle();
+        args.putString(ARG_CATEGORY_ID, id);
 
         CategoryListFragment fragment = new CategoryListFragment();
         fragment.setArguments(args);
@@ -48,43 +48,7 @@ public class CategoryListFragment extends Fragment {
 
 
         categoryRecycler = view.findViewById(R.id.category_list_fragment__main_recycler);
-//        categoryListAdapter = new CategoryListAdapter(new ArrayList<Category>() {{
-//            add(new Category("something"));
-//            add(new Category("something"));
-//            add(new Category("something"));
-//            add(new Category("something"));
-//            add(new Category("something"));
-//            add(new Category("something"));
-//            add(new Category("something"));
-//            add(new Category("something"));
-//            add(new Category("something"));
-//            add(new Category("something"));
-//            add(new Category("something"));
-//            add(new Category("something"));
-//            add(new Category("something"));
-//            add(new Category("something"));
-//            add(new Category("something"));
-//            add(new Category("something"));
-//            add(new Category("something"));
-//            add(new Category("something"));
-//            add(new Category("something"));
-//            add(new Category("something"));
-//            add(new Category("something"));
-//            add(new Category("something"));
-//            add(new Category("something"));
-//            add(new Category("something"));
-//            add(new Category("something"));
-//            add(new Category("something"));
-//            add(new Category("something"));
-//            add(new Category("something"));
-//            add(new Category("something"));
-//            add(new Category("something"));
-//            add(new Category("something"));
-//            add(new Category("something"));
-//            add(new Category("something"));
-//            add(new Category("something"));
-//        }});
-        categoryListAdapter = new CategoryListAdapter(ProductsRepository.getInstance().getCategories());
+        categoryListAdapter = new CategoryListAdapter(ProductsRepository.getInstance().getCategoryMap().get(getArguments().get(ARG_CATEGORY_ID)).getCategories());
         categoryRecycler.setAdapter(categoryListAdapter);
 
 

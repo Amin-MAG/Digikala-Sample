@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.google.android.material.tabs.TabLayout;
 import com.mag.digikala.Controller.Fragments.CategoryViewPagerFragment;
 import com.mag.digikala.Controller.Fragments.CommonToolbarFragment;
 import com.mag.digikala.R;
@@ -17,6 +18,8 @@ public class CategoryActivity extends AppCompatActivity {
     public static final String FRAGMENT_CATEGORY_COMMON_TOOLBAR = "fragment_category_common_toolbar";
     private CommonToolbarFragment commonToolbarFragment;
     private CategoryViewPagerFragment categoryViewPagerFragment;
+    private TabLayout tabLayout;
+
 
     public static final String EXTRA_CATEGORY_ID = "extra_category_id";
 
@@ -42,7 +45,13 @@ public class CategoryActivity extends AppCompatActivity {
             UiUtil.changeFragment(getSupportFragmentManager(), categoryViewPagerFragment, R.id.digikala_category__viewpager, true, FRAGMENT_CATEGORY_VIEW_PAGER);
         }
 
+        tabLayout = findViewById(R.id.category_activity__tabLayout);
 
+
+
+//        for (int k = tabLayout.getTabCount(); k < cate.getCount(); k++)
+//            tabLayout.addTab(tabLayout.newTab().setText(musicViewPagerAdapter.getPageTitle(k)));
+        tabLayout.setupWithViewPager(categoryViewPagerFragment.getMainViewpager());
 
     }
 

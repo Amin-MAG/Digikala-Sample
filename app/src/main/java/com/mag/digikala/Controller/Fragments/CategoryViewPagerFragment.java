@@ -13,10 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mag.digikala.Model.Adapter.CategoryViewPagerAdapter;
-import com.mag.digikala.Model.Category;
+import com.mag.digikala.Model.ProductsRepository;
 import com.mag.digikala.R;
-
-import java.util.ArrayList;
 
 public class CategoryViewPagerFragment extends Fragment {
 
@@ -47,17 +45,13 @@ public class CategoryViewPagerFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         mainViewpager = view.findViewById(R.id.fragment_category_viewpage__viewpager);
-        categoryViewPagerAdapter = new CategoryViewPagerAdapter(getFragmentManager(),new ArrayList<Category>(){{
-            add(new Category("Something"));
-            add(new Category("Something"));
-            add(new Category("Something"));
-            add(new Category("Something"));
-            add(new Category("Something"));
-            add(new Category("Something"));
-        }});
+        categoryViewPagerAdapter = new CategoryViewPagerAdapter(getFragmentManager(), ProductsRepository.getInstance().getCategoryMap());
         mainViewpager.setAdapter(categoryViewPagerAdapter);
 
     }
 
+    public ViewPager getMainViewpager() {
+        return mainViewpager;
+    }
 
 }

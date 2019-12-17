@@ -21,6 +21,7 @@ import com.mag.digikala.Controller.Fragments.MainFragment;
 import com.mag.digikala.Controller.Fragments.MainToolbarFragment;
 import com.mag.digikala.Model.Adapter.NavigationRecyclerAdapter;
 import com.mag.digikala.Model.Category;
+import com.mag.digikala.Model.CategoryGroup;
 import com.mag.digikala.Model.Product;
 import com.mag.digikala.Model.ProductsRepository;
 import com.mag.digikala.Network.RetrofitApi;
@@ -29,7 +30,9 @@ import com.mag.digikala.R;
 import com.mag.digikala.Util.UiUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -123,19 +126,49 @@ public class MainActivity extends AppCompatActivity {
     private void retrofitConncetion() {
 
         retrofitApi = RetrofitInstance.getInstance().create(RetrofitApi.class);
-
         requestToGetProducts();
 
     }
 
     private void requestToGetCategories() {
-        retrofitApi.getCategories().enqueue(new Callback<List<Category>>() {
+        retrofitApi.getAllCategories().enqueue(new Callback<List<Category>>() {
             @Override
             public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
 
                 if (response.isSuccessful()) {
 
-                    ProductsRepository.getInstance().setCategories(response.body());
+                    List<Category> responseList = response.body();
+                    Map<String, CategoryGroup> categoryGroups = new HashMap<>();
+
+                    /*
+
+                    Analyzing Categories
+
+                     */
+
+
+                    Category thisLoopCategory;
+                    // Get Root Categories //
+                    for (int i = 0; i < responseList.size(); i++)
+                        if ((thisLoopCategory = responseList.get(i)).getParentId().equals("0"))
+                            categoryGroups.put(thisLoopCategory.getId(), new CategoryGroup(thisLoopCategory.getId(), thisLoopCategory.getName()));
+
+
+                    CategoryGroup thisLoopCategoryGroup;
+                    // Get Sub Categories And Set Them //
+                    /*
+                    Letter SubCategory Fro SybCategory Should Be handled Here
+                     */
+                    for (int i = 0; i < responseList.size(); i++) {
+                        if (!(thisLoopCategory = responseList.get(i)).getParentId().equals("0")) {
+                            Log.e("AAADDD", thisLoopCategory.getParentId() + "");
+                            if ((thisLoopCategoryGroup = categoryGroups.get(thisLoopCategory.getParentId())) != null)
+                                thisLoopCategoryGroup.addCategory(thisLoopCategory);
+                        }
+                    }
+
+                    ProductsRepository.getInstance().setCategoryMap(categoryGroups);
+
                     dropLoadingSlide();
 
                 }
@@ -151,24 +184,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void requestToGetProducts() {
-        retrofitApi.getAllProducts().enqueue(new Callback<List<Product>>() {
+        retrofitApi.getAllProducts(10, 1).enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
 
                 if (response.isSuccessful()) {
 
                     ProductsRepository.getInstance().setAllProducts(response.body());
-                    ProductsRepository.getInstance().setCategories(new ArrayList<Category>());
-//                    dropLoadingSlide();
                     requestToGetCategories();
+
                 }
 
             }
 
             @Override
             public void onFailure(Call<List<Product>> call, Throwable t) {
-                Log.i("retrooofit", "onResponse: " + "ride");
-
                 loadConncetionErrorSlide();
             }
 

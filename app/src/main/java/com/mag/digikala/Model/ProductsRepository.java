@@ -11,6 +11,7 @@ import com.mag.digikala.Var.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ProductsRepository {
 
@@ -50,14 +51,14 @@ public class ProductsRepository {
 
     // Categories
 
-    private List<Category> categories;
+    private Map<String ,CategoryGroup> categoryMap;
 
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
+    public void setCategoryMap(Map<String ,CategoryGroup> categoryMap) {
+        this.categoryMap = categoryMap;
     }
 
-    public List<Category> getCategories() {
-        return categories;
+    public Map<String ,CategoryGroup> getCategoryMap() {
+        return categoryMap;
     }
 
     // Navigation items
