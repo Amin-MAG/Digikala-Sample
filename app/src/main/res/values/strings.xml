@@ -52,5 +52,7 @@
 
     </string>
     <string name="search_hint">جستجو در دیجی کالا... </string>
+    <string name="sort">مرتب سازی</string>
+    <string name="filter">فیلتر کردن</string>
 
 </resources>
