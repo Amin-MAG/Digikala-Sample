@@ -18,6 +18,7 @@ import com.mag.digikala.Model.Adapter.CategoryGreenButtonsRecyclerAdapter;
 import com.mag.digikala.Model.Adapter.MainSliderAdapter;
 import com.mag.digikala.Model.Adapter.ProductRecyclerAdapter;
 import com.mag.digikala.Model.Category;
+import com.mag.digikala.Model.CategoryGroup;
 import com.mag.digikala.Model.ProductsRepository;
 import com.mag.digikala.Model.Product;
 import com.mag.digikala.R;
@@ -26,6 +27,7 @@ import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainFragment extends Fragment {
 
@@ -87,7 +89,6 @@ public class MainFragment extends Fragment {
         Log.i("LifeCycle", "onViewCreated: ");
 
 
-
         // Find Items
 
         bestProductRecycler = view.findViewById(R.id.digikala_main_activity__best);
@@ -103,7 +104,8 @@ public class MainFragment extends Fragment {
         bestProductAdapter = new ProductRecyclerAdapter(new ArrayList<Product>());
         mostViewedProductAdapter = new ProductRecyclerAdapter(new ArrayList<Product>());
         newestProductAdapter = new ProductRecyclerAdapter(new ArrayList<Product>());
-        categoryAdapter = new CategoryGreenButtonsRecyclerAdapter(new ArrayList<Category>());
+        categoryAdapter = new CategoryGreenButtonsRecyclerAdapter(new ArrayList<CategoryGroup>() {
+        });
         mainSliderAdapter = new MainSliderAdapter(new ArrayList<String>() {{
             add(getURLForResource(R.drawable.main_slider_image01));
             add(getURLForResource(R.drawable.main_slider_image02));
@@ -137,7 +139,7 @@ public class MainFragment extends Fragment {
         newestProductAdapter.notifyDataSetChanged();
         offeredProductAdapter.setProductItems(ProductsRepository.getInstance().getOfferedProduct());
         offeredProductAdapter.notifyDataSetChanged();
-        categoryAdapter.setCategoriesItems(ProductsRepository.getInstance().getCategories());
+        categoryAdapter.setCategoriesItems(ProductsRepository.getInstance().getParentCategory());
         categoryAdapter.notifyDataSetChanged();
 
     }

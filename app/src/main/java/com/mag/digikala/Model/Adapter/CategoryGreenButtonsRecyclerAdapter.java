@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.button.MaterialButton;
 import com.mag.digikala.Controller.Activities.CategoryActivity;
 import com.mag.digikala.Model.Category;
+import com.mag.digikala.Model.CategoryGroup;
 import com.mag.digikala.R;
 
 import java.util.List;
@@ -18,10 +19,10 @@ import java.util.List;
 public class CategoryGreenButtonsRecyclerAdapter extends RecyclerView.Adapter<CategoryGreenButtonsRecyclerAdapter.CategoryRecyclerViewHolder> {
 
 
-    private List<Category> items;
+    private List<CategoryGroup> items;
     private Activity activity;
 
-    public CategoryGreenButtonsRecyclerAdapter(List<Category> items) {
+    public CategoryGreenButtonsRecyclerAdapter(List<CategoryGroup> items) {
         this.items = items;
     }
 
@@ -54,13 +55,13 @@ public class CategoryGreenButtonsRecyclerAdapter extends RecyclerView.Adapter<Ca
 
         }
 
-        public void bind(Category category) {
+        public void bind(final CategoryGroup categoryGroup) {
 
-            button.setText(category.getName());
+            button.setText(categoryGroup.getGroupName());
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    activity.startActivity(CategoryActivity.newIntent(activity, ""));
+                    activity.startActivity(CategoryActivity.newIntent(activity, categoryGroup.getId()));
                 }
             });
 
@@ -68,7 +69,7 @@ public class CategoryGreenButtonsRecyclerAdapter extends RecyclerView.Adapter<Ca
 
     }
 
-    public void setCategoriesItems(List<Category> items) {
+    public void setCategoriesItems(List<CategoryGroup> items) {
         this.items = items;
     }
 
