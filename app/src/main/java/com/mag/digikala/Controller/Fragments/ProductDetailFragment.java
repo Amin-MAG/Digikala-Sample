@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.button.MaterialButton;
+import com.mag.digikala.Controller.Activities.CardActivity;
 import com.mag.digikala.Model.Adapter.SliderViewPagerAdapter;
 import com.mag.digikala.Model.Product;
 import com.mag.digikala.Model.ProductImage;
@@ -60,32 +61,13 @@ public class ProductDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        realm = Realm.getDefaultInstance();
-        realm.beginTransaction();
-//        result.deleteFromRealm();
+        realmInitialization();
 
         retrofitApi = RetrofitInstance.getInstance().create(RetrofitApi.class);
-        retrofitApi.getProductById(getArguments().getString(ARG_MECHANDICE)).enqueue(new Callback<Product>() {
-            @Override
-            public void onResponse(Call<Product> call, Response<Product> response) {
 
-                if (response.isSuccessful()) {
-
-                    product = response.body();
-                    updateDetailFragment();
-
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<Product> call, Throwable t) {
-
-            }
-        });
+        requestToGetProduct();
 
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -98,13 +80,12 @@ public class ProductDetailFragment extends Fragment {
 
         findComponents(view);
 
-        cardBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        cardBtn.setOnClickListener(view1 -> {
 
-                CardRepository.getInstance().addToCard(product);
+            CardRepository.getInstance().addToCard(product);
 
-            }
+            getActivity().startActivity(CardActivity.newIntent(getContext()));
+
         });
 
     }
@@ -117,7 +98,6 @@ public class ProductDetailFragment extends Fragment {
         realm.close();
 
     }
-
 
 
     private void findComponents(@NonNull View view) {
@@ -136,6 +116,32 @@ public class ProductDetailFragment extends Fragment {
             urls.add(image.getSrc());
         sliderAdapter = new SliderViewPagerAdapter(getFragmentManager(), urls);
         slider.setAdapter(sliderAdapter);
+    }
+
+    private void realmInitialization() {
+        realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+    }
+
+    private void requestToGetProduct() {
+        retrofitApi.getProductById(getArguments().getString(ARG_MECHANDICE)).enqueue(new Callback<Product>() {
+            @Override
+            public void onResponse(Call<Product> call, Response<Product> response) {
+
+                if (response.isSuccessful()) {
+
+                    product = response.body();
+                    updateDetailFragment();
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Product> call, Throwable t) {
+
+            }
+        });
     }
 
     private void priceView() {

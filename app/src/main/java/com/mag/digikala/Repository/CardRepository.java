@@ -53,7 +53,6 @@ public class CardRepository {
         }
 
         numberOfCardProducts.postValue(realm.where(CardProduct.class).findAll().size());
-//        getActivity().startActivity(CardActivity.newIntent(getContext()));
 
     }
 

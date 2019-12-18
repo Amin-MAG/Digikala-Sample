@@ -1,9 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/digikala_dark_white"
+    android:orientation="vertical"
     tools:context=".Controller.Activities.CardActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Common Toolbar-->
+    <FrameLayout
+        android:id="@+id/card_fragment__common_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top" />
+
+    <!-- Main Content -->
+    <FrameLayout
+        android:id="@+id/card_fragment__main_frame"
+        android:layout_marginTop="56dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</FrameLayout>

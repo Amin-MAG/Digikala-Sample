@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
+import com.mag.digikala.Controller.Activities.CardActivity;
 import com.mag.digikala.Controller.Activities.MainActivity;
 import com.mag.digikala.Controller.Activities.SearchActivity;
 import com.mag.digikala.R;
@@ -72,20 +74,17 @@ public class MainToolbarFragment extends Fragment {
     }
 
     private void setEvents() {
-        menuBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (getActivity() instanceof MainActivity)
-                    ((MainActivity) getActivity()).openNavigationView();
-            }
+
+        menuBtn.setOnClickListener(view -> {
+            if (getActivity() instanceof MainActivity)
+                ((MainActivity) getActivity()).openNavigationView();
         });
 
-        searchBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(SearchActivity.newIntent(getContext()));
-            }
+        cartBtn.setOnClickListener(view -> {
+            startActivity(CardActivity.newIntent(getContext()));
         });
+
+        searchBtn.setOnClickListener(view -> startActivity(SearchActivity.newIntent(getContext())));
     }
 
     private void findComponents(@NonNull View view) {

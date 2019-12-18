@@ -16,7 +16,6 @@ import com.mag.digikala.R;
 
 public class CardFragment extends Fragment {
 
-
     public static CardFragment newInstance() {
         
         Bundle args = new Bundle();

@@ -56,5 +56,7 @@
     <string name="filter">فیلتر کردن</string>
     <string name="price_ascending">قیمت از زیاد به کم</string>
     <string name="price_descending">قیمت از کم به زیاد</string>
+    <string name="commit_card">خرید خود را نهایی کنید</string>
+    <string name="card_sum">جمع کل خرید</string>
 
 </resources>
