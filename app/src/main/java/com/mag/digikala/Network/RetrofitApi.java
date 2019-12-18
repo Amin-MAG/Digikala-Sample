@@ -27,7 +27,7 @@ public interface RetrofitApi {
     @GET(BASE_URL + "products/{id}" + WOOCOMMERCE_REST_AUTHENTICATION_KEY)
     Call<Product> getProductById(@Path("id") String productId);
 
-    @GET(BASE_URL + "products" + WOOCOMMERCE_REST_AUTHENTICATION_KEY)
+    @GET(BASE_URL + "products" + WOOCOMMERCE_REST_AUTHENTICATION_KEY + "&per_page=100")
     Call<List<Product>> searchProducts(@Query("search") String searchText);
 
     @GET(BASE_URL + "products" + WOOCOMMERCE_REST_AUTHENTICATION_KEY + "&on_sale=true")

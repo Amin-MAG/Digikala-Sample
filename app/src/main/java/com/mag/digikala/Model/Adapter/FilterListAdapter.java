@@ -91,7 +91,8 @@ public class FilterListAdapter extends RecyclerView.Adapter<FilterListAdapter.Fi
             priceView();
 
             productTitle.setText(product.getName() + " " + product.getId());
-            productDescription.setText(Jsoup.parse(product.getShortDescription()).text());
+            String shortDescriptionString = Jsoup.parse(product.getShortDescription()).text();
+            productDescription.setText(shortDescriptionString.length() > 80 ? shortDescriptionString.substring(0, 80) + "..." : shortDescriptionString);
 
             Picasso.get().load(product.getImages()[0].getSrc()).placeholder(activity.getResources().getDrawable(R.drawable.place_holder)).into(productImage);
 
