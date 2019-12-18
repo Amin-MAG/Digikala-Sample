@@ -1,4 +1,4 @@
-package com.mag.digikala.Controller.Fragments;
+package com.mag.digikala.View;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,17 +9,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
-import com.mag.digikala.Model.CardProduct;
 import com.mag.digikala.R;
-
-import io.realm.Realm;
+import com.mag.digikala.ViewModel.ProductDetailToolbarViewModel;
 
 
 public class ProductDetailToolbarFragment extends Fragment {
 
+    private ProductDetailToolbarViewModel viewModel;
+
     private TextView cardNumber;
-    private Realm realm;
 
     public static ProductDetailToolbarFragment newInstance() {
 
@@ -33,11 +33,16 @@ public class ProductDetailToolbarFragment extends Fragment {
     public ProductDetailToolbarFragment() {
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        realm = Realm.getDefaultInstance();
+        viewModel = ViewModelProviders.of(this).get(ProductDetailToolbarViewModel.class);
+        viewModel.loadData();
+        viewModel.getNumberOfCardProducts().observe(this, numberOfCardProducts -> {
+            cardNumber.setText(numberOfCardProducts.toString());
+        });
 
     }
 
@@ -50,17 +55,12 @@ public class ProductDetailToolbarFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        cardNumber = view.findViewById(R.id.product_detail_toolbar_fragment__card_number);
-        cardNumber.setText(String.valueOf(realm.where(CardProduct.class).findAll().size()));
+        findComponents(view);
 
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-
-        realm.close();
-
+    private void findComponents(@NonNull View view) {
+        cardNumber = view.findViewById(R.id.product_detail_toolbar_fragment__card_number);
     }
 
 }

@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.button.MaterialButton;
-import com.mag.digikala.Controller.Activities.CardActivity;
 import com.mag.digikala.Model.Adapter.SliderViewPagerAdapter;
 import com.mag.digikala.Model.CardProduct;
 import com.mag.digikala.Model.Product;
@@ -21,6 +20,7 @@ import com.mag.digikala.Model.ProductImage;
 import com.mag.digikala.Network.RetrofitApi;
 import com.mag.digikala.Network.RetrofitInstance;
 import com.mag.digikala.R;
+import com.mag.digikala.Repository.ToolbarRepository;
 import com.mag.digikala.Var.Constants;
 
 import org.jsoup.Jsoup;
@@ -103,8 +103,7 @@ public class ProductDetailFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                saveJsonCardProductsToSharePreferences();
-//                getActivity().startActivity(CardActivity.newIntent(getContext()));
+                ToolbarRepository.getInstance().addToCard(product);
 
             }
         });
@@ -120,71 +119,6 @@ public class ProductDetailFragment extends Fragment {
 
     }
 
-    private void saveJsonCardProductsToSharePreferences() {
-
-//        SharedPreferences cardSharePreferences = getActivity().getSharedPreferences(Constants.CARD_SHARE_PREFERENCE, Context.MODE_PRIVATE);
-//        SharedPreferences.Editor cardSharePreferencesEditor = cardSharePreferences.edit();
-//
-//        CardProduct cardProduct = new CardProduct(product, 2, "red");
-//        String jsonCardData = new Gson().toJson(cardProduct);
-//        String existingJsonCardProduct;
-//        if ((existingJsonCardProduct = cardSharePreferences.getString(product.getId(), null)) != null) {
-//            List<CardProduct> cardProductList = new Gson().fromJson(existingJsonCardProduct, List.class);
-//            for (CardProduct cp : cardProductList) {
-//                if (cp.getProduct().getId().equals(cardProduct.getProduct().getId()) && cp.getColor().equals(cardProduct.getColor())) {
-//                    cardProduct.setCount(cardProduct.getCount() + 1);
-//                    break;
-//                }
-//            }
-//            CardProduct existingCardProduct = new Gson().fromJson(existingJsonCardProduct, CardProduct.class);
-//            if (existingCardProduct.getColor().equals(cardProduct))
-//                cardProduct.setCount(cardProduct.getCount() + 1);
-//        }
-//
-//        cardSharePreferencesEditor.putString(product.getId(), jsonCardData);
-
-
-//        final int[] previousCount = new int[1];
-
-//        realm.executeTransaction(new Realm.Transaction() {
-//            @Override
-//            public void execute(Realm realm) {
-//                RealmResults<CardProduct> results = realm.where(CardProduct.class).findAll();
-//                for (CardProduct cp : results)
-//                    if (cp.getId().equals(product.getId())) {
-//                        previousCount[0] = cp.getCount();
-//                        break;
-//                    }
-//            }
-//        });
-
-
-
-        boolean productExistance = false;
-        for (CardProduct cp : realm.where(CardProduct.class).findAll()) {
-            if (cp.getProductId().equals(product.getId())) {
-                cp.setCount(cp.getCount() + 1);
-                productExistance = true;
-                break;
-            }
-        }
-
-        if (!productExistance) {
-            CardProduct object = realm.createObject(CardProduct.class, product.getId() + "_");
-            object.setCount(1);
-            object.setProductId(product.getId());
-        }
-
-
-        getActivity().startActivity(CardActivity.newIntent(getContext()));
-
-    }
-
-
-    private void updateCard() {
-
-
-    }
 
 
     private void findComponents(@NonNull View view) {

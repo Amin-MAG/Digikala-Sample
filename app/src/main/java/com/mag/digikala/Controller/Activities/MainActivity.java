@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationView;
 import com.mag.digikala.Controller.Fragments.MainFragment;
-import com.mag.digikala.Controller.Fragments.MainToolbarFragment;
+import com.mag.digikala.View.MainToolbarFragment;
 import com.mag.digikala.Model.Adapter.NavigationRecyclerAdapter;
 import com.mag.digikala.Model.Category;
 import com.mag.digikala.Model.CategoryGroup;

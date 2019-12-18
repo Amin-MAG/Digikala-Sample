@@ -10,8 +10,7 @@ import android.widget.TextView;
 
 import com.mag.digikala.Controller.Fragments.ProductDetailFragment;
 import com.mag.digikala.Model.Adapter.NavigationRecyclerAdapter;
-import com.mag.digikala.Model.ProductsRepository;
-import com.mag.digikala.Controller.Fragments.ProductDetailToolbarFragment;
+import com.mag.digikala.View.ProductDetailToolbarFragment;
 import com.mag.digikala.R;
 import com.mag.digikala.Util.UiUtil;
 
