@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 import com.mag.digikala.Model.Adapter.CategoryGreenButtonsRecyclerAdapter;
 import com.mag.digikala.Model.Adapter.MainSliderAdapter;
 import com.mag.digikala.Model.Adapter.ProductRecyclerAdapter;
-import com.mag.digikala.Model.Category;
 import com.mag.digikala.Model.CategoryGroup;
 import com.mag.digikala.Model.ProductsRepository;
 import com.mag.digikala.Model.Product;
@@ -27,7 +26,6 @@ import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainFragment extends Fragment {
 
@@ -55,8 +53,8 @@ public class MainFragment extends Fragment {
     private RecyclerView newestProductRecycler;
     private ProductRecyclerAdapter newestProductAdapter;
 
-    private RecyclerView bestProductRecycler;
-    private ProductRecyclerAdapter bestProductAdapter;
+    private RecyclerView bestSellerProductRecycler;
+    private ProductRecyclerAdapter bestSellerProductAdapter;
 
     private RecyclerView mostViewedProductRecycler;
     private ProductRecyclerAdapter mostViewedProductAdapter;
@@ -91,7 +89,7 @@ public class MainFragment extends Fragment {
 
         // Find Items
 
-        bestProductRecycler = view.findViewById(R.id.digikala_main_activity__best);
+        bestSellerProductRecycler = view.findViewById(R.id.digikala_main_activity__best);
         newestProductRecycler = view.findViewById(R.id.digikala_main_activity__newest);
         mostViewedProductRecycler = view.findViewById(R.id.digikala_main_activity__most_view);
         categories = view.findViewById(R.id.digikala_main_activity__categoty);
@@ -101,7 +99,7 @@ public class MainFragment extends Fragment {
 
         // Adapters
 
-        bestProductAdapter = new ProductRecyclerAdapter(new ArrayList<Product>());
+        bestSellerProductAdapter = new ProductRecyclerAdapter(new ArrayList<Product>());
         mostViewedProductAdapter = new ProductRecyclerAdapter(new ArrayList<Product>());
         newestProductAdapter = new ProductRecyclerAdapter(new ArrayList<Product>());
         categoryAdapter = new CategoryGreenButtonsRecyclerAdapter(new ArrayList<CategoryGroup>() {
@@ -116,7 +114,7 @@ public class MainFragment extends Fragment {
 
         // Set Adapters
 
-        bestProductRecycler.setAdapter(bestProductAdapter);
+        bestSellerProductRecycler.setAdapter(bestSellerProductAdapter);
         newestProductRecycler.setAdapter(newestProductAdapter);
         mostViewedProductRecycler.setAdapter(mostViewedProductAdapter);
         categories.setAdapter(categoryAdapter);
@@ -129,15 +127,16 @@ public class MainFragment extends Fragment {
 
     }
 
-    public void updateView() {
+    public void
+    updateView() {
 
-        bestProductAdapter.setProductItems(ProductsRepository.getInstance().getAllProducts());
-        bestProductAdapter.notifyDataSetChanged();
-        mostViewedProductAdapter.setProductItems(ProductsRepository.getInstance().getAllProducts());
+        bestSellerProductAdapter.setProductItems(ProductsRepository.getInstance().getTopRatingProducts());
+        bestSellerProductAdapter.notifyDataSetChanged();
+        mostViewedProductAdapter.setProductItems(ProductsRepository.getInstance().getPopularProducts());
         mostViewedProductAdapter.notifyDataSetChanged();
         newestProductAdapter.setProductItems(ProductsRepository.getInstance().getAllProducts());
         newestProductAdapter.notifyDataSetChanged();
-        offeredProductAdapter.setProductItems(ProductsRepository.getInstance().getOfferedProduct());
+        offeredProductAdapter.setProductItems(ProductsRepository.getInstance().getOfferedProducts());
         offeredProductAdapter.notifyDataSetChanged();
         categoryAdapter.setCategoriesItems(ProductsRepository.getInstance().getParentCategory());
         categoryAdapter.notifyDataSetChanged();

@@ -218,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
 
                     ProductsRepository.getInstance().setOfferedProducts(response.body());
-                    requestToGetCategories();
+                    requestToGetTopRatingProducts();
 
                 }
 
@@ -229,6 +229,44 @@ public class MainActivity extends AppCompatActivity {
                 loadConncetionErrorSlide();
             }
 
+        });
+    }
+
+    private void requestToGetTopRatingProducts() {
+        retrofitApi.getOrderedProducts("rating", 8, 1).enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+
+                if (response.isSuccessful()) {
+
+                    ProductsRepository.getInstance().setTopRatingProducts(response.body());
+                    requestToGetPopularProducts();
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void requestToGetPopularProducts() {
+        retrofitApi.getOrderedProducts("popularity",8,1).enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+
+                ProductsRepository.getInstance().setPopularProducts(response.body());
+                requestToGetCategories();
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+
+            }
         });
     }
 

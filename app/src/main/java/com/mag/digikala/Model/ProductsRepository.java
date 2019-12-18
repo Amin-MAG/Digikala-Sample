@@ -29,10 +29,16 @@ public class ProductsRepository {
         return instance;
     }
 
-    // Products
+    // Products //
 
+    // Test
     private List<Product> allProducts;
+    // Offered
     private List<Product> offeredProducts;
+    // Best Seller
+    private  List<Product> topRatingProducts;
+    // Most View
+    private  List<Product> popularProducts;
 
     public void setAllProducts(List<Product> allProducts) {
         this.allProducts = allProducts;
@@ -40,6 +46,14 @@ public class ProductsRepository {
 
     public void setOfferedProducts(List<Product> offeredProducts) {
         this.offeredProducts = offeredProducts;
+    }
+
+    public void setTopRatingProducts(List<Product> tppRatingProducts) {
+        this.topRatingProducts = tppRatingProducts;
+    }
+
+    public void setPopularProducts(List<Product> popularProducts) {
+        this.popularProducts = popularProducts;
     }
 
     public List<Product> getAllProducts() {
@@ -53,8 +67,16 @@ public class ProductsRepository {
         return null;
     }
 
-    public List<Product> getOfferedProduct() {
+    public List<Product> getOfferedProducts() {
         return offeredProducts;
+    }
+
+    public List<Product> getTopRatingProducts() {
+        return topRatingProducts;
+    }
+
+    public List<Product> getPopularProducts() {
+        return popularProducts;
     }
 
     // Categories

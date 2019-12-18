@@ -36,6 +36,9 @@ public interface RetrofitApi {
     @GET(BASE_URL + "products" + WOOCOMMERCE_REST_AUTHENTICATION_KEY)
     Call<List<Product>> getProducts(@QueryMap Map map);
 
+    @GET(BASE_URL + "products" + WOOCOMMERCE_REST_AUTHENTICATION_KEY)
+    Call<List<Product>> getOrderedProducts(@Query("orderby") String attribute,@Query("per_page") int perPage, @Query("page") int numberOfPage);
+
 
     // Categories //
 
