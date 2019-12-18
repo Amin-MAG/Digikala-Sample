@@ -25,6 +25,8 @@ public class Product implements Serializable {
     private String salePrice;
     private Category[] categories;
 
+    private int cardCount;
+
     public Product(String name, ProductImage[] images, String price, String sale_price) {
         this.name = name;
         this.images = images;
@@ -32,6 +34,9 @@ public class Product implements Serializable {
         this.salePrice = sale_price;
     }
 
+    public void setCardCount(int cardCount) {
+        this.cardCount = cardCount;
+    }
 
     public String getId() {
         return id;

@@ -11,14 +11,14 @@
 
     <!-- Common Toolbar-->
     <FrameLayout
-        android:id="@+id/card_fragment__common_toolbar"
+        android:id="@+id/card_activity__common_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top" />
 
     <!-- Main Content -->
     <FrameLayout
-        android:id="@+id/card_fragment__main_frame"
+        android:id="@+id/card_activity__main_frame"
         android:layout_marginTop="56dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

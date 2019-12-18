@@ -30,13 +30,13 @@ public class CardActivity extends AppCompatActivity {
 
         if (commonToolbarFragment == null) {
             commonToolbarFragment = CommonToolbarFragment.newInstance(getResources().getString(R.string.cart));
-            UiUtil.changeFragment(getSupportFragmentManager(), commonToolbarFragment, R.id.card_fragment__common_toolbar, true, FRAGMENT_CARD_TOOLBAR);
+            UiUtil.changeFragment(getSupportFragmentManager(), commonToolbarFragment, R.id.card_activity__common_toolbar, true, FRAGMENT_CARD_TOOLBAR);
         }
 
 
         if (cardFragment == null) {
             cardFragment = CardFragment.newInstance();
-            UiUtil.changeFragment(getSupportFragmentManager(), cardFragment, R.id.card_fragment__main_frame, true, FRAGMENT_CARD_MAIN);
+            UiUtil.changeFragment(getSupportFragmentManager(), cardFragment, R.id.card_activity__main_frame, true, FRAGMENT_CARD_MAIN);
         }
 
     }
