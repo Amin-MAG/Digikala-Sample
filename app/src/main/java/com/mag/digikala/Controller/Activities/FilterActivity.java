@@ -14,12 +14,14 @@ import com.mag.digikala.Util.UiUtil;
 public class FilterActivity extends AppCompatActivity {
 
     public static final String EXTRA_SEARCH_STRING = "extra_search_string";
+    public static final String EXTRA_CATEGORY_ID = "extra_category_id";
     private FilterToolbarFragment filterToolbarFragment;
     private FilterFragment filterFragment;
 
-    public static Intent newIntent(Context context, String searchString) {
+    public static Intent newIntent(Context context, String searchString, String categoryId) {
         Intent intent = new Intent(context, FilterActivity.class);
         intent.putExtra(EXTRA_SEARCH_STRING, searchString);
+        intent.putExtra(EXTRA_CATEGORY_ID, categoryId);
         return intent;
     }
 
@@ -35,7 +37,7 @@ public class FilterActivity extends AppCompatActivity {
 
 
         if (filterFragment == null) {
-            filterFragment = FilterFragment.newInstance(getIntent().getExtras().getString(EXTRA_SEARCH_STRING));
+            filterFragment = FilterFragment.newInstance(getIntent().getExtras().getString(EXTRA_SEARCH_STRING),getIntent().getExtras().getString(EXTRA_CATEGORY_ID));
             UiUtil.changeFragment(getSupportFragmentManager(), filterFragment, R.id.filter_activity__main_frame, true, EXTRA_SEARCH_STRING);
         }
 

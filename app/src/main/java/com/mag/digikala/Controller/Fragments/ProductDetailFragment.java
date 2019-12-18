@@ -118,10 +118,10 @@ public class ProductDetailFragment extends Fragment {
         String priceInvalidString = "";
 
         if (product.getSalePrice().equals(Constants.EMPTY_CHAR))
-            priceString = product.getPrice() + MONEY_STRING;
+            priceString = product.getRegularPrice() + MONEY_STRING;
         else {
             priceString = product.getSalePrice() + MONEY_STRING;
-            priceInvalidString = product.getPrice() + MONEY_STRING;
+            priceInvalidString = product.getRegularPrice() + MONEY_STRING;
         }
 
         productRegularPrice.setText(priceInvalidString);

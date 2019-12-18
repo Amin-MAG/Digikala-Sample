@@ -32,9 +32,14 @@ public class ProductsRepository {
     // Products
 
     private List<Product> allProducts;
+    private List<Product> offeredProducts;
 
     public void setAllProducts(List<Product> allProducts) {
         this.allProducts = allProducts;
+    }
+
+    public void setOfferedProducts(List<Product> offeredProducts) {
+        this.offeredProducts = offeredProducts;
     }
 
     public List<Product> getAllProducts() {
@@ -48,6 +53,9 @@ public class ProductsRepository {
         return null;
     }
 
+    public List<Product> getOfferedProduct() {
+        return offeredProducts;
+    }
 
     // Categories
 
@@ -81,18 +89,6 @@ public class ProductsRepository {
 
     public void setNavigationItems(Context context) {
         this.navigationItems = getDefaultList(context);
-    }
-
-    public List<Product> getOfferedProduct() {
-
-        ArrayList<Product> offered = new ArrayList<>();
-
-        for (Product product : allProducts)
-            if (product.getSalePrice().length() > 0)
-                offered.add(product);
-
-        return offered;
-
     }
 
     private List<MenuItem> getDefaultList(final Context context) {

@@ -29,7 +29,6 @@ import com.mag.digikala.Network.RetrofitInstance;
 import com.mag.digikala.R;
 import com.mag.digikala.Util.UiUtil;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -146,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
 
                      */
 
-                    for (int k = 0 ; k < responseList.size();k++){
+                    for (int k = 0; k < responseList.size(); k++) {
                         Log.d("CATEGORIES", "onResponse: " + responseList.get(k).getName());
                     }
 
@@ -197,6 +196,28 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
 
                     ProductsRepository.getInstance().setAllProducts(response.body());
+                    requestToGetOfferedProducts();
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+                loadConncetionErrorSlide();
+            }
+
+        });
+    }
+
+    private void requestToGetOfferedProducts() {
+        retrofitApi.getSaleProduct(8, 1).enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+
+                if (response.isSuccessful()) {
+
+                    ProductsRepository.getInstance().setOfferedProducts(response.body());
                     requestToGetCategories();
 
                 }

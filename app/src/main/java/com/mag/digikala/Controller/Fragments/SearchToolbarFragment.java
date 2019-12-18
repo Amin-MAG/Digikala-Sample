@@ -64,7 +64,7 @@ public class SearchToolbarFragment extends Fragment {
         searchEditTxt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                startActivity(FilterActivity.newIntent(getContext(), searchEditTxt.getText().toString()));
+                startActivity(FilterActivity.newIntent(getContext(), searchEditTxt.getText().toString(), null));
                 InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
                 return false;

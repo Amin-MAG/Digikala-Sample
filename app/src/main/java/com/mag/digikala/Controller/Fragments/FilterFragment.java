@@ -20,6 +20,7 @@ import com.mag.digikala.Network.RetrofitInstance;
 import com.mag.digikala.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -29,7 +30,9 @@ import retrofit2.Response;
 public class FilterFragment extends Fragment {
 
     public static final String ARG_SEARCH_STRING = "arg_search_string";
+    public static final String ARG_CATEGORY_ID = "arg_category_id";
     private String searchString;
+    String categoryid;
     private List<Category> searchItem;
     private RetrofitApi retrofitApi;
 
@@ -37,10 +40,11 @@ public class FilterFragment extends Fragment {
     private RecyclerView filterRecycler;
     private FilterListAdapter filterListAdapter;
 
-    public static FilterFragment newInstance(String searchString) {
+    public static FilterFragment newInstance(String searchString, String categoryId) {
 
         Bundle args = new Bundle();
         args.putString(ARG_SEARCH_STRING, searchString);
+        args.putString(ARG_CATEGORY_ID, categoryId);
 
         FilterFragment fragment = new FilterFragment();
         fragment.setArguments(args);
@@ -63,10 +67,14 @@ public class FilterFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         searchString = getArguments().getString(ARG_SEARCH_STRING);
+        categoryid = getArguments().getString(ARG_CATEGORY_ID);
         filterRecycler = view.findViewById(R.id.filter_fragment__recycler);
         filterListAdapter = new FilterListAdapter(new ArrayList<Product>());
         filterRecycler.setAdapter(filterListAdapter);
 
+//        HashMap<String,String> filters = new HashMap<>();
+//        if (searchString != null)
+//            filters.put("search", searchString);
 
         retrofitApi.searchProducts(searchString).enqueue(new Callback<List<Product>>() {
             @Override
@@ -74,7 +82,19 @@ public class FilterFragment extends Fragment {
 
                 if (response.isSuccessful()) {
 
-                    filterListAdapter.setData(response.body());
+                    List<Product> filteredProducts = response.body();
+
+                    Log.i("CategoryID", "onResponse: " + categoryid);
+
+                    if (categoryid!= null) {
+                        filteredProducts = new ArrayList<>();
+                        for (Product product : response.body())
+                            for (Category category : product.getCategories())
+                                if (category.getId().equals(categoryid))
+                                    filteredProducts.add(product);
+                    }
+
+                    filterListAdapter.setData(filteredProducts);
                     filterListAdapter.notifyDataSetChanged();
 
                 }

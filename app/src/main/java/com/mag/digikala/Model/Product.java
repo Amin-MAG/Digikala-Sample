@@ -13,9 +13,14 @@ public class Product implements Serializable {
     @SerializedName("short_description")
     private String shortDescription;
     // prices
+    @SerializedName("on_sale")
+    private boolean onSale;
     private String price;
+    @SerializedName("regular_price")
+    private String regularPrice;
     @SerializedName("sale_price")
     private String salePrice;
+    private Category[] categories;
 
     public Product(String name, ProductImage[] images, String price, String sale_price) {
         this.name = name;
@@ -51,5 +56,17 @@ public class Product implements Serializable {
 
     public String getShortDescription() {
         return shortDescription;
+    }
+
+    public String getRegularPrice() {
+        return regularPrice;
+    }
+
+    public boolean isOnSale() {
+        return onSale;
+    }
+
+    public Category[] getCategories() {
+        return categories;
     }
 }

@@ -50,7 +50,7 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
 
     public class ProductRecyclerViewHolder extends RecyclerView.ViewHolder {
 
-        private int id;
+        private Product product;
         private TextView title;
         private TextView price;
         private TextView priceInvalid;
@@ -71,15 +71,16 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
 
         public void bind(final Product product) {
 
+            this.product = product;
+
             if (product.getImages().length != 0) {
                 String imageUrl = product.getImages()[0].getSrc();
                 Picasso.get().load(imageUrl).placeholder(R.drawable.place_holder).into(cover);
             }
 
-            setPrices(product.getPrice(), product.getSalePrice());
+            setPrices();
 
             title.setText(product.getName());
-
 
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -90,17 +91,17 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
 
         }
 
-        private void setPrices(String regular_price, String sale_price) {
+        private void setPrices() {
 
             String MONEY_STRING = Constants.SPACE_CHAR + activity.getResources().getString(R.string.tomans);
             String priceString;
             String priceInvalidString = Constants.EMPTY_CHAR;
 
-            if (sale_price.equals(Constants.EMPTY_CHAR))
-                priceString = regular_price + MONEY_STRING;
+            if (!product.isOnSale())
+                priceString = product.getRegularPrice() + MONEY_STRING;
             else {
-                priceString = sale_price + MONEY_STRING;
-                priceInvalidString = regular_price + MONEY_STRING;
+                priceString = product.getSalePrice() + MONEY_STRING;
+                priceInvalidString = product.getRegularPrice() + MONEY_STRING;
             }
 
             priceInvalid.setText(priceInvalidString);
