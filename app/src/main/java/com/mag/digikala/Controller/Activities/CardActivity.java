@@ -10,13 +10,14 @@ import com.mag.digikala.Controller.Fragments.CardFragment;
 import com.mag.digikala.Controller.Fragments.CommonToolbarFragment;
 import com.mag.digikala.R;
 import com.mag.digikala.Util.UiUtil;
+import com.mag.digikala.View.CardToolbarFragment;
 
 public class CardActivity extends AppCompatActivity {
 
     public static final String FRAGMENT_CARD_TOOLBAR = "fragment_card_toolbar";
     public static final String FRAGMENT_CARD_MAIN = "fragment_card_main";
 
-    private CommonToolbarFragment commonToolbarFragment;
+    private CardToolbarFragment cardToolbarFragment;
     private CardFragment cardFragment;
 
     public static Intent newIntent(Context context) {
@@ -28,9 +29,9 @@ public class CardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card);
 
-        if (commonToolbarFragment == null) {
-            commonToolbarFragment = CommonToolbarFragment.newInstance(getResources().getString(R.string.cart));
-            UiUtil.changeFragment(getSupportFragmentManager(), commonToolbarFragment, R.id.card_activity__common_toolbar, true, FRAGMENT_CARD_TOOLBAR);
+        if (cardToolbarFragment == null) {
+            cardToolbarFragment = CardToolbarFragment.newInstance();
+            UiUtil.changeFragment(getSupportFragmentManager(), cardToolbarFragment, R.id.card_activity__common_toolbar, true, FRAGMENT_CARD_TOOLBAR);
         }
 
 
