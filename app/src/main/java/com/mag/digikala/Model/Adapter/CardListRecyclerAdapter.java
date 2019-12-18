@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,14 +41,29 @@ public class CardListRecyclerAdapter extends RecyclerView.Adapter<CardListRecycl
         return products.size();
     }
 
+    public void setProducts(List<Product> productList) {
+        this.products = productList;
+    }
+
 
     public class CardListViewHolder extends RecyclerView.ViewHolder {
 
+        private Product product;
+        private TextView productTitle;
+
+
         public CardListViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            productTitle = itemView.findViewById(R.id.layout_card_list_item__title);
+
         }
 
         public void bind(Product product) {
+
+            this.product = product;
+
+            productTitle.setText(product.getName());
 
         }
 

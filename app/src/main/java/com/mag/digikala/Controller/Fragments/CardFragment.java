@@ -14,14 +14,29 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mag.digikala.Model.Adapter.CardListRecyclerAdapter;
+import com.mag.digikala.Model.CardProduct;
+import com.mag.digikala.Model.Product;
 import com.mag.digikala.Model.ProductsRepository;
+import com.mag.digikala.Network.RetrofitApi;
+import com.mag.digikala.Network.RetrofitInstance;
 import com.mag.digikala.R;
 import com.mag.digikala.Repository.CardRepository;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import io.realm.Realm;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 
 public class CardFragment extends Fragment {
+
+    private RetrofitApi retrofitApi;
+    private Realm realm;
+    private List<Product> productList = new ArrayList<>();
 
     private RecyclerView recyclerView;
     private CardListRecyclerAdapter recyclerAdapter;
@@ -38,6 +53,36 @@ public class CardFragment extends Fragment {
     public CardFragment() {
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        realm = Realm.getDefaultInstance();
+        retrofitApi = RetrofitInstance.getInstance().create(RetrofitApi.class);
+        for (CardProduct cardProduct : realm.where(CardProduct.class).findAll()) {
+            retrofitApi.getProductById(cardProduct.getProductId()).enqueue(new Callback<Product>() {
+                @Override
+                public void onResponse(Call<Product> call, Response<Product> response) {
+
+                    if (response.isSuccessful()) {
+
+                        Product responseProduct = response.body();
+                        responseProduct.setCardCount(cardProduct.getCount());
+                        productList.add(responseProduct);
+                        setupAdapter();
+
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<Product> call, Throwable t) {
+
+                }
+            });
+        }
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,8 +94,22 @@ public class CardFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         recyclerView = view.findViewById(R.id.card_fragment__recycler);
-        recyclerAdapter = new CardListRecyclerAdapter(ProductsRepository.getInstance().getOfferedProducts());
+        recyclerAdapter = new CardListRecyclerAdapter(productList);
         recyclerView.setAdapter(recyclerAdapter);
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        realm.close();
+
+    }
+
+    private void setupAdapter() {
+
+        recyclerAdapter.setProducts(productList);
         recyclerAdapter.notifyDataSetChanged();
 
     }
