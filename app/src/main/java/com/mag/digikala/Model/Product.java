@@ -77,4 +77,9 @@ public class Product implements Serializable {
     public Category[] getCategories() {
         return categories;
     }
+
+    public int getCardCount() {
+        return  cardCount;
+    }
+
 }

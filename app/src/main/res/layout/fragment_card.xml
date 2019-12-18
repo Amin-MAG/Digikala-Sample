@@ -24,11 +24,11 @@
             android:padding="8dp">
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/card_fragment__sum"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:gravity="left"
-                android:text="somethjhing"
                 android:textColor="@color/digikala_green"
                 app:fontFamily="@font/iran_yekan" />
 

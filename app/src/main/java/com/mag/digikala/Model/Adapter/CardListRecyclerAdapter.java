@@ -53,7 +53,7 @@ public class CardListRecyclerAdapter extends RecyclerView.Adapter<CardListRecycl
     public class CardListViewHolder extends RecyclerView.ViewHolder {
 
         private Product product;
-        private TextView productTitle, productDescription;
+        private TextView productTitle, productDescription, productCount, productPrice;
         private ImageView productImage;
 
 
@@ -63,6 +63,8 @@ public class CardListRecyclerAdapter extends RecyclerView.Adapter<CardListRecycl
             productTitle = itemView.findViewById(R.id.layout_card_list_item__title);
             productDescription = itemView.findViewById(R.id.layout_card_list_item__description);
             productImage = itemView.findViewById(R.id.layout_card_list_item__image);
+            productCount = itemView.findViewById(R.id.layout_card_list_item__count);
+            productPrice = itemView.findViewById(R.id.layout_card_list_item__price);
 
         }
 
@@ -72,6 +74,8 @@ public class CardListRecyclerAdapter extends RecyclerView.Adapter<CardListRecycl
 
             productTitle.setText(product.getName());
             productDescription.setText(Jsoup.parse(product.getShortDescription()).body().text());
+            productCount.setText(String.valueOf(product.getCardCount()));
+            productPrice.setText(product.getSalePrice().equals("") ? product.getRegularPrice() : product.getSalePrice());
             Picasso.get().load(product.getImages()[0].getSrc()).placeholder(activity.getResources().getDrawable(R.drawable.place_holder)).into(productImage);
 
         }
