@@ -301,6 +301,7 @@
 
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/product_detail_fragment__card_btn"
                 app:backgroundTint="@color/digikala_green"
                 app:cornerRadius="0dp"
                 app:icon="@drawable/ic_add_cart"

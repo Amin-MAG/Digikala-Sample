@@ -1,5 +1,7 @@
 package com.mag.digikala.Controller.Fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,7 +15,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.button.MaterialButton;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.mag.digikala.CardActivity;
 import com.mag.digikala.Model.Adapter.SliderViewPagerAdapter;
+import com.mag.digikala.Model.CardProduct;
 import com.mag.digikala.Model.Product;
 import com.mag.digikala.Model.ProductImage;
 import com.mag.digikala.Model.ProductsRepository;
@@ -41,6 +49,7 @@ public class ProductDetailFragment extends Fragment {
     private TextView productName, productShortDescription, productDescription;
     private TextView productRegularPrice, productSalePrice;
     private ViewPager slider;
+    private MaterialButton cardBtn;
     private SliderViewPagerAdapter sliderAdapter;
 
 
@@ -92,6 +101,50 @@ public class ProductDetailFragment extends Fragment {
 
         findComponents(view);
 
+        cardBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                saveJsonCardProductsToSharePreferences();
+//                getActivity().startActivity(CardActivity.newIntent(getContext()));
+
+            }
+        });
+
+    }
+
+    private void saveJsonCardProductsToSharePreferences() {
+
+//        SharedPreferences cardSharePreferences = getActivity().getSharedPreferences(Constants.CARD_SHARE_PREFERENCE, Context.MODE_PRIVATE);
+//        SharedPreferences.Editor cardSharePreferencesEditor = cardSharePreferences.edit();
+//
+//        CardProduct cardProduct = new CardProduct(product, 2, "red");
+//        String jsonCardData = new Gson().toJson(cardProduct);
+//        String existingJsonCardProduct;
+//        if ((existingJsonCardProduct = cardSharePreferences.getString(product.getId(), null)) != null) {
+//            List<CardProduct> cardProductList = new Gson().fromJson(existingJsonCardProduct, List.class);
+//            for (CardProduct cp : cardProductList) {
+//                if (cp.getProduct().getId().equals(cardProduct.getProduct().getId()) && cp.getColor().equals(cardProduct.getColor())) {
+//                    cardProduct.setCount(cardProduct.getCount() + 1);
+//                    break;
+//                }
+//            }
+//            CardProduct existingCardProduct = new Gson().fromJson(existingJsonCardProduct, CardProduct.class);
+//            if (existingCardProduct.getColor().equals(cardProduct))
+//                cardProduct.setCount(cardProduct.getCount() + 1);
+//        }
+//
+//        cardSharePreferencesEditor.putString(product.getId(), jsonCardData);
+
+        updateCard();
+
+    }
+
+    private void updateCard() {
+
+//        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Constants.CARD_SHARE_PREFERENCE, Context.MODE_PRIVATE);
+//        for (int i = 0 ; i  <)
+
     }
 
 
@@ -102,6 +155,7 @@ public class ProductDetailFragment extends Fragment {
         productRegularPrice = view.findViewById(R.id.product_detail_fragment__product_regular_price);
         productSalePrice = view.findViewById(R.id.product_detail_fragment__product_sale_price);
         productDescription = view.findViewById(R.id.product_detail_fragment__product_long_description);
+        cardBtn = view.findViewById(R.id.product_detail_fragment__card_btn);
     }
 
     private void sliderInitializer() {

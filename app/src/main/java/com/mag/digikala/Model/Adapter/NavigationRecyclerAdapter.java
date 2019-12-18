@@ -58,7 +58,7 @@ public class NavigationRecyclerAdapter extends RecyclerView.Adapter<NavigationRe
 
             itemString = itemView.findViewById(R.id.navigation_layout__item_title);
             menuImage = itemView.findViewById(R.id.navigation_layout__menu_image);
-            devider = itemView.findViewById(R.id.navigation_layout__devider);
+            devider = itemView.findViewById(R.id.filter_fragment__devider);
             mainLayout = itemView.findViewById(R.id.navigation_layout__menu_image);
 
         }

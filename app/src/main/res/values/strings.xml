@@ -54,5 +54,7 @@
     <string name="search_hint">جستجو در دیجی کالا... </string>
     <string name="sort">مرتب سازی</string>
     <string name="filter">فیلتر کردن</string>
+    <string name="price_ascending">قیمت از زیاد به کم</string>
+    <string name="price_descending">قیمت از کم به زیاد</string>
 
 </resources>
