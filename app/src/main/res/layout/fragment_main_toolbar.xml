@@ -56,6 +56,7 @@
                 app:iconSize="20dp" />
 
             <TextView
+                android:id="@+id/toolbar_fragment__card_number"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_gravity="top|right"

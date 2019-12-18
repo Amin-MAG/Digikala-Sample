@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.mag.digikala.Controller.Fragments.FilterFragment;
-import com.mag.digikala.Controller.Fragments.FilterToolbarFragment;
+import com.mag.digikala.View.FilterToolbarFragment;
 import com.mag.digikala.R;
 import com.mag.digikala.Util.UiUtil;
 

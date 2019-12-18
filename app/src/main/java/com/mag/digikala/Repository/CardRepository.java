@@ -7,19 +7,19 @@ import com.mag.digikala.Model.Product;
 
 import io.realm.Realm;
 
-public class ToolbarRepository {
+public class CardRepository {
 
-    public static ToolbarRepository instance;
+    public static CardRepository instance;
 
     private Realm realm;
 
-    public static ToolbarRepository getInstance() {
+    public static CardRepository getInstance() {
         if (instance == null)
-            instance = new ToolbarRepository();
+            instance = new CardRepository();
         return instance;
     }
 
-    private ToolbarRepository() {
+    private CardRepository() {
         realm = Realm.getDefaultInstance();
     }
 

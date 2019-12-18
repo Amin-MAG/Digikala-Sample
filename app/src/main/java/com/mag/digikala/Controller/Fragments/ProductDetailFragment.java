@@ -14,13 +14,12 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.button.MaterialButton;
 import com.mag.digikala.Model.Adapter.SliderViewPagerAdapter;
-import com.mag.digikala.Model.CardProduct;
 import com.mag.digikala.Model.Product;
 import com.mag.digikala.Model.ProductImage;
 import com.mag.digikala.Network.RetrofitApi;
 import com.mag.digikala.Network.RetrofitInstance;
 import com.mag.digikala.R;
-import com.mag.digikala.Repository.ToolbarRepository;
+import com.mag.digikala.Repository.CardRepository;
 import com.mag.digikala.Var.Constants;
 
 import org.jsoup.Jsoup;
@@ -103,7 +102,7 @@ public class ProductDetailFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                ToolbarRepository.getInstance().addToCard(product);
+                CardRepository.getInstance().addToCard(product);
 
             }
         });
