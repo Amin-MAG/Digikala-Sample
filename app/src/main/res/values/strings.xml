@@ -58,5 +58,11 @@
     <string name="price_descending">قیمت از کم به زیاد</string>
     <string name="commit_card">خرید خود را نهایی کنید</string>
     <string name="card_sum">جمع کل خرید</string>
+    <string name="delete">حذف</string>
+    <string name="final_price">قیمت نهایی</string>
+    <string name="count">تعداد</string>
+    <string name="color">رنگ</string>
+    <string name="desscription">توضیحات</string>
+    <string name="title">عنوان</string>
 
 </resources>

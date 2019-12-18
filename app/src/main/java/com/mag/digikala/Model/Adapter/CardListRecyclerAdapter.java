@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mag.digikala.Model.Product;
 import com.mag.digikala.R;
+import com.squareup.picasso.Picasso;
+
+import org.jsoup.Jsoup;
 
 import java.util.List;
 
@@ -49,13 +53,16 @@ public class CardListRecyclerAdapter extends RecyclerView.Adapter<CardListRecycl
     public class CardListViewHolder extends RecyclerView.ViewHolder {
 
         private Product product;
-        private TextView productTitle;
+        private TextView productTitle, productDescription;
+        private ImageView productImage;
 
 
         public CardListViewHolder(@NonNull View itemView) {
             super(itemView);
 
             productTitle = itemView.findViewById(R.id.layout_card_list_item__title);
+            productDescription = itemView.findViewById(R.id.layout_card_list_item__description);
+            productImage = itemView.findViewById(R.id.layout_card_list_item__image);
 
         }
 
@@ -64,6 +71,8 @@ public class CardListRecyclerAdapter extends RecyclerView.Adapter<CardListRecycl
             this.product = product;
 
             productTitle.setText(product.getName());
+            productDescription.setText(Jsoup.parse(product.getShortDescription()).body().text());
+            Picasso.get().load(product.getImages()[0].getSrc()).placeholder(activity.getResources().getDrawable(R.drawable.place_holder)).into(productImage);
 
         }
 

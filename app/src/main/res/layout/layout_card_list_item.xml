@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="4dp"
+    android:layout_marginTop="8dp"
     android:orientation="vertical">
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <LinearLayout
@@ -21,7 +21,9 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.65"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="0.7"
                 android:orientation="vertical">
 
 
@@ -29,35 +31,54 @@
                     android:id="@+id/layout_card_list_item__title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="4dp"
                     android:gravity="right"
-                    android:text="TextView" />
+                    android:text="@string/title"
+                    android:textSize="14dp"
+                    app:fontFamily="@font/iran_yekan" />
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/layout_card_list_item__description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="4dp"
                     android:gravity="right"
-                    android:text="TextView" />
+                    android:text="@string/desscription"
+                    android:textSize="10dp"
+                    app:fontFamily="@font/iran_yekan" />
 
                 <TextView
                     android:id="@+id/textView5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="4dp"
                     android:gravity="right"
-                    android:text="TextView" />
+                    android:text="@string/color"
+                    android:textSize="10dp"
+                    app:fontFamily="@font/iran_yekan" />
 
                 <TextView
                     android:id="@+id/textView3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="4dp"
                     android:gravity="right"
-                    android:text="TextView" />
+                    android:text="@string/count"
+                    android:textSize="10dp"
+                    app:fontFamily="@font/iran_yekan" />
             </LinearLayout>
 
             <ImageView
+                android:id="@+id/layout_card_list_item__image"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.35"
+                android:layout_height="80dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="0.3"
                 android:src="@drawable/logo" />
 
 
@@ -66,53 +87,53 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@color/digikala_white">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
                 android:layout_weight="0.5"
                 android:gravity="left"
-                android:text="something" />
+                android:padding="2dp"
+                android:text="something"
+                android:textColor="@color/digikala_green"
+                android:textSize="12dp"
+                app:fontFamily="@font/iran_yekan" />
 
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
                 android:layout_weight="0.5"
                 android:gravity="right"
-                android:text="something" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:gravity="left"
-                android:text="something" />
-
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:gravity="right"
-                android:text="something" />
+                android:padding="2dp"
+                android:text="@string/final_price"
+                android:textColor="@color/digikala_green"
+                android:textSize="12dp"
+                app:fontFamily="@font/iran_yekan" />
 
         </LinearLayout>
 
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="4dp"
+            android:clickable="true"
+            android:focusable="true"
             android:gravity="left"
-            android:text="something" />
+            android:paddingLeft="12dp"
+            android:paddingTop="4dp"
+            android:paddingRight="12dp"
+            android:paddingBottom="4dp"
+            android:text="@string/delete"
+            android:textColor="@color/digikala_red"
+            app:fontFamily="@font/iran_yekan" />
 
 
     </LinearLayout>
