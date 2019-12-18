@@ -2,8 +2,11 @@ package com.mag.digikala.Controller;
 
 import android.app.Application;
 
+import com.mag.digikala.Model.CardProduct;
+
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
 
 public class ShopApplication extends Application {
 
@@ -21,6 +24,7 @@ public class ShopApplication extends Application {
                 .name("shop.realm")
                 .build();
         Realm.setDefaultConfiguration(realmAppConfiguration);
+
     }
 
 }

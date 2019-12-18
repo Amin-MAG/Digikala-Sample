@@ -10,13 +10,18 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.mag.digikala.R;
+
+import org.w3c.dom.Text;
 
 public class FilterToolbarFragment extends Fragment {
 
     public static final String ARG_SEARCH_STRING = "arg_search_string";
     private String searchString;
+
+    private TextView cardNumber;
 
     public static FilterToolbarFragment newInstance(String searchString) {
 
@@ -42,6 +47,7 @@ public class FilterToolbarFragment extends Fragment {
 
 
         searchString = getArguments().getString(ARG_SEARCH_STRING);
+
 
     }
 

@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:label">
-        <activity android:name=".CardActivity"></activity>
+        <activity android:name=".Controller.Activities.CardActivity"/>
         <activity android:name=".Controller.Activities.FilterActivity" />
         <activity android:name=".Controller.Activities.SearchActivity" />
         <activity android:name=".Controller.Activities.CategoryActivity" />

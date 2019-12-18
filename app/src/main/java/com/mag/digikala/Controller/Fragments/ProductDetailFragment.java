@@ -1,10 +1,7 @@
 package com.mag.digikala.Controller.Fragments;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,15 +13,11 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.mag.digikala.CardActivity;
+import com.mag.digikala.Controller.Activities.CardActivity;
 import com.mag.digikala.Model.Adapter.SliderViewPagerAdapter;
 import com.mag.digikala.Model.CardProduct;
 import com.mag.digikala.Model.Product;
 import com.mag.digikala.Model.ProductImage;
-import com.mag.digikala.Model.ProductsRepository;
 import com.mag.digikala.Network.RetrofitApi;
 import com.mag.digikala.Network.RetrofitInstance;
 import com.mag.digikala.R;
@@ -34,8 +27,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 
 import java.util.ArrayList;
-import java.util.List;
 
+import io.realm.Realm;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -45,6 +38,7 @@ public class ProductDetailFragment extends Fragment {
     public static final String ARG_MECHANDICE = "arg_mechandice";
     private Product product;
     private RetrofitApi retrofitApi;
+    private Realm realm;
 
     private TextView productName, productShortDescription, productDescription;
     private TextView productRegularPrice, productSalePrice;
@@ -66,6 +60,10 @@ public class ProductDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+//        result.deleteFromRealm();
 
         retrofitApi = RetrofitInstance.getInstance().create(RetrofitApi.class);
         retrofitApi.getProductById(getArguments().getString(ARG_MECHANDICE)).enqueue(new Callback<Product>() {
@@ -113,6 +111,15 @@ public class ProductDetailFragment extends Fragment {
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        realm.commitTransaction();
+        realm.close();
+
+    }
+
     private void saveJsonCardProductsToSharePreferences() {
 
 //        SharedPreferences cardSharePreferences = getActivity().getSharedPreferences(Constants.CARD_SHARE_PREFERENCE, Context.MODE_PRIVATE);
@@ -136,14 +143,46 @@ public class ProductDetailFragment extends Fragment {
 //
 //        cardSharePreferencesEditor.putString(product.getId(), jsonCardData);
 
-        updateCard();
+
+//        final int[] previousCount = new int[1];
+
+//        realm.executeTransaction(new Realm.Transaction() {
+//            @Override
+//            public void execute(Realm realm) {
+//                RealmResults<CardProduct> results = realm.where(CardProduct.class).findAll();
+//                for (CardProduct cp : results)
+//                    if (cp.getId().equals(product.getId())) {
+//                        previousCount[0] = cp.getCount();
+//                        break;
+//                    }
+//            }
+//        });
+
+
+
+        boolean productExistance = false;
+        for (CardProduct cp : realm.where(CardProduct.class).findAll()) {
+            if (cp.getProductId().equals(product.getId())) {
+                cp.setCount(cp.getCount() + 1);
+                productExistance = true;
+                break;
+            }
+        }
+
+        if (!productExistance) {
+            CardProduct object = realm.createObject(CardProduct.class, product.getId() + "_");
+            object.setCount(1);
+            object.setProductId(product.getId());
+        }
+
+
+        getActivity().startActivity(CardActivity.newIntent(getContext()));
 
     }
 
+
     private void updateCard() {
 
-//        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Constants.CARD_SHARE_PREFERENCE, Context.MODE_PRIVATE);
-//        for (int i = 0 ; i  <)
 
     }
 

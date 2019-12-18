@@ -194,6 +194,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
 
                 if (response.isSuccessful()) {
+                    Log.d("WWWWWTTF", "onFailure: " );
 
                     ProductsRepository.getInstance().setAllProducts(response.body());
                     requestToGetOfferedProducts();
@@ -205,6 +206,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<Product>> call, Throwable t) {
                 loadConncetionErrorSlide();
+
+                Log.d("WWWWWTTF", "onFailure: " + t.getMessage());
             }
 
         });
@@ -216,6 +219,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
 
                 if (response.isSuccessful()) {
+                    Log.d("WWWWWTTF", "onFailure: " );
 
                     ProductsRepository.getInstance().setOfferedProducts(response.body());
                     requestToGetTopRatingProducts();
@@ -227,6 +231,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<Product>> call, Throwable t) {
                 loadConncetionErrorSlide();
+                Log.d("WWWWWTTF", "onFailure: " + t.getMessage());
             }
 
         });

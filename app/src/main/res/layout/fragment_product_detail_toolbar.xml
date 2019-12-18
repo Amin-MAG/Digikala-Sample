@@ -31,6 +31,7 @@
                 app:iconSize="20dp" />
 
             <TextView
+                android:id="@+id/product_detail_toolbar_fragment__card_number"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="top|right"
@@ -38,7 +39,7 @@
                 android:layout_marginRight="12dp"
                 android:background="@drawable/cart_counter"
                 android:gravity="center"
-                android:text="3"
+                android:text="0"
                 android:textColor="@color/digikala_red"
                 android:textSize="12dp"
                 app:fontFamily="@font/far_trafc_bd" />

@@ -1,24 +1,37 @@
 package com.mag.digikala.Model;
 
-public class CardProduct {
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
-    private Product product;
+public class CardProduct extends RealmObject {
+
+    @PrimaryKey
+    private String id;
+    private String productId;
     private int count;
     private String color;
 
+    public CardProduct() {
+    }
 
-    public CardProduct(Product product, int count, String color) {
-        this.product = product;
-        this.count = count;
-        this.color = color;
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
     public void setCount(int count) {
         this.count = count;
     }
 
-    public Product getProduct() {
-        return product;
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getProductId() {
+        return productId;
     }
 
     public int getCount() {
@@ -28,4 +41,5 @@ public class CardProduct {
     public String getColor() {
         return color;
     }
+
 }

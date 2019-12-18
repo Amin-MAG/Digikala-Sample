@@ -3,6 +3,7 @@ package com.mag.digikala.Model;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Product implements Serializable {
 
@@ -10,6 +11,8 @@ public class Product implements Serializable {
     private String name;
     private ProductImage[] images;
     private String description;
+    @SerializedName("attributes")
+    private List<ProductAttribute> attributes;
     @SerializedName("short_description")
     private String shortDescription;
     // prices
