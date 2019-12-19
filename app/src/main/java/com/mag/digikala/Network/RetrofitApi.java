@@ -28,16 +28,16 @@ public interface RetrofitApi {
     Call<Product> getProductById(@Path("id") String productId);
 
     @GET(BASE_URL + "products" + WOOCOMMERCE_REST_AUTHENTICATION_KEY + "&per_page=100")
-    Call<List<Product>> searchProducts(@Query("search") String searchText);
+    Call<List<Product>> searchProducts(@Query("search") String searchText, @QueryMap Map<String,String> map);
 
     @GET(BASE_URL + "products" + WOOCOMMERCE_REST_AUTHENTICATION_KEY + "&on_sale=true")
     Call<List<Product>> getSaleProduct(@Query("per_page") int perPage, @Query("page") int numberOfPage);
 
     @GET(BASE_URL + "products" + WOOCOMMERCE_REST_AUTHENTICATION_KEY)
-    Call<List<Product>> getProducts(@QueryMap Map map);
+    Call<List<Product>> getProducts(@QueryMap Map<String,String> map);
 
     @GET(BASE_URL + "products" + WOOCOMMERCE_REST_AUTHENTICATION_KEY)
-    Call<List<Product>> getOrderedProducts(@Query("orderby") String attribute,@Query("per_page") int perPage, @Query("page") int numberOfPage);
+    Call<List<Product>> getOrderedProducts(@Query("orderby") String attribute, @Query("per_page") int perPage, @Query("page") int numberOfPage);
 
 
     // Categories //

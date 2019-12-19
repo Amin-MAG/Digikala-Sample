@@ -35,7 +35,7 @@
             android:textSize="11dp" />
 
         <RadioButton
-            android:id="@+id/sort_selection_dialog_fragment__price_ascending"
+            android:id="@+id/sort_selection_dialog_fragment__price_descending"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="@color/digikala_green"
@@ -47,7 +47,7 @@
             android:textSize="11dp" />
 
         <RadioButton
-            android:id="@+id/sort_selection_dialog_fragment__price_descending"
+            android:id="@+id/sort_selection_dialog_fragment__price_ascending"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="@color/digikala_green"
