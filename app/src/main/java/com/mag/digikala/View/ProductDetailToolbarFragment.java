@@ -12,6 +12,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.google.android.material.button.MaterialButton;
+import com.mag.digikala.Controller.Activities.CardActivity;
 import com.mag.digikala.R;
 import com.mag.digikala.Var.Constants;
 import com.mag.digikala.ViewModel.ProductDetailToolbarViewModel;
@@ -22,6 +24,7 @@ public class ProductDetailToolbarFragment extends Fragment {
     private ProductDetailToolbarViewModel viewModel;
 
     private TextView cardNumber;
+    private MaterialButton cardBtn, backBtn;
 
     public static ProductDetailToolbarFragment newInstance() {
 
@@ -67,10 +70,19 @@ public class ProductDetailToolbarFragment extends Fragment {
 
         findComponents(view);
 
+        setEvents();
+
+    }
+
+    private void setEvents() {
+        cardBtn.setOnClickListener(cardNumberView -> getActivity().startActivity(CardActivity.newIntent(getContext())));
+        backBtn.setOnClickListener(backBtnView -> getActivity().finish());
     }
 
     private void findComponents(@NonNull View view) {
         cardNumber = view.findViewById(R.id.product_detail_toolbar_fragment__card_number);
+        cardBtn = view.findViewById(R.id.product_detail_toolbar_fragment__cart_btn);
+        backBtn = view.findViewById(R.id.toolbar_fragment__back_btn);
     }
 
 }

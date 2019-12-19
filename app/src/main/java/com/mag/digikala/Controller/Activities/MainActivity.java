@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationView;
 import com.mag.digikala.Controller.Fragments.MainFragment;
 import com.mag.digikala.Model.ProductAttributesRepository;
+import com.mag.digikala.Repository.CardRepository;
 import com.mag.digikala.View.MainToolbarFragment;
 import com.mag.digikala.Model.Adapter.NavigationRecyclerAdapter;
 import com.mag.digikala.Model.Category;
@@ -41,6 +43,8 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+    private boolean backIsPressed = false;
+
     private ScrollView mainFrame;
     private FrameLayout toolbarFrame;
     private FrameLayout loadingFrame;
@@ -59,6 +63,12 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView;
 
     private RetrofitApi retrofitApi;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        backIsPressed = false;
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -123,12 +133,23 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void finish() {
+        if (backIsPressed)
+            super.finish();
+        else {
+            backIsPressed = true;
+            Toast.makeText(this, getResources().getString(R.string.press_again_for_exit), Toast.LENGTH_SHORT).show();
+        }
+    }
+
     @SuppressLint("CheckResult")
     private void retrofitConncetion() {
 
         retrofitApi = RetrofitInstance.getInstance().create(RetrofitApi.class);
         requestToGetProducts();
         requestToGetInitialAttributeData();
+        CardRepository.getInstance().loadInitialProduct();
 
     }
 
@@ -286,7 +307,7 @@ public class MainActivity extends AppCompatActivity {
 
                     List<ProductAttributesRepository.Attribute> defaultAttributes = new ArrayList<>();
 
-                    for(ProductAttributesRepository.Attribute attribute : response.body()) {
+                    for (ProductAttributesRepository.Attribute attribute : response.body()) {
                         ProductAttributesRepository.Attribute newAttribute = attribute;
                         retrofitApi.getTerms(newAttribute.getId()).enqueue(new Callback<List<ProductAttributesRepository.Term>>() {
                             @Override

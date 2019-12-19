@@ -41,6 +41,7 @@ public class CategoryActivity extends AppCompatActivity {
 
         if (commonToolbarFragment == null) {
             commonToolbarFragment = CommonToolbarFragment.newInstance(getResources().getString(R.string.category), () -> {
+                finish();
             });
             UiUtil.changeFragment(getSupportFragmentManager(), commonToolbarFragment, R.id.digikala_category__toolbar_frame, true, FRAGMENT_CATEGORY_COMMON_TOOLBAR);
         }

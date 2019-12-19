@@ -14,6 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.material.button.MaterialButton;
+import com.mag.digikala.Controller.Activities.CardActivity;
+import com.mag.digikala.Controller.Activities.SearchActivity;
 import com.mag.digikala.R;
 import com.mag.digikala.Var.Constants;
 import com.mag.digikala.ViewModel.FilteToolbarViewModel;
@@ -25,6 +28,8 @@ public class FilterToolbarFragment extends Fragment {
 
     public static final String ARG_SEARCH_STRING = "arg_search_string";
     private String searchString;
+
+    private MaterialButton searchBtn, cardBtn, backBtn;
     private TextView cardNumber;
 
     public static FilterToolbarFragment newInstance(String searchString) {
@@ -73,10 +78,19 @@ public class FilterToolbarFragment extends Fragment {
 
         findComponents(view);
 
+        backBtn.setOnClickListener(backBtnView -> getActivity().finish());
+
+        searchBtn.setOnClickListener(searchBtnView -> startActivity(SearchActivity.newIntent(getContext())));
+
+        cardBtn.setOnClickListener(cardBtnView -> startActivity(CardActivity.newIntent(getContext())));
+
     }
 
     private void findComponents(@NonNull View view) {
         cardNumber = view.findViewById(R.id.filter_toolbar_fragment__card_number);
+        backBtn = view.findViewById(R.id.filter_toolbar_fragment__back_btn);
+        cardBtn = view.findViewById(R.id.filter_toolbar_fragment__cart_btn);
+        searchBtn = view.findViewById(R.id.filter_toolbar_fragment__search_btn);
     }
 
 }

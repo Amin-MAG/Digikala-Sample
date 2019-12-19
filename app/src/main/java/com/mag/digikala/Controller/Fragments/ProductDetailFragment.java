@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,7 +17,9 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.button.MaterialButton;
 import com.mag.digikala.Controller.Activities.CardActivity;
 import com.mag.digikala.Model.Adapter.SliderViewPagerAdapter;
+import com.mag.digikala.Model.Adapter.SpinnerAdapter;
 import com.mag.digikala.Model.Product;
+import com.mag.digikala.Model.ProductAttributesRepository;
 import com.mag.digikala.Model.ProductImage;
 import com.mag.digikala.Network.RetrofitApi;
 import com.mag.digikala.Network.RetrofitInstance;
@@ -27,6 +31,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.realm.Realm;
 import retrofit2.Call;
@@ -45,6 +50,7 @@ public class ProductDetailFragment extends Fragment {
     private ViewPager slider;
     private MaterialButton cardBtn;
     private SliderViewPagerAdapter sliderAdapter;
+    private Spinner colorSpinner, sizeSpinner;
 
 
     public static ProductDetailFragment newInstance(String merchandiceId) {
@@ -80,14 +86,38 @@ public class ProductDetailFragment extends Fragment {
 
         findComponents(view);
 
+        setSpinners();
+
         cardBtn.setOnClickListener(view1 -> {
 
             CardRepository.getInstance().addToCard(product);
-
             getActivity().startActivity(CardActivity.newIntent(getContext()));
 
         });
 
+    }
+
+    private void setSpinners() {
+        List<String> spinnerColorArray = new ArrayList<>();
+        for (ProductAttributesRepository.Term term : ProductAttributesRepository.getInstance().getAttributeById("3").getTerms())
+            spinnerColorArray.add(term.getName());
+        SpinnerAdapter colorAdapter = new SpinnerAdapter(
+                getActivity(),
+                android.R.layout.simple_spinner_item,
+                spinnerColorArray
+        );
+        colorSpinner.setAdapter(colorAdapter);
+
+
+        List<String> spinnerSizeArray = new ArrayList<>();
+        for (ProductAttributesRepository.Term term : ProductAttributesRepository.getInstance().getAttributeById("4").getTerms())
+            spinnerSizeArray.add(term.getName());
+        SpinnerAdapter sizeAdapter = new SpinnerAdapter(
+                getActivity(),
+                android.R.layout.simple_spinner_item,
+                spinnerSizeArray
+        );
+        sizeSpinner.setAdapter(sizeAdapter);
     }
 
 
@@ -99,6 +129,8 @@ public class ProductDetailFragment extends Fragment {
         productSalePrice = view.findViewById(R.id.product_detail_fragment__product_sale_price);
         productDescription = view.findViewById(R.id.product_detail_fragment__product_long_description);
         cardBtn = view.findViewById(R.id.product_detail_fragment__card_btn);
+        colorSpinner = view.findViewById(R.id.product_detail_fragment__color_spinner);
+        sizeSpinner = view.findViewById(R.id.product_detail_fragment__size_spinner);
     }
 
     private void sliderInitializer() {

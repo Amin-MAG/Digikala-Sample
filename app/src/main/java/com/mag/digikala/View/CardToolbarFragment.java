@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.material.button.MaterialButton;
 import com.mag.digikala.R;
 import com.mag.digikala.Var.Constants;
 import com.mag.digikala.ViewModel.CardToolbarViewModel;
@@ -25,6 +26,7 @@ public class CardToolbarFragment extends Fragment {
     private CardToolbarViewModel viewModel;
 
     private TextView cardNumber, toolbarText;
+    private MaterialButton backBtn;
 
     public static CardToolbarFragment newInstance() {
 
@@ -34,8 +36,8 @@ public class CardToolbarFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-    
-    
+
+
     public CardToolbarFragment() {
     }
 
@@ -73,11 +75,14 @@ public class CardToolbarFragment extends Fragment {
 
         toolbarText.setText(getActivity().getResources().getString(R.string.cart));
 
+        backBtn.setOnClickListener(backBtnView -> getActivity().finish());
+
     }
 
     private void findComponents(@NonNull View view) {
         cardNumber = view.findViewById(R.id.card_toolbar_fragment__card_number);
         toolbarText = view.findViewById(R.id.card_toolbar_fragment__title);
+        backBtn = view.findViewById(R.id.card_toolbar_fragment__back_btn);
     }
 
 

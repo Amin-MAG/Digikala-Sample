@@ -1,5 +1,7 @@
 package com.mag.digikala.Model;
 
+import android.util.Log;
+
 import org.w3c.dom.Attr;
 
 import java.util.ArrayList;
@@ -26,6 +28,14 @@ public class ProductAttributesRepository {
 
     public void setAttributes(List<Attribute> attributes) {
         this.attributes = attributes;
+
+        for (Attribute attribute : attributes) {
+            Log.d("attributes", attribute.getName()  + " " + attribute.getId()+ " [ ");
+            for (Term term : attribute.getTerms())
+                Log.d("attributes", term.getName());
+
+            Log.d("attributes", " ] ");
+        }
     }
 
     public List<Attribute> getAttributes() {

@@ -67,5 +67,7 @@
     <string name="no_mode">بدون ترتیب</string>
     <string name="filter_default">رنگ، نوع، قیمت ...</string>
     <string name="fiter_product">فیلتر کردن محصولات</string>
+    <string name="size">سایز</string>
+    <string name="press_again_for_exit">برای خروج دوباره فشار دهید</string>
 
 </resources>

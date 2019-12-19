@@ -52,11 +52,11 @@
         android:gravity="center|right"
         android:text="TextView"
         android:textColor="@color/digikala_raw_white"
-        app:layout_constraintEnd_toStartOf="@+id/materialButton2"
+        app:layout_constraintEnd_toStartOf="@+id/card_toolbar_fragment__back_btn"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/materialButton2"
+        android:id="@+id/card_toolbar_fragment__back_btn"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="52dp"
         android:layout_height="60dp"

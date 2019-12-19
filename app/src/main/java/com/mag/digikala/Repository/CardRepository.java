@@ -111,6 +111,8 @@ public class CardRepository {
             object.setCount(1);
             object.setProductId(product.getId());
         }
+        if (realm.isInTransaction())
+            realm.commitTransaction();
         sumOfCardProducts.postValue(calculateSumOfCardProducts());
         numberOfCardProducts.postValue(realm.where(CardProduct.class).findAll().size());
     }
