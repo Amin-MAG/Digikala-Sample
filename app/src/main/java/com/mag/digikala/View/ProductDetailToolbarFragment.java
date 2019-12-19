@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.mag.digikala.R;
+import com.mag.digikala.Var.Constants;
 import com.mag.digikala.ViewModel.ProductDetailToolbarViewModel;
 
 
@@ -41,7 +42,12 @@ public class ProductDetailToolbarFragment extends Fragment {
         viewModel = ViewModelProviders.of(this).get(ProductDetailToolbarViewModel.class);
         viewModel.loadData();
         viewModel.getNumberOfCardProducts().observe(this, numberOfCardProducts -> {
-            cardNumber.setText(numberOfCardProducts.toString());
+            if (numberOfCardProducts == 0) {
+                cardNumber.setBackgroundColor(getResources().getColor(R.color.nothing));
+                cardNumber.setText(Constants.EMPTY_CHAR);
+            } else {
+                cardNumber.setText(String.valueOf(numberOfCardProducts));
+            }
         });
 
     }

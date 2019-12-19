@@ -10,8 +10,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
 import com.mag.digikala.Model.Product;
 import com.mag.digikala.R;
+import com.mag.digikala.Repository.CardRepository;
 import com.squareup.picasso.Picasso;
 
 import org.jsoup.Jsoup;
@@ -55,6 +57,7 @@ public class CardListRecyclerAdapter extends RecyclerView.Adapter<CardListRecycl
         private Product product;
         private TextView productTitle, productDescription, productCount, productPrice;
         private ImageView productImage;
+        private MaterialButton increaseBtn, decreaseBtn;
 
 
         public CardListViewHolder(@NonNull View itemView) {
@@ -65,6 +68,16 @@ public class CardListRecyclerAdapter extends RecyclerView.Adapter<CardListRecycl
             productImage = itemView.findViewById(R.id.layout_card_list_item__image);
             productCount = itemView.findViewById(R.id.layout_card_list_item__count);
             productPrice = itemView.findViewById(R.id.layout_card_list_item__price);
+            increaseBtn = itemView.findViewById(R.id.layout_card_list_item__increase);
+            decreaseBtn = itemView.findViewById(R.id.layout_card_list_item__decrease);
+
+            increaseBtn.setOnClickListener(view -> {
+                CardRepository.getInstance().increaseProductInCard(product);
+            });
+
+            decreaseBtn.setOnClickListener(view -> {
+                CardRepository.getInstance().decreaseProductInCard(product);
+            });
 
         }
 

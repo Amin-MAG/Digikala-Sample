@@ -35,25 +35,56 @@ public class CardRepository {
         numberOfCardProducts.postValue(realm.where(CardProduct.class).findAll().size());
     }
 
+
     public void addToCard(Product product) {
-
-        boolean productExistance = false;
-        for (CardProduct cp : realm.where(CardProduct.class).findAll()) {
-            if (cp.getProductId().equals(product.getId())) {
-                cp.setCount(cp.getCount() + 1);
-                productExistance = true;
-                break;
-            }
-        }
-
-        if (!productExistance) {
+        if (!increaseProductInCard(product)) {
             CardProduct object = realm.createObject(CardProduct.class, product.getId() + "_");
             object.setCount(1);
             object.setProductId(product.getId());
         }
-
         numberOfCardProducts.postValue(realm.where(CardProduct.class).findAll().size());
-
+        realm.commitTransaction();
     }
+
+    public boolean increaseProductInCard(Product product) {
+        if (!realm.isInTransaction())
+            realm.beginTransaction();
+        for (CardProduct cp : realm.where(CardProduct.class).findAll()) {
+            if (cp.getProductId().equals(product.getId())) {
+                cp.setCount(cp.getCount() + 1);
+                numberOfCardProducts.postValue(realm.where(CardProduct.class).findAll().size());
+                realm.commitTransaction();
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public void decreaseProductInCard(Product product) {
+        realm.beginTransaction();
+        for (CardProduct cp : realm.where(CardProduct.class).findAll()) {
+            if (cp.getProductId().equals(product.getId())) {
+                if (cp.getCount() - 1 == 0) {
+                    cp.deleteFromRealm();
+                } else {
+                    cp.setCount(cp.getCount() - 1);
+                }
+                numberOfCardProducts.postValue(realm.where(CardProduct.class).findAll().size());
+            }
+        }
+        realm.commitTransaction();
+    }
+
+    public void clearProductFromCard(Product product) {
+        for (CardProduct cp : realm.where(CardProduct.class).findAll()) {
+            if (cp.getProductId().equals(product.getId())) {
+                cp.deleteFromRealm();
+                break;
+            }
+        }
+        numberOfCardProducts.postValue(realm.where(CardProduct.class).findAll().size());
+    }
+
 
 }

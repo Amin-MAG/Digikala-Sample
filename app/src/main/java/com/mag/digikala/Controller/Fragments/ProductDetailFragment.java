@@ -61,7 +61,7 @@ public class ProductDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        realmInitialization();
+        realm = Realm.getDefaultInstance();
 
         retrofitApi = RetrofitInstance.getInstance().create(RetrofitApi.class);
 
@@ -90,15 +90,6 @@ public class ProductDetailFragment extends Fragment {
 
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-
-        realm.commitTransaction();
-        realm.close();
-
-    }
-
 
     private void findComponents(@NonNull View view) {
         slider = view.findViewById(R.id.product_detail_activity__view_pager);
@@ -118,10 +109,6 @@ public class ProductDetailFragment extends Fragment {
         slider.setAdapter(sliderAdapter);
     }
 
-    private void realmInitialization() {
-        realm = Realm.getDefaultInstance();
-        realm.beginTransaction();
-    }
 
     private void requestToGetProduct() {
         retrofitApi.getProductById(getArguments().getString(ARG_MECHANDICE)).enqueue(new Callback<Product>() {

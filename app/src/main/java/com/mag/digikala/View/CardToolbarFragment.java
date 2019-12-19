@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.mag.digikala.R;
+import com.mag.digikala.Var.Constants;
 import com.mag.digikala.ViewModel.CardToolbarViewModel;
 import com.mag.digikala.ViewModel.FilteToolbarViewModel;
 
@@ -45,7 +46,12 @@ public class CardToolbarFragment extends Fragment {
         viewModel = ViewModelProviders.of(this).get(CardToolbarViewModel.class);
         viewModel.loadData();
         viewModel.getNumberOfCardProducts().observe(this, numberOfCardProducts -> {
-            cardNumber.setText(numberOfCardProducts.toString());
+            if (numberOfCardProducts == 0) {
+                cardNumber.setBackgroundColor(getResources().getColor(R.color.nothing));
+                cardNumber.setText(Constants.EMPTY_CHAR);
+            } else {
+                cardNumber.setText(String.valueOf(numberOfCardProducts));
+            }
         });
 
     }

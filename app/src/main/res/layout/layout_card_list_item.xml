@@ -68,6 +68,7 @@
                     android:gravity="center|right">
 
                     <com.google.android.material.button.MaterialButton
+                        android:id="@+id/layout_card_list_item__decrease"
                         android:layout_width="44dp"
                         android:layout_height="match_parent"
                         android:layout_marginRight="12dp"
@@ -84,6 +85,7 @@
                         app:fontFamily="@font/iran_yekan" />
 
                     <com.google.android.material.button.MaterialButton
+                        android:id="@+id/layout_card_list_item__increase"
                         android:layout_width="44dp"
                         android:layout_height="31dp"
                         android:layout_marginRight="12dp"
