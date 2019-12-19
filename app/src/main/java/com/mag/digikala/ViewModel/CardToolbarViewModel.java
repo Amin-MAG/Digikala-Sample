@@ -27,7 +27,7 @@ public class CardToolbarViewModel extends AndroidViewModel {
     }
 
     public void loadData() {
-        repository.loadData();
+        repository.loadInitialData();
     }
 
 }

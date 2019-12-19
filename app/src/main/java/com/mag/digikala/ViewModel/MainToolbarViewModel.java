@@ -26,7 +26,7 @@ public class MainToolbarViewModel extends AndroidViewModel {
     }
 
     public void loadData() {
-        repository.loadData();
+        repository.loadInitialData();
     }
 
 }

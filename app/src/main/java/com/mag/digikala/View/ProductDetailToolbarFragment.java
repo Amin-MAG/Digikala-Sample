@@ -1,5 +1,6 @@
 package com.mag.digikala.View;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +47,9 @@ public class ProductDetailToolbarFragment extends Fragment {
                 cardNumber.setBackgroundColor(getResources().getColor(R.color.nothing));
                 cardNumber.setText(Constants.EMPTY_CHAR);
             } else {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    cardNumber.setBackground(getResources().getDrawable(R.drawable.cart_counter));
+                }
                 cardNumber.setText(String.valueOf(numberOfCardProducts));
             }
         });

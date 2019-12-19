@@ -6,8 +6,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.mag.digikala.Controller.Fragments.CardFragment;
-import com.mag.digikala.Controller.Fragments.CommonToolbarFragment;
+import com.mag.digikala.View.CardFragment;
 import com.mag.digikala.R;
 import com.mag.digikala.Util.UiUtil;
 import com.mag.digikala.View.CardToolbarFragment;

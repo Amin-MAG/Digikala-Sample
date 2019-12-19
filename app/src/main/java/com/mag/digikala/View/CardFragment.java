@@ -1,12 +1,12 @@
-package com.mag.digikala.Controller.Fragments;
+package com.mag.digikala.View;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -20,6 +20,9 @@ import com.mag.digikala.Model.Product;
 import com.mag.digikala.Network.RetrofitApi;
 import com.mag.digikala.Network.RetrofitInstance;
 import com.mag.digikala.R;
+import com.mag.digikala.Var.Constants;
+import com.mag.digikala.ViewModel.CardToolbarViewModel;
+import com.mag.digikala.ViewModel.CardViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,9 +35,7 @@ import retrofit2.Response;
 
 public class CardFragment extends Fragment {
 
-    private RetrofitApi retrofitApi;
-    private Realm realm;
-    private List<Product> productList = new ArrayList<>();
+    private CardViewModel viewModel;
 
     private RecyclerView recyclerView;
     private CardListRecyclerAdapter recyclerAdapter;
@@ -56,31 +57,15 @@ public class CardFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        realm = Realm.getDefaultInstance();
-        retrofitApi = RetrofitInstance.getInstance().create(RetrofitApi.class);
-        for (CardProduct cardProduct : realm.where(CardProduct.class).findAll()) {
-            retrofitApi.getProductById(cardProduct.getProductId()).enqueue(new Callback<Product>() {
-                @Override
-                public void onResponse(Call<Product> call, Response<Product> response) {
 
-                    if (response.isSuccessful()) {
-
-                        Product responseProduct = response.body();
-                        responseProduct.setCardCount(cardProduct.getCount());
-                        productList.add(responseProduct);
-                        setupAdapter();
-                        calculateSumOfCardProducts();
-
-                    }
-
-                }
-
-                @Override
-                public void onFailure(Call<Product> call, Throwable t) {
-
-                }
-            });
-        }
+        viewModel = ViewModelProviders.of(this).get(CardViewModel.class);
+        viewModel.loadData();
+//        viewModel.getSumOfCardProducts().observe(this, sum -> {
+//            sumOfCardProductText.setText(String.valueOf(sum));
+//        });
+        viewModel.getProducts().observe(this, productList -> {
+            setupAdapter(productList);
+        });
 
     }
 
@@ -95,7 +80,7 @@ public class CardFragment extends Fragment {
 
         findComponents(view);
 
-        recyclerAdapter = new CardListRecyclerAdapter(productList);
+        recyclerAdapter = new CardListRecyclerAdapter(new ArrayList<>());
         recyclerView.setAdapter(recyclerAdapter);
 
     }
@@ -105,28 +90,13 @@ public class CardFragment extends Fragment {
         sumOfCardProductText = view.findViewById(R.id.card_fragment__sum);
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
+    private void setupAdapter(List<Product> products) {
 
-        realm.close();
-
-    }
-
-    private void setupAdapter() {
-
-        recyclerAdapter.setProducts(productList);
+        recyclerAdapter.setProducts(products);
         recyclerAdapter.notifyDataSetChanged();
 
     }
 
-    private void calculateSumOfCardProducts() {
 
-        double sum = 0;
-        for (Product p : productList)
-            sum += p.getCardCount() * ((p.isOnSale() ? Double.parseDouble(p.getSalePrice()) : Double.parseDouble(p.getRegularPrice())));
-        sumOfCardProductText.setText(String.valueOf(sum));
-
-    }
 
 }
