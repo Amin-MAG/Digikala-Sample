@@ -28,7 +28,7 @@
                 app:cornerRadius="30dp"
                 app:icon="@drawable/ic_voice"
                 app:iconSize="20dp"
-                app:layout_constraintStart_toEndOf="@+id/fragement_search_toolbar__close_button"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:rippleColor="@color/digikala_gray" />
 
@@ -41,11 +41,12 @@
                 android:insetTop="0dp"
                 android:insetBottom="10dp"
 
+                android:visibility="invisible"
                 app:backgroundTint="@color/nothing"
                 app:cornerRadius="30dp"
                 app:icon="@drawable/ic_close"
                 app:iconSize="20dp"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/fragement_search_toolbar__voice_button"
                 app:layout_constraintTop_toTopOf="parent"
                 app:rippleColor="@color/digikala_gray" />
 
@@ -57,15 +58,14 @@
                 android:fontFamily="@font/iran_yekan"
                 android:gravity="right|center"
                 android:hint="@string/search_hint"
-                android:inputType="text"
                 android:imeOptions="actionSearch"
+                android:inputType="text"
                 android:textColor="@color/digikala_dark_blue_gray"
                 android:textColorHint="@color/digikala_light_gray"
                 android:textDirection="rtl"
                 android:textSize="12dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/fragement_search_toolbar__back_button"
-                app:layout_constraintStart_toEndOf="@+id/fragement_search_toolbar__voice_button"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.button.MaterialButton

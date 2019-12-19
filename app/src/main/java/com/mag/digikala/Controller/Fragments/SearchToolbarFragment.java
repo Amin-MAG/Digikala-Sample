@@ -71,13 +71,12 @@ public class SearchToolbarFragment extends Fragment {
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
 
-        closeSearchBtn.setOnClickListener(closeSearchBtnView->{
+        closeSearchBtn.setOnClickListener(closeSearchBtnView -> {
             searchEditTxt.setText(Constants.EMPTY_CHAR);
+            closeSearchBtn.setVisibility(View.GONE);
         });
 
-        backBtn.setOnClickListener(backBtnView->{
-            getActivity().finish();
-        });
+        backBtn.setOnClickListener(backBtnView -> getActivity().finish());
 
         searchEditTxt.setOnKeyListener((view, i, keyEvent) -> {
             if (searchEditTxt.getText().length() > 0) closeSearchBtn.setVisibility(View.VISIBLE);
