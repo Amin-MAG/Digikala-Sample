@@ -40,15 +40,15 @@ public class CardRepository {
 
     private MutableLiveData<List<Product>> productList = new MutableLiveData<>();
     private MutableLiveData<Integer> numberOfCardProducts = new MutableLiveData<>();
-//    private MutableLiveData<Double> sumOfCardProducts = new MutableLiveData<>();
+    private MutableLiveData<Double> sumOfCardProducts = new MutableLiveData<>();
 
     public MutableLiveData<Integer> getNumberOfCardProducts() {
         return numberOfCardProducts;
     }
 
-//    public MutableLiveData<Double> getSumOfCardProducts() {
-//        return sumOfCardProducts;
-//    }
+    public MutableLiveData<Double> getSumOfCardProducts() {
+        return sumOfCardProducts;
+    }
 
     public MutableLiveData<List<Product>> getProductList() {
         return productList;
@@ -65,13 +65,10 @@ public class CardRepository {
 
                         Product responseProduct = response.body();
                         responseProduct.setCardCount(cardProduct.getCount());
-                        if (!productList.getValue().contains(responseProduct)) {
-                            List<Product> newProduct = productList.getValue();
-                            newProduct.add(responseProduct);
-                            productList.postValue(newProduct);
-                        }
-//                        addToCard(responseProduct);
-//                        sumOfCardProducts.postValue(calculateSumOfCardProducts());
+                        List<Product> newProduct = productList.getValue();
+                        newProduct.add(responseProduct);
+                        productList.postValue(newProduct);
+                        sumOfCardProducts.postValue(calculateSumOfCardProducts());
                         Log.d("debug_for_products", "Retorit Reuqest: " + responseProduct.getName());
                         Log.d("debug_for_products", "Realm Data: " + realm.where(CardProduct.class).findAll());
 
@@ -86,36 +83,35 @@ public class CardRepository {
                 }
             });
         }
+        sumOfCardProducts.postValue(calculateSumOfCardProducts());
     }
 
     public void loadInitialData() {
         numberOfCardProducts.postValue(realm.where(CardProduct.class).findAll().size());
-//        sumOfCardProducts.postValue(calculateSumOfCardProducts());
     }
 
 
-//    private double calculateSumOfCardProducts() {
-//
-//        double sum = 0;
-//        if (productList.getValue() != null)
-//            for (Product p : productList.getValue())
-//                sum += p.getCardCount() * ((p.isOnSale() ? Double.parseDouble(p.getSalePrice()) : Double.parseDouble(p.getRegularPrice())));
-//        return sum;
-//
-//    }
+    private double calculateSumOfCardProducts() {
+
+        double sum = 0;
+        if (productList.getValue() != null)
+            for (Product p : productList.getValue())
+                sum += p.getCardCount() * ((p.isOnSale() ? Double.parseDouble(p.getSalePrice()) : Double.parseDouble(p.getRegularPrice())));
+        return sum;
+
+    }
 
 
     // Actions //
 
     public void addToCard(Product product) {
         if (!increaseProductInCard(product)) {
+            // Realm
             CardProduct object = realm.createObject(CardProduct.class, product.getId() + "_");
             object.setCount(1);
             object.setProductId(product.getId());
-//            productList.getValue().add(product);
-//            productList.postValue(productList.getValue());
         }
-//        sumOfCardProducts.postValue(calculateSumOfCardProducts());
+        sumOfCardProducts.postValue(calculateSumOfCardProducts());
         numberOfCardProducts.postValue(realm.where(CardProduct.class).findAll().size());
     }
 
@@ -125,7 +121,13 @@ public class CardRepository {
         for (CardProduct cp : realm.where(CardProduct.class).findAll()) {
             if (cp.getProductId().equals(product.getId())) {
                 cp.setCount(cp.getCount() + 1);
-//                sumOfCardProducts.postValue(calculateSumOfCardProducts());
+                // Change
+                List<Product> newProduct = productList.getValue();
+                for (Product p : newProduct)
+                    if (p.getId().equals(product.getId()))
+                        product.setCardCount(product.getCardCount() + 1);
+                productList.postValue(newProduct);
+                sumOfCardProducts.postValue(calculateSumOfCardProducts());
                 numberOfCardProducts.postValue(realm.where(CardProduct.class).findAll().size());
                 realm.commitTransaction();
                 return true;
@@ -140,13 +142,22 @@ public class CardRepository {
         for (CardProduct cp : realm.where(CardProduct.class).findAll()) {
             if (cp.getProductId().equals(product.getId())) {
                 if (cp.getCount() - 1 == 0) {
+                    // Realm
                     cp.deleteFromRealm();
+                    // Post List
+                    List<Product> newProduct = productList.getValue();
+                    newProduct.remove(product);
+                    productList.postValue(newProduct);
                 } else {
                     cp.setCount(cp.getCount() - 1);
+                    // Change
+                    List<Product> newProduct = productList.getValue();
+                    for (Product p : newProduct)
+                        if (p.getId().equals(product.getId()))
+                            product.setCardCount(product.getCardCount() - 1);
+                    productList.postValue(newProduct);
                 }
-//                productList.getValue().remove(product);
-//                productList.postValue(productList.getValue());
-//                sumOfCardProducts.postValue(calculateSumOfCardProducts());
+                sumOfCardProducts.postValue(calculateSumOfCardProducts());
                 numberOfCardProducts.postValue(realm.where(CardProduct.class).findAll().size());
             }
         }
@@ -154,14 +165,25 @@ public class CardRepository {
     }
 
     public void clearProductFromCard(Product product) {
+        realm.beginTransaction();
         for (CardProduct cp : realm.where(CardProduct.class).findAll()) {
             if (cp.getProductId().equals(product.getId())) {
+                // Realm
                 cp.deleteFromRealm();
+                // Change
+                List<Product> newProduct = productList.getValue();
+                for (int i = 0; i < newProduct.size(); i++)
+                    if (newProduct.get(i).getId().equals(product.getId())) {
+                        newProduct.remove(i);
+                        break;
+                    }
+                productList.postValue(newProduct);
                 break;
             }
         }
-//        sumOfCardProducts.postValue(calculateSumOfCardProducts());
+        sumOfCardProducts.postValue(calculateSumOfCardProducts());
         numberOfCardProducts.postValue(realm.where(CardProduct.class).findAll().size());
+        realm.commitTransaction();
     }
 
 

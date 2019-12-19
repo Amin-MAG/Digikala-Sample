@@ -8,9 +8,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
+import com.mag.digikala.Controller.Activities.ProductDetailActivity;
 import com.mag.digikala.Model.Product;
 import com.mag.digikala.R;
 import com.mag.digikala.Repository.CardRepository;
@@ -55,14 +57,22 @@ public class CardListRecyclerAdapter extends RecyclerView.Adapter<CardListRecycl
     public class CardListViewHolder extends RecyclerView.ViewHolder {
 
         private Product product;
+        private CardView cardView;
         private TextView productTitle, productDescription, productCount, productPrice;
         private ImageView productImage;
         private MaterialButton increaseBtn, decreaseBtn;
-
+        private MaterialButton clearBtn;
 
         public CardListViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            findItems(itemView);
+
+            setEvents();
+
+        }
+
+        private void findItems(@NonNull View itemView) {
             productTitle = itemView.findViewById(R.id.layout_card_list_item__title);
             productDescription = itemView.findViewById(R.id.layout_card_list_item__description);
             productImage = itemView.findViewById(R.id.layout_card_list_item__image);
@@ -70,7 +80,11 @@ public class CardListRecyclerAdapter extends RecyclerView.Adapter<CardListRecycl
             productPrice = itemView.findViewById(R.id.layout_card_list_item__price);
             increaseBtn = itemView.findViewById(R.id.layout_card_list_item__increase);
             decreaseBtn = itemView.findViewById(R.id.layout_card_list_item__decrease);
+            clearBtn = itemView.findViewById(R.id.layout_card_list_item__delete);
+            cardView = itemView.findViewById(R.id.layout_card_list_item__card_view);
+        }
 
+        private void setEvents() {
             increaseBtn.setOnClickListener(view -> {
                 CardRepository.getInstance().increaseProductInCard(product);
             });
@@ -79,6 +93,13 @@ public class CardListRecyclerAdapter extends RecyclerView.Adapter<CardListRecycl
                 CardRepository.getInstance().decreaseProductInCard(product);
             });
 
+            clearBtn.setOnClickListener(view -> {
+                CardRepository.getInstance().clearProductFromCard(product);
+            });
+
+            cardView.setOnClickListener(view -> {
+                activity.startActivity(ProductDetailActivity.newIntent(activity, product.getId()));
+            });
         }
 
         public void bind(Product product) {

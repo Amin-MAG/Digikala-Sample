@@ -23,7 +23,7 @@ public class CardViewModel extends AndroidViewModel {
         super(application);
 
         repository = CardRepository.getInstance();
-//        sumOfCardProducts = repository.getSumOfCardProducts();
+        sumOfCardProducts = repository.getSumOfCardProducts();
         products = repository.getProductList();
 
 
@@ -32,9 +32,9 @@ public class CardViewModel extends AndroidViewModel {
     }
 
 
-//    public MutableLiveData<Double> getSumOfCardProducts() {
-//        return sumOfCardProducts;
-//    }
+    public MutableLiveData<Double> getSumOfCardProducts() {
+        return sumOfCardProducts;
+    }
 
     public MutableLiveData<List<Product>> getProducts() {
         return products;

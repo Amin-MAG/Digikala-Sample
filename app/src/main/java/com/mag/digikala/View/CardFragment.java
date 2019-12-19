@@ -60,9 +60,9 @@ public class CardFragment extends Fragment {
 
         viewModel = ViewModelProviders.of(this).get(CardViewModel.class);
         viewModel.loadData();
-//        viewModel.getSumOfCardProducts().observe(this, sum -> {
-//            sumOfCardProductText.setText(String.valueOf(sum));
-//        });
+        viewModel.getSumOfCardProducts().observe(this, sum -> {
+            sumOfCardProductText.setText(String.valueOf(sum));
+        });
         viewModel.getProducts().observe(this, productList -> {
             setupAdapter(productList);
         });
