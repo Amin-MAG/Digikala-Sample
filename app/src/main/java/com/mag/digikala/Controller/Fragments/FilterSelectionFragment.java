@@ -55,8 +55,8 @@ public class FilterSelectionFragment extends Fragment {
 
         findComponents(view);
 
-        attributesRecyclerAdapter = new FilterSelectionAttributesRecyclerAdapter(ProductAttributesRepository.getInstance().getAttributes(), ()->{
-            termsRecyclerAdapter = new FilterSelectionTermsRecyclerAdapter(attributesRecyclerAdapter.getSelected().getTerms());
+        attributesRecyclerAdapter = new FilterSelectionAttributesRecyclerAdapter(ProductAttributesRepository.getInstance().getAttributes(), () -> {
+            termsRecyclerAdapter = new FilterSelectionTermsRecyclerAdapter(attributesRecyclerAdapter.getSelected());
             termsRecycler.setAdapter(termsRecyclerAdapter);
         });
         attrRecycler.setAdapter(attributesRecyclerAdapter);

@@ -1,5 +1,8 @@
 package com.mag.digikala.Model;
 
+import org.w3c.dom.Attr;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductAttributesRepository {
@@ -21,12 +24,19 @@ public class ProductAttributesRepository {
 
     private List<Attribute> attributes;
 
+    public void setAttributes(List<Attribute> attributes) {
+        this.attributes = attributes;
+    }
+
     public List<Attribute> getAttributes() {
         return attributes;
     }
 
-    public void setAttributes(List<Attribute> attributes) {
-        this.attributes = attributes;
+    public Attribute getAttributeById(String id) {
+        for (Attribute attribute : attributes)
+            if (attribute.getId().equals(id))
+                return attribute;
+        return null;
     }
 
     public class Attribute {
@@ -35,9 +45,11 @@ public class ProductAttributesRepository {
         private String name;
         private String slug;
         private List<Term> terms;
+        private List<Term> selectedTerms;
 
         public void setTerms(List<Term> terms) {
             this.terms = terms;
+            selectedTerms = new ArrayList<>();
         }
 
 
@@ -57,6 +69,18 @@ public class ProductAttributesRepository {
             return terms;
         }
 
+        public void addToSelected(Term term) {
+            selectedTerms.add(term);
+        }
+
+        public void removeFromSelected(Term term) {
+            if (selectedTerms.contains(term))
+                selectedTerms.remove(term);
+        }
+
+        public List<Term> getSelectedTerms() {
+            return selectedTerms;
+        }
     }
 
     public class Term {

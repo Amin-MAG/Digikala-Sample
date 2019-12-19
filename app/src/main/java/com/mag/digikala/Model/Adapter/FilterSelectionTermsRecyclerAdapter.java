@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,10 +17,12 @@ import java.util.List;
 public class FilterSelectionTermsRecyclerAdapter extends RecyclerView.Adapter<FilterSelectionTermsRecyclerAdapter.FilterSelectionOptionsRecyclerViewHolder> {
 
     private Activity activity;
+    private ProductAttributesRepository.Attribute attribute;
     private List<ProductAttributesRepository.Term> terms;
 
-    public FilterSelectionTermsRecyclerAdapter(List<ProductAttributesRepository.Term> terms) {
-        this.terms = terms;
+    public FilterSelectionTermsRecyclerAdapter(ProductAttributesRepository.Attribute attribute) {
+        this.attribute = attribute;
+        this.terms = attribute.getTerms();
     }
 
     @NonNull
@@ -43,18 +45,35 @@ public class FilterSelectionTermsRecyclerAdapter extends RecyclerView.Adapter<Fi
 
     public class FilterSelectionOptionsRecyclerViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView optionText;
+        ProductAttributesRepository.Term term;
+        private CheckBox termCheckedBox;
 
         public FilterSelectionOptionsRecyclerViewHolder(@NonNull View itemView) {
 
             super(itemView);
 
-            optionText = itemView.findViewById(R.id.layout_filter_selection_options_list_item__option);
+            termCheckedBox = itemView.findViewById(R.id.layout_filter_selection_options_list_item__option);
+
+            termCheckedBox.setOnClickListener(view -> {
+                if (termCheckedBox.isChecked())
+                    ProductAttributesRepository.getInstance().getAttributeById(attribute.getId()).addToSelected(term);
+                else
+                    ProductAttributesRepository.getInstance().getAttributeById(attribute.getId()).removeFromSelected(term);
+
+                notifyDataSetChanged();
+            });
 
         }
 
         private void bind(ProductAttributesRepository.Term term) {
-            optionText.setText(term.getName());
+            this.term = term;
+            termCheckedBox.setText(term.getName());
+
+            if (ProductAttributesRepository.getInstance().getAttributeById(attribute.getId()).getSelectedTerms().contains(term))
+                termCheckedBox.setChecked(true);
+            else
+                termCheckedBox.setChecked(false);
+
         }
 
     }
