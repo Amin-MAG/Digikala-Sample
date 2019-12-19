@@ -65,5 +65,6 @@
     <string name="desscription">توضیحات</string>
     <string name="title">عنوان</string>
     <string name="no_mode">بدون ترتیب</string>
+    <string name="filter_default">رنگ، نوع، قیمت ...</string>
 
 </resources>

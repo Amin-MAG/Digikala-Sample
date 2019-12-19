@@ -1,5 +1,4 @@
 - Phase2
-+ Sort in filter page
 + Filter in filter page
 + Special Products First Page
 + MVVM

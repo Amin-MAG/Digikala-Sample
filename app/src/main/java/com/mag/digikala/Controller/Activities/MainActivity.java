@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationView;
 import com.mag.digikala.Controller.Fragments.MainFragment;
+import com.mag.digikala.Model.ProductAttributesRepository;
 import com.mag.digikala.View.MainToolbarFragment;
 import com.mag.digikala.Model.Adapter.NavigationRecyclerAdapter;
 import com.mag.digikala.Model.Category;
@@ -29,6 +30,7 @@ import com.mag.digikala.Network.RetrofitInstance;
 import com.mag.digikala.R;
 import com.mag.digikala.Util.UiUtil;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -126,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
 
         retrofitApi = RetrofitInstance.getInstance().create(RetrofitApi.class);
         requestToGetProducts();
+        requestToGetInitialAttributeData();
 
     }
 
@@ -166,7 +169,6 @@ public class MainActivity extends AppCompatActivity {
                      */
                     for (int i = 0; i < responseList.size(); i++) {
                         if (!(thisLoopCategory = responseList.get(i)).getParentId().equals("0")) {
-                            Log.e("AAADDD", thisLoopCategory.getParentId() + "");
                             if ((thisLoopCategoryGroup = categoryGroups.get(thisLoopCategory.getParentId())) != null)
                                 thisLoopCategoryGroup.addCategory(thisLoopCategory);
                         }
@@ -194,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
 
                 if (response.isSuccessful()) {
-                    Log.d("WWWWWTTF", "onFailure: " );
+                    Log.d("WWWWWTTF", "onFailure: ");
 
                     ProductsRepository.getInstance().setAllProducts(response.body());
                     requestToGetOfferedProducts();
@@ -219,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
 
                 if (response.isSuccessful()) {
-                    Log.d("WWWWWTTF", "onFailure: " );
+                    Log.d("WWWWWTTF", "onFailure: ");
 
                     ProductsRepository.getInstance().setOfferedProducts(response.body());
                     requestToGetTopRatingProducts();
@@ -259,7 +261,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void requestToGetPopularProducts() {
-        retrofitApi.getOrderedProducts("popularity",8,1).enqueue(new Callback<List<Product>>() {
+        retrofitApi.getOrderedProducts("popularity", 8, 1).enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
 
@@ -273,6 +275,51 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void requestToGetInitialAttributeData() {
+        retrofitApi.getAttributes().enqueue(new Callback<List<ProductAttributesRepository.Attribute>>() {
+            @Override
+            public void onResponse(Call<List<ProductAttributesRepository.Attribute>> call, Response<List<ProductAttributesRepository.Attribute>> response) {
+
+                if (response.isSuccessful()) {
+
+                    List<ProductAttributesRepository.Attribute> defaultAttributes = new ArrayList<>();
+
+                    for(ProductAttributesRepository.Attribute attribute : response.body()) {
+                        ProductAttributesRepository.Attribute newAttribute = attribute;
+                        retrofitApi.getTerms(newAttribute.getId()).enqueue(new Callback<List<ProductAttributesRepository.Term>>() {
+                            @Override
+                            public void onResponse(Call<List<ProductAttributesRepository.Term>> call, Response<List<ProductAttributesRepository.Term>> response) {
+
+                                if (response.isSuccessful()) {
+
+                                    newAttribute.setTerms(response.body());
+                                    defaultAttributes.add(newAttribute);
+                                    ProductAttributesRepository.getInstance().setAttributes(defaultAttributes);
+
+                                }
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<List<ProductAttributesRepository.Term>> call, Throwable t) {
+
+                            }
+                        });
+
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<ProductAttributesRepository.Attribute>> call, Throwable t) {
+
+            }
+        });
+
     }
 
 

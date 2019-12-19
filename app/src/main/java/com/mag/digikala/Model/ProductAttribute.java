@@ -2,7 +2,7 @@ package com.mag.digikala.Model;
 
 import java.util.List;
 
-class ProductAttribute {
+public class ProductAttribute {
 
     private String id;
     private String name;

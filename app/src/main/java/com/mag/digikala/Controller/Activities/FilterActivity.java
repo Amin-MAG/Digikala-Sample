@@ -7,16 +7,18 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.mag.digikala.Controller.Fragments.FilterFragment;
+import com.mag.digikala.Controller.Fragments.FilterSelectionFragment;
 import com.mag.digikala.View.FilterToolbarFragment;
 import com.mag.digikala.R;
 import com.mag.digikala.Util.UiUtil;
 
-public class FilterActivity extends AppCompatActivity {
+public class FilterActivity extends AppCompatActivity implements FilterFragment.FilterSelectionCallBack {
 
     public static final String EXTRA_SEARCH_STRING = "extra_search_string";
     public static final String EXTRA_CATEGORY_ID = "extra_category_id";
     private FilterToolbarFragment filterToolbarFragment;
     private FilterFragment filterFragment;
+    private FilterSelectionFragment filterSelectionFragment;
 
     public static Intent newIntent(Context context, String searchString, String categoryId) {
         Intent intent = new Intent(context, FilterActivity.class);
@@ -42,7 +44,17 @@ public class FilterActivity extends AppCompatActivity {
         }
 
 
+
     }
 
+    @Override
+    public void showPage() {
+
+        if (filterSelectionFragment == null) {
+            filterSelectionFragment = FilterSelectionFragment.newInstance();
+            UiUtil.changeFragment(getSupportFragmentManager(), filterSelectionFragment, R.id.filter_activity__main_frame, true, EXTRA_SEARCH_STRING);
+        }
+
+    }
 
 }

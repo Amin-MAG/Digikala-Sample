@@ -1,21 +1,24 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/digikala_dark_white"
-    android:orientation="vertical"
     android:weightSum="1.0">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/filter_fragment__sorting_constrain_layout"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="48dp"
             android:layout_weight="0.5"
             android:background="@color/digikala_raw_white"
             android:padding="4dp">
@@ -35,7 +38,7 @@
                 android:id="@+id/textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="4dp"
                 android:gravity="center"
                 android:text="@string/sort"
                 android:textSize="10dp"
@@ -50,7 +53,6 @@
                 android:layout_width="0dp"
                 android:layout_height="13dp"
                 android:gravity="center"
-                android:text="something"
                 android:textSize="8dp"
                 app:fontFamily="@font/iran_yekan"
                 app:layout_constraintEnd_toStartOf="@+id/imageView"
@@ -76,7 +78,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/filter_fragment__filter_constrain_layout"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="48dp"
             android:layout_weight="0.5"
             android:background="@color/digikala_raw_white"
             android:padding="4dp">
@@ -97,7 +99,7 @@
                 android:id="@+id/textView2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="4dp"
                 android:gravity="center"
                 android:text="@string/filter"
                 android:textSize="10dp"
@@ -108,10 +110,10 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/filter_fragment__filter_mode"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="something"
                 android:textSize="8dp"
                 app:fontFamily="@font/iran_yekan"
                 app:layout_constraintEnd_toStartOf="@+id/imageView2"
@@ -126,10 +128,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/filter_fragment__recycler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
+        android:layout_height="0dp"
         android:background="@color/digikala_dark_white"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        tools:layout_editor_absoluteX="-16dp" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

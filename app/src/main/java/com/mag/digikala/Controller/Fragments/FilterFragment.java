@@ -1,6 +1,7 @@
 package com.mag.digikala.Controller.Fragments;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -44,6 +45,7 @@ public class FilterFragment extends Fragment {
     String categoryid;
     private List<Category> searchItem;
     private RetrofitApi retrofitApi;
+    private FilterSelectionCallBack filterSelectionCallBack;
 
     public static enum SORT_MODE {
         SORT_BY_VIEW(0), SORT_BY_SELL(1), SORT_BY_PRICE_ASCENDING(2), SORT_BY_PRICE_DESCENDING(3), SORT_BY_NEWEST(4);
@@ -61,6 +63,7 @@ public class FilterFragment extends Fragment {
     }
 
     private TextView sortMode;
+    private TextView filterMode;
     private RecyclerView filterRecycler;
     private FilterListAdapter filterListAdapter;
     private ConstraintLayout sortingLayout;
@@ -75,6 +78,15 @@ public class FilterFragment extends Fragment {
         FilterFragment fragment = new FilterFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if (getActivity() instanceof FilterSelectionCallBack)
+            filterSelectionCallBack = (FilterSelectionCallBack) getActivity();
+
     }
 
     @Override
@@ -116,21 +128,27 @@ public class FilterFragment extends Fragment {
         findConponents(view);
 
         sortMode.setText(getResources().getString(R.string.no_mode));
-        filterListAdapter = new FilterListAdapter(new ArrayList<Product>());
+        filterMode.setText(R.string.filter_default);
+        filterListAdapter = new FilterListAdapter(new ArrayList<>());
         filterRecycler.setAdapter(filterListAdapter);
 
-        sortingLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SortSelectionDialogFragment sortSelectionDialogFragment = SortSelectionDialogFragment.newInstance();
-                sortSelectionDialogFragment.setTargetFragment(FilterFragment.this, REQUEST_CODE_FOR_SORT_DIALOG);
-                sortSelectionDialogFragment.show(getFragmentManager(), SORT_SELECTION_DIALOG_FRAGMENT);
-            }
-        });
+        setEvents();
 
         initialSearchRequest();
 
 
+    }
+
+    private void setEvents() {
+        filterLayout.setOnClickListener(filterModeView->{
+            filterSelectionCallBack.showPage();;
+        });
+
+        sortingLayout.setOnClickListener(sortingModeView -> {
+            SortSelectionDialogFragment sortSelectionDialogFragment = SortSelectionDialogFragment.newInstance();
+            sortSelectionDialogFragment.setTargetFragment(FilterFragment.this, REQUEST_CODE_FOR_SORT_DIALOG);
+            sortSelectionDialogFragment.show(getFragmentManager(), SORT_SELECTION_DIALOG_FRAGMENT);
+        });
     }
 
     private void initialSearchRequest() {
@@ -171,6 +189,7 @@ public class FilterFragment extends Fragment {
         filterLayout = view.findViewById(R.id.filter_fragment__filter_constrain_layout);
         sortingLayout = view.findViewById(R.id.filter_fragment__sorting_constrain_layout);
         sortMode = view.findViewById(R.id.filter_fragment__sort_mode);
+        filterMode = view.findViewById(R.id.filter_fragment__filter_mode);
     }
 
     private void sortPage(SORT_MODE mode) {
@@ -235,6 +254,10 @@ public class FilterFragment extends Fragment {
             }
         });
 
+    }
+
+    public interface FilterSelectionCallBack {
+        void showPage();
     }
 
 }

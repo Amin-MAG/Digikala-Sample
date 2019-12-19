@@ -82,4 +82,8 @@ public class Product implements Serializable {
         return  cardCount;
     }
 
+    public List<ProductAttribute> getAttributes() {
+        return attributes;
+    }
+
 }
