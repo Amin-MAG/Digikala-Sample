@@ -141,7 +141,7 @@ public class FilterFragment extends Fragment {
 
     private void setEvents() {
         filterLayout.setOnClickListener(filterModeView->{
-            filterSelectionCallBack.showPage();;
+            filterSelectionCallBack.showFitlerSelectionPage();;
         });
 
         sortingLayout.setOnClickListener(sortingModeView -> {
@@ -257,7 +257,7 @@ public class FilterFragment extends Fragment {
     }
 
     public interface FilterSelectionCallBack {
-        void showPage();
+        void showFitlerSelectionPage();
     }
 
 }
