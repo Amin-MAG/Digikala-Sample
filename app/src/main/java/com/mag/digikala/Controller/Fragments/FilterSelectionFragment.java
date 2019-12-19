@@ -20,24 +20,26 @@ import com.mag.digikala.R;
 
 public class FilterSelectionFragment extends Fragment {
 
+    private FilterSelectionFragmentCallBack callBack;
+
     private RecyclerView attrRecycler;
     private RecyclerView termsRecycler;
     private FilterSelectionAttributesRecyclerAdapter attributesRecyclerAdapter;
     private FilterSelectionTermsRecyclerAdapter termsRecyclerAdapter;
     private MaterialButton filterBtn;
 
-    public static FilterSelectionFragment newInstance() {
+    public static FilterSelectionFragment newInstance(FilterSelectionFragmentCallBack callBack) {
 
         Bundle args = new Bundle();
 
-        FilterSelectionFragment fragment = new FilterSelectionFragment();
+        FilterSelectionFragment fragment = new FilterSelectionFragment(callBack);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public FilterSelectionFragment() {
+    public FilterSelectionFragment(FilterSelectionFragmentCallBack callBack) {
+        this.callBack = callBack;
     }
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,6 +63,8 @@ public class FilterSelectionFragment extends Fragment {
         });
         attrRecycler.setAdapter(attributesRecyclerAdapter);
 
+        filterBtn.setOnClickListener(filterBtnView -> callBack.filter());
+
     }
 
     private void findComponents(@NonNull View view) {
@@ -69,5 +73,8 @@ public class FilterSelectionFragment extends Fragment {
         filterBtn = view.findViewById(R.id.filter_selection_fragment__filter_btn);
     }
 
+    public interface FilterSelectionFragmentCallBack {
+        void filter();
+    }
 
 }

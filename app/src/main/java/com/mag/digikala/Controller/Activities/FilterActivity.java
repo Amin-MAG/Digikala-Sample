@@ -60,7 +60,10 @@ public class FilterActivity extends AppCompatActivity implements FilterFragment.
 
 
         if (filterSelectionFragment == null)
-            filterSelectionFragment = FilterSelectionFragment.newInstance();
+            filterSelectionFragment = FilterSelectionFragment.newInstance(() -> {
+                showFilterPage();
+                filterFragment.filter();
+            });
         UiUtil.changeFragment(getSupportFragmentManager(), filterSelectionFragment, R.id.filter_activity__main_frame, true, EXTRA_SEARCH_STRING);
 
 

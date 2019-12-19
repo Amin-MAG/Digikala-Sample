@@ -40,6 +40,9 @@ public interface RetrofitApi {
     @GET(BASE_URL + "products" + WOOCOMMERCE_REST_AUTHENTICATION_KEY)
     Call<List<Product>> getOrderedProducts(@Query("orderby") String attribute, @Query("per_page") int perPage, @Query("page") int numberOfPage);
 
+    @GET(BASE_URL + "products" + WOOCOMMERCE_REST_AUTHENTICATION_KEY)
+    Call<List<Product>> getFilteredProducts(@Query("attribute") String attribute, @Query("attribute_term") String terms);
+
     // Attributes
 
     @GET(BASE_URL + "products/attributes" + WOOCOMMERCE_REST_AUTHENTICATION_KEY + "&per_page=20")
@@ -47,7 +50,6 @@ public interface RetrofitApi {
 
     @GET(BASE_URL + "products/attributes/{id}/terms" + WOOCOMMERCE_REST_AUTHENTICATION_KEY + "&per_page=20")
     Call<List<ProductAttributesRepository.Term>> getTerms(@Path("id") String id);
-
 
     // Categories //
 

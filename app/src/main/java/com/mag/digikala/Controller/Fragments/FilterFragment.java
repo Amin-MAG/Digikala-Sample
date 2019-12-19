@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.mag.digikala.Model.Adapter.FilterListAdapter;
 import com.mag.digikala.Model.Category;
 import com.mag.digikala.Model.Product;
+import com.mag.digikala.Model.ProductAttributesRepository;
 import com.mag.digikala.Network.RetrofitApi;
 import com.mag.digikala.Network.RetrofitInstance;
 import com.mag.digikala.R;
@@ -140,8 +141,9 @@ public class FilterFragment extends Fragment {
     }
 
     private void setEvents() {
-        filterLayout.setOnClickListener(filterModeView->{
-            filterSelectionCallBack.showFitlerSelectionPage();;
+        filterLayout.setOnClickListener(filterModeView -> {
+            filterSelectionCallBack.showFitlerSelectionPage();
+            ;
         });
 
         sortingLayout.setOnClickListener(sortingModeView -> {
@@ -182,6 +184,44 @@ public class FilterFragment extends Fragment {
             }
 
         });
+    }
+
+    public void filter() {
+        String terms = "";
+        List<ProductAttributesRepository.Term> selectedTerms = ProductAttributesRepository.getInstance().getAttributeById("4").getSelectedTerms();
+        for (int i = 0; i < selectedTerms.size(); i++) {
+            if (i != 0) terms += ",";
+            terms += selectedTerms.get(i).getSlug();
+        }
+        retrofitApi.getFilteredProducts(ProductAttributesRepository.getInstance().getAttributeById("4").getSlug(), terms).enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+
+                if (response.isSuccessful()) {
+
+                    List<Product> filteredProducts = response.body();
+
+                    if (categoryid != null) {
+                        filteredProducts = new ArrayList<>();
+                        for (Product product : response.body())
+                            for (Category category : product.getCategories())
+                                if (category.getId().equals(categoryid))
+                                    filteredProducts.add(product);
+                    }
+
+                    filterListAdapter.setData(filteredProducts);
+                    filterListAdapter.notifyDataSetChanged();
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+
+            }
+        });
+
     }
 
     private void findConponents(@NonNull View view) {
