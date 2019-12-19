@@ -43,7 +43,7 @@
             android:gravity="right|center_vertical"
             android:layoutDirection="rtl"
             android:paddingRight="8dp"
-            android:text="@string/price_ascending"
+            android:text="@string/price_descending"
             android:textSize="11dp" />
 
         <RadioButton
@@ -55,7 +55,7 @@
             android:gravity="right|center_vertical"
             android:layoutDirection="rtl"
             android:paddingRight="8dp"
-            android:text="@string/price_descending"
+            android:text="@string/price_ascending"
             android:textSize="11dp" />
 
         <RadioButton
