@@ -26,6 +26,7 @@ import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainFragment extends Fragment {
 
@@ -104,12 +105,19 @@ public class MainFragment extends Fragment {
         newestProductAdapter = new ProductRecyclerAdapter(new ArrayList<Product>());
         categoryAdapter = new CategoryGreenButtonsRecyclerAdapter(new ArrayList<CategoryGroup>() {
         });
-        mainSliderAdapter = new MainSliderAdapter(new ArrayList<String>() {{
-            add(getURLForResource(R.drawable.main_slider_image01));
-            add(getURLForResource(R.drawable.main_slider_image02));
-            add(getURLForResource(R.drawable.main_slider_image03));
-            add(getURLForResource(R.drawable.main_slider_image04));
-        }});
+
+//        List<String> list = new ArrayList<>();
+//        for (Product product : ProductsRepository.getInstance().getOfferedProducts())
+//            list.add(product.getImages()[0].getSrc());
+        mainSliderAdapter = new MainSliderAdapter(new ArrayList<>());
+
+//        mainSliderAdapter = new MainSliderAdapter(new ArrayList<String>() {{
+//            add(getURLForResource(R.drawable.main_slider_image01));
+//            add(getURLForResource(R.drawable.main_slider_image02));
+//            add(getURLForResource(R.drawable.main_slider_image03));
+//            add(getURLForResource(R.drawable.main_slider_image04));
+//        }});
+
         offeredProductAdapter = new ProductRecyclerAdapter(new ArrayList<Product>());
 
         // Set Adapters
@@ -140,6 +148,15 @@ public class MainFragment extends Fragment {
         offeredProductAdapter.notifyDataSetChanged();
         categoryAdapter.setCategoriesItems(ProductsRepository.getInstance().getParentCategory());
         categoryAdapter.notifyDataSetChanged();
+
+
+        List<String> list = new ArrayList<>();
+        for (Product product : ProductsRepository.getInstance().getOfferedProducts())
+            list.add(product.getImages()[0].getSrc());
+        mainSliderAdapter.setImages(list);
+        mainSliderAdapter.notifyDataSetChanged();
+
+
 
     }
 
