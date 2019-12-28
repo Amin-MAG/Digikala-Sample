@@ -6,16 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.tabs.TabLayout;
 import com.mag.digikala.Controller.Fragments.CategoryViewPagerFragment;
 import com.mag.digikala.Controller.Fragments.CommonToolbarFragment;
-import com.mag.digikala.Model.CategoryGroup;
-import com.mag.digikala.Model.ProductsRepository;
 import com.mag.digikala.R;
 import com.mag.digikala.Util.UiUtil;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class CategoryActivity extends AppCompatActivity {
 

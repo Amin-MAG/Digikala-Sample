@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="productViewModel"
+            type="com.mag.digikala.viewmodel.ProductViewModel" />
+    </data>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/product_layout__cardview"
@@ -36,8 +42,9 @@
                 android:gravity="right"
                 android:paddingTop="4dp"
                 android:paddingBottom="4dp"
-                android:text="Product Title"
+                android:text="@{productViewModel.title}"
                 android:textSize="9dp" />
+
 
             <View
                 android:id="@+id/divider"
@@ -53,6 +60,7 @@
                 android:layout_gravity="left"
                 android:layout_marginLeft="4dp"
                 android:gravity="left"
+                android:text="@{productViewModel.salerPrice}"
                 android:textColor="@color/digikala_red"
                 android:textSize="8dp" />
 
@@ -63,7 +71,7 @@
                 android:layout_gravity="left"
                 android:layout_marginLeft="4dp"
                 android:gravity="left"
-                android:text="Price"
+                android:text="@{productViewModel.regularPrice}"
                 android:textColor="@color/digikala_green"
                 android:textSize="10dp" />
 

@@ -17,8 +17,7 @@ import android.widget.TextView;
 import com.google.android.material.button.MaterialButton;
 import com.mag.digikala.R;
 import com.mag.digikala.Var.Constants;
-import com.mag.digikala.ViewModel.CardToolbarViewModel;
-import com.mag.digikala.ViewModel.FilteToolbarViewModel;
+import com.mag.digikala.ViewModelLiveData.CardToolbarViewModel;
 
 
 public class CardToolbarFragment extends Fragment {

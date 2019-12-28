@@ -2,8 +2,6 @@ package com.mag.digikala.Model;
 
 import android.util.Log;
 
-import org.w3c.dom.Attr;
-
 import java.util.ArrayList;
 import java.util.List;
 

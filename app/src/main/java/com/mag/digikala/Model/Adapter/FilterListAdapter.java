@@ -13,7 +13,6 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mag.digikala.Controller.Activities.ProductDetailActivity;
-import com.mag.digikala.Controller.Fragments.ProductDetailFragment;
 import com.mag.digikala.Model.Product;
 import com.mag.digikala.R;
 import com.mag.digikala.Var.Constants;

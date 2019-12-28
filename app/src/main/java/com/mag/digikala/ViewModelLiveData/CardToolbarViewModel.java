@@ -1,4 +1,4 @@
-package com.mag.digikala.ViewModel;
+package com.mag.digikala.ViewModelLiveData;
 
 import android.app.Application;
 
@@ -8,12 +8,13 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.mag.digikala.Repository.CardRepository;
 
-public class MainToolbarViewModel extends AndroidViewModel {
+public class CardToolbarViewModel extends AndroidViewModel {
+
 
     private CardRepository repository;
     private MutableLiveData<Integer> numberOfCardProducts;
 
-    public MainToolbarViewModel(@NonNull Application application) {
+    public CardToolbarViewModel(@NonNull Application application) {
         super(application);
 
         repository = CardRepository.getInstance();

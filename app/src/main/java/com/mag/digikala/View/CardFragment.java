@@ -15,22 +15,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.mag.digikala.Model.Adapter.CardListRecyclerAdapter;
-import com.mag.digikala.Model.CardProduct;
 import com.mag.digikala.Model.Product;
-import com.mag.digikala.Network.RetrofitApi;
-import com.mag.digikala.Network.RetrofitInstance;
 import com.mag.digikala.R;
-import com.mag.digikala.Var.Constants;
-import com.mag.digikala.ViewModel.CardToolbarViewModel;
-import com.mag.digikala.ViewModel.CardViewModel;
+import com.mag.digikala.ViewModelLiveData.CardViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import io.realm.Realm;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class CardFragment extends Fragment {

@@ -6,12 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.mag.digikala.Controller.Fragments.ProductDetailFragment;
 import com.mag.digikala.R;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 import com.squareup.picasso.Picasso;
 
-import java.lang.invoke.CallSite;
 import java.util.List;
 
 public class MainSliderAdapter extends SliderViewAdapter<MainSliderAdapter.MainSliderAdapterViewHolder> {

@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mag.digikala.Model.Adapter.CategoryListAdapter;
-import com.mag.digikala.Model.CategoryGroup;
 import com.mag.digikala.Model.ProductsRepository;
 import com.mag.digikala.R;
 

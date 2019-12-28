@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.mag.digikala.Model.Adapter.CategoryGreenButtonsRecyclerAdapter;
 import com.mag.digikala.Model.Adapter.MainSliderAdapter;
-import com.mag.digikala.Model.Adapter.ProductRecyclerAdapter;
+import com.mag.digikala.View.Adapters.ProductRecyclerAdapter;
 import com.mag.digikala.Model.Product;
 import com.mag.digikala.Model.ProductsRepository;
 import com.mag.digikala.R;

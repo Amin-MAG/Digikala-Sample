@@ -1,4 +1,4 @@
-package com.mag.digikala.ViewModel;
+package com.mag.digikala.ViewModelLiveData;
 
 import android.app.Application;
 import android.util.Log;

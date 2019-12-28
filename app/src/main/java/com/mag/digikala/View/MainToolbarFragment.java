@@ -6,13 +6,10 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -23,8 +20,7 @@ import com.mag.digikala.Controller.Activities.MainActivity;
 import com.mag.digikala.Controller.Activities.SearchActivity;
 import com.mag.digikala.R;
 import com.mag.digikala.Var.Constants;
-import com.mag.digikala.ViewModel.MainToolbarViewModel;
-import com.mag.digikala.ViewModel.ProductDetailToolbarViewModel;
+import com.mag.digikala.ViewModelLiveData.MainToolbarViewModel;
 
 public class MainToolbarFragment extends Fragment {
 

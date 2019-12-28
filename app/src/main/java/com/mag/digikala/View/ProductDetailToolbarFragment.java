@@ -16,7 +16,7 @@ import com.google.android.material.button.MaterialButton;
 import com.mag.digikala.Controller.Activities.CardActivity;
 import com.mag.digikala.R;
 import com.mag.digikala.Var.Constants;
-import com.mag.digikala.ViewModel.ProductDetailToolbarViewModel;
+import com.mag.digikala.ViewModelLiveData.ProductDetailToolbarViewModel;
 
 
 public class ProductDetailToolbarFragment extends Fragment {

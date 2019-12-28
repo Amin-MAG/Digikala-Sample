@@ -8,14 +8,11 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.mag.digikala.Controller.Fragments.CategoryListFragment;
-import com.mag.digikala.Model.Category;
 import com.mag.digikala.Model.CategoryGroup;
 import com.mag.digikala.Model.ProductsRepository;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class CategoryViewPagerAdapter extends FragmentStatePagerAdapter {
 

@@ -4,8 +4,6 @@ import com.mag.digikala.Model.Category;
 import com.mag.digikala.Model.Product;
 import com.mag.digikala.Model.ProductAttributesRepository;
 
-import org.jsoup.select.Evaluator;
-
 import java.util.List;
 import java.util.Map;
 

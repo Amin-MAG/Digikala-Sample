@@ -10,7 +10,6 @@ import com.mag.digikala.R;
 import com.mag.digikala.Var.Constants;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

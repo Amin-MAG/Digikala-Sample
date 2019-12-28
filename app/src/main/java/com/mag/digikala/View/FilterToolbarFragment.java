@@ -19,8 +19,7 @@ import com.mag.digikala.Controller.Activities.CardActivity;
 import com.mag.digikala.Controller.Activities.SearchActivity;
 import com.mag.digikala.R;
 import com.mag.digikala.Var.Constants;
-import com.mag.digikala.ViewModel.FilteToolbarViewModel;
-import com.mag.digikala.ViewModel.MainToolbarViewModel;
+import com.mag.digikala.ViewModelLiveData.FilteToolbarViewModel;
 
 public class FilterToolbarFragment extends Fragment {
 

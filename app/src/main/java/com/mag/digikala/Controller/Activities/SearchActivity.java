@@ -5,9 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.SearchView;
 
-import com.mag.digikala.Controller.Fragments.MainFragment;
 import com.mag.digikala.Controller.Fragments.SearchToolbarFragment;
 import com.mag.digikala.R;
 import com.mag.digikala.Util.UiUtil;

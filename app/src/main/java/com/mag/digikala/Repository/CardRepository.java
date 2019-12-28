@@ -8,7 +8,6 @@ import com.mag.digikala.Model.CardProduct;
 import com.mag.digikala.Model.Product;
 import com.mag.digikala.Network.RetrofitApi;
 import com.mag.digikala.Network.RetrofitInstance;
-import com.mag.digikala.ViewModel.CardViewModel;
 
 import java.util.ArrayList;
 import java.util.List;

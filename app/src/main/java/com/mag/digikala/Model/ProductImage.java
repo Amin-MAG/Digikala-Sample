@@ -1,7 +1,5 @@
 package com.mag.digikala.Model;
 
-import androidx.annotation.NonNull;
-
 public class ProductImage {
 
     private String id;
