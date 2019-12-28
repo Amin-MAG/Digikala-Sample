@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
-import com.mag.digikala.Model.Adapter.CategoryGreenButtonsRecyclerAdapter;
+import com.mag.digikala.View.Adapters.CategoryGreenButtonsRecyclerAdapter;
 import com.mag.digikala.Model.Adapter.MainSliderAdapter;
 import com.mag.digikala.View.Adapters.ProductRecyclerAdapter;
 import com.mag.digikala.Model.ProductsRepository;

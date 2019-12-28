@@ -21,8 +21,8 @@ import java.util.List;
 
 public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecyclerAdapter.ProductRecyclerViewHolder> {
 
-    private List<Product> productItems;
     private Activity activity;
+    private List<Product> productItems;
 
     public ProductRecyclerAdapter() {
         this.productItems = new ArrayList<>();
