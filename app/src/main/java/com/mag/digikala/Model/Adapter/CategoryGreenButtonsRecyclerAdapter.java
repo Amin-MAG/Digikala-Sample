@@ -75,6 +75,7 @@ public class CategoryGreenButtonsRecyclerAdapter extends RecyclerView.Adapter<Ca
 
     public void setCategoriesItems(List<CategoryGroup> items) {
         this.items = items;
+        notifyDataSetChanged();
     }
 
 }

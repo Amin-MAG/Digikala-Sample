@@ -32,13 +32,13 @@ public class ProductsRepository {
     // Products //
 
     // Test
-    private List<Product> allProducts;
+    private List<Product> allProducts = new ArrayList<>();
     // Offered
-    private List<Product> offeredProducts;
+    private List<Product> offeredProducts= new ArrayList<>();
     // Best Seller
-    private  List<Product> topRatingProducts;
+    private  List<Product> topRatingProducts= new ArrayList<>();
     // Most View
-    private  List<Product> popularProducts;
+    private  List<Product> popularProducts= new ArrayList<>();
 
     public void setAllProducts(List<Product> allProducts) {
         this.allProducts = allProducts;

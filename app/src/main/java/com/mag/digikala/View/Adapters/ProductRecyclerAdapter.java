@@ -86,6 +86,7 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
 
     public void setProductItems(List<Product> productItems) {
         this.productItems = productItems;
+        notifyDataSetChanged();
     }
 
 }

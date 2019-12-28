@@ -1,4 +1,4 @@
-package com.mag.digikala.Controller.Fragments;
+package com.mag.digikala.View;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,7 +14,6 @@ import androidx.fragment.app.Fragment;
 import com.mag.digikala.Model.Adapter.CategoryGreenButtonsRecyclerAdapter;
 import com.mag.digikala.Model.Adapter.MainSliderAdapter;
 import com.mag.digikala.View.Adapters.ProductRecyclerAdapter;
-import com.mag.digikala.Model.Product;
 import com.mag.digikala.Model.ProductsRepository;
 import com.mag.digikala.R;
 import com.mag.digikala.databinding.FragmentMainBinding;
@@ -27,6 +26,7 @@ import java.util.ArrayList;
 public class MainFragment extends Fragment {
 
     private FragmentMainBinding binding;
+
     private MainSliderAdapter mainSliderAdapter;
     private CategoryGreenButtonsRecyclerAdapter categoryAdapter;
     private ProductRecyclerAdapter newestProductAdapter;
@@ -57,9 +57,7 @@ public class MainFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-        adapterInitilozation();
-
-        adapterSetting();
+        setAdapters();
 
         mainSliderInitilazation();
 
@@ -73,7 +71,21 @@ public class MainFragment extends Fragment {
         sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
     }
 
-    private void adapterSetting() {
+    private void setAdapters() {
+
+        bestSellerProductAdapter = new ProductRecyclerAdapter();
+        mostViewedProductAdapter = new ProductRecyclerAdapter();
+        newestProductAdapter = new ProductRecyclerAdapter();
+        categoryAdapter = new CategoryGreenButtonsRecyclerAdapter();
+        offeredProductAdapter = new ProductRecyclerAdapter();
+        // Should be changed
+        mainSliderAdapter = new MainSliderAdapter(new ArrayList<String>() {{
+            add(getURLForResource(R.drawable.main_slider_image01));
+            add(getURLForResource(R.drawable.main_slider_image02));
+            add(getURLForResource(R.drawable.main_slider_image03));
+            add(getURLForResource(R.drawable.main_slider_image04));
+        }});
+
         binding.digikalaMainActivityBest.setAdapter(bestSellerProductAdapter);
         binding.digikalaMainActivityNewest.setAdapter(newestProductAdapter);
         binding.digikalaMainActivityMostView.setAdapter(mostViewedProductAdapter);
@@ -81,33 +93,14 @@ public class MainFragment extends Fragment {
         binding.digikalaMainActivityOffered.setAdapter(offeredProductAdapter);
     }
 
-    private void adapterInitilozation() {
-        bestSellerProductAdapter = new ProductRecyclerAdapter();
-        mostViewedProductAdapter = new ProductRecyclerAdapter();
-        newestProductAdapter = new ProductRecyclerAdapter();
-        categoryAdapter = new CategoryGreenButtonsRecyclerAdapter();
-        offeredProductAdapter = new ProductRecyclerAdapter(new ArrayList<Product>());
-        mainSliderAdapter = new MainSliderAdapter(new ArrayList<String>() {{
-            add(getURLForResource(R.drawable.main_slider_image01));
-            add(getURLForResource(R.drawable.main_slider_image02));
-            add(getURLForResource(R.drawable.main_slider_image03));
-            add(getURLForResource(R.drawable.main_slider_image04));
-        }});
-    }
-
     public void
     updateView() {
 
         bestSellerProductAdapter.setProductItems(ProductsRepository.getInstance().getTopRatingProducts());
-        bestSellerProductAdapter.notifyDataSetChanged();
         mostViewedProductAdapter.setProductItems(ProductsRepository.getInstance().getPopularProducts());
-        mostViewedProductAdapter.notifyDataSetChanged();
         newestProductAdapter.setProductItems(ProductsRepository.getInstance().getAllProducts());
-        newestProductAdapter.notifyDataSetChanged();
         offeredProductAdapter.setProductItems(ProductsRepository.getInstance().getOfferedProducts());
-        offeredProductAdapter.notifyDataSetChanged();
         categoryAdapter.setCategoriesItems(ProductsRepository.getInstance().getParentCategory());
-        categoryAdapter.notifyDataSetChanged();
 
     }
 
