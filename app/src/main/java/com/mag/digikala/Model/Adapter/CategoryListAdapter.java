@@ -1,38 +1,40 @@
 package com.mag.digikala.Model.Adapter;
 
 import android.app.Activity;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mag.digikala.Controller.Activities.FilterActivity;
 import com.mag.digikala.Model.Category;
 import com.mag.digikala.R;
+import com.mag.digikala.databinding.LayoutCategoryListItemBinding;
+import com.mag.digikala.viewmodel.CategoryViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapter.CategoryListViewHolder> {
 
-    private List<Category> categories;
     private Activity activity;
+    private List<Category> categories;
+
+    public CategoryListAdapter() {
+        this.categories = new ArrayList<>();
+    }
 
     public CategoryListAdapter(List<Category> categories) {
         this.categories = categories;
-        Log.i("AdapterList", "CategoryListAdapter: " + categories);
     }
 
     @NonNull
     @Override
     public CategoryListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         activity = (Activity) parent.getContext();
-        View view = LayoutInflater.from(activity).inflate(R.layout.layout_category_list_item, parent, false);
-        return new CategoryListViewHolder(view);
+        LayoutCategoryListItemBinding binding = DataBindingUtil.inflate(activity.getLayoutInflater(), R.layout.layout_category_list_item, parent, false);
+        return new CategoryListViewHolder(binding);
     }
 
     @Override
@@ -47,30 +49,24 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
 
     public class CategoryListViewHolder extends RecyclerView.ViewHolder {
 
-        private Category category;
-        private TextView title;
-        private CardView cardView;
+        private LayoutCategoryListItemBinding binding;
+        private CategoryViewModel viewModel;
 
-        public CategoryListViewHolder(@NonNull View itemView) {
-            super(itemView);
 
-            title = itemView.findViewById(R.id.category_list_item_layout__title);
-            cardView = itemView.findViewById(R.id.category_list_item_layout__main_card_view);
+        public CategoryListViewHolder(@NonNull LayoutCategoryListItemBinding binding) {
+            super(binding.getRoot());
 
-            cardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    activity.startActivity(FilterActivity.newIntent(activity, null, category.getId()));
-                }
-            });
+            this.binding = binding;
+            this.viewModel = new CategoryViewModel();
 
+            binding.setCategoryViewmodel(viewModel);
         }
 
         public void bind(Category category) {
 
-            this.category = category;
+            binding.getCategoryViewmodel().setCategory(category);
 
-            title.setText(category.getName());
+            binding.categoryListItemLayoutMainCardView.setOnClickListener(view -> activity.startActivity(FilterActivity.newIntent(activity, null, category.getId())));
 
         }
 

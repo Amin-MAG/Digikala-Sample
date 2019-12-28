@@ -1,4 +1,4 @@
-package com.mag.digikala.View;
+package com.mag.digikala.View.Fragment;
 
 import android.net.Uri;
 import android.os.Bundle;

@@ -1,28 +1,31 @@
-package com.mag.digikala.Controller.Fragments;
+package com.mag.digikala.View.Fragment;
 
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.mag.digikala.Model.Adapter.CategoryViewPagerAdapter;
 import com.mag.digikala.Model.CategoryGroup;
 import com.mag.digikala.Model.ProductsRepository;
 import com.mag.digikala.R;
+import com.mag.digikala.databinding.FragmentCategoryViewPagerBinding;
 
 import java.util.List;
+import java.util.Objects;
 
 public class CategoryViewPagerFragment extends Fragment {
 
+    public static final String CATEGORY_GRUOP_ID = "default";
+    private FragmentCategoryViewPagerBinding binding;
 
     public static final String ARG_CATEGORY_GROUP_ID = "arg_category_group_id";
     private ViewPager mainViewpager;
@@ -32,7 +35,7 @@ public class CategoryViewPagerFragment extends Fragment {
     public static CategoryViewPagerFragment newInstance(String categoryGruopId) {
 
         Bundle args = new Bundle();
-        args.putString(ARG_CATEGORY_GROUP_ID,categoryGruopId);
+        args.putString(ARG_CATEGORY_GROUP_ID, categoryGruopId);
 
         CategoryViewPagerFragment fragment = new CategoryViewPagerFragment();
         fragment.setArguments(args);
@@ -40,7 +43,7 @@ public class CategoryViewPagerFragment extends Fragment {
     }
 
     public static CategoryViewPagerFragment newInstance() {
-        return newInstance("-1");
+        return newInstance(CATEGORY_GRUOP_ID);
     }
 
     public CategoryViewPagerFragment() {
@@ -49,17 +52,26 @@ public class CategoryViewPagerFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_category_view_pager, container, false);
+        binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_category_view_pager, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mainViewpager = view.findViewById(R.id.fragment_category_viewpage__viewpager);
+        viewPagerInitialization();
+
+        tabInitialization();
+
+    }
+
+    private void viewPagerInitialization() {
+        mainViewpager = binding.fragmentCategoryViewpageViewpager;
         categoryViewPagerAdapter = new CategoryViewPagerAdapter(getFragmentManager(), ProductsRepository.getInstance().getParentCategory());
         mainViewpager.setAdapter(categoryViewPagerAdapter);
-        mainViewpager.setCurrentItem(getArguments().get(ARG_CATEGORY_GROUP_ID) == "-1" ? categoryViewPagerAdapter.getCount() - 1 : categoryViewPagerAdapter.getCategoryPostion(getArguments().getString(ARG_CATEGORY_GROUP_ID)));
+        // Should be changed
+        mainViewpager.setCurrentItem(getArguments().get(ARG_CATEGORY_GROUP_ID).equals(CATEGORY_GRUOP_ID) ? categoryViewPagerAdapter.getCount() - 1 : categoryViewPagerAdapter.getCategoryPostion(getArguments().getString(ARG_CATEGORY_GROUP_ID)));
         mainViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
             @Override
@@ -76,18 +88,13 @@ public class CategoryViewPagerFragment extends Fragment {
             public void onPageScrollStateChanged(int state) {
 
             }
+
         });
+    }
 
-        tabLayout = view.findViewById(R.id.category_activity__tabLayout);
-        List<CategoryGroup> categoryGroups = ProductsRepository.getInstance().getParentCategory();
-        for (int k = 0; k < categoryGroups.size(); k++) {
-
-            tabLayout.addTab(tabLayout.newTab().setText(categoryGroups.get(k).getGroupName()));
-            Log.d("Group233", "onViewCreated: " + categoryGroups.get(k).getGroupName());
-
-        }
-
-
+    private void tabInitialization() {
+        tabLayout = binding.categoryActivityTabLayout;
+        addTabsToTabLayout();
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -105,7 +112,13 @@ public class CategoryViewPagerFragment extends Fragment {
             }
         });
         tabLayout.setupWithViewPager(mainViewpager);
+    }
 
+    private void addTabsToTabLayout() {
+        List<CategoryGroup> categoryGroups = ProductsRepository.getInstance().getParentCategory();
+        for (CategoryGroup categoryGroup : categoryGroups) {
+            tabLayout.addTab(tabLayout.newTab().setText(categoryGroup.getGroupName()));
+        }
     }
 
 }
