@@ -10,18 +10,22 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mag.digikala.Controller.Activities.ProductDetailActivity;
 import com.mag.digikala.Model.Product;
 import com.mag.digikala.R;
 import com.mag.digikala.Var.Constants;
+import com.mag.digikala.databinding.LayoutProductSpecialBinding;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecyclerAdapter.ProductRecyclerViewHolder> {
+
+    private LayoutProductSpecialBinding  binding;
 
     private List<Product> productItems;
     private Activity activity;
@@ -39,8 +43,8 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
     @Override
     public ProductRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         activity = (Activity) parent.getContext();
-        View view = LayoutInflater.from(activity).inflate(R.layout.layout_product_special, parent, false);
-        return new ProductRecyclerViewHolder(view);
+        binding =  DataBindingUtil.inflate(activity.getLayoutInflater(), R.layout.layout_product_special, parent, false);
+        return new ProductRecyclerViewHolder(binding.getRoot());
     }
 
     @Override
@@ -56,21 +60,9 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
     public class ProductRecyclerViewHolder extends RecyclerView.ViewHolder {
 
         private Product product;
-        private TextView title;
-        private TextView price;
-        private TextView priceInvalid;
-        private ImageView cover;
-        private CardView cardView;
 
         public ProductRecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            cover = itemView.findViewById(R.id.product_layout__cover);
-            price = itemView.findViewById(R.id.product_layout_price);
-            priceInvalid = itemView.findViewById(R.id.product_layout_price_without_sales);
-            title = itemView.findViewById(R.id.product_layout__title);
-            cardView = itemView.findViewById(R.id.product_layout__cardview);
-
         }
 
 
@@ -78,22 +70,18 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
 
             this.product = product;
 
+            setImage(product);
+            setPrices();
+            binding.productLayoutTitle.setText(product.getName());
+            binding.productLayoutCardview.setOnClickListener(view -> activity.startActivity(ProductDetailActivity.newIntent(activity, product.getId())));
+
+        }
+
+        private void setImage(Product product) {
             if (product.getImages().length != 0) {
                 String imageUrl = product.getImages()[0].getSrc();
-                Picasso.get().load(imageUrl).placeholder(R.drawable.place_holder).into(cover);
+                Picasso.get().load(imageUrl).placeholder(R.drawable.place_holder).into(binding.productLayoutCover);
             }
-
-            setPrices();
-
-            title.setText(product.getName());
-
-            cardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    activity.startActivity(ProductDetailActivity.newIntent(activity, product.getId()));
-                }
-            });
-
         }
 
         private void setPrices() {
@@ -109,9 +97,10 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
                 priceInvalidString = product.getRegularPrice() + MONEY_STRING;
             }
 
+            TextView priceInvalid =  binding.productLayoutPriceWithoutSales;
             priceInvalid.setText(priceInvalidString);
             priceInvalid.setPaintFlags(priceInvalid.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-            price.setText(priceString);
+            binding.productLayoutPrice.setText(priceString);
 
         }
 
