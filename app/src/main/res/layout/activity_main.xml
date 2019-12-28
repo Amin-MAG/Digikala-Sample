@@ -1,118 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/digikala_activity__drawer_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clickable="true"
-    android:focusable="true">
+    xmlns:tools="http://schemas.android.com/tools">
 
-
-    <FrameLayout
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/digikala_activity__drawer_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="true">
 
-        <!--Loading Frame-->
         <FrameLayout
-            android:id="@+id/digikala_activity__loading_frame"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/digikala_red_origin">
+            android:layout_height="match_parent">
 
-            <com.pollux.widget.DualProgressView
-                android:id="@+id/digikala_activity__progress_bar"
-                style="?android:attr/progressBarStyle"
+            <!--Loading Frame-->
+            <FrameLayout
+                android:id="@+id/digikala_activity__loading_frame"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_gravity="bottom|center"
-                android:layout_marginBottom="4dp"
-                android:indeterminateDrawable="@drawable/progress_bar"
-                android:indeterminateDuration="1500"
-                app:dpv_inner_color="@color/nothing"
-                app:dpv_inner_padding="12dp"
-                app:dpv_outer_color="@color/digikala_raw_white"
-                app:dpv_thickness="2dp" />
+                android:layout_height="match_parent"
+                android:background="@color/digikala_red_origin">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="190dp"
-                android:layout_gravity="center"
+                <com.pollux.widget.DualProgressView
+                    android:id="@+id/digikala_activity__progress_bar"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginBottom="4dp"
+                    android:indeterminateDrawable="@drawable/progress_bar"
+                    android:indeterminateDuration="1500"
+                    app:dpv_inner_color="@color/nothing"
+                    app:dpv_inner_padding="12dp"
+                    app:dpv_outer_color="@color/digikala_raw_white"
+                    app:dpv_thickness="2dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="190dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginRight="80dp"
+                    android:src="@drawable/loading_logo" />
+
+            </FrameLayout>
+
+            <!--No Internet Frame-->
+            <LinearLayout
+                android:id="@+id/digikala_activity__no_internet_frame"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="80dp"
                 android:layout_marginRight="80dp"
-                android:src="@drawable/loading_logo" />
+                android:background="@color/digikala_white"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="46dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_no_internet" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/iran_yekan"
+                    android:gravity="center"
+                    android:text="@string/no_internet"
+                    android:textSize="10dp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/digikala_activity__retry_connection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="@color/digikala_red"
+                    android:fontFamily="@font/far_roya_bd"
+                    android:text="@string/retry"
+                    android:textColor="@color/digikala_raw_white"
+                    android:textSize="12dp"
+                    app:cornerRadius="0dp" />
+
+            </LinearLayout>
+
+            <!--Main Content-->
+            <ScrollView
+                android:id="@+id/digikala_activity__scroll_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="48dp"
+                android:background="#dcdcdc"
+                android:visibility="gone" />
+
+            <!-- Toolbar-->
+            <FrameLayout
+                android:id="@+id/digikala_activity__toolbar_frame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
 
         </FrameLayout>
 
-        <!--No Internet Frame-->
-        <LinearLayout
-            android:id="@+id/digikala_activity__no_internet_frame"
-            android:layout_width="match_parent"
+        <!-- Navigation Bar-->
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/digikala__navigation_view"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="80dp"
-            android:layout_marginRight="80dp"
-            android:background="@color/digikala_white"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:visibility="gone">
+            android:layout_gravity="right"
+            android:layoutDirection="rtl"
+            app:headerLayout="@layout/layout_header"
+            app:menu="@menu/main_menu" />
 
-            <ImageView
-                android:layout_width="120dp"
-                android:layout_height="46dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_no_internet" />
+    </androidx.drawerlayout.widget.DrawerLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/iran_yekan"
-                android:gravity="center"
-                android:text="@string/no_internet"
-                android:textSize="10dp"
-                android:textStyle="bold" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/digikala_activity__retry_connection"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:backgroundTint="@color/digikala_red"
-                android:fontFamily="@font/far_roya_bd"
-                android:text="@string/retry"
-                android:textColor="@color/digikala_raw_white"
-                android:textSize="12dp"
-                app:cornerRadius="0dp" />
-
-        </LinearLayout>
-
-        <!--Main Content-->
-        <ScrollView
-            android:id="@+id/digikala_activity__scroll_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="48dp"
-            android:background="#dcdcdc"
-            android:visibility="gone" />
-
-        <!-- Toolbar-->
-        <FrameLayout
-            android:id="@+id/digikala_activity__toolbar_frame"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone" />
-
-    </FrameLayout>
-
-    <!-- Navigation Bar-->
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/digikala__navigation_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="right"
-        android:layoutDirection="rtl"
-        app:headerLayout="@layout/layout_header"
-        app:menu="@menu/main_menu" />
-
-
-</androidx.drawerlayout.widget.DrawerLayout>
+</layout>

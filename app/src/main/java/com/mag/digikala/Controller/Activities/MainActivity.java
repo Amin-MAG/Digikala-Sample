@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -78,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
 
         Log.i("LifeCycle", "onCreate: ");
 
-
         ProductsRepository.getInstance().setNavigationItems(this);
 
         // Find Items
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (mainFragment == null) {
             mainFragment = MainFragment.newInstance();
-            UiUtil.changeFragment(getSupportFragmentManager(), mainFragment, R.id.digikala_activity__scroll_view, true, "fragment_main_digikala");
+            UiUtil.changeFragment(getSupportFragmentManager(), mainFragment, R.id.digikala_activity__scroll_view, true, "fragment_main");
         }
 
 

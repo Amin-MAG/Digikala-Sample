@@ -14,6 +14,7 @@ import com.mag.digikala.Model.Category;
 import com.mag.digikala.Model.CategoryGroup;
 import com.mag.digikala.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryGreenButtonsRecyclerAdapter extends RecyclerView.Adapter<CategoryGreenButtonsRecyclerAdapter.CategoryRecyclerViewHolder> {
@@ -21,6 +22,10 @@ public class CategoryGreenButtonsRecyclerAdapter extends RecyclerView.Adapter<Ca
 
     private List<CategoryGroup> items;
     private Activity activity;
+
+    public CategoryGreenButtonsRecyclerAdapter() {
+        this.items = new ArrayList<>();
+    }
 
     public CategoryGreenButtonsRecyclerAdapter(List<CategoryGroup> items) {
         this.items = items;

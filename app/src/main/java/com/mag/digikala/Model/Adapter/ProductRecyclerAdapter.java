@@ -18,12 +18,17 @@ import com.mag.digikala.R;
 import com.mag.digikala.Var.Constants;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecyclerAdapter.ProductRecyclerViewHolder> {
 
     private List<Product> productItems;
     private Activity activity;
+
+    public ProductRecyclerAdapter() {
+        this.productItems = new ArrayList<>();
+    }
 
     public ProductRecyclerAdapter(List<Product> products) {
         this.productItems = products;
