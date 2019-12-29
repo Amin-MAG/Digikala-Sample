@@ -1,4 +1,4 @@
-package com.mag.digikala.Model.Adapter;
+package com.mag.digikala.View.Adapters;
 
 import android.app.Activity;
 import android.view.ViewGroup;

@@ -1,4 +1,4 @@
-package com.mag.digikala.View.Adapters;
+package com.mag.digikala.View.Fragment;
 
 
 import android.os.Bundle;
@@ -11,9 +11,9 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
-import com.mag.digikala.Model.Adapter.CategoryListAdapter;
 import com.mag.digikala.Model.ProductsRepository;
 import com.mag.digikala.R;
+import com.mag.digikala.View.Adapters.CategoryListAdapter;
 import com.mag.digikala.databinding.FragmentCategoryListBinding;
 
 public class CategoryListFragment extends Fragment {

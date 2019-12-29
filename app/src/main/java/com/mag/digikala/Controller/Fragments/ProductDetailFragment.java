@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -25,6 +26,8 @@ import com.mag.digikala.Network.RetrofitInstance;
 import com.mag.digikala.R;
 import com.mag.digikala.Repository.CardRepository;
 import com.mag.digikala.Var.Constants;
+import com.mag.digikala.databinding.FragmentProductDetailBinding;
+import com.mag.digikala.viewmodel.ProductViewModel;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
@@ -40,16 +43,14 @@ import retrofit2.Response;
 public class ProductDetailFragment extends Fragment {
 
     public static final String ARG_MECHANDICE = "arg_mechandice";
-    private Product product;
+
+    private FragmentProductDetailBinding binding;
+    private ProductViewModel viewModel;
+
     private RetrofitApi retrofitApi;
     private Realm realm;
 
-    private TextView productName, productShortDescription, productDescription;
-    private TextView productRegularPrice, productSalePrice;
-    private ViewPager slider;
-    private MaterialButton cardBtn;
     private SliderViewPagerAdapter sliderAdapter;
-    private Spinner colorSpinner, sizeSpinner;
 
 
     public static ProductDetailFragment newInstance(String merchandiceId) {
@@ -76,20 +77,24 @@ public class ProductDetailFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_product_detail, container, false);
+        binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_product_detail, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        findComponents(view);
+        viewModel = new ProductViewModel();
+        binding.setProductViewModel(viewModel);
 
         setSpinners();
+        sliderInitializer();
+        priceView();
 
-        cardBtn.setOnClickListener(view1 -> {
+        binding.productDetailFragmentCardBtn.setOnClickListener(view1 -> {
 
-            CardRepository.getInstance().addToCard(product);
+            CardRepository.getInstance().addToCard(viewModel.getProduct());
             getActivity().startActivity(CardActivity.newIntent(getContext()));
 
         });
@@ -105,7 +110,7 @@ public class ProductDetailFragment extends Fragment {
                 android.R.layout.simple_spinner_item,
                 spinnerColorArray
         );
-        colorSpinner.setAdapter(colorAdapter);
+        binding.productDetailFragmentColorSpinner.setAdapter(colorAdapter);
 
 
         List<String> spinnerSizeArray = new ArrayList<>();
@@ -116,28 +121,18 @@ public class ProductDetailFragment extends Fragment {
                 android.R.layout.simple_spinner_item,
                 spinnerSizeArray
         );
-        sizeSpinner.setAdapter(sizeAdapter);
+        binding.productDetailFragmentSizeSpinner.setAdapter(sizeAdapter);
     }
 
-
-    private void findComponents(@NonNull View view) {
-        slider = view.findViewById(R.id.product_detail_activity__view_pager);
-        productName = view.findViewById(R.id.product_detail_fragment__product_name);
-        productShortDescription = view.findViewById(R.id.product_detail_fragment__product_short_description);
-        productRegularPrice = view.findViewById(R.id.product_detail_fragment__product_regular_price);
-        productSalePrice = view.findViewById(R.id.product_detail_fragment__product_sale_price);
-        productDescription = view.findViewById(R.id.product_detail_fragment__product_long_description);
-        cardBtn = view.findViewById(R.id.product_detail_fragment__card_btn);
-        colorSpinner = view.findViewById(R.id.product_detail_fragment__color_spinner);
-        sizeSpinner = view.findViewById(R.id.product_detail_fragment__size_spinner);
-    }
 
     private void sliderInitializer() {
         ArrayList<String> urls = new ArrayList<>();
-        for (ProductImage image : product.getImages())
-            urls.add(image.getSrc());
+        if (viewModel.getProduct() != null) {
+            for (ProductImage image : viewModel.getImages())
+                urls.add(image.getSrc());
+        }
         sliderAdapter = new SliderViewPagerAdapter(getFragmentManager(), urls);
-        slider.setAdapter(sliderAdapter);
+        binding.productDetailActivityViewPager.setAdapter(sliderAdapter);
     }
 
 
@@ -148,8 +143,10 @@ public class ProductDetailFragment extends Fragment {
 
                 if (response.isSuccessful()) {
 
-                    product = response.body();
-                    updateDetailFragment();
+                    Product product = response.body();
+                    viewModel.setProduct(product);
+                    sliderInitializer();
+//                    updateDetailFragment();
 
                 }
 
@@ -163,33 +160,17 @@ public class ProductDetailFragment extends Fragment {
     }
 
     private void priceView() {
-        String MONEY_STRING = Constants.SPACE_CHAR + getResources().getString(R.string.tomans);
-        String priceString;
-        String priceInvalidString = "";
-
-        if (product.getSalePrice().equals(Constants.EMPTY_CHAR))
-            priceString = product.getRegularPrice() + MONEY_STRING;
-        else {
-            priceString = product.getSalePrice() + MONEY_STRING;
-            priceInvalidString = product.getRegularPrice() + MONEY_STRING;
-        }
-
-        productRegularPrice.setText(priceInvalidString);
-        productRegularPrice.setPaintFlags(productSalePrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        productSalePrice.setText(priceString);
+        binding.productDetailFragmentProductRegularPrice.setPaintFlags(binding.productDetailFragmentProductSalePrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
     }
 
 
     private void updateDetailFragment() {
 
-        productName.setText(getString(R.string.product_name) + " " + product.getName());
-        productShortDescription.setText(Jsoup.parse(product.getShortDescription()).body().text());
-        Element pTag;
-        if ((pTag = Jsoup.parse(product.getDescription()).body().select("p").first()) != null)
-            productDescription.setText(pTag.text());
+//        binding.productDetailFragmentProductName.setText(getString(R.string.product_name) + " " + product.getName());
+//        Element pTag;
+//        if ((pTag = Jsoup.parse(product.getDescription()).body().select("p").first()) != null)
+//            binding.productDetailFragmentProductShortDescription.setText(pTag.text());
 
-        sliderInitializer();
-        priceView();
 
     }
 

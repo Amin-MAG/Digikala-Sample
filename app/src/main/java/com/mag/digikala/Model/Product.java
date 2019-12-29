@@ -27,6 +27,9 @@ public class Product implements Serializable {
 
     private int cardCount;
 
+    public Product() {
+    }
+
     public Product(String name, ProductImage[] images, String price, String sale_price) {
         this.name = name;
         this.images = images;
@@ -79,7 +82,7 @@ public class Product implements Serializable {
     }
 
     public int getCardCount() {
-        return  cardCount;
+        return cardCount;
     }
 
     public List<ProductAttribute> getAttributes() {
