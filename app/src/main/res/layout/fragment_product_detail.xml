@@ -80,7 +80,8 @@
                     android:id="@+id/product_detail_fragment__product_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp"
                     android:fontFamily="@font/far_roya_bd"
                     android:gravity="right"
                     android:text='@{productViewModel.product == null ?  "" : productViewModel.title}'
@@ -95,7 +96,7 @@
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/iran_yekan"
                     android:gravity="right"
-                    android:text='@{productViewModel.product == null ?  "" : productViewModel.productShortDescription}'
+                    android:text='@{productViewModel.product == null ?  "" : productViewModel.shortDescription}'
                     android:textColor="@color/digikala_gray"
                     android:textSize="12dp" />
 
@@ -414,6 +415,7 @@
                     android:paddingTop="4dp"
                     android:paddingRight="12dp"
                     android:paddingBottom="4dp"
+                    android:text='@{productViewModel.product == null ? "" : productViewModel.description}'
                     android:textColor="#C9464646"
                     android:textSize="10dp" />
 

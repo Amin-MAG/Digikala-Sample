@@ -72,7 +72,7 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
             binding.executePendingBindings();
 
             // Image
-            Picasso.get().load(viewModel.getImageSrc()).placeholder(R.drawable.place_holder).into(binding.productLayoutCover);
+            Picasso.get().load(viewModel.getFirstImageSrc()).placeholder(R.drawable.place_holder).into(binding.productLayoutCover);
 
             // Invalid Price Style
             binding.productLayoutPriceWithoutSales.setPaintFlags(new TextView(activity).getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);

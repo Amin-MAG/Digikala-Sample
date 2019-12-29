@@ -13,10 +13,9 @@ public class SliderViewPagerAdapter extends FragmentStatePagerAdapter {
 
     private List<SliderImageItemFragment> imagesFragment;
 
-    public SliderViewPagerAdapter(FragmentManager fm, List<String> imagesUrl) {
+    public SliderViewPagerAdapter(FragmentManager fm) {
         super(fm);
         imagesFragment = new ArrayList<>();
-        for (String url : imagesUrl) imagesFragment.add(SliderImageItemFragment.newInstance(url));
     }
 
     @Override
@@ -29,5 +28,10 @@ public class SliderViewPagerAdapter extends FragmentStatePagerAdapter {
         return imagesFragment.size();
     }
 
+    public void setImagesFragment(List<String> imagesUrl) {
+        imagesFragment = new ArrayList<>();
+        for (String url : imagesUrl) imagesFragment.add(SliderImageItemFragment.newInstance(url));
+        notifyDataSetChanged();
+    }
 
 }

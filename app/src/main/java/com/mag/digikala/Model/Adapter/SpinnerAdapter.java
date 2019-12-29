@@ -21,7 +21,6 @@ public class SpinnerAdapter extends ArrayAdapter<String> {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             font = context.getResources().getFont(R.font.iran_yekan);
         }
-
     }
 
     @Override
@@ -35,10 +34,6 @@ public class SpinnerAdapter extends ArrayAdapter<String> {
     @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
         TextView view = (TextView) super.getDropDownView(position, convertView, parent);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            view.setBackgroundColor(getContext().getColor(R.color.digikala_green));
-            view.setTextColor(getContext().getColor(R.color.digikala_raw_white));
-        }
         view.setTypeface(font);
         view.setTextSize(12);
         return view;
