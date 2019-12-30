@@ -2,31 +2,29 @@ package com.mag.digikala.Controller.Fragments;
 
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.material.button.MaterialButton;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+
 import com.mag.digikala.Model.Adapter.FilterSelectionAttributesRecyclerAdapter;
 import com.mag.digikala.Model.Adapter.FilterSelectionTermsRecyclerAdapter;
 import com.mag.digikala.Model.ProductAttributesRepository;
 import com.mag.digikala.R;
+import com.mag.digikala.databinding.FragmentFilterSelectionBinding;
 
 public class FilterSelectionFragment extends Fragment {
 
+    private FragmentFilterSelectionBinding binding;
+
     private FilterSelectionFragmentCallBack callBack;
 
-    private RecyclerView attrRecycler;
-    private RecyclerView termsRecycler;
     private FilterSelectionAttributesRecyclerAdapter attributesRecyclerAdapter;
     private FilterSelectionTermsRecyclerAdapter termsRecyclerAdapter;
-    private MaterialButton filterBtn;
 
     public static FilterSelectionFragment newInstance(FilterSelectionFragmentCallBack callBack) {
 
@@ -42,35 +40,30 @@ public class FilterSelectionFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_filter_selection, container, false);
+        binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_filter_selection, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        findComponents(view);
+        setAdapter();
 
-        attributesRecyclerAdapter = new FilterSelectionAttributesRecyclerAdapter(ProductAttributesRepository.getInstance().getAttributes(), () -> {
-            termsRecyclerAdapter = new FilterSelectionTermsRecyclerAdapter(attributesRecyclerAdapter.getSelected());
-            termsRecycler.setAdapter(termsRecyclerAdapter);
-        });
-        attrRecycler.setAdapter(attributesRecyclerAdapter);
-
-        filterBtn.setOnClickListener(filterBtnView -> callBack.filter());
+        binding.filterSelectionFragmentFilterBtn.setOnClickListener(filterBtnView -> callBack.filter());
 
     }
 
-    private void findComponents(@NonNull View view) {
-        termsRecycler = view.findViewById(R.id.filter_selection_fragment__options_recycler);
-        attrRecycler = view.findViewById(R.id.filter_selection_fragment__attribute_recycler);
-        filterBtn = view.findViewById(R.id.filter_selection_fragment__filter_btn);
+    private void setAdapter() {
+
+        attributesRecyclerAdapter = new FilterSelectionAttributesRecyclerAdapter(ProductAttributesRepository.getInstance().getAttributes(), () -> {
+            termsRecyclerAdapter = new FilterSelectionTermsRecyclerAdapter(attributesRecyclerAdapter.getSelected());
+            binding.filterSelectionFragmentOptionsRecycler.setAdapter(termsRecyclerAdapter);
+        });
+
+        binding.filterSelectionFragmentAttributeRecycler.setAdapter(attributesRecyclerAdapter);
+
     }
 
     public interface FilterSelectionFragmentCallBack {
