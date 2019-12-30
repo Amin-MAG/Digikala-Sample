@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.mag.digikala.Controller.Fragments.ProductDetailFragment;
+import com.mag.digikala.View.Fragment.ProductDetailFragment;
 import com.mag.digikala.Model.Adapter.NavigationRecyclerAdapter;
 import com.mag.digikala.View.ProductDetailToolbarFragment;
 import com.mag.digikala.R;

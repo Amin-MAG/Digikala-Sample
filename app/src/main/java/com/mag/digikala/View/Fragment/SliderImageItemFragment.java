@@ -1,25 +1,25 @@
-package com.mag.digikala.Controller.Fragments;
+package com.mag.digikala.View.Fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import com.mag.digikala.R;
+import com.mag.digikala.databinding.LayoutSliderImageItemBinding;
 import com.squareup.picasso.Picasso;
 
 
 public class SliderImageItemFragment extends Fragment {
 
-    public static final String ARG_URL_IMAGE_STRING = "args_url_image_string";
-    private String urlString;
+    private LayoutSliderImageItemBinding binding;
 
-    private ImageView imageView;
+    public static final String ARG_URL_IMAGE_STRING = "args_url_image_string";
 
     public static SliderImageItemFragment newInstance(String imageUrl) {
         SliderImageItemFragment fragment = new SliderImageItemFragment();
@@ -41,18 +41,14 @@ public class SliderImageItemFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.layout_slider_image_item, container, false);
+        binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.layout_slider_image_item, container, false);
+        return  binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        imageView = view.findViewById(R.id.slider_image_item);
-        urlString = getArguments().getString(ARG_URL_IMAGE_STRING);
-
-        Picasso.get().load(urlString).placeholder(getResources().getDrawable(R.drawable.place_holder)).into(imageView);
-
+        Picasso.get().load(getArguments().getString(ARG_URL_IMAGE_STRING)).placeholder(getResources().getDrawable(R.drawable.place_holder)).into(binding.sliderImageItem);
     }
 
 }

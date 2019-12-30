@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.mag.digikala.View.Fragment.CategoryViewPagerFragment;
-import com.mag.digikala.Controller.Fragments.CommonToolbarFragment;
+import com.mag.digikala.View.Fragment.CommonToolbarFragment;
 import com.mag.digikala.R;
 import com.mag.digikala.Util.UiUtil;
 

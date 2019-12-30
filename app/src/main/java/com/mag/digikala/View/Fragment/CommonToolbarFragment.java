@@ -1,26 +1,26 @@
-package com.mag.digikala.Controller.Fragments;
+package com.mag.digikala.View.Fragment;
 
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.google.android.material.button.MaterialButton;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+
 import com.mag.digikala.R;
+import com.mag.digikala.databinding.FragmentCommonToolbarBinding;
 
 
 public class CommonToolbarFragment extends Fragment {
 
+    private FragmentCommonToolbarBinding binding;
+
     public static final String ARG_COMMON_TOOLBAR_TITLE = "arg_common_toolbar_title";
-    private TextView toolbarTitle;
-    private MaterialButton backBtn;
+
     private CommonToolbarCallback callback;
 
 
@@ -40,22 +40,20 @@ public class CommonToolbarFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_common_toolbar, container, false);
+        binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_common_toolbar, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        toolbarTitle = view.findViewById(R.id.common_toolbar_fragment__title);
-        backBtn = view.findViewById(R.id.common_toolbar_fragment__back_btn);
-
-        backBtn.setOnClickListener(backBtnView -> callback.backBtnClicked());
-
-        toolbarTitle.setText(getArguments().getString(ARG_COMMON_TOOLBAR_TITLE));
+        binding.commonToolbarFragmentBackBtn.setOnClickListener(backBtnView -> callback.backBtnClicked());
+        binding.commonToolbarFragmentTitle.setText(getArguments().getString(ARG_COMMON_TOOLBAR_TITLE));
 
     }
 
+    // Should be changed later
     public interface CommonToolbarCallback {
         void backBtnClicked();
     }

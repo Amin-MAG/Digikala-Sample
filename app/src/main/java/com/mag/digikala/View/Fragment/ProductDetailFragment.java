@@ -1,4 +1,4 @@
-package com.mag.digikala.Controller.Fragments;
+package com.mag.digikala.View.Fragment;
 
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -23,16 +23,12 @@ import com.mag.digikala.viewmodel.ProductViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.realm.Realm;
-
 public class ProductDetailFragment extends Fragment {
 
     public static final String ARG_MECHANDICE = "arg_mechandice";
 
     private FragmentProductDetailBinding binding;
     private ProductViewModel viewModel;
-
-    private Realm realm;
 
     private SliderViewPagerAdapter sliderAdapter;
 
@@ -50,10 +46,7 @@ public class ProductDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        realm = Realm.getDefaultInstance();
         viewModel = new ProductViewModel(getArguments().getString(ARG_MECHANDICE));
-
     }
 
     @Override

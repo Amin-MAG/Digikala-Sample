@@ -1,4 +1,4 @@
-package com.mag.digikala.Controller.Fragments;
+package com.mag.digikala.View.Fragment;
 
 
 import android.content.Context;
@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -18,10 +19,13 @@ import com.google.android.material.button.MaterialButton;
 import com.mag.digikala.Controller.Activities.FilterActivity;
 import com.mag.digikala.R;
 import com.mag.digikala.Var.Constants;
+import com.mag.digikala.databinding.FragmentSearchToolbarBinding;
 
 public class SearchToolbarFragment extends Fragment {
 
-    private MaterialButton backBtn, voiceRecognitionBtn, closeSearchBtn;
+    private FragmentSearchToolbarBinding binding;
+
+    private MaterialButton closeSearchBtn;
     private EditText searchEditTxt;
 
     public static SearchToolbarFragment newInstance() {
@@ -39,41 +43,41 @@ public class SearchToolbarFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_search_toolbar, container, false);
+        binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_search_toolbar, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        findComponents(view);
-
-        backBtn.setIconTint(getResources().getColorStateList(R.color.digikala_gray));
-        voiceRecognitionBtn.setIconTint(getResources().getColorStateList(R.color.digikala_gray));
+        findComponents();
+        
+        binding.fragementSearchToolbarBackButton.setIconTint(getResources().getColorStateList(R.color.digikala_gray));
+        binding.fragementSearchToolbarVoiceButton.setIconTint(getResources().getColorStateList(R.color.digikala_gray));
         closeSearchBtn.setIconTint(getResources().getColorStateList(R.color.digikala_gray));
+
+        searchEditTxt.requestFocus();
 
         setEvents();
 
     }
 
-    private void findComponents(@NonNull View view) {
-        voiceRecognitionBtn = view.findViewById(R.id.fragement_search_toolbar__voice_button);
-        backBtn = view.findViewById(R.id.fragement_search_toolbar__back_button);
-        closeSearchBtn = view.findViewById(R.id.fragement_search_toolbar__close_button);
-        searchEditTxt = view.findViewById(R.id.fragement_search_toolbar__search_bar);
+    private void findComponents() {
+        closeSearchBtn = binding.fragementSearchToolbarCloseButton;
+        searchEditTxt = binding.fragementSearchToolbarSearchBar;
     }
 
     private void setEvents() {
-        searchEditTxt.requestFocus();
-        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+
+        openKeyboard();
 
         closeSearchBtn.setOnClickListener(closeSearchBtnView -> {
             searchEditTxt.setText(Constants.EMPTY_CHAR);
             closeSearchBtn.setVisibility(View.GONE);
         });
 
-        backBtn.setOnClickListener(backBtnView -> getActivity().finish());
+        binding.fragementSearchToolbarBackButton.setOnClickListener(backBtnView -> getActivity().finish());
 
         searchEditTxt.setOnKeyListener((view, i, keyEvent) -> {
             if (searchEditTxt.getText().length() > 0) closeSearchBtn.setVisibility(View.VISIBLE);
@@ -87,6 +91,12 @@ public class SearchToolbarFragment extends Fragment {
             imm1.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
             return false;
         });
+
+    }
+
+    private void openKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
     }
 
 
