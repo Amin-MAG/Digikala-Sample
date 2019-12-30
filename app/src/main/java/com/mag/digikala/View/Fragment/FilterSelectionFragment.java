@@ -1,4 +1,4 @@
-package com.mag.digikala.Controller.Fragments;
+package com.mag.digikala.View.Fragment;
 
 
 import android.os.Bundle;

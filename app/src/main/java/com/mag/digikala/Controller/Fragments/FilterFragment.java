@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,6 +24,7 @@ import com.mag.digikala.Model.ProductAttributesRepository;
 import com.mag.digikala.Network.RetrofitApi;
 import com.mag.digikala.Network.RetrofitInstance;
 import com.mag.digikala.R;
+import com.mag.digikala.databinding.FragmentFilterBinding;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,6 +38,8 @@ import static com.mag.digikala.Controller.Fragments.SortSelectionDialogFragment.
 
 public class FilterFragment extends Fragment {
 
+    private FragmentFilterBinding binding;
+
     public static final String ARG_SEARCH_STRING = "arg_search_string";
     public static final String ARG_CATEGORY_ID = "arg_category_id";
     private static final int REQUEST_CODE_FOR_SORT_DIALOG = 15001;
@@ -48,7 +52,7 @@ public class FilterFragment extends Fragment {
     private RetrofitApi retrofitApi;
     private FilterSelectionCallBack filterSelectionCallBack;
 
-    public static enum SORT_MODE {
+    public enum SORT_MODE {
         SORT_BY_VIEW(0), SORT_BY_SELL(1), SORT_BY_PRICE_ASCENDING(2), SORT_BY_PRICE_DESCENDING(3), SORT_BY_NEWEST(4);
 
         private int code;
@@ -117,7 +121,8 @@ public class FilterFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_filter, container, false);
+        binding = DataBindingUtil.inflate(getLayoutInflater(),R.layout.fragment_filter, container, false);
+        return binding.getRoot();
     }
 
     @Override

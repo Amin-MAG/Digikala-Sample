@@ -10,7 +10,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Controller.Fragments.FilterSelectionFragment">
+        tools:context=".View.Fragment.FilterSelectionFragment">
 
         <LinearLayout
             android:layout_width="0dp"

@@ -8,7 +8,7 @@ import android.os.Bundle;
 
 import com.mag.digikala.View.Fragment.CommonToolbarFragment;
 import com.mag.digikala.Controller.Fragments.FilterFragment;
-import com.mag.digikala.Controller.Fragments.FilterSelectionFragment;
+import com.mag.digikala.View.Fragment.FilterSelectionFragment;
 import com.mag.digikala.View.FilterToolbarFragment;
 import com.mag.digikala.R;
 import com.mag.digikala.Util.UiUtil;
