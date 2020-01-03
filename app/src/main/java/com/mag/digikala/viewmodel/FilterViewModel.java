@@ -150,19 +150,7 @@ public class FilterViewModel extends BaseObservable {
 
                         if (response.isSuccessful()) {
 
-                            List<Product> products = new ArrayList<>();
-
-                            if (categoryId != null) {
-                                for (Product product : response.body()) {
-                                    for (Category category : product.getCategories()) {
-                                        if (category.getId().equals(categoryId)) {
-                                            products.add(product);
-                                        }
-                                    }
-                                }
-                            }
-
-                            filteredProducts.postValue(products);
+                            filteredProducts.postValue(response.body());
 
                         }
 
@@ -181,19 +169,7 @@ public class FilterViewModel extends BaseObservable {
 
                         if (response.isSuccessful()) {
 
-                            List<Product> products = new ArrayList<>();
-
-                            if (categoryId != null) {
-                                for (Product product : response.body()) {
-                                    for (Category category : product.getCategories()) {
-                                        if (category.getId().equals(categoryId)) {
-                                            products.add(product);
-                                        }
-                                    }
-                                }
-                            }
-
-                            filteredProducts.postValue(products);
+                            filteredProducts.postValue(response.body());
 
                         }
 
@@ -225,9 +201,9 @@ public class FilterViewModel extends BaseObservable {
     public void setSortMode(SORT_MODE sortMode) {
         this.sortMode = sortMode;
         filter();
-        notifyChange();
     }
 
+    @Bindable
     public MutableLiveData<List<Product>> getFilteredProducts() {
         return filteredProducts;
     }

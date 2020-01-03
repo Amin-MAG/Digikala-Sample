@@ -66,7 +66,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
                     android:gravity="left"
-                    android:text="@{productViewModel.regularPrice}"
+                    android:text="@{productViewModel.salesPrice}"
                     android:textColor="@color/digikala_red"
                     android:textSize="12dp" />
 
@@ -76,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:gravity="left"
-                    android:text="@{productViewModel.salesPrice}"
+                    android:text="@{productViewModel.regularPrice}"
                     android:textColor="@color/digikala_green"
                     android:textSize="12dp" />
 

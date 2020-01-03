@@ -123,9 +123,9 @@ public class FilterFragment extends Fragment {
             Log.d("WWTTF DE", "setAdapter: " + "??");
             filterListAdapter.setData(products);
         });
-        viewModel.getFilterAttribute().observe(this, attribute -> {
-            viewModel.filter();
-        });
+//        viewModel.getFilterAttribute().observe(this, attribute -> {
+//            viewModel.filter();
+//        });
         viewModel.filter();
 
     }
