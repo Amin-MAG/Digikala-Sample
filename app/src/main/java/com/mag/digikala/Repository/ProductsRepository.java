@@ -1,4 +1,4 @@
-package com.mag.digikala.Model;
+package com.mag.digikala.Repository;
 
 import android.content.Context;
 import android.util.Log;
@@ -6,6 +6,9 @@ import android.view.View;
 
 import com.mag.digikala.Controller.Activities.CategoryActivity;
 import com.mag.digikala.Model.Adapter.NavigationRecyclerAdapter;
+import com.mag.digikala.Model.CategoryGroup;
+import com.mag.digikala.Model.MenuItem;
+import com.mag.digikala.Model.Product;
 import com.mag.digikala.R;
 import com.mag.digikala.Var.Constants;
 
@@ -81,7 +84,7 @@ public class ProductsRepository {
 
     // Categories
 
-    private Map<String ,CategoryGroup> categoryMap;
+    private Map<String , CategoryGroup> categoryMap;
     private List<CategoryGroup> parentCategory;
 
     public void setCategoryMap(Map<String ,CategoryGroup> categoryMap) {

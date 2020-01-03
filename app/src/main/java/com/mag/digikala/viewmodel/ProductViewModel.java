@@ -55,6 +55,10 @@ public class ProductViewModel extends BaseObservable {
 
     }
 
+    public String getId() {
+        return product.getId();
+    }
+
     @Bindable
     public String getTitle() {
         return product.getName();
@@ -74,7 +78,7 @@ public class ProductViewModel extends BaseObservable {
     }
 
     @Bindable
-    public String getSalerPrice() {
+    public String getSalesPrice() {
         String MONEY_STRING = Constants.SPACE_CHAR + "تومان";
         return product.isOnSale() ? product.getRegularPrice() + MONEY_STRING : "";
     }
@@ -107,6 +111,7 @@ public class ProductViewModel extends BaseObservable {
     public MutableLiveData<List<String>> getImagesSrc() {
         return imageUrls;
     }
+
 
 
 }

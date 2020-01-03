@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.mag.digikala.Model.Adapter.CardListRecyclerAdapter;
 import com.mag.digikala.Model.Product;
 import com.mag.digikala.R;
-import com.mag.digikala.ViewModelLiveData.CardViewModel;
+import com.mag.digikala.viewmodel.CardViewModel;
 
 import java.util.ArrayList;
 import java.util.List;

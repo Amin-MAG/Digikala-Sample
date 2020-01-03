@@ -19,14 +19,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationView;
 import com.mag.digikala.View.Fragment.MainFragment;
-import com.mag.digikala.Model.ProductAttributesRepository;
+import com.mag.digikala.Repository.FilterRepository;
 import com.mag.digikala.Repository.CardRepository;
 import com.mag.digikala.View.MainToolbarFragment;
 import com.mag.digikala.Model.Adapter.NavigationRecyclerAdapter;
 import com.mag.digikala.Model.Category;
 import com.mag.digikala.Model.CategoryGroup;
 import com.mag.digikala.Model.Product;
-import com.mag.digikala.Model.ProductsRepository;
+import com.mag.digikala.Repository.ProductsRepository;
 import com.mag.digikala.Network.RetrofitApi;
 import com.mag.digikala.Network.RetrofitInstance;
 import com.mag.digikala.R;
@@ -211,13 +211,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void requestToGetProducts() {
-        retrofitApi.getAllProducts(10, 1).enqueue(new Callback<List<Product>>() {
+        retrofitApi.getProducts(10, 1, "date").enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
 
                 if (response.isSuccessful()) {
-                    Log.d("WWWWWTTF", "onFailure: ");
-
                     ProductsRepository.getInstance().setAllProducts(response.body());
                     requestToGetOfferedProducts();
 
@@ -229,7 +227,6 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(Call<List<Product>> call, Throwable t) {
                 loadConncetionErrorSlide();
 
-                Log.d("WWWWWTTF", "onFailure: " + t.getMessage());
             }
 
         });
@@ -241,8 +238,6 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
 
                 if (response.isSuccessful()) {
-                    Log.d("WWWWWTTF", "onFailure: ");
-
                     ProductsRepository.getInstance().setOfferedProducts(response.body());
                     requestToGetTopRatingProducts();
 
@@ -253,14 +248,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<Product>> call, Throwable t) {
                 loadConncetionErrorSlide();
-                Log.d("WWWWWTTF", "onFailure: " + t.getMessage());
             }
 
         });
     }
 
     private void requestToGetTopRatingProducts() {
-        retrofitApi.getOrderedProducts("rating", 8, 1).enqueue(new Callback<List<Product>>() {
+        retrofitApi.getProducts(8, 1, "rating").enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
 
@@ -281,7 +275,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void requestToGetPopularProducts() {
-        retrofitApi.getOrderedProducts("popularity", 8, 1).enqueue(new Callback<List<Product>>() {
+        retrofitApi.getProducts(8, 1, "popularity").enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
 
@@ -298,32 +292,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void requestToGetInitialAttributeData() {
-        retrofitApi.getAttributes().enqueue(new Callback<List<ProductAttributesRepository.Attribute>>() {
+        retrofitApi.getAttributes().enqueue(new Callback<List<FilterRepository.Attribute>>() {
             @Override
-            public void onResponse(Call<List<ProductAttributesRepository.Attribute>> call, Response<List<ProductAttributesRepository.Attribute>> response) {
+            public void onResponse(Call<List<FilterRepository.Attribute>> call, Response<List<FilterRepository.Attribute>> response) {
 
                 if (response.isSuccessful()) {
 
-                    List<ProductAttributesRepository.Attribute> defaultAttributes = new ArrayList<>();
+                    List<FilterRepository.Attribute> defaultAttributes = new ArrayList<>();
 
-                    for (ProductAttributesRepository.Attribute attribute : response.body()) {
-                        ProductAttributesRepository.Attribute newAttribute = attribute;
-                        retrofitApi.getTerms(newAttribute.getId()).enqueue(new Callback<List<ProductAttributesRepository.Term>>() {
+                    for (FilterRepository.Attribute attribute : response.body()) {
+                        FilterRepository.Attribute newAttribute = attribute;
+                        retrofitApi.getTerms(newAttribute.getId()).enqueue(new Callback<List<FilterRepository.Term>>() {
                             @Override
-                            public void onResponse(Call<List<ProductAttributesRepository.Term>> call, Response<List<ProductAttributesRepository.Term>> response) {
+                            public void onResponse(Call<List<FilterRepository.Term>> call, Response<List<FilterRepository.Term>> response) {
 
                                 if (response.isSuccessful()) {
 
                                     newAttribute.setTerms(response.body());
                                     defaultAttributes.add(newAttribute);
-                                    ProductAttributesRepository.getInstance().setAttributes(defaultAttributes);
+                                    FilterRepository.getInstance().setAttributes(defaultAttributes);
 
                                 }
 
                             }
 
                             @Override
-                            public void onFailure(Call<List<ProductAttributesRepository.Term>> call, Throwable t) {
+                            public void onFailure(Call<List<FilterRepository.Term>> call, Throwable t) {
 
                             }
                         });
@@ -335,7 +329,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<ProductAttributesRepository.Attribute>> call, Throwable t) {
+            public void onFailure(Call<List<FilterRepository.Attribute>> call, Throwable t) {
 
             }
         });

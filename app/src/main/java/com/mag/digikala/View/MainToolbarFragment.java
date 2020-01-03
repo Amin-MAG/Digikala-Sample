@@ -20,7 +20,7 @@ import com.mag.digikala.Controller.Activities.MainActivity;
 import com.mag.digikala.Controller.Activities.SearchActivity;
 import com.mag.digikala.R;
 import com.mag.digikala.Var.Constants;
-import com.mag.digikala.ViewModelLiveData.MainToolbarViewModel;
+import com.mag.digikala.viewmodel.toolbar.MainToolbarViewModel;
 
 public class MainToolbarFragment extends Fragment {
 

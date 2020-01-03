@@ -1,4 +1,4 @@
-package com.mag.digikala.ViewModelLiveData;
+package com.mag.digikala.viewmodel;
 
 import android.app.Application;
 import android.util.Log;
@@ -25,9 +25,6 @@ public class CardViewModel extends AndroidViewModel {
         repository = CardRepository.getInstance();
         sumOfCardProducts = repository.getSumOfCardProducts();
         products = repository.getProductList();
-
-
-        Log.d("debug_for_products", "CardViewModel: " + products.getValue());
 
     }
 

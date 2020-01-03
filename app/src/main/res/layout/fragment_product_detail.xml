@@ -347,7 +347,7 @@
                         android:layout_marginLeft="4dp"
                         android:fontFamily="@font/far_trafc_bd"
                         android:gravity="left"
-                        android:text='@{productViewModel.product == null ?  "" : productViewModel.salerPrice}'
+                        android:text='@{productViewModel.product == null ?  "" : productViewModel.salesPrice}'
                         android:textColor="@color/digikala_green"
                         android:textSize="17dp" />
 

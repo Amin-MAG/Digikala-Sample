@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mag.digikala.Model.ProductAttributesRepository;
+import com.mag.digikala.Repository.FilterRepository;
 import com.mag.digikala.R;
 
 import java.util.List;
@@ -17,11 +17,11 @@ import java.util.List;
 public class FilterSelectionAttributesRecyclerAdapter extends RecyclerView.Adapter<FilterSelectionAttributesRecyclerAdapter.FilterSelectionAttributesRecyclerViewHolder> {
 
     private Activity activity;
-    private List<ProductAttributesRepository.Attribute> attributes;
-    private ProductAttributesRepository.Attribute selected;
+    private List<FilterRepository.Attribute> attributes;
+    private FilterRepository.Attribute selected;
     private AdapterCallback callback;
 
-    public FilterSelectionAttributesRecyclerAdapter(List<ProductAttributesRepository.Attribute> attributes, AdapterCallback callback) {
+    public FilterSelectionAttributesRecyclerAdapter(List<FilterRepository.Attribute> attributes, AdapterCallback callback) {
         this.attributes = attributes;
         this.callback = callback;
     }
@@ -46,7 +46,7 @@ public class FilterSelectionAttributesRecyclerAdapter extends RecyclerView.Adapt
 
     public class FilterSelectionAttributesRecyclerViewHolder extends RecyclerView.ViewHolder {
 
-        private ProductAttributesRepository.Attribute productAttribute;
+        private FilterRepository.Attribute productAttribute;
         private TextView attrText;
 
         public FilterSelectionAttributesRecyclerViewHolder(@NonNull View itemView) {
@@ -74,7 +74,7 @@ public class FilterSelectionAttributesRecyclerAdapter extends RecyclerView.Adapt
             }
         }
 
-        private void bind(ProductAttributesRepository.Attribute productAttribute) {
+        private void bind(FilterRepository.Attribute productAttribute) {
             this.productAttribute = productAttribute;
 
             selectedAttributeUi();
@@ -84,7 +84,7 @@ public class FilterSelectionAttributesRecyclerAdapter extends RecyclerView.Adapt
 
     }
 
-    public ProductAttributesRepository.Attribute getSelected() {
+    public FilterRepository.Attribute getSelected() {
         return selected;
     }
 

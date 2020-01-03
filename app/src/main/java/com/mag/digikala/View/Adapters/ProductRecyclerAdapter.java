@@ -78,7 +78,7 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
             binding.productLayoutPriceWithoutSales.setPaintFlags(new TextView(activity).getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
             // Card Event
-            binding.productLayoutCardview.setOnClickListener(view -> activity.startActivity(ProductDetailActivity.newIntent(activity, product.getId())));
+            binding.productLayoutCardview.setOnClickListener(view -> activity.startActivity(ProductDetailActivity.newIntent(activity, viewModel.getId())));
 
         }
 

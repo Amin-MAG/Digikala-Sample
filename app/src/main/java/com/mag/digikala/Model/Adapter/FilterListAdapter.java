@@ -2,24 +2,21 @@ package com.mag.digikala.Model.Adapter;
 
 import android.app.Activity;
 import android.graphics.Paint;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mag.digikala.Controller.Activities.ProductDetailActivity;
 import com.mag.digikala.Model.Product;
 import com.mag.digikala.R;
-import com.mag.digikala.Var.Constants;
+import com.mag.digikala.databinding.LayoutFilterListItemBinding;
+import com.mag.digikala.viewmodel.ProductViewModel;
 import com.squareup.picasso.Picasso;
 
-import org.jsoup.Jsoup;
-
+import java.util.ArrayList;
 import java.util.List;
 
 public class FilterListAdapter extends RecyclerView.Adapter<FilterListAdapter.FilterListViewHolder> {
@@ -32,12 +29,16 @@ public class FilterListAdapter extends RecyclerView.Adapter<FilterListAdapter.Fi
         this.products = products;
     }
 
+    public FilterListAdapter() {
+        this.products = new ArrayList<>();
+    }
+
     @NonNull
     @Override
     public FilterListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         activity = (Activity) parent.getContext();
-        View view = LayoutInflater.from(activity).inflate(R.layout.layout_filter_list_item, parent, false);
-        return new FilterListAdapter.FilterListViewHolder(view);
+        LayoutFilterListItemBinding binding = DataBindingUtil.inflate(activity.getLayoutInflater(), R.layout.layout_filter_list_item, parent, false);
+        return new FilterListAdapter.FilterListViewHolder(binding);
     }
 
     @Override
@@ -50,70 +51,44 @@ public class FilterListAdapter extends RecyclerView.Adapter<FilterListAdapter.Fi
         return products.size();
     }
 
-    public void setData(List<Product> products) {
-        this.products = products;
-    }
-
     public class FilterListViewHolder extends RecyclerView.ViewHolder {
 
-        private Product product;
-        private TextView productTitle, productDescription, regularPrice, salesPrice;
-        private ImageView productImage;
-        private CardView cardView;
+        private LayoutFilterListItemBinding binding;
+        private ProductViewModel viewModel;
 
-        public FilterListViewHolder(@NonNull View itemView) {
-            super(itemView);
-            findComponents(itemView);
+        public FilterListViewHolder(@NonNull LayoutFilterListItemBinding binding) {
+            super(binding.getRoot());
 
-            cardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    activity.startActivity(ProductDetailActivity.newIntent(activity, product.getId()));
-                }
-            });
+            this.binding = binding;
+            this.viewModel = new ProductViewModel();
 
-        }
+            binding.setProductViewModel(viewModel);
 
-        private void findComponents(@NonNull View itemView) {
-            cardView = itemView.findViewById(R.id.filter_list_item_layout__card_view);
-            regularPrice = itemView.findViewById(R.id.filter_list_item_layout__product_regular_price);
-            salesPrice = itemView.findViewById(R.id.filter_list_item_layout__product_sales_price);
-            productTitle = itemView.findViewById(R.id.filter_list_item_layout__product_title);
-            productDescription = itemView.findViewById(R.id.filter_list_item_layout__product_description);
-            productImage = itemView.findViewById(R.id.filter_list_item_layout__product_image);
         }
 
         public void bind(Product product) {
 
-            this.product = product;
+            binding.getProductViewModel().setProduct(product);
 
-            priceView();
+//            binding.filterListItemLayoutProductDescription.setText(shortDescriptionString.length() > 80 ? shortDescriptionString.substring(0, 80) + "..." : shortDescriptionString);
 
-            productTitle.setText(product.getName() + " " + product.getId());
-            String shortDescriptionString = Jsoup.parse(product.getShortDescription()).text();
-            productDescription.setText(shortDescriptionString.length() > 80 ? shortDescriptionString.substring(0, 80) + "..." : shortDescriptionString);
+            // Image
+            Picasso.get().load(viewModel.getFirstImageSrc()).placeholder(activity.getResources().getDrawable(R.drawable.place_holder)).into(binding.filterListItemLayoutProductImage);
 
-            Picasso.get().load(product.getImages()[0].getSrc()).placeholder(activity.getResources().getDrawable(R.drawable.place_holder)).into(productImage);
+            // Invalid Price Style
+            binding.filterListItemLayoutProductRegularPrice.setPaintFlags(new TextView(activity).getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
-        }
+            // Card Event
+            binding.filterListItemLayoutCardView.setOnClickListener(view -> activity.startActivity(ProductDetailActivity.newIntent(activity, viewModel.getId())));
 
-        private void priceView() {
-            String MONEY_STRING = Constants.SPACE_CHAR + activity.getResources().getString(R.string.tomans);
-            String priceString;
-            String priceInvalidString = "";
-
-            if (product.getSalePrice().equals(Constants.EMPTY_CHAR))
-                priceString = product.getPrice() + MONEY_STRING;
-            else {
-                priceString = product.getSalePrice() + MONEY_STRING;
-                priceInvalidString = product.getPrice() + MONEY_STRING;
-            }
-
-            regularPrice.setText(priceInvalidString);
-            regularPrice.setPaintFlags(salesPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-            salesPrice.setText(priceString);
         }
 
     }
 
+
+    public void setData(List<Product> products) {
+        this.products = products;
+        notifyDataSetChanged();
+    }
+    
 }

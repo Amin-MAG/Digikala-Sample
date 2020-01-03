@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 import com.mag.digikala.Controller.Activities.CardActivity;
 import com.mag.digikala.Model.Adapter.SliderViewPagerAdapter;
 import com.mag.digikala.Model.Adapter.SpinnerAdapter;
-import com.mag.digikala.Model.ProductAttributesRepository;
+import com.mag.digikala.Repository.FilterRepository;
 import com.mag.digikala.R;
 import com.mag.digikala.Repository.CardRepository;
 import com.mag.digikala.databinding.FragmentProductDetailBinding;
@@ -85,7 +85,7 @@ public class ProductDetailFragment extends Fragment {
     // Should be changed
     private void setSpinners() {
         List<String> spinnerColorArray = new ArrayList<>();
-        for (ProductAttributesRepository.Term term : ProductAttributesRepository.getInstance().getAttributeById("3").getTerms())
+        for (FilterRepository.Term term : FilterRepository.getInstance().getAttributeById("3").getTerms())
             spinnerColorArray.add(term.getName());
         SpinnerAdapter colorAdapter = new SpinnerAdapter(
                 getActivity(),
@@ -96,7 +96,7 @@ public class ProductDetailFragment extends Fragment {
 
 
         List<String> spinnerSizeArray = new ArrayList<>();
-        for (ProductAttributesRepository.Term term : ProductAttributesRepository.getInstance().getAttributeById("4").getTerms())
+        for (FilterRepository.Term term : FilterRepository.getInstance().getAttributeById("4").getTerms())
             spinnerSizeArray.add(term.getName());
         SpinnerAdapter sizeAdapter = new SpinnerAdapter(
                 getActivity(),

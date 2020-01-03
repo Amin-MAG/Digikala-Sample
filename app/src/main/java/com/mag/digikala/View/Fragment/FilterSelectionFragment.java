@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.mag.digikala.Model.Adapter.FilterSelectionAttributesRecyclerAdapter;
 import com.mag.digikala.Model.Adapter.FilterSelectionTermsRecyclerAdapter;
-import com.mag.digikala.Model.ProductAttributesRepository;
+import com.mag.digikala.Repository.FilterRepository;
 import com.mag.digikala.R;
 import com.mag.digikala.databinding.FragmentFilterSelectionBinding;
 
@@ -57,7 +57,7 @@ public class FilterSelectionFragment extends Fragment {
 
     private void setAdapter() {
 
-        attributesRecyclerAdapter = new FilterSelectionAttributesRecyclerAdapter(ProductAttributesRepository.getInstance().getAttributes(), () -> {
+        attributesRecyclerAdapter = new FilterSelectionAttributesRecyclerAdapter(FilterRepository.getInstance().getAttributes(), () -> {
             termsRecyclerAdapter = new FilterSelectionTermsRecyclerAdapter(attributesRecyclerAdapter.getSelected());
             binding.filterSelectionFragmentOptionsRecycler.setAdapter(termsRecyclerAdapter);
         });

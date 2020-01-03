@@ -60,7 +60,7 @@
                 android:layout_gravity="left"
                 android:layout_marginLeft="4dp"
                 android:gravity="left"
-                android:text="@{productViewModel.salerPrice}"
+                android:text="@{productViewModel.salesPrice}"
                 android:textColor="@color/digikala_red"
                 android:textSize="8dp" />
 

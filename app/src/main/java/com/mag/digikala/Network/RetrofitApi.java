@@ -2,7 +2,7 @@ package com.mag.digikala.Network;
 
 import com.mag.digikala.Model.Category;
 import com.mag.digikala.Model.Product;
-import com.mag.digikala.Model.ProductAttributesRepository;
+import com.mag.digikala.Repository.FilterRepository;
 
 import java.util.List;
 import java.util.Map;
@@ -21,33 +21,52 @@ public interface RetrofitApi {
     //  Products //
 
     @GET(BASE_URL + "products" + WOOCOMMERCE_REST_AUTHENTICATION_KEY)
-    Call<List<Product>> getAllProducts(@Query("per_page") int perPage, @Query("page") int numberOfPage);
+    Call<List<Product>> getProducts(@Query("search") String searchText, @Query("attribute") String attribute, @Query("attribute_term") String terms, @Query("per_page") int perPage, @Query("page") int numberOfPage, @Query("orderby") String baseOn, @Query("order") String order);
+
+    @GET(BASE_URL + "products" + WOOCOMMERCE_REST_AUTHENTICATION_KEY)
+    Call<List<Product>> getProducts(@Query("search") String searchText, @Query("attribute") String attribute, @Query("attribute_term") String terms, @Query("per_page") int perPage, @Query("page") int numberOfPage);
+
+
+    @GET(BASE_URL + "products" + WOOCOMMERCE_REST_AUTHENTICATION_KEY)
+    Call<List<Product>> getProducts(@Query("attribute") String attribute, @Query("attribute_term") String terms, @Query("per_page") int perPage, @Query("page") int numberOfPage);
+
+    @GET(BASE_URL + "products" + WOOCOMMERCE_REST_AUTHENTICATION_KEY + "&per_page=100")
+    Call<List<Product>> searchProducts(@Query("search") String searchText, @Query("per_page") int perPage, @Query("page") int numberOfPage);
+
+
+    @GET(BASE_URL + "products" + WOOCOMMERCE_REST_AUTHENTICATION_KEY)
+    Call<List<Product>> getProducts(@Query("per_page") int perPage, @Query("page") int numberOfPage, @Query("orderby") String baseOn);
+
+
+    ///// With Category
+
+    @GET(BASE_URL + "products" + WOOCOMMERCE_REST_AUTHENTICATION_KEY)
+    Call<List<Product>> getProducts(@Query("category") String category, @Query("search") String searchText, @Query("attribute") String attribute, @Query("attribute_term") String terms, @Query("per_page") int perPage, @Query("page") int numberOfPage, @Query("orderby") String baseOn, @Query("order") String order);
+
+    @GET(BASE_URL + "products" + WOOCOMMERCE_REST_AUTHENTICATION_KEY)
+    Call<List<Product>> getProducts(@Query("category") String category, @Query("search") String searchText, @Query("attribute") String attribute, @Query("attribute_term") String terms, @Query("per_page") int perPage, @Query("page") int numberOfPage);
+
+    @GET(BASE_URL + "products" + WOOCOMMERCE_REST_AUTHENTICATION_KEY)
+    Call<List<Product>> getProducts(@Query("category") String category, @Query("per_page") int perPage, @Query("page") int numberOfPage);
+
+
+    //// Special For Products
 
     @GET(BASE_URL + "products/{id}" + WOOCOMMERCE_REST_AUTHENTICATION_KEY)
     Call<Product> getProductById(@Path("id") String productId);
 
-    @GET(BASE_URL + "products" + WOOCOMMERCE_REST_AUTHENTICATION_KEY + "&per_page=100")
-    Call<List<Product>> searchProducts(@Query("search") String searchText, @QueryMap Map<String, String> map);
 
     @GET(BASE_URL + "products" + WOOCOMMERCE_REST_AUTHENTICATION_KEY + "&on_sale=true")
     Call<List<Product>> getSaleProduct(@Query("per_page") int perPage, @Query("page") int numberOfPage);
 
-    @GET(BASE_URL + "products" + WOOCOMMERCE_REST_AUTHENTICATION_KEY)
-    Call<List<Product>> getProducts(@QueryMap Map<String, String> map);
 
-    @GET(BASE_URL + "products" + WOOCOMMERCE_REST_AUTHENTICATION_KEY)
-    Call<List<Product>> getOrderedProducts(@Query("orderby") String attribute, @Query("per_page") int perPage, @Query("page") int numberOfPage);
-
-    @GET(BASE_URL + "products" + WOOCOMMERCE_REST_AUTHENTICATION_KEY)
-    Call<List<Product>> getFilteredProducts(@Query("attribute") String attribute, @Query("attribute_term") String terms);
-
-    // Attributes
+    // Attributes //
 
     @GET(BASE_URL + "products/attributes" + WOOCOMMERCE_REST_AUTHENTICATION_KEY + "&per_page=20")
-    Call<List<ProductAttributesRepository.Attribute>> getAttributes();
+    Call<List<FilterRepository.Attribute>> getAttributes();
 
     @GET(BASE_URL + "products/attributes/{id}/terms" + WOOCOMMERCE_REST_AUTHENTICATION_KEY + "&per_page=20")
-    Call<List<ProductAttributesRepository.Term>> getTerms(@Path("id") String id);
+    Call<List<FilterRepository.Term>> getTerms(@Path("id") String id);
 
     // Categories //
 

@@ -1,87 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/filter_list_item_layout__card_view"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="4dp"
-    android:orientation="vertical">
 
-    <LinearLayout
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <data>
+        <variable
+            name="productViewModel"
+            type="com.mag.digikala.viewmodel.ProductViewModel" />
+    </data>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/filter_list_item_layout__card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_margin="4dp"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:orientation="vertical">
 
 
-            <TextView
-                android:id="@+id/filter_list_item_layout__product_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                <TextView
+                    android:id="@+id/filter_list_item_layout__product_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:gravity="right"
+                    android:text="@{productViewModel.title}"
+                    android:textColor="@android:color/black"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/filter_list_item_layout__product_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:gravity="left"
+                    android:text="@{productViewModel.shortDescription}"
+                    android:textColor="@color/digikala_gray"
+                    android:textSize="10dp" />
+
+                <View
+                    android:id="@+id/filter_list_item_layout__devider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp"
+                    android:background="?android:attr/listDivider" />
+
+                <TextView
+                    android:id="@+id/filter_list_item_layout__product_regular_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:gravity="left"
+                    android:text="@{productViewModel.regularPrice}"
+                    android:textColor="@color/digikala_red"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/filter_list_item_layout__product_sales_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:gravity="left"
+                    android:text="@{productViewModel.salesPrice}"
+                    android:textColor="@color/digikala_green"
+                    android:textSize="12dp" />
+
+            </LinearLayout>
+
+
+            <ImageView
+                android:id="@+id/filter_list_item_layout__product_image"
+                android:layout_width="wrap_content"
+                android:layout_height="136dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:gravity="right"
-                android:text="Something"
-                android:textColor="@android:color/black"
-                android:textSize="16dp" />
-
-            <TextView
-                android:id="@+id/filter_list_item_layout__product_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:gravity="left"
-                android:text="Something"
-                android:textColor="@color/digikala_gray"
-                android:textSize="10dp" />
-
-            <View
-                android:id="@+id/filter_list_item_layout__devider"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="8dp"
-                android:background="?android:attr/listDivider" />
-
-            <TextView
-                android:id="@+id/filter_list_item_layout__product_regular_price"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:gravity="left"
-                android:text="Something"
-                android:textColor="@color/digikala_red"
-                android:textSize="12dp" />
-
-            <TextView
-                android:id="@+id/filter_list_item_layout__product_sales_price"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:gravity="left"
-                android:text="Something"
-                android:textColor="@color/digikala_green"
-                android:textSize="12dp" />
+                android:layout_weight="0.5"
+                android:src="@drawable/logo" />
 
         </LinearLayout>
 
 
-        <ImageView
-            android:id="@+id/filter_list_item_layout__product_image"
-            android:layout_width="wrap_content"
-            android:layout_height="136dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_weight="0.5"
-            android:src="@drawable/logo" />
+    </androidx.cardview.widget.CardView>
 
-    </LinearLayout>
-
-
-</androidx.cardview.widget.CardView>
+</layout>

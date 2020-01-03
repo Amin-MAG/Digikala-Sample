@@ -9,7 +9,7 @@ import android.widget.CheckBox;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mag.digikala.Model.ProductAttributesRepository;
+import com.mag.digikala.Repository.FilterRepository;
 import com.mag.digikala.R;
 
 import java.util.List;
@@ -17,10 +17,10 @@ import java.util.List;
 public class FilterSelectionTermsRecyclerAdapter extends RecyclerView.Adapter<FilterSelectionTermsRecyclerAdapter.FilterSelectionOptionsRecyclerViewHolder> {
 
     private Activity activity;
-    private ProductAttributesRepository.Attribute attribute;
-    private List<ProductAttributesRepository.Term> terms;
+    private FilterRepository.Attribute attribute;
+    private List<FilterRepository.Term> terms;
 
-    public FilterSelectionTermsRecyclerAdapter(ProductAttributesRepository.Attribute attribute) {
+    public FilterSelectionTermsRecyclerAdapter(FilterRepository.Attribute attribute) {
         this.attribute = attribute;
         this.terms = attribute.getTerms();
     }
@@ -45,7 +45,7 @@ public class FilterSelectionTermsRecyclerAdapter extends RecyclerView.Adapter<Fi
 
     public class FilterSelectionOptionsRecyclerViewHolder extends RecyclerView.ViewHolder {
 
-        ProductAttributesRepository.Term term;
+        FilterRepository.Term term;
         private CheckBox termCheckedBox;
 
         public FilterSelectionOptionsRecyclerViewHolder(@NonNull View itemView) {
@@ -56,20 +56,20 @@ public class FilterSelectionTermsRecyclerAdapter extends RecyclerView.Adapter<Fi
 
             termCheckedBox.setOnClickListener(view -> {
                 if (termCheckedBox.isChecked())
-                    ProductAttributesRepository.getInstance().getAttributeById(attribute.getId()).addToSelected(term);
+                    FilterRepository.getInstance().getAttributeById(attribute.getId()).addToSelected(term);
                 else
-                    ProductAttributesRepository.getInstance().getAttributeById(attribute.getId()).removeFromSelected(term);
+                    FilterRepository.getInstance().getAttributeById(attribute.getId()).removeFromSelected(term);
 
                 notifyDataSetChanged();
             });
 
         }
 
-        private void bind(ProductAttributesRepository.Term term) {
+        private void bind(FilterRepository.Term term) {
             this.term = term;
             termCheckedBox.setText(term.getName());
 
-            if (ProductAttributesRepository.getInstance().getAttributeById(attribute.getId()).getSelectedTerms().contains(term))
+            if (FilterRepository.getInstance().getAttributeById(attribute.getId()).getSelectedTerm().contains(term))
                 termCheckedBox.setChecked(true);
             else
                 termCheckedBox.setChecked(false);

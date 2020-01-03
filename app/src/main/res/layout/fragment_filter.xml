@@ -2,6 +2,9 @@
 
     <data>
 
+        <variable
+            name="filterViewHolder"
+            type="com.mag.digikala.viewmodel.FilterViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -60,6 +63,7 @@
                     android:layout_height="13dp"
                     android:gravity="center"
                     android:textSize="8dp"
+                    android:text="@{filterViewHolder.sortModeString}"
                     app:fontFamily="@font/iran_yekan"
                     app:layout_constraintEnd_toStartOf="@+id/imageView"
                     app:layout_constraintHorizontal_bias="0.6"
@@ -120,6 +124,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:text="@string/filter_default"
                     android:textSize="8dp"
                     app:fontFamily="@font/iran_yekan"
                     app:layout_constraintEnd_toStartOf="@+id/imageView2"

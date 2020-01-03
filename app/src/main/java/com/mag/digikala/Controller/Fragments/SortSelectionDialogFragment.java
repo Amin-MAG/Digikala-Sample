@@ -23,21 +23,19 @@ import com.mag.digikala.databinding.FragmentSortSelectionDialogBinding;
 
 public class SortSelectionDialogFragment extends DialogFragment {
 
+    private FragmentSortSelectionDialogBinding binding;
+
     public static final String EXTRA_SORT_ID = "extra_sort_id";
     private RadioButton newest, mostView, bestSeller, priceAscending, priceDescending;
 
 
-    public  enum SORT_MODE {
+    public enum SORT_MODE {
         SORT_BY_VIEW(0), SORT_BY_SELL(1), SORT_BY_PRICE_ASCENDING(2), SORT_BY_PRICE_DESCENDING(3), SORT_BY_NEWEST(4);
 
         private int code;
 
         SORT_MODE(int code) {
             this.code = code;
-        }
-
-        public int getNumVal() {
-            return code;
         }
 
     }
@@ -66,7 +64,8 @@ public class SortSelectionDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
 
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_sort_selection_dialog, null, false);
-
+//        binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_sort_selection_dialog, null, false);
+//        View view = binding.getRoot();
         findComponents(view);
 
         setEvents();

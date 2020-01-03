@@ -1,39 +1,43 @@
-package com.mag.digikala.Model;
+package com.mag.digikala.Repository;
 
-import android.util.Log;
+import android.os.Build;
+
+import androidx.lifecycle.MutableLiveData;
+
+import org.w3c.dom.Attr;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductAttributesRepository {
+public class FilterRepository {
 
-    private static ProductAttributesRepository instance;
+    private static FilterRepository instance;
 
-    private ProductAttributesRepository() {
+    private FilterRepository() {
 
     }
 
-    public static ProductAttributesRepository getInstance() {
+    public static FilterRepository getInstance() {
         if (instance == null)
-            instance = new ProductAttributesRepository();
+            instance = new FilterRepository();
         return instance;
     }
 
+    // Filter
 
-    // Attributes
+    private MutableLiveData<Attribute> filterAttribute;
+
+    public MutableLiveData<Attribute> getFilterAttribute() {
+        return filterAttribute;
+    }
+
+
+    // Default Attributes
 
     private List<Attribute> attributes;
 
     public void setAttributes(List<Attribute> attributes) {
         this.attributes = attributes;
-
-        for (Attribute attribute : attributes) {
-            Log.d("attributes", attribute.getName()  + " " + attribute.getId()+ " [ ");
-            for (Term term : attribute.getTerms())
-                Log.d("attributes", term.getName());
-
-            Log.d("attributes", " ] ");
-        }
     }
 
     public List<Attribute> getAttributes() {
@@ -46,6 +50,8 @@ public class ProductAttributesRepository {
                 return attribute;
         return null;
     }
+
+    // Classes
 
     public class Attribute {
 
@@ -78,6 +84,7 @@ public class ProductAttributesRepository {
         }
 
         public void addToSelected(Term term) {
+            filterAttribute.postValue(this);
             selectedTerms.add(term);
         }
 
@@ -86,9 +93,18 @@ public class ProductAttributesRepository {
                 selectedTerms.remove(term);
         }
 
-        public List<Term> getSelectedTerms() {
+        public List<Term> getSelectedTerm() {
             return selectedTerms;
         }
+
+        public String getSelectedTermString() {
+            List<String> strings = new ArrayList<>();
+            for (Term term : selectedTerms)
+                strings.add(term.id);
+            return String.join(",", strings);
+        }
+
+
     }
 
     public class Term {
