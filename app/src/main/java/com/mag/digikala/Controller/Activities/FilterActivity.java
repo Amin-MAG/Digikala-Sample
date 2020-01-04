@@ -12,6 +12,7 @@ import com.mag.digikala.View.Fragment.FilterSelectionFragment;
 import com.mag.digikala.View.FilterToolbarFragment;
 import com.mag.digikala.R;
 import com.mag.digikala.Util.UiUtil;
+import com.mag.digikala.viewmodel.FilterSelectionViewModel;
 
 public class FilterActivity extends AppCompatActivity implements FilterFragment.FilterSelectionCallBack {
 
@@ -21,6 +22,8 @@ public class FilterActivity extends AppCompatActivity implements FilterFragment.
     private FilterFragment filterFragment;
     private CommonToolbarFragment filterSelectionFragmentCommonToolbar;
     private FilterSelectionFragment filterSelectionFragment;
+
+    private FilterSelectionViewModel filterSelectionViewModel;
 
     public static Intent newIntent(Context context, String searchString, String categoryId) {
         Intent intent = new Intent(context, FilterActivity.class);
@@ -33,6 +36,9 @@ public class FilterActivity extends AppCompatActivity implements FilterFragment.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter);
+
+        filterSelectionViewModel = new FilterSelectionViewModel();
+
 
         showFilterPage();
 
@@ -67,6 +73,11 @@ public class FilterActivity extends AppCompatActivity implements FilterFragment.
         UiUtil.changeFragment(getSupportFragmentManager(), filterSelectionFragment, R.id.filter_activity__main_frame, true, EXTRA_SEARCH_STRING);
 
 
+    }
+
+
+    public FilterSelectionViewModel getFilterSelectionViewModel() {
+        return filterSelectionViewModel;
     }
 
 }

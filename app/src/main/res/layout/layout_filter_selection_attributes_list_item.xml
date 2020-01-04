@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/layout_filter_selection_attributes_list_item__title"
-    android:layout_width="match_parent"
-    android:layout_height="40dp"
-    android:background="@color/cardview_dark_background"
-    android:fontFamily="@font/far_roya_bd"
-    android:gravity="center|left"
-    android:orientation="vertical"
-    android:paddingLeft="16dp"
-    android:textColor="@color/digikala_raw_white"
-    android:textSize="12dp" />
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <TextView
+        android:id="@+id/layout_filter_selection_attributes_list_item__title"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/cardview_dark_background"
+        android:fontFamily="@font/far_roya_bd"
+        android:gravity="center|left"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:textColor="@color/digikala_raw_white"
+        android:textSize="12dp" />
+
+</layout>

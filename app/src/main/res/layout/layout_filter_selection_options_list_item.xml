@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/layout_filter_selection_options_list_item__option"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="4dp"
-    android:background="@color/digikala_dark_white"
-    android:buttonTint="@color/digikala_green"
-    android:checked="false"
-    android:fontFamily="@font/far_roya_bd"
-    android:gravity="center|left"
-    android:padding="4dp"
-    android:textSize="12dp" />
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+
+    <CheckBox
+        android:id="@+id/layout_filter_selection_options_list_item__option"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="@color/digikala_dark_white"
+        android:buttonTint="@color/digikala_green"
+        android:checked="false"
+        android:fontFamily="@font/far_roya_bd"
+        android:gravity="center|left"
+        android:padding="4dp"
+        android:textSize="12dp" />
+
+</layout>

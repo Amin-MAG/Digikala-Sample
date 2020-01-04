@@ -7,10 +7,12 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mag.digikala.Repository.FilterRepository;
 import com.mag.digikala.R;
+import com.mag.digikala.databinding.LayoutFilterSelectionOptionsListItemBinding;
 
 import java.util.List;
 
@@ -29,8 +31,8 @@ public class FilterSelectionTermsRecyclerAdapter extends RecyclerView.Adapter<Fi
     @Override
     public FilterSelectionOptionsRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         activity = (Activity) parent.getContext();
-        View view = LayoutInflater.from(activity).inflate(R.layout.layout_filter_selection_options_list_item, parent, false);
-        return new FilterSelectionOptionsRecyclerViewHolder(view);
+        LayoutFilterSelectionOptionsListItemBinding binding = DataBindingUtil.inflate(activity.getLayoutInflater(),R.layout.layout_filter_selection_options_list_item, parent, false);
+        return new FilterSelectionOptionsRecyclerViewHolder(binding);
     }
 
     @Override
@@ -48,11 +50,11 @@ public class FilterSelectionTermsRecyclerAdapter extends RecyclerView.Adapter<Fi
         FilterRepository.Term term;
         private CheckBox termCheckedBox;
 
-        public FilterSelectionOptionsRecyclerViewHolder(@NonNull View itemView) {
+        public FilterSelectionOptionsRecyclerViewHolder(@NonNull LayoutFilterSelectionOptionsListItemBinding binding) {
 
-            super(itemView);
+            super(binding.getRoot());
 
-            termCheckedBox = itemView.findViewById(R.id.layout_filter_selection_options_list_item__option);
+            termCheckedBox = binding.layoutFilterSelectionOptionsListItemOption;
 
             termCheckedBox.setOnClickListener(view -> {
                 if (termCheckedBox.isChecked())

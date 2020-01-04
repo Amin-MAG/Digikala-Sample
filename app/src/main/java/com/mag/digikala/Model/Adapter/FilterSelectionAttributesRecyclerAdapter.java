@@ -7,11 +7,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mag.digikala.Controller.Activities.FilterActivity;
 import com.mag.digikala.Repository.FilterRepository;
 import com.mag.digikala.R;
+import com.mag.digikala.databinding.LayoutFilterSelectionAttributesListItemBinding;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FilterSelectionAttributesRecyclerAdapter extends RecyclerView.Adapter<FilterSelectionAttributesRecyclerAdapter.FilterSelectionAttributesRecyclerViewHolder> {
@@ -26,12 +32,22 @@ public class FilterSelectionAttributesRecyclerAdapter extends RecyclerView.Adapt
         this.callback = callback;
     }
 
+    public FilterSelectionAttributesRecyclerAdapter() {
+        this.attributes = new ArrayList<>();
+    }
+
     @NonNull
     @Override
     public FilterSelectionAttributesRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         activity = (Activity) parent.getContext();
-        View view = LayoutInflater.from(activity).inflate(R.layout.layout_filter_selection_attributes_list_item, parent, false);
-        return new FilterSelectionAttributesRecyclerViewHolder(view);
+        LayoutFilterSelectionAttributesListItemBinding binding = DataBindingUtil.inflate(activity.getLayoutInflater(), R.layout.layout_filter_selection_attributes_list_item, parent, false);
+        ((FilterActivity) activity).getFilterSelectionViewModel().getAttributes().observe((LifecycleOwner) activity, attributes -> {
+            this.attributes = attributes;
+        });
+        ((FilterActivity) activity).getFilterSelectionViewModel().getSelectedAttribute().observe((LifecycleOwner) activity, selected -> {
+            this.selected = selected;
+        });
+        return new FilterSelectionAttributesRecyclerViewHolder(binding);
     }
 
     @Override
@@ -49,12 +65,11 @@ public class FilterSelectionAttributesRecyclerAdapter extends RecyclerView.Adapt
         private FilterRepository.Attribute productAttribute;
         private TextView attrText;
 
-        public FilterSelectionAttributesRecyclerViewHolder(@NonNull View itemView) {
+        public FilterSelectionAttributesRecyclerViewHolder(@NonNull LayoutFilterSelectionAttributesListItemBinding binding) {
 
-            super(itemView);
+            super(binding.getRoot());
 
-            attrText = itemView.findViewById(R.id.layout_filter_selection_attributes_list_item__title);
-
+            attrText = binding.layoutFilterSelectionAttributesListItemTitle;
 
             attrText.setOnClickListener(view -> {
                 selected = productAttribute;
@@ -65,6 +80,7 @@ public class FilterSelectionAttributesRecyclerAdapter extends RecyclerView.Adapt
         }
 
         private void selectedAttributeUi() {
+
             if (selected != null && selected.getId().equals(productAttribute.getId())) {
                 attrText.setTextColor(activity.getResources().getColor(R.color.cardview_dark_background));
                 attrText.setBackgroundColor(activity.getResources().getColor(R.color.digikala_dark_white));
@@ -72,6 +88,7 @@ public class FilterSelectionAttributesRecyclerAdapter extends RecyclerView.Adapt
                 attrText.setTextColor(activity.getResources().getColor(R.color.digikala_raw_white));
                 attrText.setBackgroundColor(activity.getResources().getColor(R.color.cardview_dark_background));
             }
+
         }
 
         private void bind(FilterRepository.Attribute productAttribute) {

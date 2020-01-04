@@ -16,10 +16,13 @@ import com.mag.digikala.Model.Adapter.FilterSelectionTermsRecyclerAdapter;
 import com.mag.digikala.Repository.FilterRepository;
 import com.mag.digikala.R;
 import com.mag.digikala.databinding.FragmentFilterSelectionBinding;
+import com.mag.digikala.viewmodel.FilterSelectionViewModel;
 
 public class FilterSelectionFragment extends Fragment {
 
     private FragmentFilterSelectionBinding binding;
+
+    private FilterSelectionViewModel viewModel;
 
     private FilterSelectionFragmentCallBack callBack;
 
@@ -59,8 +62,10 @@ public class FilterSelectionFragment extends Fragment {
 
         attributesRecyclerAdapter = new FilterSelectionAttributesRecyclerAdapter(FilterRepository.getInstance().getAttributes(), () -> {
             termsRecyclerAdapter = new FilterSelectionTermsRecyclerAdapter(attributesRecyclerAdapter.getSelected());
-            binding.filterSelectionFragmentOptionsRecycler.setAdapter(termsRecyclerAdapter);
+//            binding.filterSelectionFragmentOptionsRecycler.setAdapter(termsRecyclerAdapter);
         });
+
+//        attributesRecyclerAdapter = new FilterSelectionAttributesRecyclerAdapter();
 
         binding.filterSelectionFragmentAttributeRecycler.setAdapter(attributesRecyclerAdapter);
 

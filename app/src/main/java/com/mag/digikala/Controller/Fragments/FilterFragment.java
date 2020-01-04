@@ -120,7 +120,6 @@ public class FilterFragment extends Fragment {
         filterListAdapter = new FilterListAdapter();
         binding.filterFragmentRecycler.setAdapter(filterListAdapter);
         viewModel.getFilteredProducts().observe(this, products -> {
-            Log.d("WWTTF DE", "setAdapter: " + "??");
             filterListAdapter.setData(products);
         });
 //        viewModel.getFilterAttribute().observe(this, attribute -> {
@@ -143,108 +142,6 @@ public class FilterFragment extends Fragment {
         });
 
     }
-
-//    public void filter() {
-//        String terms = "";
-//        List<FilterRepository.Term> selectedTerms = FilterRepository.getInstance().getAttributeById("4").getSelectedTerm();
-//        for (int i = 0; i < selectedTerms.size(); i++) {
-//            if (i != 0) terms += ",";
-//            terms += selectedTerms.get(i).getSlug();
-//        }
-//        retrofitApi.getProducts(FilterRepository.getInstance().getAttributeById("4").getSlug(), terms).enqueue(new Callback<List<Product>>() {
-//            @Override
-//            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-//
-//                if (response.isSuccessful()) {
-//
-//                    List<Product> filteredProducts = response.body();
-//
-//                    if (categoryid != null) {
-//                        filteredProducts = new ArrayList<>();
-//                        for (Product product : response.body())
-//                            for (Category category : product.getCategories())
-//                                if (category.getId().equals(categoryid))
-//                                    filteredProducts.add(product);
-//                    }
-//
-//                    filterListAdapter.setData(filteredProducts);
-//                    filterListAdapter.notifyDataSetChanged();
-//
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Product>> call, Throwable t) {
-//
-//            }
-//        });
-//
-//    }
-//
-//    private void sortPage(SORT_MODE mode) {
-//
-//        HashMap<String, String> queryHashMap = new HashMap<>();
-//
-//        Log.d("orderREquest", "onResponse: " + mode.toString());
-//
-//        switch (mode) {
-//            case SORT_BY_VIEW:
-//                queryHashMap.put("orderby", "popularity");
-//                sortMode.setText(getResources().getString(R.string.most_views));
-//                break;
-//            case SORT_BY_SELL:
-//                queryHashMap.put("orderby", "rating");
-//                sortMode.setText(getResources().getString(R.string.best_sellers));
-//                break;
-//            case SORT_BY_PRICE_ASCENDING:
-//                queryHashMap.put("orderby", "price");
-//                queryHashMap.put("order", "asc");
-//                sortMode.setText(getResources().getString(R.string.price_ascending));
-//                break;
-//            case SORT_BY_PRICE_DESCENDING:
-//                queryHashMap.put("orderby", "price");
-//                queryHashMap.put("order", "desc");
-//                sortMode.setText(getResources().getString(R.string.price_descending));
-//                break;
-//            case SORT_BY_NEWEST:
-//                queryHashMap.put("orderby", "date");
-//                sortMode.setText(getResources().getString(R.string.newests));
-//                break;
-//            default:
-//                break;
-//        }
-//
-//        retrofitApi.searchProducts(searchString, queryHashMap).enqueue(new Callback<List<Product>>() {
-//            @Override
-//            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-//
-//                if (response.isSuccessful()) {
-//
-//                    List<Product> filteredProducts = response.body();
-//
-//                    if (categoryid != null) {
-//                        filteredProducts = new ArrayList<>();
-//                        for (Product product : response.body())
-//                            for (Category category : product.getCategories())
-//                                if (category.getId().equals(categoryid))
-//                                    filteredProducts.add(product);
-//                    }
-//
-//                    filterListAdapter.setData(filteredProducts);
-//                    filterListAdapter.notifyDataSetChanged();
-//
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Product>> call, Throwable t) {
-//
-//            }
-//        });
-//
-//    }
 
     public interface FilterSelectionCallBack {
         void showFitlerSelectionPage();

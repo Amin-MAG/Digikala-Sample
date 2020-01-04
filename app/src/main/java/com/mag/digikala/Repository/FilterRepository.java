@@ -34,7 +34,7 @@ public class FilterRepository {
 
     // Default Attributes
 
-    private List<Attribute> attributes;
+    private List<Attribute> attributes = new ArrayList<>();
 
     public void setAttributes(List<Attribute> attributes) {
         this.attributes = attributes;
