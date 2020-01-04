@@ -35,11 +35,12 @@
                     android:id="@+id/filter_list_item_layout__product_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:gravity="right"
                     android:text="@{productViewModel.title}"
                     android:textColor="@android:color/black"
-                    android:textSize="16dp" />
+                    android:textSize="13dp" />
 
                 <TextView
                     android:id="@+id/filter_list_item_layout__product_description"
@@ -50,7 +51,7 @@
                     android:gravity="left"
                     android:text="@{productViewModel.shortDescription}"
                     android:textColor="@color/digikala_gray"
-                    android:textSize="10dp" />
+                    android:textSize="9dp" />
 
                 <View
                     android:id="@+id/filter_list_item_layout__devider"
@@ -85,8 +86,8 @@
 
             <ImageView
                 android:id="@+id/filter_list_item_layout__product_image"
-                android:layout_width="wrap_content"
-                android:layout_height="136dp"
+                android:layout_width="300dp"
+                android:layout_height="150dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_weight="0.5"
