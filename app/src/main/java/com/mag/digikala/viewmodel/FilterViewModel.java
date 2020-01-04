@@ -1,16 +1,16 @@
 package com.mag.digikala.viewmodel;
 
+import android.util.Log;
+
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 import androidx.lifecycle.MutableLiveData;
 
-import com.mag.digikala.Model.Category;
 import com.mag.digikala.Model.Product;
-import com.mag.digikala.Repository.FilterRepository;
 import com.mag.digikala.Network.RetrofitApi;
 import com.mag.digikala.Network.RetrofitInstance;
+import com.mag.digikala.Repository.FilterRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -20,11 +20,10 @@ import retrofit2.Response;
 public class FilterViewModel extends BaseObservable {
 
     // Should be change
-    private String sortModeString = "بدون ترتیب";
     private RetrofitApi retrofitApi;
     private MutableLiveData<List<Product>> filteredProducts;
     private MutableLiveData<FilterRepository.Attribute> filterAttribute;
-    private String searchingText, categoryId, sortText;
+    public String searchingText, categoryId, sortText = "بدون ترتیب";
     private SORT_MODE sortMode;
 
 
@@ -53,7 +52,6 @@ public class FilterViewModel extends BaseObservable {
         this.filterAttribute = new MutableLiveData<>();
         this.sortMode = SORT_MODE.NO_SORT;
 
-
     }
 
     public void filter() {
@@ -65,6 +63,7 @@ public class FilterViewModel extends BaseObservable {
             case SORT_BY_VIEW:
                 orderBaseOn = "popularity";
                 sortText = "پربازدیدترین ها";
+                Log.d("hwaTTTTT", "filter: " + sortText);
                 break;
             case SORT_BY_SELL:
                 orderBaseOn = "rating";
@@ -88,6 +87,7 @@ public class FilterViewModel extends BaseObservable {
                 break;
         }
 
+        notifyChange();
 
         String attribute = "";
         String terms = "";
@@ -143,7 +143,6 @@ public class FilterViewModel extends BaseObservable {
         } else {
 
             if (orderBaseOn == null) {
-
                 retrofitApi.getProducts(categoryId, searchingText, attribute, terms, 100, 1).enqueue(new Callback<List<Product>>() {
                     @Override
                     public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
@@ -189,12 +188,8 @@ public class FilterViewModel extends BaseObservable {
     }
 
     @Bindable
-    public String getSortModeString() {
-        return sortModeString;
-    }
-
-    @Bindable
     public String getSortText() {
+        Log.d("Clicked and search", "getSortText: ");
         return sortText;
     }
 

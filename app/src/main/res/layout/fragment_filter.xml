@@ -63,7 +63,7 @@
                     android:layout_height="13dp"
                     android:gravity="center"
                     android:textSize="8dp"
-                    android:text="@{filterViewHolder.sortModeString}"
+                    android:text="@{filterViewHolder.sortText}"
                     app:fontFamily="@font/iran_yekan"
                     app:layout_constraintEnd_toStartOf="@+id/imageView"
                     app:layout_constraintHorizontal_bias="0.6"
