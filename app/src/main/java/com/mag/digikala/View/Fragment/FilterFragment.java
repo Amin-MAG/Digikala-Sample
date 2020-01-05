@@ -1,37 +1,24 @@
-package com.mag.digikala.Controller.Fragments;
+package com.mag.digikala.View.Fragment;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 
+import com.mag.digikala.Controller.Activities.FilterActivity;
+import com.mag.digikala.Controller.Fragments.SortSelectionDialogFragment;
 import com.mag.digikala.Model.Adapter.FilterListAdapter;
-import com.mag.digikala.Model.Category;
-import com.mag.digikala.Model.Product;
-import com.mag.digikala.Repository.FilterRepository;
-import com.mag.digikala.Network.RetrofitApi;
 import com.mag.digikala.R;
 import com.mag.digikala.databinding.FragmentFilterBinding;
 import com.mag.digikala.viewmodel.FilterViewModel;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import static com.mag.digikala.Controller.Fragments.SortSelectionDialogFragment.EXTRA_SORT_ID;
 
@@ -122,9 +109,9 @@ public class FilterFragment extends Fragment {
         viewModel.getFilteredProducts().observe(this, products -> {
             filterListAdapter.setData(products);
         });
-//        viewModel.getFilterAttribute().observe(this, attribute -> {
-//            viewModel.filter();
-//        });
+        ((FilterActivity) getActivity()).getFilterSelectionViewModel().getSelectedAttribute().observe(this, attribute -> {
+            viewModel.filter();
+        });
         viewModel.filter();
 
     }

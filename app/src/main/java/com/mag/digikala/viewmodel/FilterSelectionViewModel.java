@@ -40,7 +40,7 @@ public class FilterSelectionViewModel extends BaseObservable {
     }
 
     public void onAttributeClicked(FilterRepository.Attribute attribute) {
-        this.selectedAttribute.postValue(attribute);
+        this.selectedAttribute.setValue(attribute);
     }
 
     public void onTermClicked(FilterRepository.Term term, boolean isExist) {
@@ -52,6 +52,17 @@ public class FilterSelectionViewModel extends BaseObservable {
             terms.remove(term);
             selectedTerms.setValue(terms);
         }
+        Log.d("onTermClicked", "onTermClicked: " + terms);
+    }
+
+    public void clearSelectedTerms() {
+        List<FilterRepository.Term> newValue = selectedTerms.getValue();
+        newValue.clear();
+        selectedTerms.setValue(newValue);
+    }
+
+    public void filter() {
+
     }
 
 }

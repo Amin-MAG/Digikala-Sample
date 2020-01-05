@@ -92,11 +92,12 @@ public class FilterViewModel extends BaseObservable {
         String attribute = "";
         String terms = "";
 
-        if (filterAttribute.getValue() != null) {
-            attribute = filterAttribute.getValue().getName();
+        if (filterAttribute.getValue() != null && filterAttribute.getValue().getSelectedTerms().size() > 0) {
+            attribute = filterAttribute.getValue().getSlug();
             terms = filterAttribute.getValue().getSelectedTermString();
         }
 
+        Log.d("filter: ", "filter: " + attribute + " " + terms);
 
         if (categoryId != null) {
 

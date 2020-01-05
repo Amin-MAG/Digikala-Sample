@@ -1,15 +1,12 @@
-package com.mag.digikala.Model.Adapter;
+package com.mag.digikala.View.Adapters;
 
 import android.app.Activity;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mag.digikala.Repository.FilterRepository;
@@ -17,7 +14,6 @@ import com.mag.digikala.R;
 import com.mag.digikala.databinding.LayoutFilterSelectionOptionsListItemBinding;
 import com.mag.digikala.viewmodel.FilterSelectionViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FilterSelectionTermsRecyclerAdapter extends RecyclerView.Adapter<FilterSelectionTermsRecyclerAdapter.FilterSelectionOptionsRecyclerViewHolder> {
@@ -27,13 +23,11 @@ public class FilterSelectionTermsRecyclerAdapter extends RecyclerView.Adapter<Fi
     private Activity activity;
     private FilterRepository.Attribute attribute;
     private List<FilterRepository.Term> terms;
-    private RecyclerView recyclerView;
 
-    public FilterSelectionTermsRecyclerAdapter(FilterSelectionViewModel viewModel, RecyclerView recyclerView) {
+    public FilterSelectionTermsRecyclerAdapter(FilterSelectionViewModel viewModel) {
         this.viewModel = viewModel;
         this.attribute = viewModel.getSelectedAttribute().getValue();
         this.terms = attribute.getTerms();
-        this.recyclerView = recyclerView;
     }
 
     @NonNull
@@ -49,7 +43,6 @@ public class FilterSelectionTermsRecyclerAdapter extends RecyclerView.Adapter<Fi
         viewModel.getSelectedAttribute().observe((LifecycleOwner) activity, attribute -> {
             this.attribute = attribute;
             this.terms = attribute.getTerms();
-            recyclerView.post(this::notifyDataSetChanged);
         });
     }
 
@@ -74,10 +67,9 @@ public class FilterSelectionTermsRecyclerAdapter extends RecyclerView.Adapter<Fi
 
             termCheckedBox = binding.layoutFilterSelectionOptionsListItemOption;
 
-//            termCheckedBox.setOnClickListener(view -> {
-//                viewModel.onTermClicked(term, termCheckedBox.isChecked());
-//                notifyDataSetChanged();
-//            });
+            termCheckedBox.setOnClickListener(view -> {
+                viewModel.onTermClicked(term, termCheckedBox.isChecked());
+            });
 
         }
 
@@ -86,10 +78,10 @@ public class FilterSelectionTermsRecyclerAdapter extends RecyclerView.Adapter<Fi
 
             termCheckedBox.setText(term.getName());
 
-//            if (FilterRepository.getInstance().getAttributeById(attribute.getId()).getSelectedTerm().contains(term))
-//                termCheckedBox.setChecked(true);
-//            else
-//                termCheckedBox.setChecked(false);
+            if (viewModel.getSelectedAttribute().getValue().getSelectedTerms().contains(term))
+                termCheckedBox.setChecked(true);
+            else
+                termCheckedBox.setChecked(false);
 
         }
 

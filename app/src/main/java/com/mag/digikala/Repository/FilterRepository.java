@@ -93,7 +93,7 @@ public class FilterRepository {
                 selectedTerms.remove(term);
         }
 
-        public List<Term> getSelectedTerm() {
+        public List<Term> getSelectedTerms() {
             return selectedTerms;
         }
 

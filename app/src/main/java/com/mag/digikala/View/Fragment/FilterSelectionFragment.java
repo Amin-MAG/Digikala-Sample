@@ -10,12 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.mag.digikala.Controller.Activities.FilterActivity;
-import com.mag.digikala.Model.Adapter.FilterSelectionAttributesRecyclerAdapter;
-import com.mag.digikala.Model.Adapter.FilterSelectionTermsRecyclerAdapter;
-import com.mag.digikala.Repository.FilterRepository;
+import com.mag.digikala.View.Adapters.FilterSelectionAttributesRecyclerAdapter;
+import com.mag.digikala.View.Adapters.FilterSelectionTermsRecyclerAdapter;
 import com.mag.digikala.R;
 import com.mag.digikala.databinding.FragmentFilterSelectionBinding;
 import com.mag.digikala.viewmodel.FilterSelectionViewModel;
@@ -47,6 +45,7 @@ public class FilterSelectionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_filter_selection, container, false);
+        viewModel = ((FilterActivity) getActivity()).getFilterSelectionViewModel();
         return binding.getRoot();
     }
 
@@ -58,12 +57,15 @@ public class FilterSelectionFragment extends Fragment {
 
         binding.filterSelectionFragmentFilterBtn.setOnClickListener(filterBtnView -> callBack.filter());
 
+//        binding.filterSelectionFragmentFilterBtn.setOnClickListener(filterBtnView -> viewModel.filter());
+
+
     }
 
     private void setAdapter() {
 
-        attributesRecyclerAdapter = new FilterSelectionAttributesRecyclerAdapter(((FilterActivity) getActivity()).getFilterSelectionViewModel());
-        termsRecyclerAdapter = new FilterSelectionTermsRecyclerAdapter(((FilterActivity) getActivity()).getFilterSelectionViewModel(), binding.filterSelectionFragmentOptionsRecycler);
+        termsRecyclerAdapter = new FilterSelectionTermsRecyclerAdapter(viewModel);
+        attributesRecyclerAdapter = new FilterSelectionAttributesRecyclerAdapter(viewModel,termsRecyclerAdapter);
 
         binding.filterSelectionFragmentOptionsRecycler.setAdapter(termsRecyclerAdapter);
         binding.filterSelectionFragmentAttributeRecycler.setAdapter(attributesRecyclerAdapter);

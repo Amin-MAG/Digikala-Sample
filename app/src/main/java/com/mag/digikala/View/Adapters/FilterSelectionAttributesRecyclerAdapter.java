@@ -1,26 +1,19 @@
-package com.mag.digikala.Model.Adapter;
+package com.mag.digikala.View.Adapters;
 
 import android.app.Activity;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mag.digikala.Controller.Activities.FilterActivity;
 import com.mag.digikala.Repository.FilterRepository;
 import com.mag.digikala.R;
 import com.mag.digikala.databinding.LayoutFilterSelectionAttributesListItemBinding;
 import com.mag.digikala.viewmodel.FilterSelectionViewModel;
-import com.mag.digikala.viewmodel.FilterViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FilterSelectionAttributesRecyclerAdapter extends RecyclerView.Adapter<FilterSelectionAttributesRecyclerAdapter.FilterSelectionAttributesRecyclerViewHolder> {
@@ -30,11 +23,15 @@ public class FilterSelectionAttributesRecyclerAdapter extends RecyclerView.Adapt
     private Activity activity;
     private List<FilterRepository.Attribute> attributes;
     private FilterRepository.Attribute selected;
+    private FilterSelectionTermsRecyclerAdapter termsRecyclerAdapter;
 
-    public FilterSelectionAttributesRecyclerAdapter(FilterSelectionViewModel viewModel) {
+
+    // should be changed
+    public FilterSelectionAttributesRecyclerAdapter(FilterSelectionViewModel viewModel, FilterSelectionTermsRecyclerAdapter adapter) {
         this.viewModel = viewModel;
         this.attributes = viewModel.getAttributes().getValue();
         this.selected = viewModel.getSelectedAttribute().getValue();
+        this.termsRecyclerAdapter = adapter;
     }
 
     @NonNull
@@ -78,7 +75,9 @@ public class FilterSelectionAttributesRecyclerAdapter extends RecyclerView.Adapt
 
             attrText.setOnClickListener(view -> {
                 viewModel.onAttributeClicked(productAttribute);
+                viewModel.clearSelectedTerms();
                 notifyDataSetChanged();
+                termsRecyclerAdapter.notifyDataSetChanged();;
             });
 
         }
