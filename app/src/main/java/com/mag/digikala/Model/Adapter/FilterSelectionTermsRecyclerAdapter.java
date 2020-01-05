@@ -8,31 +8,49 @@ import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mag.digikala.Repository.FilterRepository;
 import com.mag.digikala.R;
 import com.mag.digikala.databinding.LayoutFilterSelectionOptionsListItemBinding;
+import com.mag.digikala.viewmodel.FilterSelectionViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FilterSelectionTermsRecyclerAdapter extends RecyclerView.Adapter<FilterSelectionTermsRecyclerAdapter.FilterSelectionOptionsRecyclerViewHolder> {
 
+    private FilterSelectionViewModel viewModel;
+
     private Activity activity;
     private FilterRepository.Attribute attribute;
     private List<FilterRepository.Term> terms;
+    private RecyclerView recyclerView;
 
-    public FilterSelectionTermsRecyclerAdapter(FilterRepository.Attribute attribute) {
-        this.attribute = attribute;
+    public FilterSelectionTermsRecyclerAdapter(FilterSelectionViewModel viewModel, RecyclerView recyclerView) {
+        this.viewModel = viewModel;
+        this.attribute = viewModel.getSelectedAttribute().getValue();
         this.terms = attribute.getTerms();
+        this.recyclerView = recyclerView;
     }
 
     @NonNull
     @Override
     public FilterSelectionOptionsRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         activity = (Activity) parent.getContext();
-        LayoutFilterSelectionOptionsListItemBinding binding = DataBindingUtil.inflate(activity.getLayoutInflater(),R.layout.layout_filter_selection_options_list_item, parent, false);
+        LayoutFilterSelectionOptionsListItemBinding binding = DataBindingUtil.inflate(activity.getLayoutInflater(), R.layout.layout_filter_selection_options_list_item, parent, false);
+        setObserve();
         return new FilterSelectionOptionsRecyclerViewHolder(binding);
+    }
+
+    private void setObserve() {
+        viewModel.getSelectedAttribute().observe((LifecycleOwner) activity, attribute -> {
+            this.attribute = attribute;
+            this.terms = attribute.getTerms();
+            recyclerView.post(this::notifyDataSetChanged);
+        });
     }
 
     @Override
@@ -47,7 +65,7 @@ public class FilterSelectionTermsRecyclerAdapter extends RecyclerView.Adapter<Fi
 
     public class FilterSelectionOptionsRecyclerViewHolder extends RecyclerView.ViewHolder {
 
-        FilterRepository.Term term;
+        private FilterRepository.Term term;
         private CheckBox termCheckedBox;
 
         public FilterSelectionOptionsRecyclerViewHolder(@NonNull LayoutFilterSelectionOptionsListItemBinding binding) {
@@ -56,25 +74,22 @@ public class FilterSelectionTermsRecyclerAdapter extends RecyclerView.Adapter<Fi
 
             termCheckedBox = binding.layoutFilterSelectionOptionsListItemOption;
 
-            termCheckedBox.setOnClickListener(view -> {
-                if (termCheckedBox.isChecked())
-                    FilterRepository.getInstance().getAttributeById(attribute.getId()).addToSelected(term);
-                else
-                    FilterRepository.getInstance().getAttributeById(attribute.getId()).removeFromSelected(term);
-
-                notifyDataSetChanged();
-            });
+//            termCheckedBox.setOnClickListener(view -> {
+//                viewModel.onTermClicked(term, termCheckedBox.isChecked());
+//                notifyDataSetChanged();
+//            });
 
         }
 
         private void bind(FilterRepository.Term term) {
             this.term = term;
+
             termCheckedBox.setText(term.getName());
 
-            if (FilterRepository.getInstance().getAttributeById(attribute.getId()).getSelectedTerm().contains(term))
-                termCheckedBox.setChecked(true);
-            else
-                termCheckedBox.setChecked(false);
+//            if (FilterRepository.getInstance().getAttributeById(attribute.getId()).getSelectedTerm().contains(term))
+//                termCheckedBox.setChecked(true);
+//            else
+//                termCheckedBox.setChecked(false);
 
         }
 

@@ -29,14 +29,14 @@
                 android:background="@color/cardview_dark_background"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-<!--            <androidx.recyclerview.widget.RecyclerView-->
-<!--                android:id="@+id/filter_selection_fragment__options_recycler"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:layout_weight="0.6"-->
-<!--                android:background="@color/digikala_dark_white"-->
-<!--                android:padding="8dp"-->
-<!--                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/filter_selection_fragment__options_recycler"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.6"
+                android:background="@color/digikala_dark_white"
+                android:padding="8dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         </LinearLayout>
 

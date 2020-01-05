@@ -10,7 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.mag.digikala.Controller.Activities.FilterActivity;
 import com.mag.digikala.Model.Adapter.FilterSelectionAttributesRecyclerAdapter;
 import com.mag.digikala.Model.Adapter.FilterSelectionTermsRecyclerAdapter;
 import com.mag.digikala.Repository.FilterRepository;
@@ -60,13 +62,10 @@ public class FilterSelectionFragment extends Fragment {
 
     private void setAdapter() {
 
-        attributesRecyclerAdapter = new FilterSelectionAttributesRecyclerAdapter(FilterRepository.getInstance().getAttributes(), () -> {
-            termsRecyclerAdapter = new FilterSelectionTermsRecyclerAdapter(attributesRecyclerAdapter.getSelected());
-//            binding.filterSelectionFragmentOptionsRecycler.setAdapter(termsRecyclerAdapter);
-        });
+        attributesRecyclerAdapter = new FilterSelectionAttributesRecyclerAdapter(((FilterActivity) getActivity()).getFilterSelectionViewModel());
+        termsRecyclerAdapter = new FilterSelectionTermsRecyclerAdapter(((FilterActivity) getActivity()).getFilterSelectionViewModel(), binding.filterSelectionFragmentOptionsRecycler);
 
-//        attributesRecyclerAdapter = new FilterSelectionAttributesRecyclerAdapter();
-
+        binding.filterSelectionFragmentOptionsRecycler.setAdapter(termsRecyclerAdapter);
         binding.filterSelectionFragmentAttributeRecycler.setAdapter(attributesRecyclerAdapter);
 
     }

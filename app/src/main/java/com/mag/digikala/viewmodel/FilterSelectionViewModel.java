@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.mag.digikala.Repository.FilterRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FilterSelectionViewModel extends BaseObservable {
@@ -14,7 +15,6 @@ public class FilterSelectionViewModel extends BaseObservable {
 
     private MutableLiveData<List<FilterRepository.Attribute>> attributes;
     private MutableLiveData<FilterRepository.Attribute> selectedAttribute;
-    private MutableLiveData<List<FilterRepository.Term>> terms;
     private MutableLiveData<List<FilterRepository.Term>> selectedTerms;
 
 
@@ -22,14 +22,11 @@ public class FilterSelectionViewModel extends BaseObservable {
 
         this.attributes = new MutableLiveData<>();
         this.selectedAttribute = new MutableLiveData<>();
-        this.terms = new MutableLiveData<>();
+        this.selectedTerms = new MutableLiveData<>();
 
-        this.attributes.postValue(FilterRepository.getInstance().getAttributes());
-        Log.d("FilterSelectio", "FilterSelectionViewModel: " + getAttributes().getValue());
-        if (attributes.getValue() != null && attributes.getValue().size() != 0) {
-            this.selectedAttribute.postValue(attributes.getValue().get(0));
-            this.terms.postValue(selectedAttribute.getValue().getTerms());
-        }
+        this.attributes.setValue(FilterRepository.getInstance().getAttributes());
+        this.selectedAttribute.setValue(attributes.getValue().get(0));
+        this.selectedTerms.setValue(new ArrayList<>());
 
     }
 
@@ -40,6 +37,21 @@ public class FilterSelectionViewModel extends BaseObservable {
 
     public MutableLiveData<FilterRepository.Attribute> getSelectedAttribute() {
         return selectedAttribute;
+    }
+
+    public void onAttributeClicked(FilterRepository.Attribute attribute) {
+        this.selectedAttribute.postValue(attribute);
+    }
+
+    public void onTermClicked(FilterRepository.Term term, boolean isExist) {
+        List<FilterRepository.Term> terms = selectedTerms.getValue();
+        if (isExist) {
+            terms.add(term);
+            selectedTerms.setValue(terms);
+        } else {
+            terms.remove(term);
+            selectedTerms.setValue(terms);
+        }
     }
 
 }
