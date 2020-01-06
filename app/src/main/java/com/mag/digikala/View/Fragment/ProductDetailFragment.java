@@ -10,15 +10,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.mag.digikala.Controller.Activities.CardActivity;
 import com.mag.digikala.Model.Adapter.SliderViewPagerAdapter;
 import com.mag.digikala.Model.Adapter.SpinnerAdapter;
-import com.mag.digikala.Repository.FilterRepository;
 import com.mag.digikala.R;
 import com.mag.digikala.Repository.CardRepository;
+import com.mag.digikala.Repository.FilterRepository;
 import com.mag.digikala.databinding.FragmentProductDetailBinding;
-import com.mag.digikala.viewmodel.ProductViewModel;
+import com.mag.digikala.viewmodel.ProductViewModelNew;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ public class ProductDetailFragment extends Fragment {
     public static final String ARG_MECHANDICE = "arg_mechandice";
 
     private FragmentProductDetailBinding binding;
-    private ProductViewModel viewModel;
+    private ProductViewModelNew viewModel;
 
     private SliderViewPagerAdapter sliderAdapter;
 
@@ -46,13 +47,16 @@ public class ProductDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel = new ProductViewModel(getArguments().getString(ARG_MECHANDICE));
+        viewModel = ViewModelProviders.of(getActivity()).get(ProductViewModelNew.class);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_product_detail, container, false);
         binding.setProductViewModel(viewModel);
+        viewModel.getProduct().observe(this, product -> {
+            binding.setProductViewModel(viewModel);
+        });
         return binding.getRoot();
     }
 
@@ -67,9 +71,9 @@ public class ProductDetailFragment extends Fragment {
         viewModel.getImagesSrc().observe(this, strings -> sliderAdapter.setImagesFragment(strings));
 
         binding.productDetailFragmentProductRegularPrice.setPaintFlags(binding.productDetailFragmentProductSalePrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        binding.productDetailFragmentCardBtn.setOnClickListener(view1 -> {
+        binding.productDetailFragmentCardBtn.setOnClickListener(cardView -> {
 
-            CardRepository.getInstance().addToCard(viewModel.getProduct());
+            CardRepository.getInstance().addToCard(viewModel.getProduct().getValue());
             getActivity().startActivity(CardActivity.newIntent(getContext()));
 
         });

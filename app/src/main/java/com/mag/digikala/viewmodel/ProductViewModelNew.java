@@ -7,12 +7,20 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.mag.digikala.Model.Product;
+import com.mag.digikala.Model.ProductImage;
+import com.mag.digikala.Network.RetrofitApi;
+import com.mag.digikala.Network.RetrofitInstance;
 import com.mag.digikala.Var.Constants;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ProductViewModelNew extends AndroidViewModel {
 
@@ -22,32 +30,33 @@ public class ProductViewModelNew extends AndroidViewModel {
 
     public ProductViewModelNew(@NonNull Application application) {
         super(application);
-
-//        RetrofitApi retrofitApi = RetrofitInstance.getInstance().create(RetrofitApi.class);
-//        retrofitApi.getProductById(productId).enqueue(new Callback<Product>() {
-//            @Override
-//            public void onResponse(Call<Product> call, Response<Product> response) {
-//
-//                if (response.isSuccessful()) {
-//
-//                    setProduct(response.body());
-//
-//                    ArrayList<String> urls = new ArrayList<>();
-//                    for (ProductImage image : product.getValue().getImages())
-//                        urls.add(image.getSrc());
-//                    imageUrls.postValue(urls);
-//
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Product> call, Throwable t) {
-//
-//            }
-//        });
+    }
 
 
+    public void requestToSetProductById(String productId) {
+        RetrofitApi retrofitApi = RetrofitInstance.getInstance().create(RetrofitApi.class);
+        retrofitApi.getProductById(productId).enqueue(new Callback<Product>() {
+            @Override
+            public void onResponse(Call<Product> call, Response<Product> response) {
+
+                if (response.isSuccessful()) {
+
+                    product.setValue(response.body());
+
+                    ArrayList<String> urls = new ArrayList<>();
+                    for (ProductImage image : product.getValue().getImages())
+                        urls.add(image.getSrc());
+                    imageUrls.postValue(urls);
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Product> call, Throwable t) {
+
+            }
+        });
     }
 
     public String getId() {

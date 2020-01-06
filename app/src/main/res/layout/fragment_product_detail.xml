@@ -4,7 +4,7 @@
 
         <variable
             name="productViewModel"
-            type="com.mag.digikala.viewmodel.ProductViewModel" />
+            type="com.mag.digikala.viewmodel.ProductViewModelNew" />
     </data>
 
     <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"

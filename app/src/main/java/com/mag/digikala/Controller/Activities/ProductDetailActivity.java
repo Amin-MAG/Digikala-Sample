@@ -1,18 +1,17 @@
 package com.mag.digikala.Controller.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
 
-import com.mag.digikala.View.Fragment.ProductDetailFragment;
-import com.mag.digikala.Model.Adapter.NavigationRecyclerAdapter;
-import com.mag.digikala.View.ProductDetailToolbarFragment;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.mag.digikala.R;
 import com.mag.digikala.Util.UiUtil;
+import com.mag.digikala.View.Fragment.ProductDetailFragment;
+import com.mag.digikala.View.ProductDetailToolbarFragment;
+import com.mag.digikala.viewmodel.ProductViewModelNew;
 
 public class ProductDetailActivity extends AppCompatActivity {
 
@@ -20,9 +19,11 @@ public class ProductDetailActivity extends AppCompatActivity {
     public static final String FRAGMENT_PRODUCT_DETAIL_TOOLBAR = "fragment_product_detail_toolbar";
     public static final String FRAGMENT_PRODUCT_DETAIL = "fragment_product_detail";
 
-    private RecyclerView navigationRecycler;
-    private NavigationRecyclerAdapter navigationRecyclerAdapter;
-    private TextView validPrice, invaidPrice;
+    private ProductViewModelNew viewModel;
+
+//    private RecyclerView navigationRecycler;
+//    private NavigationRecyclerAdapter navigationRecyclerAdapter;
+//    private TextView validPrice, invaidPrice;
 
     public static Intent newIntent(Context context, String merchandiseId) {
         Intent intent = new Intent(context, ProductDetailActivity.class);
@@ -35,7 +36,11 @@ public class ProductDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
 
-        navigationRecycler = findViewById(R.id.digikala__navigation_recycler);
+
+        viewModel = ViewModelProviders.of(this).get(ProductViewModelNew.class);
+        viewModel.requestToSetProductById(getIntent().getExtras().getString(EXTRA_MERCHANDISE));
+
+//        navigationRecycler = findViewById(R.id.digikala__navigation_recycler);
 
         UiUtil.changeFragment(getSupportFragmentManager(), ProductDetailToolbarFragment.newInstance(), R.id.digikala_product_detail_activity__toolbar_frame, false, FRAGMENT_PRODUCT_DETAIL_TOOLBAR);
         UiUtil.changeFragment(getSupportFragmentManager(), ProductDetailFragment.newInstance(getIntent().getExtras().getString(EXTRA_MERCHANDISE)), R.id.digikala_product_detail_activity__main_frame, false, FRAGMENT_PRODUCT_DETAIL);
