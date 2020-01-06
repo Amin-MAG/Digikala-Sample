@@ -11,7 +11,7 @@ import com.mag.digikala.R;
 import com.mag.digikala.Util.UiUtil;
 import com.mag.digikala.View.Fragment.ProductDetailFragment;
 import com.mag.digikala.View.ProductDetailToolbarFragment;
-import com.mag.digikala.viewmodel.ProductViewModelNew;
+import com.mag.digikala.viewmodel.ProductViewModel;
 
 public class ProductDetailActivity extends AppCompatActivity {
 
@@ -19,7 +19,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     public static final String FRAGMENT_PRODUCT_DETAIL_TOOLBAR = "fragment_product_detail_toolbar";
     public static final String FRAGMENT_PRODUCT_DETAIL = "fragment_product_detail";
 
-    private ProductViewModelNew viewModel;
+    private ProductViewModel viewModel;
 
 //    private RecyclerView navigationRecycler;
 //    private NavigationRecyclerAdapter navigationRecyclerAdapter;
@@ -37,7 +37,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product_detail);
 
 
-        viewModel = ViewModelProviders.of(this).get(ProductViewModelNew.class);
+        viewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
         viewModel.requestToSetProductById(getIntent().getExtras().getString(EXTRA_MERCHANDISE));
 
 //        navigationRecycler = findViewById(R.id.digikala__navigation_recycler);

@@ -7,7 +7,7 @@
 
         <variable
             name="productViewModel"
-            type="com.mag.digikala.viewmodel.ProductViewModelNew" />
+            type="com.mag.digikala.viewmodel.ProductViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView

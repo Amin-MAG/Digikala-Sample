@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mag.digikala.Controller.Activities.ProductDetailActivity;
@@ -24,10 +26,6 @@ public class FilterListAdapter extends RecyclerView.Adapter<FilterListAdapter.Fi
 
     private Activity activity;
     private List<Product> products;
-
-    public FilterListAdapter(List<Product> products) {
-        this.products = products;
-    }
 
     public FilterListAdapter() {
         this.products = new ArrayList<>();
@@ -60,7 +58,7 @@ public class FilterListAdapter extends RecyclerView.Adapter<FilterListAdapter.Fi
             super(binding.getRoot());
 
             this.binding = binding;
-            this.viewModel = new ProductViewModel();
+            this.viewModel = ViewModelProviders.of((FragmentActivity) activity).get(ProductViewModel.class);
 
             binding.setProductViewModel(viewModel);
 
@@ -68,7 +66,10 @@ public class FilterListAdapter extends RecyclerView.Adapter<FilterListAdapter.Fi
 
         public void bind(Product product) {
 
-            binding.getProductViewModel().setProduct(product);
+
+            viewModel.getProduct().setValue(product);
+            binding.setProductViewModel(viewModel);
+            binding.executePendingBindings();
 
 //            binding.filterListItemLayoutProductDescription.setText(shortDescriptionString.length() > 80 ? shortDescriptionString.substring(0, 80) + "..." : shortDescriptionString);
 
@@ -79,7 +80,7 @@ public class FilterListAdapter extends RecyclerView.Adapter<FilterListAdapter.Fi
             binding.filterListItemLayoutProductRegularPrice.setPaintFlags(new TextView(activity).getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
             // Card Event
-            binding.filterListItemLayoutCardView.setOnClickListener(view -> activity.startActivity(ProductDetailActivity.newIntent(activity, viewModel.getId())));
+            binding.filterListItemLayoutCardView.setOnClickListener(view -> activity.startActivity(ProductDetailActivity.newIntent(activity, product.getId())));
 
         }
 
@@ -90,5 +91,5 @@ public class FilterListAdapter extends RecyclerView.Adapter<FilterListAdapter.Fi
         this.products = products;
         notifyDataSetChanged();
     }
-    
+
 }

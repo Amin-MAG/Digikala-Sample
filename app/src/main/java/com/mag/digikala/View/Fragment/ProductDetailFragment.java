@@ -19,7 +19,7 @@ import com.mag.digikala.R;
 import com.mag.digikala.Repository.CardRepository;
 import com.mag.digikala.Repository.FilterRepository;
 import com.mag.digikala.databinding.FragmentProductDetailBinding;
-import com.mag.digikala.viewmodel.ProductViewModelNew;
+import com.mag.digikala.viewmodel.ProductViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class ProductDetailFragment extends Fragment {
     public static final String ARG_MECHANDICE = "arg_mechandice";
 
     private FragmentProductDetailBinding binding;
-    private ProductViewModelNew viewModel;
+    private ProductViewModel viewModel;
 
     private SliderViewPagerAdapter sliderAdapter;
 
@@ -47,7 +47,7 @@ public class ProductDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel = ViewModelProviders.of(getActivity()).get(ProductViewModelNew.class);
+        viewModel = ViewModelProviders.of(getActivity()).get(ProductViewModel.class);
     }
 
     @Override

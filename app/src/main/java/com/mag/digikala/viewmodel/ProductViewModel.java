@@ -1,7 +1,9 @@
 package com.mag.digikala.viewmodel;
 
-import androidx.databinding.BaseObservable;
-import androidx.databinding.Bindable;
+import android.app.Application;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.mag.digikala.Model.Product;
@@ -20,15 +22,18 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProductViewModel extends BaseObservable {
+public class ProductViewModel extends AndroidViewModel {
 
-    private Product product;
+    private MutableLiveData<Product> product = new MutableLiveData<>();
     private MutableLiveData<List<String>> imageUrls = new MutableLiveData<>();
 
-    public ProductViewModel() {
+
+    public ProductViewModel(@NonNull Application application) {
+        super(application);
     }
 
-    public ProductViewModel(String productId) {
+
+    public void requestToSetProductById(String productId) {
         RetrofitApi retrofitApi = RetrofitInstance.getInstance().create(RetrofitApi.class);
         retrofitApi.getProductById(productId).enqueue(new Callback<Product>() {
             @Override
@@ -36,10 +41,10 @@ public class ProductViewModel extends BaseObservable {
 
                 if (response.isSuccessful()) {
 
-                    setProduct(response.body());
+                    product.setValue(response.body());
 
                     ArrayList<String> urls = new ArrayList<>();
-                    for (ProductImage image : product.getImages())
+                    for (ProductImage image : product.getValue().getImages())
                         urls.add(image.getSrc());
                     imageUrls.postValue(urls);
 
@@ -52,66 +57,52 @@ public class ProductViewModel extends BaseObservable {
 
             }
         });
-
     }
 
     public String getId() {
-        return product.getId();
+        return product.getValue().getId();
     }
 
-    @Bindable
     public String getTitle() {
-        return product.getName();
+        return product.getValue().getName();
     }
 
-    @Bindable
     public String getFirstImageSrc() {
-        if (product.getImages().length != 0)
-            return product.getImages()[0].getSrc();
+        if (product.getValue().getImages().length != 0)
+            return product.getValue().getImages()[0].getSrc();
         return null;
     }
 
-    @Bindable
     public String getRegularPrice() {
         String MONEY_STRING = Constants.SPACE_CHAR + "تومان";
-        return !product.isOnSale() ? product.getRegularPrice() + MONEY_STRING : product.getSalePrice() + MONEY_STRING;
+        return !product.getValue().isOnSale() ? product.getValue().getRegularPrice() + MONEY_STRING : product.getValue().getSalePrice() + MONEY_STRING;
     }
 
-    @Bindable
     public String getSalesPrice() {
         String MONEY_STRING = Constants.SPACE_CHAR + "تومان";
-        return product.isOnSale() ? product.getRegularPrice() + MONEY_STRING : "";
+        return product.getValue().isOnSale() ? product.getValue().getRegularPrice() + MONEY_STRING : "";
     }
 
-    @Bindable
     public String getShortDescription() {
-        return Jsoup.parse(product.getShortDescription()).body().text();
+        return Jsoup.parse(product.getValue().getShortDescription()).body().text();
     }
 
 
-    @Bindable
     public String getDescription() {
         Element pTag;
-        if ((pTag = Jsoup.parse(product.getDescription()).body().select("p").first()) != null) {
+        if ((pTag = Jsoup.parse(product.getValue().getDescription()).body().select("p").first()) != null) {
             return pTag.text();
         }
         return "";
     }
 
-    @Bindable
-    public Product getProduct() {
+    public MutableLiveData<Product> getProduct() {
         return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-        notifyChange();
     }
 
     public MutableLiveData<List<String>> getImagesSrc() {
         return imageUrls;
     }
-
 
 
 }

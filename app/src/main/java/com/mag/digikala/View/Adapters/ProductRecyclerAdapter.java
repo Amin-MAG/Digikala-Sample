@@ -15,7 +15,7 @@ import com.mag.digikala.Controller.Activities.ProductDetailActivity;
 import com.mag.digikala.Model.Product;
 import com.mag.digikala.R;
 import com.mag.digikala.databinding.LayoutProductSpecialBinding;
-import com.mag.digikala.viewmodel.ProductViewModelNew;
+import com.mag.digikala.viewmodel.ProductViewModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -50,14 +50,14 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
 
     public class ProductRecyclerViewHolder extends RecyclerView.ViewHolder {
 
-        private ProductViewModelNew viewModel;
+        private ProductViewModel viewModel;
         private LayoutProductSpecialBinding binding;
 
         public ProductRecyclerViewHolder(@NonNull LayoutProductSpecialBinding binding) {
             super(binding.getRoot());
 
             this.binding = binding;
-            this.viewModel = ViewModelProviders.of((FragmentActivity) activity).get(ProductViewModelNew.class);
+            this.viewModel = ViewModelProviders.of((FragmentActivity) activity).get(ProductViewModel.class);
 
             binding.setProductViewModel(viewModel);
         }
