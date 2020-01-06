@@ -1,6 +1,7 @@
 package com.mag.digikala.Controller.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,11 +11,14 @@ import com.mag.digikala.View.Fragment.CategoryViewPagerFragment;
 import com.mag.digikala.View.Fragment.CommonToolbarFragment;
 import com.mag.digikala.R;
 import com.mag.digikala.Util.UiUtil;
+import com.mag.digikala.viewmodel.CategoryViewModel;
 
 public class CategoryActivity extends AppCompatActivity {
 
     public static final String FRAGMENT_CATEGORY_VIEW_PAGER = "fragment_category_view_pager";
     public static final String FRAGMENT_CATEGORY_COMMON_TOOLBAR = "fragment_category_common_toolbar";
+
+    private CategoryViewModel viewModel;
 
     private CommonToolbarFragment commonToolbarFragment;
     private CategoryViewPagerFragment categoryViewPagerFragment;
@@ -32,6 +36,8 @@ public class CategoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
+
+        viewModel = ViewModelProviders.of(this).get(CategoryViewModel.class);
 
 
         if (commonToolbarFragment == null) {

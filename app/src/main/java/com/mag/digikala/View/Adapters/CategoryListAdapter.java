@@ -5,6 +5,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mag.digikala.Controller.Activities.FilterActivity;
@@ -20,10 +22,6 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
 
     private Activity activity;
     private List<Category> categories;
-
-    public CategoryListAdapter() {
-        this.categories = new ArrayList<>();
-    }
 
     public CategoryListAdapter(List<Category> categories) {
         this.categories = categories;
@@ -57,14 +55,16 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
             super(binding.getRoot());
 
             this.binding = binding;
-            this.viewModel = new CategoryViewModel();
+            this.viewModel = ViewModelProviders.of((FragmentActivity) activity).get(CategoryViewModel.class);
 
             binding.setCategoryViewmodel(viewModel);
         }
 
         public void bind(Category category) {
 
-            binding.getCategoryViewmodel().setCategory(category);
+            viewModel.setCategory(category);
+            binding.setCategoryViewmodel(viewModel);
+            binding.executePendingBindings();
 
             binding.categoryListItemLayoutMainCardView.setOnClickListener(view -> activity.startActivity(FilterActivity.newIntent(activity, null, category.getId())));
 

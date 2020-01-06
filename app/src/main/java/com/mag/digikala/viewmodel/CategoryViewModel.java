@@ -1,26 +1,27 @@
 package com.mag.digikala.viewmodel;
 
-import androidx.databinding.BaseObservable;
-import androidx.databinding.Bindable;
+import android.app.Application;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 
 import com.mag.digikala.Model.Category;
 import com.mag.digikala.Model.CategoryGroup;
 
-public class CategoryViewModel extends BaseObservable {
+public class CategoryViewModel extends AndroidViewModel {
 
     private CategoryGroup categoryGroup;
     private Category category;
 
-    public CategoryViewModel() {
-
+    public CategoryViewModel(@NonNull Application application) {
+        super(application);
     }
 
-    @Bindable
+
     public String getCategoryGroupTitle() {
         return categoryGroup.getGroupName();
     }
 
-    @Bindable
     public String getCategoryTitle() {
         return category.getName();
     }

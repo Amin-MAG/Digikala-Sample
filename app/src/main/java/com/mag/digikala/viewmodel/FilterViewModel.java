@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.mag.digikala.Model.Product;
 import com.mag.digikala.Network.RetrofitApi;
@@ -61,7 +60,6 @@ public class FilterViewModel extends AndroidViewModel {
         this.sortText.set("بدون ترتیب");
 
     }
-
 
 
     public void filter() {

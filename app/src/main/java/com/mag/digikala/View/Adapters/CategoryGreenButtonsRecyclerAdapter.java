@@ -5,6 +5,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mag.digikala.Controller.Activities.CategoryActivity;
@@ -24,10 +26,6 @@ public class CategoryGreenButtonsRecyclerAdapter extends RecyclerView.Adapter<Ca
 
     public CategoryGreenButtonsRecyclerAdapter() {
         this.items = new ArrayList<>();
-    }
-
-    public CategoryGreenButtonsRecyclerAdapter(List<CategoryGroup> items) {
-        this.items = items;
     }
 
     @NonNull
@@ -57,14 +55,17 @@ public class CategoryGreenButtonsRecyclerAdapter extends RecyclerView.Adapter<Ca
             super(binding.getRoot());
 
             this.binding = binding;
-            this.viewModel = new CategoryViewModel();
+            this.viewModel = ViewModelProviders.of((FragmentActivity) activity).get(CategoryViewModel.class);
 
             binding.setCategoryViewModel(viewModel);
         }
 
         public void bind(final CategoryGroup categoryGroup) {
 
-            binding.getCategoryViewModel().setCategoryGroup(categoryGroup);
+            viewModel.setCategoryGroup(categoryGroup);
+            binding.setCategoryViewModel(viewModel);
+            binding.executePendingBindings();
+
             binding.layoutGreenCatItem.setOnClickListener(view -> activity.startActivity(CategoryActivity.newIntent(activity, categoryGroup.getId())));
 
         }
