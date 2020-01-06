@@ -15,7 +15,6 @@ import com.mag.digikala.Controller.Activities.ProductDetailActivity;
 import com.mag.digikala.Model.Product;
 import com.mag.digikala.R;
 import com.mag.digikala.databinding.LayoutProductSpecialBinding;
-import com.mag.digikala.viewmodel.ProductViewModel;
 import com.mag.digikala.viewmodel.ProductViewModelNew;
 import com.squareup.picasso.Picasso;
 
@@ -30,11 +29,6 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
     public ProductRecyclerAdapter() {
         this.productItems = new ArrayList<>();
     }
-
-    public ProductRecyclerAdapter(List<Product> products) {
-        this.productItems = products;
-    }
-
 
     @NonNull
     @Override
@@ -63,7 +57,6 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
             super(binding.getRoot());
 
             this.binding = binding;
-//            this.viewModel = new ProductViewModel();
             this.viewModel = ViewModelProviders.of((FragmentActivity) activity).get(ProductViewModelNew.class);
 
             binding.setProductViewModel(viewModel);
@@ -72,10 +65,10 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
 
         public void bind(final Product product) {
 
-//            binding.getProductViewModel().setProduct(product);
             viewModel.getProduct().setValue(product);
             binding.setProductViewModel(viewModel);
             binding.executePendingBindings();
+
 
             // Image
             Picasso.get().load(viewModel.getFirstImageSrc()).placeholder(R.drawable.place_holder).into(binding.productLayoutCover);
@@ -84,7 +77,7 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
             binding.productLayoutPriceWithoutSales.setPaintFlags(new TextView(activity).getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
             // Card Event
-            binding.productLayoutCardview.setOnClickListener(view -> activity.startActivity(ProductDetailActivity.newIntent(activity, viewModel.getId())));
+            binding.productLayoutCardview.setOnClickListener(view -> activity.startActivity(ProductDetailActivity.newIntent(activity, product.getId())));
 
         }
 
