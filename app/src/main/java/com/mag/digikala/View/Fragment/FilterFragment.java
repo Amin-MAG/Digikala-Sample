@@ -12,15 +12,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.mag.digikala.Controller.Activities.FilterActivity;
-import com.mag.digikala.Controller.Fragments.SortSelectionDialogFragment;
 import com.mag.digikala.Model.Adapter.FilterListAdapter;
 import com.mag.digikala.R;
 import com.mag.digikala.databinding.FragmentFilterBinding;
+import com.mag.digikala.viewmodel.FilterSelectionViewModel;
 import com.mag.digikala.viewmodel.FilterViewModel;
 
-import static com.mag.digikala.Controller.Fragments.SortSelectionDialogFragment.EXTRA_SORT_ID;
+import static com.mag.digikala.View.Fragment.SortSelectionDialogFragment.EXTRA_SORT_ID;
 
 public class FilterFragment extends Fragment {
 
@@ -39,11 +41,9 @@ public class FilterFragment extends Fragment {
 
     private FilterListAdapter filterListAdapter;
 
-    public static FilterFragment newInstance(String searchString, String categoryId) {
+    public static FilterFragment newInstance() {
 
         Bundle args = new Bundle();
-        args.putString(ARG_SEARCH_STRING, searchString);
-        args.putString(ARG_CATEGORY_ID, categoryId);
 
         FilterFragment fragment = new FilterFragment();
         fragment.setArguments(args);
@@ -83,7 +83,7 @@ public class FilterFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel = new FilterViewModel(getArguments().getString(ARG_SEARCH_STRING), getArguments().getString(ARG_CATEGORY_ID));
+        viewModel = ViewModelProviders.of(getActivity()).get(FilterViewModel.class);
     }
 
     @Override
@@ -109,9 +109,9 @@ public class FilterFragment extends Fragment {
         viewModel.getFilteredProducts().observe(this, products -> {
             filterListAdapter.setData(products);
         });
-        ((FilterActivity) getActivity()).getFilterSelectionViewModel().getSelectedAttribute().observe(this, attribute -> {
-            viewModel.filter();
-        });
+//        ViewModelProviders.of(getActivity()).get(FilterSelectionViewModel.class).getSelectedAttribute().observe(this, attribute -> {
+//            viewModel.filter();
+//        });
         viewModel.filter();
 
     }

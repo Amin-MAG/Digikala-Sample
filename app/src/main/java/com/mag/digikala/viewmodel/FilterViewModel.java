@@ -1,10 +1,13 @@
 package com.mag.digikala.viewmodel;
 
+import android.app.Application;
 import android.util.Log;
 
-import androidx.databinding.BaseObservable;
-import androidx.databinding.Bindable;
+import androidx.annotation.NonNull;
+import androidx.databinding.ObservableField;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.mag.digikala.Model.Product;
 import com.mag.digikala.Network.RetrofitApi;
@@ -17,13 +20,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FilterViewModel extends BaseObservable {
+public class FilterViewModel extends AndroidViewModel {
 
     // Should be change
     private RetrofitApi retrofitApi;
     private MutableLiveData<List<Product>> filteredProducts;
     private MutableLiveData<FilterRepository.Attribute> filterAttribute;
-    public String searchingText, categoryId, sortText = "بدون ترتیب";
+    private ObservableField<String> sortText;
+    public String searchingText, categoryId;
     private SORT_MODE sortMode;
 
 
@@ -43,16 +47,22 @@ public class FilterViewModel extends BaseObservable {
     }
 
 
-    public FilterViewModel(String searchingText, String categoryId) {
+    public FilterViewModel(@NonNull Application application) {
+        super(application);
 
-        this.searchingText = searchingText;
-        this.categoryId = categoryId;
+//        this.searchingText = searchingText;
+//        this.categoryId = categoryId;
         this.retrofitApi = RetrofitInstance.getInstance().create(RetrofitApi.class);
         this.filteredProducts = new MutableLiveData<>();
         this.filterAttribute = new MutableLiveData<>();
+        this.sortText = new ObservableField<>();
+
         this.sortMode = SORT_MODE.NO_SORT;
+        this.sortText.set("بدون ترتیب");
 
     }
+
+
 
     public void filter() {
 
@@ -62,32 +72,30 @@ public class FilterViewModel extends BaseObservable {
         switch (sortMode) {
             case SORT_BY_VIEW:
                 orderBaseOn = "popularity";
-                sortText = "پربازدیدترین ها";
-                Log.d("hwaTTTTT", "filter: " + sortText);
+                sortText.set("پربازدیدترین ها");
                 break;
             case SORT_BY_SELL:
                 orderBaseOn = "rating";
-                sortText = "پرفروشترین ها";
+                sortText.set("پرفروشترین ها");
                 break;
             case SORT_BY_PRICE_ASCENDING:
                 orderBaseOn = "price";
-                sortText = "قیمت از کم به زیاد";
+                sortText.set("قیمت از کم به زیاد");
                 break;
             case SORT_BY_PRICE_DESCENDING:
                 orderBaseOn = "price";
                 order = "desc";
-                sortText = "قیمت از کم به زیاد";
+                sortText.set("قیمت از کم به زیاد");
                 break;
             case SORT_BY_NEWEST:
                 orderBaseOn = "date";
-                sortText = "جدیدترین ها";
+                sortText.set("جدیدترین ها");
                 break;
             default:
-                sortText = "بدون ترتیب";
+                sortText.set("بدون ترتیب");
                 break;
         }
 
-        notifyChange();
 
         String attribute = "";
         String terms = "";
@@ -188,9 +196,7 @@ public class FilterViewModel extends BaseObservable {
 
     }
 
-    @Bindable
-    public String getSortText() {
-        Log.d("Clicked and search", "getSortText: ");
+    public ObservableField<String> getSortText() {
         return sortText;
     }
 
@@ -199,13 +205,20 @@ public class FilterViewModel extends BaseObservable {
         filter();
     }
 
-    @Bindable
     public MutableLiveData<List<Product>> getFilteredProducts() {
         return filteredProducts;
     }
 
     public MutableLiveData<FilterRepository.Attribute> getFilterAttribute() {
         return filterAttribute;
+    }
+
+    public void setSearchingText(String searchingText) {
+        this.searchingText = searchingText;
+    }
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
     }
 
 }

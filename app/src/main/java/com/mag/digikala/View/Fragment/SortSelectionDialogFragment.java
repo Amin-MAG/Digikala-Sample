@@ -1,4 +1,4 @@
-package com.mag.digikala.Controller.Fragments;
+package com.mag.digikala.View.Fragment;
 
 
 import android.app.Activity;
@@ -13,9 +13,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
 
 import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.RadioButton;
 
 import com.mag.digikala.R;
 import com.mag.digikala.databinding.FragmentSortSelectionDialogBinding;
@@ -26,7 +23,6 @@ public class SortSelectionDialogFragment extends DialogFragment {
     private FragmentSortSelectionDialogBinding binding;
 
     public static final String EXTRA_SORT_ID = "extra_sort_id";
-    private RadioButton newest, mostView, bestSeller, priceAscending, priceDescending;
 
 
     public enum SORT_MODE {
@@ -53,75 +49,58 @@ public class SortSelectionDialogFragment extends DialogFragment {
     }
 
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
-    }
-
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
 
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_sort_selection_dialog, null, false);
-//        binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_sort_selection_dialog, null, false);
-//        View view = binding.getRoot();
-        findComponents(view);
+        binding = DataBindingUtil.inflate(LayoutInflater.from(getActivity()), R.layout.fragment_sort_selection_dialog, null, false);
 
         setEvents();
 
         // Dialog Box
 
         Dialog dialog = new AlertDialog.Builder(getActivity())
-                .setView(view)
+                .setView(binding.getRoot())
                 .create();
 
         return dialog;
     }
 
     private void setEvents() {
-        newest.setOnClickListener(view1 -> {
+        binding.sortSelectionDialogFragmentNewest.setOnClickListener(view1 -> {
             Intent intent = new Intent();
             intent.putExtra(EXTRA_SORT_ID, SORT_MODE.SORT_BY_NEWEST.code);
             getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, intent);
             dismiss();
         });
 
-        mostView.setOnClickListener(view1 -> {
+        binding.sortSelectionDialogFragmentMostView.setOnClickListener(view1 -> {
             Intent intent = new Intent();
             intent.putExtra(EXTRA_SORT_ID, SORT_MODE.SORT_BY_VIEW.code);
             getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, intent);
             dismiss();
         });
 
-        bestSeller.setOnClickListener(view1 -> {
+        binding.sortSelectionDialogFragmentBestSeller.setOnClickListener(view1 -> {
             Intent intent = new Intent();
             intent.putExtra(EXTRA_SORT_ID, SORT_MODE.SORT_BY_SELL.code);
             getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, intent);
             dismiss();
         });
 
-        priceAscending.setOnClickListener(view1 -> {
+        binding.sortSelectionDialogFragmentPriceAscending.setOnClickListener(view1 -> {
             Intent intent = new Intent();
             intent.putExtra(EXTRA_SORT_ID, SORT_MODE.SORT_BY_PRICE_ASCENDING.code);
             getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, intent);
             dismiss();
         });
 
-        priceDescending.setOnClickListener(view1 -> {
+        binding.sortSelectionDialogFragmentPriceDescending.setOnClickListener(view1 -> {
             Intent intent = new Intent();
             intent.putExtra(EXTRA_SORT_ID, SORT_MODE.SORT_BY_PRICE_DESCENDING.code);
             getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, intent);
             dismiss();
         });
-    }
-
-    private void findComponents(View view) {
-        newest = view.findViewById(R.id.sort_selection_dialog_fragment__newest);
-        mostView = view.findViewById(R.id.sort_selection_dialog_fragment__most_view);
-        bestSeller = view.findViewById(R.id.sort_selection_dialog_fragment__best_seller);
-        priceAscending = view.findViewById(R.id.sort_selection_dialog_fragment__price_ascending);
-        priceDescending = view.findViewById(R.id.sort_selection_dialog_fragment__price_descending);
     }
 
 }

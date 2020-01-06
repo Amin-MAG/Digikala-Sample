@@ -25,16 +25,13 @@ public class FilterToolbarFragment extends Fragment {
 
     private FilteToolbarViewModel viewModel;
 
-    public static final String ARG_SEARCH_STRING = "arg_search_string";
-    private String searchString;
 
     private MaterialButton searchBtn, cardBtn, backBtn;
     private TextView cardNumber;
 
-    public static FilterToolbarFragment newInstance(String searchString) {
+    public static FilterToolbarFragment newInstance() {
 
         Bundle args = new Bundle();
-        args.putString(ARG_SEARCH_STRING, searchString);
 
         FilterToolbarFragment fragment = new FilterToolbarFragment();
         fragment.setArguments(args);
@@ -47,7 +44,6 @@ public class FilterToolbarFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         viewModel = ViewModelProviders.of(this).get(FilteToolbarViewModel.class);
         viewModel.loadData();
         viewModel.getNumberOfCardProducts().observe(this, numberOfCardProducts -> {
@@ -61,7 +57,6 @@ public class FilterToolbarFragment extends Fragment {
                 cardNumber.setText(String.valueOf(numberOfCardProducts));
             }
         });
-
     }
 
     @Override
@@ -73,7 +68,6 @@ public class FilterToolbarFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        searchString = getArguments().getString(ARG_SEARCH_STRING);
 
         findComponents(view);
 

@@ -1,6 +1,8 @@
 package com.mag.digikala.Controller.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,17 +15,20 @@ import com.mag.digikala.View.FilterToolbarFragment;
 import com.mag.digikala.R;
 import com.mag.digikala.Util.UiUtil;
 import com.mag.digikala.viewmodel.FilterSelectionViewModel;
+import com.mag.digikala.viewmodel.FilterViewModel;
 
 public class FilterActivity extends AppCompatActivity implements FilterFragment.FilterSelectionCallBack {
 
     public static final String EXTRA_SEARCH_STRING = "extra_search_string";
     public static final String EXTRA_CATEGORY_ID = "extra_category_id";
+
     private FilterToolbarFragment filterToolbarFragment;
     private FilterFragment filterFragment;
     private CommonToolbarFragment filterSelectionFragmentCommonToolbar;
     private FilterSelectionFragment filterSelectionFragment;
 
     private FilterSelectionViewModel filterSelectionViewModel;
+    private FilterViewModel filterViewModel;
 
     public static Intent newIntent(Context context, String searchString, String categoryId) {
         Intent intent = new Intent(context, FilterActivity.class);
@@ -37,8 +42,10 @@ public class FilterActivity extends AppCompatActivity implements FilterFragment.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter);
 
-        filterSelectionViewModel = new FilterSelectionViewModel();
-
+        filterSelectionViewModel = ViewModelProviders.of(this).get(FilterSelectionViewModel.class);
+        filterViewModel = ViewModelProviders.of(this).get(FilterViewModel.class);
+        filterViewModel.setSearchingText(getIntent().getExtras().getString(EXTRA_SEARCH_STRING));
+        filterViewModel.setCategoryId(getIntent().getExtras().getString(EXTRA_CATEGORY_ID));
 
         showFilterPage();
 
@@ -47,12 +54,12 @@ public class FilterActivity extends AppCompatActivity implements FilterFragment.
     public void showFilterPage() {
 
         if (filterToolbarFragment == null)
-            filterToolbarFragment = FilterToolbarFragment.newInstance(getIntent().getExtras().getString(EXTRA_SEARCH_STRING));
+            filterToolbarFragment = FilterToolbarFragment.newInstance();
         UiUtil.changeFragment(getSupportFragmentManager(), filterToolbarFragment, R.id.filter_activity__toolbar_frame, true, EXTRA_SEARCH_STRING);
 
 
         if (filterFragment == null)
-            filterFragment = FilterFragment.newInstance(getIntent().getExtras().getString(EXTRA_SEARCH_STRING), getIntent().getExtras().getString(EXTRA_CATEGORY_ID));
+            filterFragment = FilterFragment.newInstance();
         UiUtil.changeFragment(getSupportFragmentManager(), filterFragment, R.id.filter_activity__main_frame, true, EXTRA_SEARCH_STRING);
 
     }
@@ -72,12 +79,6 @@ public class FilterActivity extends AppCompatActivity implements FilterFragment.
             });
         UiUtil.changeFragment(getSupportFragmentManager(), filterSelectionFragment, R.id.filter_activity__main_frame, true, EXTRA_SEARCH_STRING);
 
-
-    }
-
-
-    public FilterSelectionViewModel getFilterSelectionViewModel() {
-        return filterSelectionViewModel;
     }
 
 }

@@ -15,6 +15,7 @@ public class CategoryActivity extends AppCompatActivity {
 
     public static final String FRAGMENT_CATEGORY_VIEW_PAGER = "fragment_category_view_pager";
     public static final String FRAGMENT_CATEGORY_COMMON_TOOLBAR = "fragment_category_common_toolbar";
+
     private CommonToolbarFragment commonToolbarFragment;
     private CategoryViewPagerFragment categoryViewPagerFragment;
 

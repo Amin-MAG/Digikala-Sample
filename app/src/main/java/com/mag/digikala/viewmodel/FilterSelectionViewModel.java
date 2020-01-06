@@ -1,8 +1,10 @@
 package com.mag.digikala.viewmodel;
 
-import android.util.Log;
+import android.app.Application;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.mag.digikala.Repository.FilterRepository;
@@ -10,7 +12,7 @@ import com.mag.digikala.Repository.FilterRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FilterSelectionViewModel extends BaseObservable {
+public class FilterSelectionViewModel extends AndroidViewModel {
 
 
     private MutableLiveData<List<FilterRepository.Attribute>> attributes;
@@ -18,7 +20,8 @@ public class FilterSelectionViewModel extends BaseObservable {
     private MutableLiveData<List<FilterRepository.Term>> selectedTerms;
 
 
-    public FilterSelectionViewModel() {
+    public FilterSelectionViewModel(@NonNull Application application) {
+        super(application);
 
         this.attributes = new MutableLiveData<>();
         this.selectedAttribute = new MutableLiveData<>();
@@ -52,7 +55,6 @@ public class FilterSelectionViewModel extends BaseObservable {
             terms.remove(term);
             selectedTerms.setValue(terms);
         }
-        Log.d("onTermClicked", "onTermClicked: " + terms);
     }
 
     public void clearSelectedTerms() {

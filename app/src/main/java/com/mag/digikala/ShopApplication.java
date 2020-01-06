@@ -1,4 +1,4 @@
-package com.mag.digikala.Controller;
+package com.mag.digikala;
 
 import android.app.Application;
 

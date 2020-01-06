@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.mag.digikala.Controller.Activities.FilterActivity;
 import com.mag.digikala.View.Adapters.FilterSelectionAttributesRecyclerAdapter;
@@ -45,7 +46,7 @@ public class FilterSelectionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_filter_selection, container, false);
-        viewModel = ((FilterActivity) getActivity()).getFilterSelectionViewModel();
+        viewModel = ViewModelProviders.of(getActivity()).get(FilterSelectionViewModel.class);
         return binding.getRoot();
     }
 
