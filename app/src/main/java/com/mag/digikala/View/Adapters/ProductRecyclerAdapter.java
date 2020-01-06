@@ -73,8 +73,9 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
         public void bind(final Product product) {
 
 //            binding.getProductViewModel().setProduct(product);
-            binding.getProductViewModel().getProduct().setValue(product);
-//            binding.executePendingBindings();
+            viewModel.getProduct().setValue(product);
+            binding.setProductViewModel(viewModel);
+            binding.executePendingBindings();
 
             // Image
             Picasso.get().load(viewModel.getFirstImageSrc()).placeholder(R.drawable.place_holder).into(binding.productLayoutCover);
