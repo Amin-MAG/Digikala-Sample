@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.mag.digikala.View.Fragment.CategoryListFragment;
+import com.mag.digikala.View.Fragments.CategoryListFragment;
 import com.mag.digikala.Model.CategoryGroup;
 import com.mag.digikala.Repository.ProductsRepository;
 

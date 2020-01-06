@@ -1,17 +1,16 @@
 package com.mag.digikala.Controller.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.mag.digikala.View.Fragment.CommonToolbarFragment;
-import com.mag.digikala.View.Fragment.FilterFragment;
-import com.mag.digikala.View.Fragment.FilterSelectionFragment;
-import com.mag.digikala.View.FilterToolbarFragment;
+import com.mag.digikala.View.Fragments.CommonToolbarFragment;
+import com.mag.digikala.View.Fragments.FilterFragment;
+import com.mag.digikala.View.Fragments.FilterSelectionFragment;
+import com.mag.digikala.View.ToolbarFragments.FilterToolbarFragment;
 import com.mag.digikala.R;
 import com.mag.digikala.Util.UiUtil;
 import com.mag.digikala.viewmodel.FilterSelectionViewModel;

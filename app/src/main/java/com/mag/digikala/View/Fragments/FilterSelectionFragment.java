@@ -1,4 +1,4 @@
-package com.mag.digikala.View.Fragment;
+package com.mag.digikala.View.Fragments;
 
 
 import android.os.Bundle;
@@ -12,7 +12,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.mag.digikala.Controller.Activities.FilterActivity;
 import com.mag.digikala.View.Adapters.FilterSelectionAttributesRecyclerAdapter;
 import com.mag.digikala.View.Adapters.FilterSelectionTermsRecyclerAdapter;
 import com.mag.digikala.R;

@@ -37,7 +37,7 @@
 
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/filter_toolbar_fragment__cart_btn"
+                android:id="@+id/filter_toolbar_fragment_card_btn"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="52dp"
                 android:layout_height="60dp"

@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.mag.digikala.View.Fragment.SliderImageItemFragment;
+import com.mag.digikala.View.Fragments.SliderImageItemFragment;
 
 import java.util.ArrayList;
 import java.util.List;

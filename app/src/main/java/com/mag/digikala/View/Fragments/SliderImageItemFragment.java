@@ -1,4 +1,4 @@
-package com.mag.digikala.View.Fragment;
+package com.mag.digikala.View.Fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

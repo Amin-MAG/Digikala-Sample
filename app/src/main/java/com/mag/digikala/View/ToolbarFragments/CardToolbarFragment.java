@@ -1,4 +1,4 @@
-package com.mag.digikala.View;
+package com.mag.digikala.View.ToolbarFragments;
 
 
 import android.os.Build;
@@ -6,45 +6,50 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
-import com.mag.digikala.Controller.Activities.CardActivity;
-import com.mag.digikala.Controller.Activities.SearchActivity;
 import com.mag.digikala.R;
 import com.mag.digikala.Var.Constants;
-import com.mag.digikala.viewmodel.toolbar.FilteToolbarViewModel;
-
-public class FilterToolbarFragment extends Fragment {
-
-    private FilteToolbarViewModel viewModel;
+import com.mag.digikala.databinding.FragmentCardToolbarBinding;
+import com.mag.digikala.viewmodel.MainToolbarViewModel;
 
 
-    private MaterialButton searchBtn, cardBtn, backBtn;
+public class CardToolbarFragment extends Fragment {
+
+    private MainToolbarViewModel viewModel;
+
+    private FragmentCardToolbarBinding binding;
+
     private TextView cardNumber;
 
-    public static FilterToolbarFragment newInstance() {
+    public static CardToolbarFragment newInstance() {
 
         Bundle args = new Bundle();
 
-        FilterToolbarFragment fragment = new FilterToolbarFragment();
+        CardToolbarFragment fragment = new CardToolbarFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
-    public FilterToolbarFragment() {
+
+    public CardToolbarFragment() {
     }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel = ViewModelProviders.of(this).get(FilteToolbarViewModel.class);
+
+        viewModel = ViewModelProviders.of(this).get(MainToolbarViewModel.class);
         viewModel.loadData();
         viewModel.getNumberOfCardProducts().observe(this, numberOfCardProducts -> {
             if (numberOfCardProducts == 0) {
@@ -57,33 +62,25 @@ public class FilterToolbarFragment extends Fragment {
                 cardNumber.setText(String.valueOf(numberOfCardProducts));
             }
         });
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_filter_toolbar, container, false);
+        binding = DataBindingUtil.inflate(LayoutInflater.from(getActivity()), R.layout.fragment_card_toolbar, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        cardNumber = binding.cardToolbarFragmentCardNumber;
 
-        findComponents(view);
+        binding.cardToolbarFragmentTitle.setText(getActivity().getResources().getString(R.string.cart));
 
-        backBtn.setOnClickListener(backBtnView -> getActivity().finish());
+        binding.cardToolbarFragmentBackBtn.setOnClickListener(backBtnView -> getActivity().finish());
 
-        searchBtn.setOnClickListener(searchBtnView -> startActivity(SearchActivity.newIntent(getContext())));
-
-        cardBtn.setOnClickListener(cardBtnView -> startActivity(CardActivity.newIntent(getContext())));
-
-    }
-
-    private void findComponents(@NonNull View view) {
-        cardNumber = view.findViewById(R.id.filter_toolbar_fragment__card_number);
-        backBtn = view.findViewById(R.id.filter_toolbar_fragment__back_btn);
-        cardBtn = view.findViewById(R.id.filter_toolbar_fragment__cart_btn);
-        searchBtn = view.findViewById(R.id.filter_toolbar_fragment__search_btn);
     }
 
 }

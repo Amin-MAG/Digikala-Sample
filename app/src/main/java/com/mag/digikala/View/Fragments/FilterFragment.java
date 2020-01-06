@@ -1,4 +1,4 @@
-package com.mag.digikala.View.Fragment;
+package com.mag.digikala.View.Fragments;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,17 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.mag.digikala.Controller.Activities.FilterActivity;
 import com.mag.digikala.Model.Adapter.FilterListAdapter;
 import com.mag.digikala.R;
 import com.mag.digikala.databinding.FragmentFilterBinding;
-import com.mag.digikala.viewmodel.FilterSelectionViewModel;
 import com.mag.digikala.viewmodel.FilterViewModel;
 
-import static com.mag.digikala.View.Fragment.SortSelectionDialogFragment.EXTRA_SORT_ID;
+import static com.mag.digikala.View.Fragments.SortSelectionDialogFragment.EXTRA_SORT_ID;
 
 public class FilterFragment extends Fragment {
 

@@ -20,7 +20,7 @@
             app:layout_constraintHorizontal_bias="0.633"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:context=".View.Fragment.SliderImageItemFragment" />
+            tools:context=".View.Fragments.SliderImageItemFragment" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

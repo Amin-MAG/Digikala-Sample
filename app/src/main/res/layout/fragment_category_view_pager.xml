@@ -29,7 +29,7 @@
             android:id="@+id/fragment_category_viewpage__viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".View.Fragment.CategoryViewPagerFragment" />
+            tools:context=".View.Fragments.CategoryViewPagerFragment" />
 
     </LinearLayout>
 
