@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mag.digikala.Controller.Activities.ProductDetailActivity;
@@ -14,6 +16,7 @@ import com.mag.digikala.Model.Product;
 import com.mag.digikala.R;
 import com.mag.digikala.databinding.LayoutProductSpecialBinding;
 import com.mag.digikala.viewmodel.ProductViewModel;
+import com.mag.digikala.viewmodel.ProductViewModelNew;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -53,14 +56,15 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
 
     public class ProductRecyclerViewHolder extends RecyclerView.ViewHolder {
 
-        private ProductViewModel viewModel;
+        private ProductViewModelNew viewModel;
         private LayoutProductSpecialBinding binding;
 
         public ProductRecyclerViewHolder(@NonNull LayoutProductSpecialBinding binding) {
             super(binding.getRoot());
 
             this.binding = binding;
-            this.viewModel = new ProductViewModel();
+//            this.viewModel = new ProductViewModel();
+            this.viewModel = ViewModelProviders.of((FragmentActivity) activity).get(ProductViewModelNew.class);
 
             binding.setProductViewModel(viewModel);
         }
@@ -68,8 +72,9 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
 
         public void bind(final Product product) {
 
-            binding.getProductViewModel().setProduct(product);
-            binding.executePendingBindings();
+//            binding.getProductViewModel().setProduct(product);
+            binding.getProductViewModel().getProduct().setValue(product);
+//            binding.executePendingBindings();
 
             // Image
             Picasso.get().load(viewModel.getFirstImageSrc()).placeholder(R.drawable.place_holder).into(binding.productLayoutCover);
