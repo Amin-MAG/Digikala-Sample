@@ -1,8 +1,11 @@
-package com.mag.digikala.View.ToolbarFragments;
-
+package com.mag.digikala.View.Fragments.ToolbarFragments;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,43 +13,36 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
 import com.mag.digikala.Controller.Activities.CardActivity;
-import com.mag.digikala.Controller.Activities.MainActivity;
-import com.mag.digikala.Controller.Activities.SearchActivity;
 import com.mag.digikala.R;
 import com.mag.digikala.Var.Constants;
-import com.mag.digikala.databinding.FragmentMainToolbarBinding;
+import com.mag.digikala.databinding.FragmentProductDetailToolbarBinding;
 import com.mag.digikala.viewmodel.MainToolbarViewModel;
 
-public class MainToolbarFragment extends Fragment {
+
+public class ProductDetailToolbarFragment extends Fragment {
 
     private MainToolbarViewModel viewModel;
 
-    private FragmentMainToolbarBinding binding;
+    private FragmentProductDetailToolbarBinding binding;
 
     private TextView cardNumber;
 
-
-    public static MainToolbarFragment newInstance() {
+    public static ProductDetailToolbarFragment newInstance() {
 
         Bundle args = new Bundle();
 
-        MainToolbarFragment fragment = new MainToolbarFragment();
+        ProductDetailToolbarFragment fragment = new ProductDetailToolbarFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
-    public MainToolbarFragment() {
+    public ProductDetailToolbarFragment() {
     }
 
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         viewModel = ViewModelProviders.of(this).get(MainToolbarViewModel.class);
@@ -65,10 +61,9 @@ public class MainToolbarFragment extends Fragment {
 
     }
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(LayoutInflater.from(getActivity()), R.layout.fragment_main_toolbar, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = DataBindingUtil.inflate(LayoutInflater.from(getActivity()), R.layout.fragment_product_detail_toolbar, container, false);
         return binding.getRoot();
     }
 
@@ -76,24 +71,16 @@ public class MainToolbarFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        cardNumber = binding.toolbarFragmentCardNumber;
+        cardNumber = binding.productDetailToolbarFragmentCardNumber;
 
         setEvents();
 
     }
 
     private void setEvents() {
-
-        binding.toolbarFragmentMenuBtn.setOnClickListener(view -> {
-            if (getActivity() instanceof MainActivity)
-                ((MainActivity) getActivity()).openNavigationView();
-        });
-
-        binding.toolbarFragmentCardBtn.setOnClickListener(view -> {
-            startActivity(CardActivity.newIntent(getContext()));
-        });
-
-        binding.toolbarFragmentSearchBtn.setOnClickListener(view -> startActivity(SearchActivity.newIntent(getContext())));
+        binding.productDetailToolbarFragmentCardBtn.setOnClickListener(cardNumberView -> getActivity().startActivity(CardActivity.newIntent(getContext())));
+        binding.toolbarFragmentBackBtn.setOnClickListener(backBtnView -> getActivity().finish());
     }
+
 
 }

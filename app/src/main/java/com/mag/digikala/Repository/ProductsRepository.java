@@ -5,7 +5,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.mag.digikala.Controller.Activities.CategoryActivity;
-import com.mag.digikala.Model.Adapter.NavigationRecyclerAdapter;
+import com.mag.digikala.View.Adapters.nomvvm.NavigationRecyclerAdapter;
 import com.mag.digikala.Model.CategoryGroup;
 import com.mag.digikala.Model.MenuItem;
 import com.mag.digikala.Model.Product;

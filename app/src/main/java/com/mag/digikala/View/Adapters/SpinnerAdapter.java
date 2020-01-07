@@ -1,4 +1,4 @@
-package com.mag.digikala.Model.Adapter;
+package com.mag.digikala.View.Adapters;
 
 import android.content.Context;
 import android.graphics.Typeface;

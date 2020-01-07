@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.mag.digikala.View.Fragments.CardFragment;
 import com.mag.digikala.R;
 import com.mag.digikala.Util.UiUtil;
-import com.mag.digikala.View.ToolbarFragments.CardToolbarFragment;
+import com.mag.digikala.View.Fragments.ToolbarFragments.CardToolbarFragment;
 import com.mag.digikala.viewmodel.CardViewModel;
 
 public class CardActivity extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.mag.digikala.Model.Adapter;
+package com.mag.digikala.View.Adapters.nomvvm;
 
 import android.app.Activity;
 import android.util.Log;

@@ -13,8 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.mag.digikala.Controller.Activities.CardActivity;
-import com.mag.digikala.Model.Adapter.SliderViewPagerAdapter;
-import com.mag.digikala.Model.Adapter.SpinnerAdapter;
+import com.mag.digikala.View.Adapters.SliderViewPagerAdapter;
+import com.mag.digikala.View.Adapters.SpinnerAdapter;
 import com.mag.digikala.R;
 import com.mag.digikala.Repository.CardRepository;
 import com.mag.digikala.Repository.FilterRepository;

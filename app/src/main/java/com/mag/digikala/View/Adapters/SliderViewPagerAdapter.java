@@ -1,4 +1,4 @@
-package com.mag.digikala.Model.Adapter;
+package com.mag.digikala.View.Adapters;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -11,11 +11,10 @@ import java.util.List;
 
 public class SliderViewPagerAdapter extends FragmentStatePagerAdapter {
 
-    private List<SliderImageItemFragment> imagesFragment;
+    private List<SliderImageItemFragment> imagesFragment = new ArrayList<>();
 
     public SliderViewPagerAdapter(FragmentManager fm) {
         super(fm);
-        imagesFragment = new ArrayList<>();
     }
 
     @Override

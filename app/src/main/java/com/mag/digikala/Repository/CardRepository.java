@@ -1,7 +1,5 @@
 package com.mag.digikala.Repository;
 
-import android.util.Log;
-
 import androidx.lifecycle.MutableLiveData;
 
 import com.mag.digikala.Model.CardProduct;
@@ -63,14 +61,11 @@ public class CardRepository {
                     if (response.isSuccessful()) {
 
                         Product responseProduct = response.body();
-                        responseProduct.setCardCount(cardProduct.getCount());
+                        responseProduct.getCardCount().setValue(cardProduct.getCount());
                         List<Product> newProduct = productList.getValue();
                         newProduct.add(responseProduct);
                         productList.postValue(newProduct);
                         sumOfCardProducts.postValue(calculateSumOfCardProducts());
-                        Log.d("debug_for_products", "Retorit Reuqest: " + responseProduct.getName());
-                        Log.d("debug_for_products", "Realm Data: " + realm.where(CardProduct.class).findAll());
-
 
                     }
 
@@ -95,7 +90,7 @@ public class CardRepository {
         double sum = 0;
         if (productList.getValue() != null)
             for (Product p : productList.getValue())
-                sum += p.getCardCount() * ((p.isOnSale() ? Double.parseDouble(p.getSalePrice()) : Double.parseDouble(p.getRegularPrice())));
+                sum += p.getCardCount().getValue() * ((p.isOnSale() ? Double.parseDouble(p.getSalePrice()) : Double.parseDouble(p.getRegularPrice())));
         return sum;
 
     }
@@ -126,7 +121,10 @@ public class CardRepository {
                 List<Product> newProduct = productList.getValue();
                 for (Product p : newProduct)
                     if (p.getId().equals(product.getId()))
-                        product.setCardCount(product.getCardCount() + 1);
+                        if (product.getCardCount().getValue() != null)
+                            product.getCardCount().setValue(product.getCardCount().getValue() + 1);
+                        else
+                            product.getCardCount().setValue(1);
                 productList.postValue(newProduct);
                 sumOfCardProducts.postValue(calculateSumOfCardProducts());
                 numberOfCardProducts.postValue(realm.where(CardProduct.class).findAll().size());
@@ -155,7 +153,7 @@ public class CardRepository {
                     List<Product> newProduct = productList.getValue();
                     for (Product p : newProduct)
                         if (p.getId().equals(product.getId()))
-                            product.setCardCount(product.getCardCount() - 1);
+                            product.getCardCount().setValue(product.getCardCount().getValue() - 1);
                     productList.postValue(newProduct);
                 }
                 sumOfCardProducts.postValue(calculateSumOfCardProducts());

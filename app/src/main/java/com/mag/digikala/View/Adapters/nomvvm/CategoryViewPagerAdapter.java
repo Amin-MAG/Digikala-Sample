@@ -1,4 +1,4 @@
-package com.mag.digikala.Model.Adapter;
+package com.mag.digikala.View.Adapters.nomvvm;
 
 import android.util.Log;
 
@@ -22,11 +22,9 @@ public class CategoryViewPagerAdapter extends FragmentStatePagerAdapter {
     public CategoryViewPagerAdapter(FragmentManager fm, List<CategoryGroup> parents) {
         super(fm);
 
-        fragments = new ArrayList<>();
-
         this.parents = parents;
-        Log.d("orderREquest", "onResponse: " + ProductsRepository.getInstance().getParentCategory());
-        Log.d("orderREquest", "onResponse: " + parents);
+        this.fragments = new ArrayList<>();
+
         for (int i = 0; i < parents.size(); i++)
             fragments.add(CategoryListFragment.newInstance(parents.get(i).getId()));
 

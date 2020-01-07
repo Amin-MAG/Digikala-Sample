@@ -1,12 +1,14 @@
-package com.mag.digikala.Model.Adapter;
+package com.mag.digikala.View.Adapters;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 
 import com.mag.digikala.R;
+import com.mag.digikala.databinding.LayoutSliderImageItemBinding;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 import com.squareup.picasso.Picasso;
 
@@ -24,13 +26,13 @@ public class MainSliderAdapter extends SliderViewAdapter<MainSliderAdapter.MainS
     @Override
     public MainSliderAdapterViewHolder onCreateViewHolder(ViewGroup parent) {
         activity = (Activity) parent.getContext();
-        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_slider_image_item, null);
-        return new MainSliderAdapterViewHolder(inflate);
+        LayoutSliderImageItemBinding binding = DataBindingUtil.inflate(LayoutInflater.from(activity), R.layout.layout_slider_image_item, null, false);
+        return new MainSliderAdapterViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(MainSliderAdapterViewHolder viewHolder, int position) {
-        Picasso.get().load(imageSrc.get(position)).into(viewHolder.imageViewBackground);
+        viewHolder.bind(imageSrc.get(position));
     }
 
     @Override
@@ -44,15 +46,21 @@ public class MainSliderAdapter extends SliderViewAdapter<MainSliderAdapter.MainS
 
     class MainSliderAdapterViewHolder extends SliderViewAdapter.ViewHolder {
 
-        private ImageView imageViewBackground;
+        private LayoutSliderImageItemBinding binding;
 
-        public MainSliderAdapterViewHolder(View itemView) {
-            super(itemView);
-            imageViewBackground = itemView.findViewById(R.id.slider_image_item);
+        public MainSliderAdapterViewHolder(@NonNull LayoutSliderImageItemBinding binding) {
+            super(binding.getRoot());
 
-            imageViewBackground.setOnClickListener(view -> {
-//                activity.startActivity(Prod);
+            this.binding = binding;
+
+            binding.sliderImageItem.setOnClickListener(view -> {
+
             });
+
+        }
+
+        public void bind(String src) {
+            Picasso.get().load(src).into(binding.sliderImageItem);
         }
 
     }

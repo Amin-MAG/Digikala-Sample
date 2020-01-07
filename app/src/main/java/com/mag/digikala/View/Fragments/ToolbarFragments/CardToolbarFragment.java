@@ -1,4 +1,4 @@
-package com.mag.digikala.View.ToolbarFragments;
+package com.mag.digikala.View.Fragments.ToolbarFragments;
 
 
 import android.os.Build;
@@ -10,13 +10,11 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.android.material.button.MaterialButton;
 import com.mag.digikala.R;
 import com.mag.digikala.Var.Constants;
 import com.mag.digikala.databinding.FragmentCardToolbarBinding;

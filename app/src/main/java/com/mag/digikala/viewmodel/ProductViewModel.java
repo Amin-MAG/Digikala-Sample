@@ -96,6 +96,10 @@ public class ProductViewModel extends AndroidViewModel {
         return "";
     }
 
+    public String getCardCount() {
+        return String.valueOf(product.getValue().getCardCount().getValue());
+    }
+
     public MutableLiveData<Product> getProduct() {
         return product;
     }

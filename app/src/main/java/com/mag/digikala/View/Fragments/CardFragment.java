@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.mag.digikala.Model.Adapter.CardListRecyclerAdapter;
+import com.mag.digikala.View.Adapters.CardListRecyclerAdapter;
 import com.mag.digikala.Model.Product;
 import com.mag.digikala.R;
 import com.mag.digikala.viewmodel.CardViewModel;

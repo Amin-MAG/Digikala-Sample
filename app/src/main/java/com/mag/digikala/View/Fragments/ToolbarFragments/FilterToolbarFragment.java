@@ -1,4 +1,4 @@
-package com.mag.digikala.View.ToolbarFragments;
+package com.mag.digikala.View.Fragments.ToolbarFragments;
 
 
 import android.os.Build;

@@ -1,5 +1,7 @@
 package com.mag.digikala.Model;
 
+import androidx.lifecycle.MutableLiveData;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -25,7 +27,7 @@ public class Product implements Serializable {
     private String salePrice;
     private Category[] categories;
 
-    private int cardCount;
+    private MutableLiveData<Integer> cardCount = new MutableLiveData<>();
 
     public Product() {
     }
@@ -37,9 +39,6 @@ public class Product implements Serializable {
         this.salePrice = sale_price;
     }
 
-    public void setCardCount(int cardCount) {
-        this.cardCount = cardCount;
-    }
 
     public String getId() {
         return id;
@@ -81,7 +80,7 @@ public class Product implements Serializable {
         return categories;
     }
 
-    public int getCardCount() {
+    public MutableLiveData<Integer> getCardCount() {
         return cardCount;
     }
 

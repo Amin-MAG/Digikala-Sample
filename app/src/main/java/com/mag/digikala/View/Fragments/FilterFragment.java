@@ -14,7 +14,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.mag.digikala.Model.Adapter.FilterListAdapter;
+import com.mag.digikala.View.Adapters.FilterListAdapter;
 import com.mag.digikala.R;
 import com.mag.digikala.databinding.FragmentFilterBinding;
 import com.mag.digikala.viewmodel.FilterViewModel;

@@ -10,7 +10,7 @@ import android.os.Bundle;
 import com.mag.digikala.View.Fragments.CommonToolbarFragment;
 import com.mag.digikala.View.Fragments.FilterFragment;
 import com.mag.digikala.View.Fragments.FilterSelectionFragment;
-import com.mag.digikala.View.ToolbarFragments.FilterToolbarFragment;
+import com.mag.digikala.View.Fragments.ToolbarFragments.FilterToolbarFragment;
 import com.mag.digikala.R;
 import com.mag.digikala.Util.UiUtil;
 import com.mag.digikala.viewmodel.FilterSelectionViewModel;

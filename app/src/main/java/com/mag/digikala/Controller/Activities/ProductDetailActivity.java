@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.mag.digikala.R;
 import com.mag.digikala.Util.UiUtil;
 import com.mag.digikala.View.Fragments.ProductDetailFragment;
-import com.mag.digikala.View.ToolbarFragments.ProductDetailToolbarFragment;
+import com.mag.digikala.View.Fragments.ToolbarFragments.ProductDetailToolbarFragment;
 import com.mag.digikala.viewmodel.ProductViewModel;
 
 public class ProductDetailActivity extends AppCompatActivity {

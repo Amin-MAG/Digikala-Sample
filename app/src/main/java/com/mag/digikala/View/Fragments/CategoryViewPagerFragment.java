@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
-import com.mag.digikala.Model.Adapter.CategoryViewPagerAdapter;
+import com.mag.digikala.View.Adapters.nomvvm.CategoryViewPagerAdapter;
 import com.mag.digikala.Model.CategoryGroup;
 import com.mag.digikala.Repository.ProductsRepository;
 import com.mag.digikala.R;
