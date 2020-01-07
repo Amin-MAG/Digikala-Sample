@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.mag.digikala.Repository.FilterRepository;
+import com.mag.digikala.data.repository.FilterRepository;
 
 import java.util.ArrayList;
 import java.util.List;

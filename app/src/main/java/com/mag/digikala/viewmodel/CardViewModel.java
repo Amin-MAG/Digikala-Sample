@@ -1,14 +1,13 @@
 package com.mag.digikala.viewmodel;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.mag.digikala.Model.Product;
-import com.mag.digikala.Repository.CardRepository;
+import com.mag.digikala.data.model.Product;
+import com.mag.digikala.data.repository.CardRepository;
 
 import java.util.List;
 

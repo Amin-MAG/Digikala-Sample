@@ -5,8 +5,8 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
-import com.mag.digikala.Model.Category;
-import com.mag.digikala.Model.CategoryGroup;
+import com.mag.digikala.data.model.Category;
+import com.mag.digikala.data.model.CategoryGroup;
 
 public class CategoryViewModel extends AndroidViewModel {
 

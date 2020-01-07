@@ -15,12 +15,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:label">
-        <activity android:name=".Controller.Activities.CardActivity"/>
-        <activity android:name=".Controller.Activities.FilterActivity" />
-        <activity android:name=".Controller.Activities.SearchActivity" />
-        <activity android:name=".Controller.Activities.CategoryActivity" />
-        <activity android:name=".Controller.Activities.ProductDetailActivity" />
-        <activity android:name=".Controller.Activities.MainActivity">
+        <activity android:name=".view.activities.CardActivity"/>
+        <activity android:name=".view.activities.FilterActivity" />
+        <activity android:name=".view.activities.SearchActivity" />
+        <activity android:name=".view.activities.CategoryActivity" />
+        <activity android:name=".view.activities.ProductDetailActivity" />
+        <activity android:name=".view.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

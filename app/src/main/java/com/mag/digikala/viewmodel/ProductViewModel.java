@@ -6,11 +6,11 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.mag.digikala.Model.Product;
-import com.mag.digikala.Model.ProductImage;
-import com.mag.digikala.Network.RetrofitApi;
-import com.mag.digikala.Network.RetrofitInstance;
-import com.mag.digikala.Var.Constants;
+import com.mag.digikala.data.model.Product;
+import com.mag.digikala.data.model.ProductImage;
+import com.mag.digikala.network.RetrofitApi;
+import com.mag.digikala.network.RetrofitInstance;
+import com.mag.digikala.data.var.Constants;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;

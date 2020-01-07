@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.mag.digikala.Repository.CardRepository;
+import com.mag.digikala.data.repository.CardRepository;
 
 public class MainToolbarViewModel extends AndroidViewModel {
 

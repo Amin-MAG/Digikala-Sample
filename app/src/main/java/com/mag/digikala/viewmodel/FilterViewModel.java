@@ -8,10 +8,10 @@ import androidx.databinding.ObservableField;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.mag.digikala.Model.Product;
-import com.mag.digikala.Network.RetrofitApi;
-import com.mag.digikala.Network.RetrofitInstance;
-import com.mag.digikala.Repository.FilterRepository;
+import com.mag.digikala.data.model.Product;
+import com.mag.digikala.network.RetrofitApi;
+import com.mag.digikala.network.RetrofitInstance;
+import com.mag.digikala.data.repository.FilterRepository;
 
 import java.util.List;
 
