@@ -1,28 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/category_activity__tabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@color/digikala_white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/digikala_category__toolbar_frame"
-        app:tabMode="scrollable"
-        app:tabSelectedTextColor="@color/digikala_gray"
-        app:tabTextColor="@color/digikala_dark_blue_gray" />
+    <data>
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/fragment_category_viewpage__viewpager"
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Controller.Fragments.CategoryViewPagerFragment" />
+        android:orientation="vertical">
 
-</LinearLayout>
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/category_activity__tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/digikala_white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/digikala_category__toolbar_frame"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/digikala_gray"
+            app:tabTextColor="@color/digikala_dark_blue_gray" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/fragment_category_viewpage__viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".view.fragments.CategoryViewPagerFragment" />
+
+    </LinearLayout>
+
+</layout>

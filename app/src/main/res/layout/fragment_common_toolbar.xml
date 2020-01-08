@@ -1,37 +1,43 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="56dp"
-    android:background="@color/digikala_red"
-    android:gravity="right"
-    android:orientation="horizontal"
-    android:weightSum="1.0">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/common_toolbar_fragment__title"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:fontFamily="@font/far_roya_bd"
-        android:gravity="center|right"
-        android:text="TextView"
-        android:textColor="@color/digikala_raw_white" />
+    <data>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/common_toolbar_fragment__back_btn"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="52dp"
-        android:layout_height="60dp"
-        android:layout_gravity="right"
-        android:insetTop="0dp"
-        android:insetBottom="6dp"
-        app:backgroundTint="#007B2CD6"
-        app:cornerRadius="30dp"
-        app:icon="@drawable/ic_back"
-        app:iconPadding="0dp"
-        app:iconSize="20dp" />
+    </data>
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/digikala_red"
+        android:gravity="right"
+        android:orientation="horizontal"
+        android:weightSum="1.0">
 
+        <TextView
+            android:id="@+id/common_toolbar_fragment__title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="@font/far_roya_bd"
+            android:gravity="center|right"
+            android:text="TextView"
+            android:textColor="@color/digikala_raw_white" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/common_toolbar_fragment__back_btn"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="52dp"
+            android:layout_height="60dp"
+            android:layout_gravity="right"
+            android:insetTop="0dp"
+            android:insetBottom="6dp"
+            app:backgroundTint="#007B2CD6"
+            app:cornerRadius="30dp"
+            app:icon="@drawable/ic_back"
+            app:iconPadding="0dp"
+            app:iconSize="20dp" />
+
+    </LinearLayout>
+
+</layout>

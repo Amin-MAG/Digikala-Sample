@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/digikala_dark_white"
     android:orientation="vertical"
-    tools:context=".Controller.Activities.CardActivity">
+    tools:context=".view.activities.CardActivity">
 
 
     <!-- Common Toolbar-->

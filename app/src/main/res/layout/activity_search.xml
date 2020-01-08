@@ -6,4 +6,4 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/digikala_dark_white"
-    tools:context=".Controller.Activities.SearchActivity"/>
+    tools:context=".view.activities.SearchActivity"/>

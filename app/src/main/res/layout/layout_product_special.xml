@@ -1,70 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/product_layout__cardview"
-    android:layout_width="136dp"
-    android:layout_height="212dp"
-    android:layout_marginBottom="8dp"
-    android:layout_marginRight="8dp">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingBottom="8dp">
+    <data>
 
-        <ImageView
-            android:id="@+id/product_layout__cover"
-            android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:src="@drawable/place_holder" />
+        <variable
+            name="productViewModel"
+            type="com.mag.digikala.viewmodel.ProductViewModel" />
+    </data>
 
-        <TextView
-            android:id="@+id/product_layout__title"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/product_layout__cardview"
+        android:layout_width="136dp"
+        android:layout_height="212dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginRight="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/iran_yekan"
-            android:gravity="right"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            android:text="Product Title"
-            android:textSize="9dp" />
+            android:orientation="vertical"
+            android:paddingBottom="8dp">
 
-        <View
-            android:id="@+id/divider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginBottom="4dp"
-            android:background="?android:attr/listDivider" />
+            <ImageView
+                android:id="@+id/product_layout__cover"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:src="@drawable/place_holder" />
 
-        <TextView
-            android:id="@+id/product_layout_price_without_sales"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginLeft="4dp"
-            android:gravity="left"
-            android:textColor="@color/digikala_red"
-            android:textSize="8dp" />
-
-        <TextView
-            android:id="@+id/product_layout_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginLeft="4dp"
-            android:gravity="left"
-            android:text="Price"
-            android:textColor="@color/digikala_green"
-            android:textSize="10dp" />
+            <TextView
+                android:id="@+id/product_layout__title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="4dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/iran_yekan"
+                android:gravity="right"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:text="@{productViewModel.title}"
+                android:textSize="9dp" />
 
 
-    </LinearLayout>
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="4dp"
+                android:background="?android:attr/listDivider" />
 
-</androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/product_layout_price_without_sales"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="4dp"
+                android:gravity="left"
+                android:text="@{productViewModel.salesPrice}"
+                android:textColor="@color/digikala_red"
+                android:textSize="8dp" />
+
+            <TextView
+                android:id="@+id/product_layout_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="4dp"
+                android:gravity="left"
+                android:text="@{productViewModel.regularPrice}"
+                android:textColor="@color/digikala_green"
+                android:textSize="10dp" />
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

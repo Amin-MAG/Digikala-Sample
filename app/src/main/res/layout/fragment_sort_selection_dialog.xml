@@ -1,75 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Controller.Fragments.SortSelectionDialogFragment">
+<layout>
 
-    <RadioGroup
+    <data>
+
+
+    </data>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:layout_height="match_parent"
+        tools:context=".view.fragments.SortSelectionDialogFragment">
 
-        <RadioButton
-            android:id="@+id/sort_selection_dialog_fragment__most_view"
+        <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:buttonTint="@color/digikala_green"
-            android:fontFamily="@font/iran_yekan"
-            android:gravity="right|center_vertical"
-            android:layoutDirection="rtl"
-            android:paddingRight="8dp"
-            android:text="@string/most_views"
-            android:textSize="11dp" />
+            android:padding="16dp">
 
-        <RadioButton
-            android:id="@+id/sort_selection_dialog_fragment__best_seller"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/digikala_green"
-            android:fontFamily="@font/iran_yekan"
-            android:gravity="right|center_vertical"
-            android:layoutDirection="rtl"
-            android:paddingRight="8dp"
-            android:text="@string/best_sellers"
-            android:textSize="11dp" />
+            <RadioButton
+                android:id="@+id/sort_selection_dialog_fragment__most_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/digikala_green"
+                android:fontFamily="@font/iran_yekan"
+                android:gravity="right|center_vertical"
+                android:layoutDirection="rtl"
+                android:paddingRight="8dp"
+                android:text="@string/most_views"
+                android:textSize="11dp" />
 
-        <RadioButton
-            android:id="@+id/sort_selection_dialog_fragment__price_descending"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/digikala_green"
-            android:fontFamily="@font/iran_yekan"
-            android:gravity="right|center_vertical"
-            android:layoutDirection="rtl"
-            android:paddingRight="8dp"
-            android:text="@string/price_descending"
-            android:textSize="11dp" />
+            <RadioButton
+                android:id="@+id/sort_selection_dialog_fragment__best_seller"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/digikala_green"
+                android:fontFamily="@font/iran_yekan"
+                android:gravity="right|center_vertical"
+                android:layoutDirection="rtl"
+                android:paddingRight="8dp"
+                android:text="@string/best_sellers"
+                android:textSize="11dp" />
 
-        <RadioButton
-            android:id="@+id/sort_selection_dialog_fragment__price_ascending"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/digikala_green"
-            android:fontFamily="@font/iran_yekan"
-            android:gravity="right|center_vertical"
-            android:layoutDirection="rtl"
-            android:paddingRight="8dp"
-            android:text="@string/price_ascending"
-            android:textSize="11dp" />
+            <RadioButton
+                android:id="@+id/sort_selection_dialog_fragment__price_descending"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/digikala_green"
+                android:fontFamily="@font/iran_yekan"
+                android:gravity="right|center_vertical"
+                android:layoutDirection="rtl"
+                android:paddingRight="8dp"
+                android:text="@string/price_descending"
+                android:textSize="11dp" />
 
-        <RadioButton
-            android:id="@+id/sort_selection_dialog_fragment__newest"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/digikala_green"
-            android:fontFamily="@font/iran_yekan"
-            android:gravity="right|center_vertical"
-            android:layoutDirection="rtl"
-            android:paddingRight="8dp"
-            android:text="@string/newests"
-            android:textSize="11dp" />
+            <RadioButton
+                android:id="@+id/sort_selection_dialog_fragment__price_ascending"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/digikala_green"
+                android:fontFamily="@font/iran_yekan"
+                android:gravity="right|center_vertical"
+                android:layoutDirection="rtl"
+                android:paddingRight="8dp"
+                android:text="@string/price_ascending"
+                android:textSize="11dp" />
 
-    </RadioGroup>
+            <RadioButton
+                android:id="@+id/sort_selection_dialog_fragment__newest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/digikala_green"
+                android:fontFamily="@font/iran_yekan"
+                android:gravity="right|center_vertical"
+                android:layoutDirection="rtl"
+                android:paddingRight="8dp"
+                android:text="@string/newests"
+                android:textSize="11dp" />
 
-</FrameLayout>
+        </RadioGroup>
+
+    </FrameLayout>
+</layout>

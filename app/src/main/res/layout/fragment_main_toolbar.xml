@@ -1,45 +1,25 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="56dp"
-    android:background="@color/digikala_red"
-    android:weightSum="1.0">
+    xmlns:tools="http://schemas.android.com/tools">
 
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="81dp"
-        android:layout_height="37dp"
-        android:src="@drawable/logo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/toolbar_fragment__menu_btn"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/digikala_red"
+        android:weightSum="1.0">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/toolbar_fragment__search_btn"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="52dp"
-        android:layout_height="60dp"
-        android:insetTop="0dp"
-        android:insetBottom="6dp"
-        app:backgroundTint="@color/nothing"
-        app:cornerRadius="30dp"
-        app:icon="@drawable/ic_search"
-        app:iconPadding="0dp"
-        app:iconSize="20dp"
-        app:layout_constraintLeft_toRightOf="@+id/toolbar_fragment__cart_frame_btn"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <FrameLayout
-        android:id="@+id/toolbar_fragment__cart_frame_btn"
-        android:layout_width="52dp"
-        android:layout_height="60dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="81dp"
+            android:layout_height="37dp"
+            android:src="@drawable/logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/toolbar_fragment__menu_btn"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/toolbar_fragment__cart_btn"
+            android:id="@+id/toolbar_fragment__search_btn"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="52dp"
             android:layout_height="60dp"
@@ -47,42 +27,66 @@
             android:insetBottom="6dp"
             app:backgroundTint="@color/nothing"
             app:cornerRadius="30dp"
-            app:icon="@drawable/ic_shopping_cart"
+            app:icon="@drawable/ic_search"
             app:iconPadding="0dp"
-            app:iconSize="20dp" />
+            app:iconSize="20dp"
+            app:layout_constraintLeft_toRightOf="@+id/toolbar_fragment__cart_frame_btn"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/toolbar_fragment__card_number"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
-            android:layout_gravity="top|right"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="12dp"
-            android:background="@drawable/cart_counter"
-            android:gravity="center"
-            android:text="3"
-            android:textColor="@color/digikala_red"
-            android:textSize="11dp"
-            app:fontFamily="@font/far_trafc_bd" />
+        <FrameLayout
+            android:id="@+id/toolbar_fragment__cart_frame_btn"
+            android:layout_width="52dp"
+            android:layout_height="60dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
 
-    </FrameLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/toolbar_fragment_card_btn"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="52dp"
+                android:layout_height="60dp"
+                android:insetTop="0dp"
+                android:insetBottom="6dp"
+                app:backgroundTint="@color/nothing"
+                app:cornerRadius="30dp"
+                app:icon="@drawable/ic_shopping_cart"
+                app:iconPadding="0dp"
+                app:iconSize="20dp" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/toolbar_fragment__menu_btn"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="52dp"
-        android:layout_height="60dp"
-        android:insetTop="0dp"
-        android:insetBottom="8dp"
-        app:backgroundTint="@color/nothing"
-        app:cornerRadius="30dp"
-        app:icon="@drawable/ic_navigation"
-        app:iconPadding="0dp"
-        app:iconSize="22dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/toolbar_fragment__card_number"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_gravity="top|right"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="12dp"
+                android:background="@drawable/cart_counter"
+                android:gravity="center"
+                android:text="3"
+                android:textColor="@color/digikala_red"
+                android:textSize="11dp"
+                app:fontFamily="@font/far_trafc_bd" />
 
 
+        </FrameLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/toolbar_fragment__menu_btn"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="52dp"
+            android:layout_height="60dp"
+            android:insetTop="0dp"
+            android:insetBottom="8dp"
+            app:backgroundTint="@color/nothing"
+            app:cornerRadius="30dp"
+            app:icon="@drawable/ic_navigation"
+            app:iconPadding="0dp"
+            app:iconSize="22dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>
