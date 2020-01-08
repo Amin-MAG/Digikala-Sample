@@ -1,5 +1,7 @@
 package com.mag.digikala.network;
 
+import android.database.Observable;
+
 import com.mag.digikala.data.model.Category;
 import com.mag.digikala.data.model.Product;
 import com.mag.digikala.data.repository.FilterRepository;
@@ -34,7 +36,6 @@ public interface RetrofitApi {
 
     @GET(BASE_URL + "products" + WOOCOMMERCE_REST_AUTHENTICATION_KEY)
     Call<List<Product>> getProducts(@Query("per_page") int perPage, @Query("page") int numberOfPage, @Query("orderby") String baseOn);
-
 
     ///// With Category
 

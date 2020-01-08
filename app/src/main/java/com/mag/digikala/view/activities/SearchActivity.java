@@ -13,6 +13,7 @@ import com.mag.digikala.util.UiUtil;
 public class SearchActivity extends AppCompatActivity {
 
     public static final String FRAGMENT_SEARCH_TOOLBAR = "fragment_search_toolbar";
+    
     private SearchToolbarFragment searchToolbarFragment;
 
     public static Intent newIntent(Context context) {
@@ -24,11 +25,15 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+        setupFragments();
+
+    }
+
+    private void setupFragments() {
         if (searchToolbarFragment == null) {
             searchToolbarFragment = SearchToolbarFragment.newInstance();
             UiUtil.changeFragment(getSupportFragmentManager(), searchToolbarFragment, R.id.search_activity__toolbar, true, FRAGMENT_SEARCH_TOOLBAR);
         }
-
     }
 
 }

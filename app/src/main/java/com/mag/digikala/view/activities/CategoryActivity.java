@@ -39,6 +39,11 @@ public class CategoryActivity extends AppCompatActivity {
 
         viewModel = ViewModelProviders.of(this).get(CategoryViewModel.class);
 
+        setupFragments();
+
+    }
+
+    private void setupFragments() {
 
         if (commonToolbarFragment == null) {
             commonToolbarFragment = CommonToolbarFragment.newInstance(getResources().getString(R.string.category), () -> {

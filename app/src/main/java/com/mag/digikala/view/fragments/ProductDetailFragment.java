@@ -26,19 +26,16 @@ import java.util.List;
 
 public class ProductDetailFragment extends Fragment {
 
-    public static final String ARG_MECHANDICE = "arg_mechandice";
-
     private FragmentProductDetailBinding binding;
     private ProductViewModel viewModel;
 
     private SliderViewPagerAdapter sliderAdapter;
 
 
-    public static ProductDetailFragment newInstance(String merchandiceId) {
+    public static ProductDetailFragment newInstance() {
 
         ProductDetailFragment fragment = new ProductDetailFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_MECHANDICE, merchandiceId);
         fragment.setArguments(args);
 
         return fragment;

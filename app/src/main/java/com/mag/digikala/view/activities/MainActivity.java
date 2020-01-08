@@ -14,23 +14,25 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationView;
-import com.mag.digikala.view.fragments.MainFragment;
-import com.mag.digikala.data.repository.FilterRepository;
-import com.mag.digikala.data.repository.CardRepository;
-import com.mag.digikala.view.fragments.ToolbarFragments.MainToolbarFragment;
-import com.mag.digikala.view.adapters.nomvvm.NavigationRecyclerAdapter;
+import com.mag.digikala.R;
 import com.mag.digikala.data.model.Category;
 import com.mag.digikala.data.model.CategoryGroup;
 import com.mag.digikala.data.model.Product;
+import com.mag.digikala.data.repository.CardRepository;
+import com.mag.digikala.data.repository.FilterRepository;
 import com.mag.digikala.data.repository.ProductsRepository;
 import com.mag.digikala.network.RetrofitApi;
 import com.mag.digikala.network.RetrofitInstance;
-import com.mag.digikala.R;
 import com.mag.digikala.util.UiUtil;
+import com.mag.digikala.view.adapters.nomvvm.NavigationRecyclerAdapter;
+import com.mag.digikala.view.fragments.MainFragment;
+import com.mag.digikala.view.fragments.ToolbarFragments.MainToolbarFragment;
+import com.mag.digikala.viewmodel.MainViewModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,7 +45,8 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private boolean backIsPressed = false;
+    private MainViewModel viewModel;
+
 
     private ScrollView mainFrame;
     private FrameLayout toolbarFrame;
@@ -67,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        backIsPressed = false;
+        viewModel.setBackIsPressed(false);;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -76,14 +79,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Log.i("LifeCycle", "onCreate: ");
-
-        ProductsRepository.getInstance().setNavigationItems(this);
+        viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
 
         // Find Items
 
         drawerLayout = findViewById(R.id.digikala_activity__drawer_layout);
-//        navigationRecycler = findViewById(R.id.digikala__navigation_recycler);
         mainFrame = findViewById(R.id.digikala_activity__scroll_view);
         toolbarFrame = findViewById(R.id.digikala_activity__toolbar_frame);
         loadingFrame = findViewById(R.id.digikala_activity__loading_frame);
@@ -94,52 +94,30 @@ public class MainActivity extends AppCompatActivity {
 
         retrofitConncetion();
 
-        // Toolbar
+        setupFragments();
 
+
+    }
+
+    private void setupFragments() {
+
+        // Toolbar
         if (mainToolbarFragment == null) {
             mainToolbarFragment = MainToolbarFragment.newInstance();
             UiUtil.changeFragment(getSupportFragmentManager(), mainToolbarFragment, R.id.digikala_activity__toolbar_frame, true, "fragment_main_toolbar");
         }
 
-
-//        ActionBar actionBar = getSupportActionBar();
-//        actionBar.setHomeButtonEnabled(false);
-//        actionBar.setDisplayShowCustomEnabled(true);
-//        actionBar.setDisplayShowTitleEnabled(false);
-//        View view = getLayoutInflater().inflate(R.layout.fragment_main_toolbar, null);
-//        ActionBar.LayoutParams layoutParams = new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT);
-//        actionBar.setCustomView(R.layout.fragment_main_toolbar);
-
-
-        // Navigation
-
-//        navigationRecyclerAdapter = new NavigationRecyclerAdapter(ProductsRepository.getInstance().getNavigationItems());
-//        navigationRecycler.setAdapter(navigationRecyclerAdapter);
-//        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-//                return true;
-//            }
-//        });
-
         // Main Page
-
         if (mainFragment == null) {
             mainFragment = MainFragment.newInstance();
             UiUtil.changeFragment(getSupportFragmentManager(), mainFragment, R.id.digikala_activity__scroll_view, true, "fragment_main");
         }
 
-
     }
 
     @Override
     public void finish() {
-        if (backIsPressed)
-            super.finish();
-        else {
-            backIsPressed = true;
-            Toast.makeText(this, getResources().getString(R.string.press_again_for_exit), Toast.LENGTH_SHORT).show();
-        }
+        if (viewModel.onBackPressed()) finish();
     }
 
     @SuppressLint("CheckResult")
@@ -153,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void requestToGetCategories() {
+
         retrofitApi.getAllCategories().enqueue(new Callback<List<Category>>() {
             @Override
             public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
@@ -163,7 +142,6 @@ public class MainActivity extends AppCompatActivity {
                     Map<String, CategoryGroup> categoryGroups = new HashMap<>();
 
                     /*
-
                     Analyzing Categories
 
                      */
@@ -175,7 +153,6 @@ public class MainActivity extends AppCompatActivity {
                     Category thisLoopCategory;
                     // Get Root Categories //
                     for (int i = 0; i < responseList.size(); i++) {
-//                        Log.d("CATEGORIES", "onResponse: " + responseList.get(i).getName());
                         if ((thisLoopCategory = responseList.get(i)).getParentId().equals("0")) {
                             categoryGroups.put(thisLoopCategory.getId(), new CategoryGroup(thisLoopCategory.getId(), thisLoopCategory.getName()));
                         }
@@ -185,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
                     CategoryGroup thisLoopCategoryGroup;
                     // Get Sub Categories And Set Them //
                     /*
-                    Letter SubCategory Fro SybCategory Should Be handled Here
+                    Letter SubCategory For SubCategory Should Be handled Here
                      */
                     for (int i = 0; i < responseList.size(); i++) {
                         if (!(thisLoopCategory = responseList.get(i)).getParentId().equals("0")) {
@@ -355,15 +332,12 @@ public class MainActivity extends AppCompatActivity {
 
         loadingFrame.setVisibility(View.GONE);
         noInternetConnectionFrame.setVisibility(View.VISIBLE);
-        retryConnectionBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        retryConnectionBtn.setOnClickListener(view -> {
 
-                retrofitConncetion();
-                loadingFrame.setVisibility(View.VISIBLE);
-                noInternetConnectionFrame.setVisibility(View.GONE);
+            retrofitConncetion();
+            loadingFrame.setVisibility(View.VISIBLE);
+            noInternetConnectionFrame.setVisibility(View.GONE);
 
-            }
         });
 
     }

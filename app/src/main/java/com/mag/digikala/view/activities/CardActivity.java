@@ -35,6 +35,12 @@ public class CardActivity extends AppCompatActivity {
 
         viewModel = ViewModelProviders.of(this).get(CardViewModel.class);
 
+        setupFragments();
+
+    }
+
+    private void setupFragments() {
+
         if (cardToolbarFragment == null) {
             cardToolbarFragment = CardToolbarFragment.newInstance();
             UiUtil.changeFragment(getSupportFragmentManager(), cardToolbarFragment, R.id.card_activity__common_toolbar, true, FRAGMENT_CARD_TOOLBAR);

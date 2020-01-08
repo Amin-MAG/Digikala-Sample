@@ -21,9 +21,9 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     private ProductViewModel viewModel;
 
-//    private RecyclerView navigationRecycler;
-//    private NavigationRecyclerAdapter navigationRecyclerAdapter;
-//    private TextView validPrice, invaidPrice;
+    private ProductDetailFragment productDetailFragment;
+    private ProductDetailToolbarFragment productDetailToolbarFragment;
+
 
     public static Intent newIntent(Context context, String merchandiseId) {
         Intent intent = new Intent(context, ProductDetailActivity.class);
@@ -36,40 +36,25 @@ public class ProductDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
 
-
         viewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
         viewModel.requestToSetProductById(getIntent().getExtras().getString(EXTRA_MERCHANDISE));
 
-//        navigationRecycler = findViewById(R.id.digikala__navigation_recycler);
-
-        UiUtil.changeFragment(getSupportFragmentManager(), ProductDetailToolbarFragment.newInstance(), R.id.digikala_product_detail_activity__toolbar_frame, false, FRAGMENT_PRODUCT_DETAIL_TOOLBAR);
-        UiUtil.changeFragment(getSupportFragmentManager(), ProductDetailFragment.newInstance(getIntent().getExtras().getString(EXTRA_MERCHANDISE)), R.id.digikala_product_detail_activity__main_frame, false, FRAGMENT_PRODUCT_DETAIL);
-
-        // Navigation
-
-//        navigationRecyclerAdapter = new NavigationRecyclerAdapter(ProductsRepository.getInstance().getNavigationItems());
-//        navigationRecycler.setAdapter(navigationRecyclerAdapter);
-
+        setupFragments();
 
     }
-//
-//    private void setPrices(String regular_price, String sale_price) {
-//
-//        String MONEY_STRING = Constants.SPACE_CHAR + activity.getResources().getString(R.string.tomans);
-//        String priceString;
-//        String priceInvalidString = Constants.EMPTY_CHAR;
-//
-//        if (sale_price.equals(Constants.EMPTY_CHAR))
-//            priceString = regular_price + MONEY_STRING;
-//        else {
-//            priceString = sale_price + MONEY_STRING;
-//            priceInvalidString = regular_price + MONEY_STRING;
-//        }
-//
-//        priceInvalid.setText(priceInvalidString);
-//        priceInvalid.setPaintFlags(priceInvalid.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-//        price.setText(priceString);
-//
-//    }
+
+    private void setupFragments() {
+
+        if (productDetailToolbarFragment == null) {
+            productDetailToolbarFragment = ProductDetailToolbarFragment.newInstance();
+            UiUtil.changeFragment(getSupportFragmentManager(), productDetailToolbarFragment, R.id.digikala_product_detail_activity__toolbar_frame, false, FRAGMENT_PRODUCT_DETAIL_TOOLBAR);
+        }
+
+        if (productDetailFragment == null) {
+            productDetailFragment = ProductDetailFragment.newInstance();
+            UiUtil.changeFragment(getSupportFragmentManager(), productDetailFragment, R.id.digikala_product_detail_activity__main_frame, false, FRAGMENT_PRODUCT_DETAIL);
+        }
+
+    }
 
 }
