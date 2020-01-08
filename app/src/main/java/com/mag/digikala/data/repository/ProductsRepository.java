@@ -1,7 +1,6 @@
 package com.mag.digikala.data.repository;
 
 import com.mag.digikala.data.model.CategoryGroup;
-import com.mag.digikala.data.model.MenuItem;
 import com.mag.digikala.data.model.Product;
 
 import java.util.ArrayList;

@@ -1,7 +1,6 @@
 package com.mag.digikala.viewmodel;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -29,17 +28,21 @@ public class MainViewModel extends AndroidViewModel {
 
     private boolean backIsPressed = false;
 
-    private RetrofitApi retrofitApi;
-
-    private MutableLiveData<List<Category>> categories = new MutableLiveData<>();
     private MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
     private MutableLiveData<Boolean> hasError = new MutableLiveData<>();
+
+    private CardRepository cardRepository;
+    private ProductsRepository productsRepository;
+    private FilterRepository filterRepository;
+
+    private RetrofitApi retrofitApi;
 
 
     public MainViewModel(@NonNull Application application) {
         super(application);
-
-
+        cardRepository = CardRepository.getInstance();
+        productsRepository = ProductsRepository.getInstance();
+        filterRepository = FilterRepository.getInstance();
     }
 
     public void requestToGetInitialMainDatas() {
@@ -47,9 +50,11 @@ public class MainViewModel extends AndroidViewModel {
         this.retrofitApi = RetrofitInstance.getInstance().create(RetrofitApi.class);
         this.isLoading.setValue(true);
         this.hasError.setValue(false);
+
         requestToGetProducts();
         requestToGetInitialAttributeData();
-        CardRepository.getInstance().loadInitialProduct();
+
+        cardRepository.loadInitialProduct();
 
     }
 
@@ -60,9 +65,8 @@ public class MainViewModel extends AndroidViewModel {
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
 
                 if (response.isSuccessful()) {
-                    ProductsRepository.getInstance().setAllProducts(response.body());
+                    productsRepository.setAllProducts(response.body());
                     requestToGetOfferedProducts();
-
                 }
 
             }
@@ -70,7 +74,6 @@ public class MainViewModel extends AndroidViewModel {
             @Override
             public void onFailure(Call<List<Product>> call, Throwable t) {
                 loadConncetionErrorSlide();
-
             }
 
         });
@@ -82,9 +85,8 @@ public class MainViewModel extends AndroidViewModel {
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
 
                 if (response.isSuccessful()) {
-                    ProductsRepository.getInstance().setOfferedProducts(response.body());
+                    productsRepository.setOfferedProducts(response.body());
                     requestToGetTopRatingProducts();
-
                 }
 
             }
@@ -104,17 +106,15 @@ public class MainViewModel extends AndroidViewModel {
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
 
                 if (response.isSuccessful()) {
-
-                    ProductsRepository.getInstance().setTopRatingProducts(response.body());
+                    productsRepository.setTopRatingProducts(response.body());
                     requestToGetPopularProducts();
-
                 }
 
             }
 
             @Override
             public void onFailure(Call<List<Product>> call, Throwable t) {
-
+                loadConncetionErrorSlide();
             }
         });
     }
@@ -124,15 +124,13 @@ public class MainViewModel extends AndroidViewModel {
         retrofitApi.getProducts(8, 1, "popularity").enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-
-                ProductsRepository.getInstance().setPopularProducts(response.body());
+                productsRepository.setPopularProducts(response.body());
                 requestToGetCategories();
-
             }
 
             @Override
             public void onFailure(Call<List<Product>> call, Throwable t) {
-
+                loadConncetionErrorSlide();
             }
         });
     }
@@ -168,7 +166,7 @@ public class MainViewModel extends AndroidViewModel {
                         }
                     }
 
-                    ProductsRepository.getInstance().setCategoryMap(categoryGroups);
+                    productsRepository.setCategoryMap(categoryGroups);
 
                     dropLoadingSlide();
 
@@ -201,21 +199,17 @@ public class MainViewModel extends AndroidViewModel {
                             public void onResponse(Call<List<FilterRepository.Term>> call, Response<List<FilterRepository.Term>> response) {
 
                                 if (response.isSuccessful()) {
-
                                     newAttribute.setTerms(response.body());
                                     defaultAttributes.add(newAttribute);
-                                    FilterRepository.getInstance().setAttributes(defaultAttributes);
-
+                                    filterRepository.setAttributes(defaultAttributes);
                                 }
 
                             }
 
                             @Override
                             public void onFailure(Call<List<FilterRepository.Term>> call, Throwable t) {
-
                             }
                         });
-
                     }
 
                 }
@@ -255,5 +249,6 @@ public class MainViewModel extends AndroidViewModel {
     public MutableLiveData<Boolean> getIsLoading() {
         return isLoading;
     }
+
 
 }
