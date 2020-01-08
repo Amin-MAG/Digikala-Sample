@@ -51,11 +51,8 @@ public class MainViewModel extends AndroidViewModel {
         this.isLoading.setValue(true);
         this.hasError.setValue(false);
 
-        // developing...
-        this.isLoading.setValue(false);
-
-//        requestToGetProducts();
-//        requestToGetInitialAttributeData();
+        requestToGetProducts();
+        requestToGetInitialAttributeData();
 
         cardRepository.loadInitialProduct();
 
