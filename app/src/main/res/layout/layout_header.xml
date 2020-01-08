@@ -1,8 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="40dp"
-    android:background="@color/digikala_red">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
+    android:background="@color/digikala_red"
+    android:gravity="right|center_vertical"
+    android:orientation="horizontal">
 
 
+    <ImageView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/ic_user" />
 
-</RelativeLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/header_layout__login_register"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_marginRight="8dp"
+        android:fontFamily="@font/iran_yekan"
+        android:text="@string/login_register"
+        android:textSize="12dp"
+        app:backgroundTint="@color/digikala_red"
+        app:cornerRadius="8dp"
+        app:strokeColor="@color/digikala_raw_white"
+        app:strokeWidth="1dp" />
+
+
+</LinearLayout>

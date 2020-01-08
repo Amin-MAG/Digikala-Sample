@@ -51,7 +51,7 @@ public class MainViewModel extends AndroidViewModel {
         this.isLoading.setValue(true);
         this.hasError.setValue(false);
 
-        //developing...
+        // developing...
         this.isLoading.setValue(false);
 
 //        requestToGetProducts();

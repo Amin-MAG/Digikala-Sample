@@ -69,5 +69,6 @@
     <string name="fiter_product">فیلتر کردن محصولات</string>
     <string name="size">سایز</string>
     <string name="press_again_for_exit">برای خروج دوباره فشار دهید</string>
+    <string name="login_register">ورود و ثبت نام</string>
 
 </resources>

@@ -2,23 +2,20 @@ package com.mag.digikala.view.activities;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.navigation.NavigationView;
+import com.mag.digikala.CustomerRegisterationActivity;
 import com.mag.digikala.R;
 import com.mag.digikala.util.UiUtil;
 import com.mag.digikala.view.fragments.MainFragment;
@@ -32,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.digikala_activity__drawer_layout)
     protected DrawerLayout drawerLayout;
+
+    @BindView(R.id.digikala__navigation_view)
+    protected NavigationView navigationView;
 
     @BindView(R.id.digikala_activity__retry_connection)
     protected MaterialButton retryConnectionBtn;
@@ -70,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        setupNavigationEvents();
+
         viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         viewModel.requestToGetInitialMainDatas();
         viewModel.getHasError().observe(this, aBoolean -> {
@@ -80,6 +82,51 @@ public class MainActivity extends AppCompatActivity {
         });
 
         setupFragments();
+
+    }
+
+    private void setupNavigationEvents() {
+
+        navigationView.getHeaderView(0).findViewById(R.id.header_layout__login_register).setOnClickListener(view -> {
+            startActivity(CustomerRegisterationActivity.newIntent(this));
+        });
+
+        navigationView.setNavigationItemSelectedListener(menuItem -> {
+
+            switch (menuItem.getItemId()) {
+                case R.id.nav_home:
+                    drawerLayout.closeDrawer(Gravity.RIGHT);
+                    break;
+                case R.id.nav_categories:
+                    startActivity(CategoryActivity.newIntent(getBaseContext(), "default"));
+                    break;
+                case R.id.nav_card:
+                    startActivity(CardActivity.newIntent(getBaseContext()));
+                    break;
+                case R.id.nav_offer:
+                    startActivity(FilterActivity.newIntent(getBaseContext(), "", null));
+                    break;
+                case R.id.nav_newest:
+                    startActivity(FilterActivity.newIntent(getBaseContext(), "", null));
+                    break;
+                case R.id.nav_most_view:
+                    startActivity(FilterActivity.newIntent(getBaseContext(), "", null));
+                    break;
+                case R.id.nav_best_seller:
+                    startActivity(FilterActivity.newIntent(getBaseContext(), "", null));
+                    break;
+                case R.id.nav_settings:
+                    break;
+                case R.id.nav_faq:
+                    break;
+                case R.id.nav_about_us:
+                    break;
+                default:
+                    break;
+            }
+
+            return false;
+        });
 
     }
 
@@ -133,47 +180,3 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-//       switch (item.getItemId()) {
-//               case R.id.nav_home:
-//               startActivity(CardActivity.newIntent(this));
-//               break;
-//               case R.id.nav_listProduct:
-//               startActivity(CardActivity.newIntent(this));
-//               break;
-//               case R.id.nav_card:
-//               startActivity(CardActivity.newIntent(this));
-//               break;
-//               case R.id.nav_mostRate:
-//               startActivity(CardActivity.newIntent(this));
-//               break;
-//               case R.id.nav_latest:
-//               startActivity(CardActivity.newIntent(this));
-//               break;
-//               case R.id.nav3_popular:
-//               startActivity(CardActivity.newIntent(this));
-//               break;
-//               case R.id.nav_1popular:
-//               startActivity(CardActivity.newIntent(this));
-//               break;
-//               case R.id.op:
-//               startActivity(CardActivity.newIntent(this));
-//               break;
-//               case R.id.nav_lates22t:
-//               startActivity(CardActivity.newIntent(this));
-//               break;
-//               case R.id.nsav_popular:
-//               startActivity(CardActivity.newIntent(this));
-//               break;
-//default:
-//        break;

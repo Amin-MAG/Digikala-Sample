@@ -27,8 +27,10 @@ public class FilterSelectionViewModel extends AndroidViewModel {
         this.selectedTerms = new MutableLiveData<>();
 
         this.attributes.setValue(FilterRepository.getInstance().getAttributes());
-        this.selectedAttribute.setValue(attributes.getValue().get(0));
-        this.selectedTerms.setValue(new ArrayList<>());
+        if (attributes.getValue().size() > 0) {
+            this.selectedAttribute.setValue(attributes.getValue().get(0));
+            this.selectedTerms.setValue(new ArrayList<>());
+        }
 
     }
 

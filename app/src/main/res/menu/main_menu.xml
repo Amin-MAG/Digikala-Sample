@@ -9,7 +9,7 @@
             android:icon="@drawable/ic_home"
             android:title="@string/home_page" />
         <item
-            android:id="@+id/nav_listProduct"
+            android:id="@+id/nav_categories"
             android:icon="@drawable/ic_category"
             android:title="@string/category" />
     </group>
@@ -25,40 +25,40 @@
 
     <group android:id="@+id/group_2">
         <item
-            android:id="@+id/nav_mostRate"
+            android:id="@+id/nav_offer"
             android:icon="@drawable/ic_star"
-            android:title="بیشترین امتیاز ها" />
+            android:title="@string/offers" />
         <item
-            android:id="@+id/nav_latest"
+            android:id="@+id/nav_newest"
             android:icon="@drawable/ic_star"
-            android:title="جدید ترین ها" />
+            android:title="@string/newests" />
 
         <item
-            android:id="@+id/nav3_popular"
+            android:id="@+id/nav_most_view"
             android:icon="@drawable/ic_star"
-            android:title="محبوب ترین ها" />
+            android:title="@string/most_views" />
 
         <item
-            android:id="@+id/nav_1popular"
+            android:id="@+id/nav_best_seller"
             android:icon="@drawable/ic_star"
-            android:title="محبوب ترین ها" />
+            android:title="@string/best_sellers" />
     </group>
 
 
     <group android:id="@+id/grou2p_2">
         <item
-            android:id="@+id/op"
+            android:id="@+id/nav_settings"
             android:icon="@drawable/ic_setting"
-            android:title="بیشترین امتیاز ها" />
+            android:title="@string/setting" />
         <item
-            android:id="@+id/nav_lates22t"
+            android:id="@+id/nav_faq"
             android:icon="@drawable/ic_help"
-            android:title="جدید ترین ها" />
+            android:title="@string/faq" />
 
         <item
-            android:id="@+id/nsav_popular"
+            android:id="@+id/nav_about_us"
             android:icon="@drawable/ic_phone"
-            android:title="محبوب ترین ها" />
+            android:title="@string/about_us" />
 
     </group>
 
