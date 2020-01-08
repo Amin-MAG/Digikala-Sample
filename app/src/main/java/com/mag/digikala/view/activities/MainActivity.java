@@ -14,6 +14,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.navigation.NavigationView;
+import com.mag.digikala.CustomerRegisterationActivity;
 import com.mag.digikala.R;
 import com.mag.digikala.util.UiUtil;
 import com.mag.digikala.view.fragments.MainFragment;
@@ -27,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.digikala_activity__drawer_layout)
     protected DrawerLayout drawerLayout;
+
+    @BindView(R.id.digikala__navigation_view)
+    protected NavigationView navigationView;
 
     @BindView(R.id.digikala_activity__retry_connection)
     protected MaterialButton retryConnectionBtn;
@@ -65,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        setupNavigationEvents();
+
         viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         viewModel.requestToGetInitialMainDatas();
         viewModel.getHasError().observe(this, aBoolean -> {
@@ -76,6 +83,12 @@ public class MainActivity extends AppCompatActivity {
 
         setupFragments();
 
+    }
+
+    private void setupNavigationEvents() {
+        navigationView.getHeaderView(0).findViewById(R.id.header_layout__login_register).setOnClickListener(view -> {
+            startActivity(CustomerRegisterationActivity.newIntent(this));
+        });
     }
 
     private void setupFragments() {

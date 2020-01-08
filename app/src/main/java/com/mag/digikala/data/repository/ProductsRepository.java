@@ -76,7 +76,7 @@ public class ProductsRepository {
     // Categories
 
     private Map<String, CategoryGroup> categoryMap;
-    private List<CategoryGroup> parentCategory;
+    private List<CategoryGroup> parentCategory = new ArrayList<>();
 
     public void setCategoryMap(Map<String, CategoryGroup> categoryMap) {
         this.categoryMap = categoryMap;
