@@ -17,7 +17,7 @@
     <group android:id="@+id/group_12"
         android:checkableBehavior="none">
         <item
-            android:id="@+id/nav_home2"
+            android:id="@+id/nav_card"
             android:icon="@drawable/ic_shopping_cart_dark"
             android:title="@string/cart" />
     </group>

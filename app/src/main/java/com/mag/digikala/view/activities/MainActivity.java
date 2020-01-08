@@ -2,12 +2,17 @@ package com.mag.digikala.view.activities;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -128,3 +133,47 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+//       switch (item.getItemId()) {
+//               case R.id.nav_home:
+//               startActivity(CardActivity.newIntent(this));
+//               break;
+//               case R.id.nav_listProduct:
+//               startActivity(CardActivity.newIntent(this));
+//               break;
+//               case R.id.nav_card:
+//               startActivity(CardActivity.newIntent(this));
+//               break;
+//               case R.id.nav_mostRate:
+//               startActivity(CardActivity.newIntent(this));
+//               break;
+//               case R.id.nav_latest:
+//               startActivity(CardActivity.newIntent(this));
+//               break;
+//               case R.id.nav3_popular:
+//               startActivity(CardActivity.newIntent(this));
+//               break;
+//               case R.id.nav_1popular:
+//               startActivity(CardActivity.newIntent(this));
+//               break;
+//               case R.id.op:
+//               startActivity(CardActivity.newIntent(this));
+//               break;
+//               case R.id.nav_lates22t:
+//               startActivity(CardActivity.newIntent(this));
+//               break;
+//               case R.id.nsav_popular:
+//               startActivity(CardActivity.newIntent(this));
+//               break;
+//default:
+//        break;
