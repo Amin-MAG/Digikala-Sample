@@ -21,13 +21,13 @@ public class FilterActivity extends AppCompatActivity implements FilterFragment.
     public static final String EXTRA_SEARCH_STRING = "extra_search_string";
     public static final String EXTRA_CATEGORY_ID = "extra_category_id";
 
+    private FilterSelectionViewModel filterSelectionViewModel;
+    private FilterViewModel filterViewModel;
+
     private FilterToolbarFragment filterToolbarFragment;
     private FilterFragment filterFragment;
     private CommonToolbarFragment filterSelectionFragmentCommonToolbar;
     private FilterSelectionFragment filterSelectionFragment;
-
-    private FilterSelectionViewModel filterSelectionViewModel;
-    private FilterViewModel filterViewModel;
 
     public static Intent newIntent(Context context, String searchString, String categoryId) {
         Intent intent = new Intent(context, FilterActivity.class);

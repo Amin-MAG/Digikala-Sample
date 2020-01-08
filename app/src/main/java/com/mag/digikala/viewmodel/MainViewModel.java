@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.mag.digikala.data.model.Category;
 import com.mag.digikala.data.model.CategoryGroup;
 import com.mag.digikala.data.model.Product;
+import com.mag.digikala.data.repository.CardRepository;
 import com.mag.digikala.data.repository.FilterRepository;
 import com.mag.digikala.data.repository.ProductsRepository;
 import com.mag.digikala.network.RetrofitApi;
@@ -31,6 +32,9 @@ public class MainViewModel extends AndroidViewModel {
     private RetrofitApi retrofitApi;
 
     private MutableLiveData<List<Category>> categories = new MutableLiveData<>();
+    private MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
+    private MutableLiveData<Boolean> hasError = new MutableLiveData<>();
+
 
     public MainViewModel(@NonNull Application application) {
         super(application);
@@ -41,9 +45,11 @@ public class MainViewModel extends AndroidViewModel {
     public void requestToGetInitialMainDatas() {
 
         this.retrofitApi = RetrofitInstance.getInstance().create(RetrofitApi.class);
-
+        this.isLoading.setValue(true);
+        this.hasError.setValue(false);
         requestToGetProducts();
-
+        requestToGetInitialAttributeData();
+        CardRepository.getInstance().loadInitialProduct();
 
     }
 
@@ -225,9 +231,11 @@ public class MainViewModel extends AndroidViewModel {
 
 
     private void loadConncetionErrorSlide() {
+        this.hasError.setValue(true);
     }
 
     private void dropLoadingSlide() {
+        this.isLoading.setValue(false);
     }
 
     public boolean onBackPressed() {
@@ -238,6 +246,14 @@ public class MainViewModel extends AndroidViewModel {
 
     public void setBackIsPressed(boolean backIsPressed) {
         this.backIsPressed = backIsPressed;
+    }
+
+    public MutableLiveData<Boolean> getHasError() {
+        return hasError;
+    }
+
+    public MutableLiveData<Boolean> getIsLoading() {
+        return isLoading;
     }
 
 }
